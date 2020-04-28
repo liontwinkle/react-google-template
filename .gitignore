@@ -23,5 +23,8 @@ yarn-debug.log*
 yarn-error.log*
 
 # dashforge assets
-public/assets/
+public/assets/fonts
+public/assets/img
+public/assets/js
+public/assets/lib
 src/components/assets/img

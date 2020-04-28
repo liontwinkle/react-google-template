@@ -61,7 +61,20 @@
     transition: none;
 }
 
-.mail-sidebar {
+.main-sidebar-body {
+    position: relative;
+    height: 100%;
+}
+
+@media (min-width: 768px){
+    .main-sidebar {
+        left: 0;
+        opacity: 1;
+        visibility: visible;
+    }
+}
+
+.main-sidebar {
     background-color: #fff;
     position: absolute;
     top: 0;
@@ -72,7 +85,7 @@
     transition: all 0.3s;
 }
 
-.mail-sidebar .nav-link {
+.main-sidebar .nav-link {
     padding: 0;
     height: 40px;
     display: flex;
@@ -83,15 +96,15 @@
     transition: all 0.2s ease-in-out;
 }
 
-.mail-sidebar .nav-link.active {
+.main-sidebar .nav-link.active {
     color: #0168fa;
 }
 
-.mail-sidebar .nav-link:not(.active):hover, .mail-sidebar .nav-link:not(.active):focus {
+.main-sidebar .nav-link:not(.active):hover, .main-sidebar .nav-link:not(.active):focus {
     color: #000;
 }
 
-.mail-sidebar svg {
+.main-sidebar svg {
     width: 20px;
     height: 20px;
     fill: rgba(27, 46, 75, 0.1);
@@ -870,12 +883,12 @@ label.col-sm-5.col-form-label {
         height: 55px;
     }
 
-    .mail-sidebar svg {
+    .main-sidebar svg {
         width: 18px;
         height: 18px;
     }
 
-    .mail-sidebar .nav-link {
+    .main-sidebar .nav-link {
         height: 35px;
     }
 
@@ -888,7 +901,7 @@ label.col-sm-5.col-form-label {
         height: 24px;
     }
 
-    .mail-sidebar {
+    .main-sidebar {
         width: 45px;
     }
 
@@ -1291,119 +1304,3 @@ html {
                                   supported by Chrome, Opera and Firefox */
 }
 /*====== html-ui.html css=========*/
-
-/*====== Dark mode css=========*/
-.dark-mode .mail-sidebar .nav-link:not(.active), 
-.dark-mode .action-types-icons-panel .nav-link:not(.active) i {
-    color: #97a3b9;
-}
-
-.dark-mode .mail-sidebar .nav-link:not(.active):hover, 
-.dark-mode .mail-sidebar .nav-link:not(.active):focus, 
-.dark-mode .action-types-icons-panel .nav-link:not(.active):hover i,
-.dark-mode .action-types-icons-panel .nav-link:not(.active):focus i, 
-.dark-mode .action-types-icons-panel .left-move:hover,
-.dark-mode .action-types-icons-panel .left-move:focus {
-    color: #fff;
-}
-
-.dark-mode .action-types-icons-panel .nav-link.active i {
-    color: #0168fa;
-}
-
-body.dark-mode,
-.dark-mode .task-list .list-group-item {
-    color: #97a3b9;
-}
-
-.dark-mode .task-list .list-group-item:hover, .dark-mode .task-list .list-group-item:focus {
-    color: #fff;
-    background-color: #1f2c43;
-}
-
-.dark-mode .off-canvas {
-    background-color: #1c273c;
-    color: #97a3b9;
-}
-
-.dark-mode .btn-asana, .dark-mode .btn-asana:focus {
-    color: #fff;
-    background-color: #7987a1;
-    border-color: #7987a1;
-}
-
-.dark-mode .btn-asana:hover {
-    color: #fff;
-    background-color: #64738f;
-    border-color: #5f6d88;
-}
-
-.dark-mode .btn-asana-complete:hover {
-    background-color: #e2fffa;
-    border-color: #00bf9c;
-    border-style: solid;
-    color: #00bf9c;
-    fill: #00bf9c;
-}
-
-.dark-mode .ui-datepicker {
-    background-color: #141c2b;
-	color: #97a3b9;
-}
-
-.dark-mode .ui-datepicker .ui-datepicker-calendar td span, 
-.dark-mode .ui-datepicker .ui-datepicker-calendar td a, 
-.dark-mode .ui-datepicker select.ui-datepicker-month, 
-.dark-mode .ui-datepicker select.ui-datepicker-year  {
-    color: #97a3b9;
-}
-
-.dark-mode .ui-datepicker .ui-datepicker-calendar td a:hover {
-    background-color: #64738f;
-    color: #fff;
-}
-
-.dark-mode .form-control {
-    color: #97a3b9;
-}
-
-.dark-mode .custom-control-label::before {
-    background-color: #24324d;
-}
-
-.dark-mode .typeahead__field .action-type-input {
-    background-color: transparent !important;
-	border-color: #3b4863;
-	color: #97a3b9;
-}
-
-.dark-mode .typeahead__field .action-type-input:focus {
-    border-color: #7cb2fe;
-}
-
-.dark-mode .typeahead__list {
-    background-color: #24324d;
-    border-color: #3b4863;
-    color: #97a3b9;
-}
-
-.dark-mode .typeahead__list>li {
-    border-top: solid 1px #3b4863;
-}
-
-.dark-mode .typeahead__list a {
-    background-color: #24324d;
-    border-color: #3b4863;
-    color: #97a3b9;
-}
-
-.dark-mode .typeahead__dropdown .typeahead__dropdown-item:not([disabled]).active>a, 
-.dark-mode .typeahead__dropdown .typeahead__dropdown-item:not([disabled])>a:focus, 
-.dark-mode .typeahead__dropdown .typeahead__dropdown-item:not([disabled])>a:hover, 
-.dark-mode .typeahead__list .typeahead__item:not([disabled]).active>a, 
-.dark-mode .typeahead__list .typeahead__item:not([disabled])>a:focus, 
-.dark-mode .typeahead__list .typeahead__item:not([disabled])>a:hover {
-    color: #fff;
-    background-color: #1f2c43;
-}
-/*====== END Dark mode css=========*/
