@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import CommandPost from './CommandPost';
+import CommandPost from './components/CommandPost';
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(

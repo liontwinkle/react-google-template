@@ -1,7 +1,7 @@
 import './assets/css/command.post.css';
 import React, { Component } from 'react';
-import Header from './components/Header';
-import Content from './components/Content';
+import Header from './layout/Header';
+import Content from './layout/Content';
 
 class CommandPost extends Component {
   render() {

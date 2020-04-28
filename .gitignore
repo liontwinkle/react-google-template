@@ -24,4 +24,4 @@ yarn-error.log*
 
 # dashforge assets
 public/assets/
-src/assets/img/
+src/components/assets/img
