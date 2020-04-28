@@ -1,18 +1,22 @@
-import React, { Component } from 'react';
+import React, { Fragment, Component } from 'react';
 import Header from './layout/Header';
 import Footer from './layout/Footer';
-import Content from './layout/Content';
+import MainMenu from './layout/MainMenu';
 import './assets/css/command.post.css';
 
 class CommandPost extends Component {
   render() {
     return (
-      // Return Header and Content components
-      <div>
+      <Fragment>
         <Header />
-        <Content />
+        <div className="main-wrapper">
+          <MainMenu />
+          <div id="sectionContainer">
+            <p>Inner content</p>
+          </div>
+        </div>
         <Footer />
-      </div>
+      </Fragment>
     );
   }
 }

@@ -31,6 +31,16 @@
     align-items: center;
 }
 
+.main-wrapper {
+    position: fixed;
+    top: 55px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    transform: translateX(-100vw);
+    transition: all 0.3s;
+}
+
 .mail-content {
     background-color: #ffffff;
 }
@@ -778,7 +788,7 @@ label.col-sm-5.col-form-label {
         left: 60px;
     }
 
-    .mail-wrapper {
+    .main-wrapper {
         transform: translateX(-60px);
     }
 }
@@ -794,7 +804,7 @@ label.col-sm-5.col-form-label {
         left: 60px;
     }
 
-    .mail-wrapper {
+    .main-wrapper {
         transform: translateX(-60px);
     }
 }
@@ -805,7 +815,7 @@ label.col-sm-5.col-form-label {
         left: 60px;
     }
 
-    .mail-wrapper {
+    .main-wrapper {
         transform: translateX(0px);
     }
 }
@@ -912,7 +922,7 @@ label.col-sm-5.col-form-label {
         left: 320px;
     }
 
-    .mail-wrapper {
+    .main-wrapper {
         top: 55px;
     }
 
