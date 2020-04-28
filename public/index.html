@@ -1,57 +1,93 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#000000" />
-    <meta
-      name="description"
-      content="Web site created using create-react-app"
-    />
-    <!-- <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" /> -->
-    <!--
-      manifest.json provides metadata used when your web app is installed on a
-      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
-    -->
-    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-    <!-- vendor css -->
-    <link href="%PUBLIC_URL%/assets/lib/@fortawesome/fontawesome/css/all.min.css" rel="stylesheet">
-    <link href="%PUBLIC_URL%/assets/lib/ionicons/css/ionicons.min.css" rel="stylesheet">
 
-    <!-- DashForge CSS -->
-    <link rel="stylesheet" href="%PUBLIC_URL%/assets/css/dashforge.css">
-    <link rel="stylesheet" href="%PUBLIC_URL%/assets/css/dashforge.landing.css">
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no">
 
-    <title>CommandPost App</title>
+  <!-- Twitter -->
+  <meta name="twitter:site" content="@themepixels">
+  <meta name="twitter:creator" content="@themepixels">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="CommandPost">
+  <meta name="twitter:description" content="CommandPost App">
+  <meta name="twitter:image" content="https://ineedhelpers.com/wp-content/images/yootheme/logo.png">
 
-  </head>
-  <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root"></div>
-    <!--
-      This HTML file is a template. 
-      If you open it directly in the browser, you will see an empty page.
+  <!-- Facebook -->
+  <meta property="og:url" content="https://ineedhelpers.com/">
+  <meta property="og:title" content="CommandPost">
+  <meta property="og:description" content="CommandPost App">
 
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
+  <meta property="og:image" content="https://ineedhelpers.com/wp-content/images/yootheme/logo.png">
+  <meta property="og:image:secure_url" content="https://ineedhelpers.com/wp-content/images/yootheme/logo.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="600">
 
-      To begin the development, run `npm start` or `yarn start`.
-      To create a production bundle, use `npm run build` or `yarn build`.
-    -->
-    <script src="%PUBLIC_URL%/assets/lib/jquery/jquery.min.js"></script>
-    <script src="%PUBLIC_URL%/assets/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="%PUBLIC_URL%/assets/lib/feather-icons/feather.min.js"></script>
-    <script src="%PUBLIC_URL%/assets/lib/perfect-scrollbar/perfect-scrollbar.min.js"></script>
-    <script src="%PUBLIC_URL%/assets/js/dashforge.js"></script>
-    <script>
-      $(document).ready(function() {
-        'use strict'
+  <!-- Meta -->
+  <meta name="description" content="CommandPost App">
+  <meta name="author" content="I Need Helpers">
 
-        $('[data-toggle="tooltip"]').tooltip()
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="/wp-content/themes/yoo_pure_wp/favicon.ico">
 
+  <link rel="apple-touch-icon" href="%PUBLIC_URL%/assets/img/logo192.png" />
 
-      });
-    </script>
-  </body>
+  <!-- manifest.json provides metadata on a user's mobile device or desktop -->
+  <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+
+  <!-- vendor css -->
+  <link href="%PUBLIC_URL%/assets/fonts/fontawesome/css/all.min.css" rel="stylesheet">
+  <link href="%PUBLIC_URL%/assets/lib/ionicons/css/ionicons.min.css" rel="stylesheet">
+  <link href="%PUBLIC_URL%/assets/lib/quill/quill.core.css" rel="stylesheet">
+  <link href="%PUBLIC_URL%/assets/lib/quill/quill.snow.css" rel="stylesheet">
+  <link href="%PUBLIC_URL%/assets/lib/quill/quill.bubble.css" rel="stylesheet">
+  <link rel="stylesheet" href="%PUBLIC_URL%/assets/lib/select2/css/select2.min.css">
+  <link rel="stylesheet" href="%PUBLIC_URL%/assets/lib/animate.css/animate.min.css">
+  <link rel="stylesheet" href="%PUBLIC_URL%/assets/lib/jquery-typeahead/jquery.typeahead.min.css">
+
+  <!-- DashForge CSS -->
+  <link rel="stylesheet" href="%PUBLIC_URL%/assets/css/dashforge.css">
+  <link rel="stylesheet" href="%PUBLIC_URL%/assets/css/dashforge.chat.css">
+  <link rel="stylesheet" href="%PUBLIC_URL%/assets/css/dashforge.mail.css">
+
+  <title>CommandPost</title>
+
+</head>
+
+<!-- noselect class is temporary disabled for developing time -->
+
+<body class="app-mail -noselect">
+
+  <noscript>You need to enable JavaScript to run this app.</noscript>
+
+  <div class="preloader"></div>
+
+  <div id="root"></div>
+
+  <!-- These jquery files below should be converted to the React functions and methods -->
+  <script src="%PUBLIC_URL%/assets/lib/jquery/jquery.min.js"></script>
+  <script src="%PUBLIC_URL%/assets/lib/jqueryui/jquery-ui.min.js"></script>
+  <script src="%PUBLIC_URL%/assets/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="%PUBLIC_URL%/assets/lib/feather-icons/feather.min.js"></script>
+  <script src="%PUBLIC_URL%/assets/lib/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+  <script src="%PUBLIC_URL%/assets/lib/quill/quill.min.js"></script>
+  <script src="%PUBLIC_URL%/assets/js/dashforge.js"></script>
+  <script src="%PUBLIC_URL%/assets/lib/select2/js/select2.min.js"></script>
+  <script src="%PUBLIC_URL%/assets/lib/jquery-typeahead/jquery.typeahead.min.js"></script>
+  <script src="%PUBLIC_URL%/assets/lib/parsleyjs/parsley.min.js"></script>
+  <script src="%PUBLIC_URL%/assets/lib/js-cookie/js.cookie.js"></script>
+  <script src="%PUBLIC_URL%/assets/js/command.post.theme.js"></script>
+  <script src="%PUBLIC_URL%/assets/js/command.post.js"></script>
+  <!-- Convert the files above ^^^ -->
+
+  <script>
+    $(document).ready(function () {
+      'use strict'
+      $('[data-toggle="tooltip"]').tooltip()
+    });
+  </script>
+</body>
+
 </html>
