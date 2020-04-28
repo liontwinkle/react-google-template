@@ -1,17 +1,19 @@
 import React, { Fragment, Component } from 'react';
-import Cookies from "universal-cookie";
+import Cookies from 'universal-cookie';
 import Header from './layout/Header';
 import Footer from './layout/Footer';
 import MainMenu from './layout/MainMenu';
 
 class CommandPost extends Component {
 
+  // Main App data storage
   state = {
     darkMode: false,
     isLoading: true,
     userLoggedIn: false
   }
 
+  // Document ready event
   componentDidMount() {
     // Apply theme at page loading
     const cookies = new Cookies();
@@ -22,6 +24,7 @@ class CommandPost extends Component {
     });
   }
 
+  // Main App component redraw event
   componentDidUpdate() {
     const head = document.head;
     const darkModeCSS = document.createElement('link');
