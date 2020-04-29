@@ -49,7 +49,6 @@ const MainMenu = (props) => {
                   activeClassName='active'>
                   <i data-feather={menuItem.icon}></i>
                 </NavLink>
-
               </Tooltip>
             );
           })}
