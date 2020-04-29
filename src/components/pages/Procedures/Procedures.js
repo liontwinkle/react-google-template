@@ -1,7 +1,9 @@
 import React from 'react';
 
 const Procedures = () => (
-  <p>Procedures</p>
+  <div className="main-group wide-group">
+    Procedures
+  </div>
 );
 
 export default Procedures;

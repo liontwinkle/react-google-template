@@ -1,7 +1,9 @@
 import React from 'react';
 
 const Chat = () => (
-  <p>Chat</p>
+  <div className="main-group wide-group">
+    Chat
+  </div>
 );
 
 export default Chat;

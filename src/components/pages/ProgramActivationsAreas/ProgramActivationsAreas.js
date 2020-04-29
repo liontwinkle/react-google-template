@@ -1,7 +1,9 @@
 import React from 'react';
 
 const ProgramActivationsAreas = () => (
-  <p>ProgramActivationsAreas</p>
+  <div className="main-group wide-group">
+    ProgramActivationsAreas
+  </div>
 );
 
 export default ProgramActivationsAreas;

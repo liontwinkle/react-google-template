@@ -1,7 +1,18 @@
-import React from 'react';
+import React, { Component, Fragment } from 'react';
 
-const IncidentLogging = () => (
-  <p>Incident Logging</p>
-);
+class IncidentLogging extends Component {
+  render() {
+    return (
+      <Fragment>
+        <div className="main-group">
+          IncidentLogging
+        </div>
+        <div className="main-content">
+          RHS Content
+        </div>
+      </Fragment>
+    );
+  }
+};
 
 export default IncidentLogging;

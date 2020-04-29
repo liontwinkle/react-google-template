@@ -42,11 +42,75 @@
     left: 0;
     right: 0;
     transform: translateX(-100vw);
+    transition: all 0.3s; }
+    @media (prefers-reduced-motion: reduce) {
+      .main-wrapper {
+        transition: none; } }
+    @media (min-width: 375px) {
+      .main-wrapper {
+        transform: translateX(-60px); } }
+    @media (min-width: 768px) {
+      .main-wrapper {
+        transform: translateX(0); } }
+    @media (min-width: 992px) {
+      .main-wrapper {
+        top: 60px; } }
+    @media (min-width: 1200px) {
+        .main-wrapper {
+            top: 55px; } }
+
+.main-group {
+    width: 100vw;
+    position: absolute;
+    top: 0;
+    left: 100vw;
+    bottom: 0;
     transition: all 0.3s;
 }
 
-.mail-content {
+@media (prefers-reduced-motion: reduce) {
+    .main-group {
+        transition: none;
+    }
+}
+
+@media (min-width: 375px) {
+    .main-group {
+        left: 60px;
+    }
+}
+
+@media (min-width: 768px) {
+    .main-group {
+        width: auto;
+        right: 0;
+        left: 60px;
+    }
+}
+
+@media (min-width: 1200px) {
+    .main-group {
+        width: 300px;
+        left: 45px;
+        border-right: 1px solid rgba(72, 94, 144, 0.16);
+    }
+}
+
+.main-content {
+    position: absolute;
+    top: 0;
+    left: 200vw;
+    bottom: 0;
+    width: 100vw;
     background-color: #ffffff;
+}
+
+@media (min-width: 1200px) {
+    .main-content {
+        left: 345px;
+        width: auto;
+        right: 0;
+    }
 }
 
 .chat-columns .chat-column {
@@ -196,30 +260,30 @@
     bottom: 204px;
 }
 
-.mail-group .media+.media {
+.main-group .media+.media {
     margin-top: -1px;
     border-top: 1px solid #e5e9f2;
 }
 
-.mail-group .media {
+.main-group .media {
     padding: 5px 20px;
     background-color: #f8f9fc;
     cursor: pointer;
     transition: all 0.2s ease-in-out;
 }
 
-.mail-group .media.selected,
-.mail-group .media.selected:hover,
-.mail-group .media.selected:focus {
+.main-group .media.selected,
+.main-group .media.selected:hover,
+.main-group .media.selected:focus {
     background-color: #ecf4ff;
 }
 
-.mail-group .media h6 {
+.main-group .media h6 {
     margin-bottom: 0;
     margin-top: 3px;
 }
 
-.mail-group .media .avatar {
+.main-group .media .avatar {
     padding: 7px;
     color: #8392a5;
 }
@@ -410,7 +474,7 @@
 }
 
 @media (min-width: 768px) {
-	.task-group {
+	.wide-group {
 		width: auto !important;
 		right: 0;
 	}
@@ -810,50 +874,13 @@ label.col-sm-5.col-form-label {
 /*======= new css =====*/
 
 
-
-@media (max-width: 376px) {
-    .mail-group {
-        left: 60px;
-    }
-
-    .main-wrapper {
-        transform: translateX(-60px);
-    }
-}
-
 @media (max-width: 991px) {
     #headerSearch .search-form {
         margin-top: 15px;
     }
 }
 
-@media (min-width: 375px) {
-    .mail-group {
-        left: 60px;
-    }
-
-    .main-wrapper {
-        transform: translateX(-60px);
-    }
-}
-
-@media (min-width: 768px) {
-    .mail-group {
-        right: 0;
-        left: 60px;
-    }
-
-    .main-wrapper {
-        transform: translateX(0px);
-    }
-}
-
 @media (min-width: 1200px) {
-    .mail-content {
-        left: 380px;
-        width: auto;
-        right: 0;
-    }
 	
 	#command_tabs {
 		height: 37px;
@@ -941,19 +968,6 @@ label.col-sm-5.col-form-label {
         font-size: 1.15rem;
     }
 
-    .mail-group {
-        width: 275px;
-        left: 45px;
-    }
-
-    .mail-content {
-        left: 320px;
-    }
-
-    .main-wrapper {
-        top: 55px;
-    }
-
     h6 {
         font-size: 13px;
     }
@@ -961,10 +975,6 @@ label.col-sm-5.col-form-label {
     .button-submit {
         padding: 9px;
         font-size: 9px;
-    }
-
-    .mail-group-body {
-        top: 87px;
     }
 
     .chat-sidebar-body {
@@ -1288,15 +1298,6 @@ div#police-action .col-sm-4 {
 }
 html {
 	-webkit-overflow-scrolling: touch;
-}
-@media (min-width: 1200px) {
-	.mail-group {
-		width: 300px;
-	}
-
-	.mail-content {
-		left: 345px;
-	}
 }
 
 .noselect {

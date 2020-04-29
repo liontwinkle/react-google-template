@@ -1,7 +1,9 @@
 import React from 'react';
 
 const IntegratedMap = () => (
-  <p>IntegratedMap</p>
+  <div className="main-group wide-group">
+    IntegratedMap
+  </div>
 );
 
 export default IntegratedMap;

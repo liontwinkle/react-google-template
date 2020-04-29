@@ -1,4 +1,4 @@
-import React, { Fragment, Component } from 'react';
+import React, { Component } from 'react';
 import Cookies from 'universal-cookie';
 import { BrowserRouter } from 'react-router-dom';
 import Routes from './pages/Routes';
@@ -51,26 +51,20 @@ class CommandPost extends Component {
 
     this.setState({ darkMode: !doesDarkMode });
     cookies.set('df-mode', !doesDarkMode);
-
-    console.log(cookies.get('df-mode'));
   }
 
   render() {
     return (
-      <Fragment>
+      <BrowserRouter>
         <Header />
-        <BrowserRouter>
-          <div className="main-wrapper">
-            <MainMenu
-              click={() => this.switchThemeHandler()}
-              isDark={this.state.darkMode} />
-            <div id="sectionContainer">
-              <Routes />
-            </div>
-          </div>
-        </BrowserRouter>
+        <div className="main-wrapper">
+          <MainMenu
+            click={() => this.switchThemeHandler()}
+            isDark={this.state.darkMode} />
+          <Routes />
+        </div>
         <Footer />
-      </Fragment>
+      </BrowserRouter>
     );
   }
 }

@@ -1,6 +1,7 @@
 body {
-  background-color: #141c2b; }
-
+  background-color: #141c2b;
+  color: #97a3b9; }
+  
 .df-logo {
   color: #fff; }
   .df-logo:hover, .df-logo:focus {
@@ -708,7 +709,7 @@ h1, h2, h3, h4, h5, h6,
   .main-sidebar-body .nav-sidebar .nav-link a.active {
     background-color: #1f2c43; }
 
-.mail-group {
+.main-group  {
   background-color: #141c2b; }
 
 .mail-group-header {
@@ -732,7 +733,7 @@ h1, h2, h3, h4, h5, h6,
     .mail-group-body .media.selected:hover, .mail-group-body .media.selected:focus {
       background-color: #24324d; }
 
-.mail-content {
+.main-content {
   background-color: #141c2b; }
 
 .mail-content-header {
@@ -807,7 +808,6 @@ h1, h2, h3, h4, h5, h6,
     color: #0168fa;
 }
 
-body.dark-mode,
 .task-list .list-group-item {
     color: #97a3b9;
 }

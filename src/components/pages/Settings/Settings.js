@@ -1,7 +1,9 @@
 import React from 'react';
 
 const Settings = () => (
-  <p>Settings</p>
+  <div className="main-group wide-group">
+    Settings
+  </div>
 );
 
 export default Settings;

@@ -1,7 +1,9 @@
 import React from 'react';
 
 const ResourcePositioning = () => (
-  <p>ResourcePositioning</p>
+  <div className="main-group wide-group">
+    ResourcePositioning
+  </div>
 );
 
 export default ResourcePositioning;
