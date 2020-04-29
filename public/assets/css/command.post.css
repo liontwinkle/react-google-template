@@ -93,14 +93,18 @@
     justify-content: center;
     color: #1b2e4b;
     border-radius: 0.25rem;
+}
+
+.main-sidebar .nav-link a {
+    color: #1b2e4b;
     transition: all 0.2s ease-in-out;
 }
 
-.main-sidebar .nav-link.active {
+.main-sidebar .nav-link a.active {
     color: #0168fa;
 }
 
-.main-sidebar .nav-link:not(.active):hover, .main-sidebar .nav-link:not(.active):focus {
+.main-sidebar .nav-link:hover a:not(.active), .main-sidebar .nav-link a:not(.active):focus {
     color: #000;
 }
 

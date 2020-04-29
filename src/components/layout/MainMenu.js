@@ -37,14 +37,14 @@ const MainMenu = (props) => {
       <div className="main-sidebar-body">
         <nav className="nav flex-column main-menu">
           {menuItems.map((menuItem, index) => {
-            const activeItem = (index === 0) ? 'nav-link active' : 'nav-link';
             return (
               <Tooltip
                 key={index}
-                addClasses={activeItem}
+                addClasses='nav-link'
                 placement="right"
                 tooltip={menuItem.label}>
                 <NavLink
+                  exact
                   to={menuItem.link}
                   activeClassName='active'>
                   <i data-feather={menuItem.icon}></i>
