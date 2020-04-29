@@ -1,5 +1,7 @@
 import React, { Fragment, Component } from 'react';
 import Cookies from 'universal-cookie';
+import { BrowserRouter } from 'react-router-dom';
+import Routes from './pages/Routes';
 import Header from './layout/Header';
 import Footer from './layout/Footer';
 import MainMenu from './layout/MainMenu';
@@ -57,14 +59,16 @@ class CommandPost extends Component {
     return (
       <Fragment>
         <Header />
-        <div className="main-wrapper">
-          <MainMenu
-            click={() => this.switchThemeHandler()}
-            isDark={this.state.darkMode} />
-          <div id="sectionContainer">
-            <p>Inner content</p>
+        <BrowserRouter>
+          <div className="main-wrapper">
+            <MainMenu
+              click={() => this.switchThemeHandler()}
+              isDark={this.state.darkMode} />
+            <div id="sectionContainer">
+              <Routes />
+            </div>
           </div>
-        </div>
+        </BrowserRouter>
         <Footer />
       </Fragment>
     );

@@ -1,7 +1,24 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 import Tooltip from '../helpers/Tooltip';
 
 const MainMenu = (props) => {
+
+  const menuItems = [
+    { label: 'Dashboard', link: '/', icon: 'star' },
+    { label: 'Incident Logging', link: '/logging', icon: 'alert-circle' },
+    { label: 'Program / Activations & Areas', link: '/program', icon: 'trello' },
+    { label: 'Chat', link: '/chat', icon: 'message-square' },
+    { label: 'Contact List', link: '/contacts', icon: 'phone' },
+    { label: 'Task List', link: '/tasks', icon: 'list' },
+    { label: 'File Manager', link: '/files', icon: 'file-text' },
+    { label: 'Integrated Map', link: '/map', icon: 'map' },
+    { label: 'Resource Positioning', link: '/resources', icon: 'map-pin' },
+    { label: 'Fleet Management', link: '/fleet', icon: 'truck' },
+    { label: 'Procedures', link: '/procedures', icon: 'book' },
+    { label: 'Help', link: '/help', icon: 'help-circle' },
+    { label: 'Settings', link: '/settings', icon: 'settings' }
+  ];
 
   let buttonProp = {
     tooltip: 'Switch to dark mode',
@@ -19,45 +36,24 @@ const MainMenu = (props) => {
     <div className="main-sidebar">
       <div className="main-sidebar-body">
         <nav className="nav flex-column main-menu">
-          <Tooltip addClasses="nav-link active" tooltip="Dashboard" placement="right" data-section-name="dashboard">
-            <i data-feather="star"></i>
-          </Tooltip>
-          <Tooltip addClasses="nav-link" tooltip="Incident Logging" placement="right" data-section-name="incident-logging">
-            <i data-feather="alert-circle"></i>
-          </Tooltip>
-          <Tooltip addClasses="nav-link" tooltip="Program / Activations & Areas" placement="right" data-section-name="program-activations-areas">
-            <i data-feather="trello"></i>
-          </Tooltip>
-          <Tooltip addClasses="nav-link" tooltip="Chat" placement="right" data-section-name="chat">
-            <i data-feather="message-square"></i>
-          </Tooltip>
-          <Tooltip addClasses="nav-link" tooltip="Contact List" placement="right" data-section-name="contact-list">
-            <i data-feather="phone"></i>
-          </Tooltip>
-          <Tooltip addClasses="nav-link" tooltip="Task List" placement="right" data-section-name="task-list">
-            <i data-feather="list"></i>
-          </Tooltip>
-          <Tooltip addClasses="nav-link" tooltip="File Manager" placement="right" data-section-name="file-manager">
-            <i data-feather="file-text"></i>
-          </Tooltip>
-          <Tooltip addClasses="nav-link" tooltip="Integrated Map" placement="right" data-section-name="integrated-map">
-            <i data-feather="map"></i>
-          </Tooltip>
-          <Tooltip addClasses="nav-link" tooltip="Resource Positioning" placement="right" data-section-name="resource-positioning">
-            <i data-feather="map-pin"></i>
-          </Tooltip>
-          <Tooltip addClasses="nav-link" tooltip="Fleet Management" placement="right" data-section-name="fleet-management">
-            <i data-feather="truck"></i>
-          </Tooltip>
-          <Tooltip addClasses="nav-link" tooltip="Procedures" placement="right" data-section-name="procedures">
-            <i data-feather="book"></i>
-          </Tooltip>
-          <Tooltip addClasses="nav-link" tooltip="Help" placement="right" data-section-name="help">
-            <i data-feather="help-circle"></i>
-          </Tooltip>
-          <Tooltip addClasses="nav-link" tooltip="Settings" placement="right" data-section-name="settings">
-            <i data-feather="settings"></i>
-          </Tooltip>
+          {menuItems.map((menuItem, index) => {
+            const activeItem = (index === 0) ? 'nav-link active' : 'nav-link';
+            return (
+              <Tooltip
+                key={index}
+                addClasses={activeItem}
+                placement="right"
+                tooltip={menuItem.label}>
+                <NavLink
+                  to={menuItem.link}
+                  activeClassName='active'>
+                  <i data-feather={menuItem.icon}></i>
+                </NavLink>
+
+              </Tooltip>
+            );
+          })}
+
           <Tooltip
             placement="right"
             trigger="hover"
