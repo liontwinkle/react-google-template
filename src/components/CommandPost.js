@@ -18,10 +18,11 @@ class CommandPost extends Component {
     // Apply theme at page loading
     const cookies = new Cookies();
     const isDarkMode = (cookies.get('df-mode') === 'true');
-    this.setState({ 
+    this.setState({
       darkMode: isDarkMode,
-      isLoading: false 
+      isLoading: false
     });
+
   }
 
   // Main App component redraw event

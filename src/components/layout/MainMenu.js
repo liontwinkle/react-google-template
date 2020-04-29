@@ -1,16 +1,17 @@
 import React from 'react';
+import Tooltip from '../helpers/Tooltip';
 
 const MainMenu = (props) => {
 
   let buttonProp = {
-    title: 'Switch to dark mode',
-    className: 'nav-link btn-dark-mode'
+    tooltip: 'Switch to dark mode',
+    addClasses: 'nav-link btn-dark-mode'
   };
 
   if (props.isDark) {
     buttonProp = {
-      title: 'Switch to classic mode',
-      className: 'nav-link btn-dark-mode active'
+      tooltip: 'Switch to classic mode',
+      addClasses: 'nav-link btn-dark-mode active'
     };
   }
 
@@ -18,54 +19,53 @@ const MainMenu = (props) => {
     <div className="main-sidebar">
       <div className="main-sidebar-body">
         <nav className="nav flex-column main-menu">
-          <span className="change-section nav-link active" data-toggle="tooltip" title="Dashboard" data-placement="right" data-section-name="dashboard">
+          <Tooltip addClasses="nav-link active" tooltip="Dashboard" placement="right" data-section-name="dashboard">
             <i data-feather="star"></i>
-          </span>
-          <span className="change-section nav-link" data-toggle="tooltip" title="Incident Logging" data-placement="right" data-section-name="incident-logging">
+          </Tooltip>
+          <Tooltip addClasses="nav-link" tooltip="Incident Logging" placement="right" data-section-name="incident-logging">
             <i data-feather="alert-circle"></i>
-          </span>
-          <span className="change-section nav-link" data-toggle="tooltip" title="Program / Activations & Areas" data-placement="right" data-section-name="program-activations-areas">
+          </Tooltip>
+          <Tooltip addClasses="nav-link" tooltip="Program / Activations & Areas" placement="right" data-section-name="program-activations-areas">
             <i data-feather="trello"></i>
-          </span>
-          <span className="change-section nav-link" data-toggle="tooltip" title="Chat" data-placement="right" data-section-name="chat">
+          </Tooltip>
+          <Tooltip addClasses="nav-link" tooltip="Chat" placement="right" data-section-name="chat">
             <i data-feather="message-square"></i>
-          </span>
-          <span className="change-section nav-link" data-toggle="tooltip" title="Contact List" data-placement="right" data-section-name="contact-list">
+          </Tooltip>
+          <Tooltip addClasses="nav-link" tooltip="Contact List" placement="right" data-section-name="contact-list">
             <i data-feather="phone"></i>
-          </span>
-          <span className="change-section nav-link" data-toggle="tooltip" title="Task List" data-placement="right" data-section-name="task-list">
+          </Tooltip>
+          <Tooltip addClasses="nav-link" tooltip="Task List" placement="right" data-section-name="task-list">
             <i data-feather="list"></i>
-          </span>
-          <span className="change-section nav-link" data-toggle="tooltip" title="File Manager" data-placement="right" data-section-name="file-manager">
+          </Tooltip>
+          <Tooltip addClasses="nav-link" tooltip="File Manager" placement="right" data-section-name="file-manager">
             <i data-feather="file-text"></i>
-          </span>
-          <span className="change-section nav-link" data-toggle="tooltip" title="Integrated Map" data-placement="right" data-section-name="integrated-map">
+          </Tooltip>
+          <Tooltip addClasses="nav-link" tooltip="Integrated Map" placement="right" data-section-name="integrated-map">
             <i data-feather="map"></i>
-          </span>
-          <span className="change-section nav-link" data-toggle="tooltip" title="Resource Positioning" data-placement="right" data-section-name="resource-positioning">
+          </Tooltip>
+          <Tooltip addClasses="nav-link" tooltip="Resource Positioning" placement="right" data-section-name="resource-positioning">
             <i data-feather="map-pin"></i>
-          </span>
-          <span className="change-section nav-link" data-toggle="tooltip" title="Fleet Management" data-placement="right" data-section-name="fleet-management">
+          </Tooltip>
+          <Tooltip addClasses="nav-link" tooltip="Fleet Management" placement="right" data-section-name="fleet-management">
             <i data-feather="truck"></i>
-          </span>
-          <span className="change-section nav-link" data-toggle="tooltip" title="Procedures" data-placement="right" data-section-name="procedures">
+          </Tooltip>
+          <Tooltip addClasses="nav-link" tooltip="Procedures" placement="right" data-section-name="procedures">
             <i data-feather="book"></i>
-          </span>
-          <span className="change-section nav-link" data-toggle="tooltip" title="Help" data-placement="right" data-section-name="help">
+          </Tooltip>
+          <Tooltip addClasses="nav-link" tooltip="Help" placement="right" data-section-name="help">
             <i data-feather="help-circle"></i>
-          </span>
-          <span className="change-section nav-link" data-toggle="tooltip" title="Settings" data-placement="right" data-section-name="settings">
+          </Tooltip>
+          <Tooltip addClasses="nav-link" tooltip="Settings" placement="right" data-section-name="settings">
             <i data-feather="settings"></i>
-          </span>
-          <span
-            className={buttonProp.className}
-            data-toggle="tooltip"
-            title={buttonProp.title}
-            data-placement="right"
-            onClick={props.click}
-          >
+          </Tooltip>
+          <Tooltip
+            placement="right"
+            trigger="hover"
+            addClasses={buttonProp.addClasses}
+            tooltip={buttonProp.tooltip}
+            click={props.click}>
             <i className="far fa-moon-stars"></i>
-          </span>
+          </Tooltip>
         </nav>
       </div>
     </div>

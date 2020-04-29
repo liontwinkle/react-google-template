@@ -63,10 +63,6 @@
 
   <noscript>You need to enable JavaScript to run this app.</noscript>
 
-  <div class="preloader"></div>
-
-  <div id="root"></div>
-
   <!-- These jquery files below should be converted to the React functions and methods -->
   <script src="%PUBLIC_URL%/assets/lib/jquery/jquery.min.js"></script>
   <script src="%PUBLIC_URL%/assets/lib/jqueryui/jquery-ui.min.js"></script>
@@ -82,12 +78,10 @@
   <script src="%PUBLIC_URL%/assets/js/command.post.js"></script>
   <!-- Convert the files above ^^^ -->
 
-  <script>
-    $(document).ready(function () {
-      'use strict'
-      $('[data-toggle="tooltip"]').tooltip()
-    });
-  </script>
+  <div class="preloader"></div>
+
+  <div id="root"></div>
+
 </body>
 
 </html>
