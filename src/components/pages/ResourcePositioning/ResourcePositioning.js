@@ -1,7 +1,7 @@
 import React from 'react';
 
-const ResourcePositioning = () => (
-  <div className="main-group wide-group">
+const ResourcePositioning = (props) => (
+  <div className={`main-group wide-group ${props.animateClass}`}>
     ResourcePositioning
   </div>
 );

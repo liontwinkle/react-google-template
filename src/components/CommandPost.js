@@ -5,6 +5,7 @@ import Routes from './pages/Routes';
 import Header from './layout/Header';
 import Footer from './layout/Footer';
 import MainMenu from './layout/MainMenu';
+import 'animate.css/animate.css';
 
 class CommandPost extends Component {
 
@@ -12,7 +13,8 @@ class CommandPost extends Component {
   state = {
     darkMode: false,
     isLoading: true,
-    userLoggedIn: false
+    userLoggedIn: false,
+    pagesAnimation: "animated fadeIn fast" //animate css class [https://github.com/daneden/animate.css]
   }
 
   // Document ready event
@@ -61,7 +63,7 @@ class CommandPost extends Component {
           <MainMenu
             click={() => this.switchThemeHandler()}
             isDark={this.state.darkMode} />
-          <Routes />
+          <Routes pagesAnimation={this.state.pagesAnimation} />
         </div>
         <Footer />
       </BrowserRouter>

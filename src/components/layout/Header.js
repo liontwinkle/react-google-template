@@ -1,17 +1,76 @@
 import React, { Component } from 'react';
+import { NavLink } from 'react-router-dom';
 
 export default class Header extends Component {
+
+  // Document ready event
+  componentDidMount() {
+
+    // Mobile sidebar menu and side drawer opening
+    ['click', 'touchstart'].forEach(function (e) {
+      document.getElementById('mainSidebar').addEventListener(e, function (e) {
+        e.preventDefault();
+
+        if (window.matchMedia('(max-width: 767px)').matches) {
+          [...document.getElementsByClassName('chat-columns')].forEach(
+            (element) => {
+              element.style.width = '';
+              element.style.transform = '';
+            }
+          );
+        }
+
+        if (document.body.classList.contains('main-content-show')) {
+          document.body.classList.remove('main-content-show');
+        } else {
+          document.body.classList.add('main-sidebar-show');
+          document.getElementById('mainSidebar').classList.add('d-none');
+          document.getElementById('mainMenuOpen').classList.remove('d-none');
+        }
+
+        if (window.matchMedia('(min-width: 768px)').matches) {
+          document.getElementById('mainSidebar').classList.add('d-md-none');
+          document.getElementById('mainMenuOpen').classList.add('d-md-flex');
+        }
+      });
+    });
+
+    // Closing of sidebar menu when clicking outside of it
+    ['click', 'touchstart'].forEach(function (e) {
+      document.addEventListener(e, function (e) {
+        e.stopPropagation();
+
+        if (!e.target.closest('.burger-menu') && !e.target.closest('.main-sidebar')) {
+          document.body.classList.remove('main-sidebar-show');
+          document.getElementById('mainSidebar').classList.remove('d-none');
+          document.getElementById('mainMenuOpen').classList.add('d-none');
+        }
+      });
+    });
+
+  }
+
   render() {
     return (
       <header className="navbar navbar-header navbar-header-fixed">
         <a href="." id="mainMenuOpen" className="burger-menu d-none d-md-flex d-lg-none"><i data-feather="menu"></i></a>
-        <a href="." id="mailSidebar" className="burger-menu d-md-none"><i data-feather="arrow-left"></i></a>
+        <a href="." id="mainSidebar" className="burger-menu d-md-none"><i data-feather="arrow-left"></i></a>
         <div className="navbar-brand">
-          <a href="." className="df-logo">Command<span>Post</span></a>
+          <NavLink
+            exact
+            to="/"
+            activeClassName='active'>
+            <span className="df-logo">Command<span>Post</span></span>
+          </NavLink>
         </div>
         <div id="navbarMenu" className="navbar-menu-wrapper">
           <div className="navbar-menu-header">
-            <a href="." className="df-logo">Command<span>Post</span></a>
+            <NavLink
+              exact
+              to="/"
+              activeClassName='active'>
+              <span className="df-logo">Command<span>Post</span></span>
+            </NavLink>
             <a id="mainMenuClose" href="."><i data-feather="x"></i></a>
           </div>
           <div id="headerSearch" className="d-flex">

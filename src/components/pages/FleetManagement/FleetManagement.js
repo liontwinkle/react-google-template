@@ -1,7 +1,7 @@
 import React from 'react';
 
-const FleetManagement = () => (
-  <div className="main-group wide-group">
+const FleetManagement = (props) => (
+  <div className={`main-group wide-group ${props.animateClass}`}>
     FleetManagement
   </div>
 );

@@ -1,7 +1,7 @@
 import React from 'react';
 
-const FileManager = () => (
-  <div className="main-group wide-group">
+const FileManager = (props) => (
+  <div className={`main-group wide-group ${props.animateClass}`}>
     FileManager
   </div>
 );

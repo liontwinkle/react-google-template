@@ -1,7 +1,7 @@
 import React from 'react';
 
-const TaskList = () => (
-  <div className="main-group wide-group">
+const TaskList = (props) => (
+  <div className={`main-group wide-group ${props.animateClass}`}>
     TaskList
   </div>
 );

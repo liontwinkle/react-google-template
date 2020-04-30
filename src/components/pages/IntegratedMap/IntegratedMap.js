@@ -1,7 +1,7 @@
 import React from 'react';
 
-const IntegratedMap = () => (
-  <div className="main-group wide-group">
+const IntegratedMap = (props) => (
+  <div className={`main-group wide-group ${props.animateClass}`}>
     IntegratedMap
   </div>
 );

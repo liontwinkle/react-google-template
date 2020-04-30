@@ -1,7 +1,7 @@
 import React from 'react';
 
-const Settings = () => (
-  <div className="main-group wide-group">
+const Settings = (props) => (
+  <div className={`main-group wide-group ${props.animateClass}`}>
     Settings
   </div>
 );

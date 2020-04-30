@@ -14,22 +14,25 @@ import Procedures from './Procedures/Procedures';
 import Help from './Help/Help';
 import Settings from './Settings/Settings';
 
-const Routes = () => (
+const Routes = (props) => {
+    const properties = props;
+    return (
     <Switch>
-        <Route component={Dashboard} exact path="/" />
-        <Route component={IncidentLogging} exact path="/logging" />
-        <Route component={ProgramActivationsAreas} exact path="/program" />
-        <Route component={Chat} exact path="/chat" />
-        <Route component={ContactList} exact path="/contacts" />
-        <Route component={TaskList} exact path="/tasks" />
-        <Route component={FileManager} exact path="/files" />
-        <Route component={IntegratedMap} exact path="/map" />
-        <Route component={ResourcePositioning} exact path="/resources" />
-        <Route component={FleetManagement} exact path="/fleet" />
-        <Route component={Procedures} exact path="/procedures" />
-        <Route component={Help} exact path="/help" />
-        <Route component={Settings} exact path="/settings" />
+        <Route render={(props) => <Dashboard {...props} animateClass={properties.pagesAnimation} />} exact path="/" />
+        <Route render={(props) => <IncidentLogging {...props} animateClass={properties.pagesAnimation} />} exact path="/logging" />
+        <Route render={(props) => <ProgramActivationsAreas {...props} animateClass={properties.pagesAnimation} />} exact path="/program" />
+        <Route render={(props) => <Chat {...props} animateClass={properties.pagesAnimation} />} exact path="/chat" />
+        <Route render={(props) => <ContactList {...props} animateClass={properties.pagesAnimation} />} exact path="/contacts" />
+        <Route render={(props) => <TaskList {...props} animateClass={properties.pagesAnimation} />} exact path="/tasks" />
+        <Route render={(props) => <FileManager {...props} animateClass={properties.pagesAnimation} />} exact path="/files" />
+        <Route render={(props) => <IntegratedMap {...props} animateClass={properties.pagesAnimation} />} exact path="/map" />
+        <Route render={(props) => <ResourcePositioning {...props} animateClass={properties.pagesAnimation} />} exact path="/resources" />
+        <Route render={(props) => <FleetManagement {...props} animateClass={properties.pagesAnimation} />} exact path="/fleet" />
+        <Route render={(props) => <Procedures {...props} animateClass={properties.pagesAnimation} />} exact path="/procedures" />
+        <Route render={(props) => <Help {...props} animateClass={properties.pagesAnimation} />} exact path="/help" />
+        <Route render={(props) => <Settings {...props} animateClass={properties.pagesAnimation} />} exact path="/settings" />
     </Switch>
-);
+    );
+};
 
 export default Routes;

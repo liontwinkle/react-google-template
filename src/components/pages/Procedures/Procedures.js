@@ -1,7 +1,7 @@
 import React from 'react';
 
-const Procedures = () => (
-  <div className="main-group wide-group">
+const Procedures = (props) => (
+  <div className={`main-group wide-group ${props.animateClass}`}>
     Procedures
   </div>
 );

@@ -1,7 +1,7 @@
 import React from 'react';
 
-const ProgramActivationsAreas = () => (
-  <div className="main-group wide-group">
+const ProgramActivationsAreas = (props) => (
+  <div className={`main-group wide-group ${props.animateClass}`}>
     ProgramActivationsAreas
   </div>
 );
