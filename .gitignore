@@ -22,8 +22,9 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
+#cp_client misc folders
 /backup
-/tmp
+ws.config.code-workspace
 
 # dashforge assets
 public/assets/fonts
