@@ -2,23 +2,6 @@
     font-family: "IBM Plex Sans", sans-serif;
 }
 
-.preloader {
-   position: absolute;
-   top: 0;
-   left: 0;
-   width: 100%;
-   height: 100%;
-   z-index: 9999;
-   background-image: url('../img/Eclipse-1s-84px.gif');
-   background-repeat: no-repeat; 
-   background-color: #FFF;
-   background-position: center;
-}
-
-#sectionContainer .preloader {
-    left: 45px;
-}
-
 .tooltip-inner {
 	font-size: 0.9rem;
 }
