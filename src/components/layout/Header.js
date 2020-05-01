@@ -11,6 +11,7 @@ export default class Header extends Component {
       document.getElementById('mainSidebar').addEventListener(e, function (e) {
         e.preventDefault();
 
+        // Displaying second and other columns
         if (window.matchMedia('(max-width: 767px)').matches) {
           [...document.getElementsByClassName('chat-columns')].forEach(
             (element) => {
@@ -20,17 +21,18 @@ export default class Header extends Component {
           );
         }
 
+        // Switch main menu sidebar visibility
         if (document.body.classList.contains('main-content-show')) {
           document.body.classList.remove('main-content-show');
         } else {
-          document.body.classList.add('main-sidebar-show');
-          document.getElementById('mainSidebar').classList.add('d-none');
-          document.getElementById('mainMenuOpen').classList.remove('d-none');
+          if (document.body.classList.contains('main-sidebar-show')) {
+            document.body.classList.remove('main-sidebar-show');
+          } else document.body.classList.add('main-sidebar-show');
         }
 
+        // Hide burger-menu button after switch to first column on desktop
         if (window.matchMedia('(min-width: 768px)').matches) {
           document.getElementById('mainSidebar').classList.add('d-md-none');
-          document.getElementById('mainMenuOpen').classList.add('d-md-flex');
         }
       });
     });
@@ -42,8 +44,6 @@ export default class Header extends Component {
 
         if (!e.target.closest('.burger-menu') && !e.target.closest('.main-sidebar')) {
           document.body.classList.remove('main-sidebar-show');
-          document.getElementById('mainSidebar').classList.remove('d-none');
-          document.getElementById('mainMenuOpen').classList.add('d-none');
         }
       });
     });
@@ -53,8 +53,7 @@ export default class Header extends Component {
   render() {
     return (
       <header className="navbar navbar-header navbar-header-fixed">
-        <a href="." id="mainMenuOpen" className="burger-menu d-none d-md-flex d-lg-none"><i data-feather="menu"></i></a>
-        <a href="." id="mainSidebar" className="burger-menu d-md-none"><i data-feather="arrow-left"></i></a>
+        <a href="." id="mainSidebar" className="burger-menu d-md-none"><i data-feather="menu"></i></a>
         <div className="navbar-brand">
           <NavLink
             exact
