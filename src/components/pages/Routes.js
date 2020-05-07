@@ -18,19 +18,45 @@ import SignIn from './SignIn/SignIn';
 const Routes = (props) => {
     return (
         <Switch>
-            <Route render={() => <Dashboard animateClass={props.pagesAnimation} />} exact path="/" />
-            <Route render={() => <IncidentLogging animateClass={props.pagesAnimation} />} exact path="/logging" />
-            <Route render={() => <ProgramActivationsAreas animateClass={props.pagesAnimation} />} exact path="/program" />
-            <Route render={() => <Chat animateClass={props.pagesAnimation} />} exact path="/chat" />
-            <Route render={() => <ContactList animateClass={props.pagesAnimation} />} exact path="/contacts" />
-            <Route render={() => <TaskList animateClass={props.pagesAnimation} />} exact path="/tasks" />
-            <Route render={() => <FileManager animateClass={props.pagesAnimation} />} exact path="/files" />
-            <Route render={() => <IntegratedMap animateClass={props.pagesAnimation} />} exact path="/map" />
-            <Route render={() => <ResourcePositioning animateClass={props.pagesAnimation} />} exact path="/resources" />
-            <Route render={() => <FleetManagement animateClass={props.pagesAnimation} />} exact path="/fleet" />
-            <Route render={() => <Procedures animateClass={props.pagesAnimation} />} exact path="/procedures" />
-            <Route render={() => <Help animateClass={props.pagesAnimation} />} exact path="/help" />
-            <Route render={() => <Settings animateClass={props.pagesAnimation} />} exact path="/settings" />
+            <Route exact path="/">
+                <Dashboard animateClass={props.pagesAnimation} />
+            </Route>
+            <Route exact path="/logging">
+                <IncidentLogging animateClass={props.pagesAnimation} />
+            </Route>
+            <Route exact path="/program">
+                <ProgramActivationsAreas animateClass={props.pagesAnimation} />
+            </Route>
+            <Route exact path="/chat">
+                <Chat animateClass={props.pagesAnimation} />
+            </Route>
+            <Route exact path="/contacts">
+                <ContactList animateClass={props.pagesAnimation} />
+            </Route>
+            <Route exact path="/tasks">
+                <TaskList animateClass={props.pagesAnimation} />
+            </Route>
+            <Route exact path="/files">
+                <FileManager animateClass={props.pagesAnimation} />
+            </Route>
+            <Route exact path="/map">
+                <IntegratedMap animateClass={props.pagesAnimation} />
+            </Route>
+            <Route exact path="/resources">
+                <ResourcePositioning animateClass={props.pagesAnimation} />
+            </Route>
+            <Route exact path="/fleet">
+                <FleetManagement animateClass={props.pagesAnimation} />
+            </Route>
+            <Route exact path="/procedures">
+                <Procedures animateClass={props.pagesAnimation} />
+            </Route>
+            <Route exact path="/help">
+                <Help animateClass={props.pagesAnimation} />
+            </Route>
+            <Route exact path="/settings">
+                <Settings animateClass={props.pagesAnimation} />
+            </Route>
             <Route exact path="/signin">
                 <SignIn animateClass={props.pagesAnimation} />
             </Route>
