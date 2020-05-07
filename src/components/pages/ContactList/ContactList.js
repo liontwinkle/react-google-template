@@ -1,9 +1,14 @@
-import React from 'react';
+import React, { Component } from 'react';
+import WidePane from '../../layout/WidePane';
 
-const ContactList = (props) => (
-  <div className={`main-group wide-group ${props.animateClass}`}>
-    ContactList
-  </div>
-);
+class ContactList extends Component {
+  render() {
+    return (
+      <WidePane animateClass={this.props.animateClass}>
+        ContactList
+      </WidePane>
+    );
+  }
+};
 
 export default ContactList;

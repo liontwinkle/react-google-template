@@ -1,9 +1,14 @@
-import React from 'react';
+import React, { Component } from 'react';
+import WidePane from '../../layout/WidePane';
 
-const ResourcePositioning = (props) => (
-  <div className={`main-group wide-group ${props.animateClass}`}>
-    ResourcePositioning
-  </div>
-);
+class ResourcePositioning extends Component {
+  render() {
+    return (
+      <WidePane animateClass={this.props.animateClass}>
+        ResourcePositioning
+      </WidePane>
+    );
+  }
+};
 
 export default ResourcePositioning;

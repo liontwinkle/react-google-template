@@ -1,16 +1,17 @@
 import React, { Component } from 'react';
+import PageAnimator from '../../layout/PageAnimator';
 
 class IncidentLogging extends Component {
   render() {
     return (
-      <div className={`${this.props.animateClass}`}>
+      <PageAnimator animateClass={this.props.animateClass}>
         <div className="main-group">
           IncidentLogging
         </div>
         <div className="main-content">
           RHS Content
         </div>
-      </div>
+      </PageAnimator>
     );
   }
 };

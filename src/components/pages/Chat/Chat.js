@@ -1,9 +1,14 @@
-import React from 'react';
+import React, { Component } from 'react';
+import WidePane from '../../layout/WidePane';
 
-const Chat = (props) => (
-  <div className={`main-group wide-group ${props.animateClass}`}>
-    Chat
-  </div>
-);
+class Chat extends Component {
+  render() {
+    return (
+      <WidePane animateClass={this.props.animateClass}>
+        Chat
+      </WidePane>
+    );
+  }
+};
 
 export default Chat;

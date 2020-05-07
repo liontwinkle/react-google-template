@@ -1,9 +1,14 @@
-import React from 'react';
+import React, { Component } from 'react';
+import WidePane from '../../layout/WidePane';
 
-const Dashboard = (props) => (
-  <div className={`main-group wide-group ${props.animateClass}`}>
-    Dashboard
-  </div>
-);
+class Dashboard extends Component {
+  render() {
+    return (
+      <WidePane animateClass={this.props.animateClass}>
+        Dashboard
+      </WidePane>
+    );
+  }
+};
 
 export default Dashboard;

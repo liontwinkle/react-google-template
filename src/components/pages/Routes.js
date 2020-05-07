@@ -15,25 +15,21 @@ import Help from './Help/Help';
 import Settings from './Settings/Settings';
 
 const Routes = (props) => {
-    const properties = props;
-
-    /* Change this way of passing props to pages to use Global state and make these rows much shorter */
-    
     return (
     <Switch>
-        <Route render={(props) => <Dashboard {...props} animateClass={properties.pagesAnimation} />} exact path="/" />
-        <Route render={(props) => <IncidentLogging {...props} animateClass={properties.pagesAnimation} />} exact path="/logging" />
-        <Route render={(props) => <ProgramActivationsAreas {...props} animateClass={properties.pagesAnimation} />} exact path="/program" />
-        <Route render={(props) => <Chat {...props} animateClass={properties.pagesAnimation} />} exact path="/chat" />
-        <Route render={(props) => <ContactList {...props} animateClass={properties.pagesAnimation} />} exact path="/contacts" />
-        <Route render={(props) => <TaskList {...props} animateClass={properties.pagesAnimation} />} exact path="/tasks" />
-        <Route render={(props) => <FileManager {...props} animateClass={properties.pagesAnimation} />} exact path="/files" />
-        <Route render={(props) => <IntegratedMap {...props} animateClass={properties.pagesAnimation} />} exact path="/map" />
-        <Route render={(props) => <ResourcePositioning {...props} animateClass={properties.pagesAnimation} />} exact path="/resources" />
-        <Route render={(props) => <FleetManagement {...props} animateClass={properties.pagesAnimation} />} exact path="/fleet" />
-        <Route render={(props) => <Procedures {...props} animateClass={properties.pagesAnimation} />} exact path="/procedures" />
-        <Route render={(props) => <Help {...props} animateClass={properties.pagesAnimation} />} exact path="/help" />
-        <Route render={(props) => <Settings {...props} animateClass={properties.pagesAnimation} />} exact path="/settings" />
+        <Route render={() => <Dashboard animateClass={props.pagesAnimation} />} exact path="/" />
+        <Route render={() => <IncidentLogging animateClass={props.pagesAnimation} />} exact path="/logging" />
+        <Route render={() => <ProgramActivationsAreas animateClass={props.pagesAnimation} />} exact path="/program" />
+        <Route render={() => <Chat animateClass={props.pagesAnimation} />} exact path="/chat" />
+        <Route render={() => <ContactList animateClass={props.pagesAnimation} />} exact path="/contacts" />
+        <Route render={() => <TaskList animateClass={props.pagesAnimation} />} exact path="/tasks" />
+        <Route render={() => <FileManager animateClass={props.pagesAnimation} />} exact path="/files" />
+        <Route render={() => <IntegratedMap animateClass={props.pagesAnimation} />} exact path="/map" />
+        <Route render={() => <ResourcePositioning animateClass={props.pagesAnimation} />} exact path="/resources" />
+        <Route render={() => <FleetManagement animateClass={props.pagesAnimation} />} exact path="/fleet" />
+        <Route render={() => <Procedures animateClass={props.pagesAnimation} />} exact path="/procedures" />
+        <Route render={() => <Help animateClass={props.pagesAnimation} />} exact path="/help" />
+        <Route render={() => <Settings animateClass={props.pagesAnimation} />} exact path="/settings" />
     </Switch>
     );
 };

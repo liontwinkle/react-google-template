@@ -1,9 +1,14 @@
-import React from 'react';
+import React, { Component } from 'react';
+import WidePane from '../../layout/WidePane';
 
-const ProgramActivationsAreas = (props) => (
-  <div className={`main-group wide-group ${props.animateClass}`}>
-    ProgramActivationsAreas
-  </div>
-);
+class ProgramActivationsAreas extends Component {
+  render() {
+    return (
+      <WidePane animateClass={this.props.animateClass}>
+        ProgramActivationsAreas
+      </WidePane>
+    );
+  }
+};
 
 export default ProgramActivationsAreas;

@@ -1,9 +1,14 @@
-import React from 'react';
+import React, { Component } from 'react';
+import WidePane from '../../layout/WidePane';
 
-const Settings = (props) => (
-  <div className={`main-group wide-group ${props.animateClass}`}>
-    Settings
-  </div>
-);
+class Settings extends Component {
+  render() {
+    return (
+      <WidePane animateClass={this.props.animateClass}>
+        Settings
+      </WidePane>
+    );
+  }
+};
 
 export default Settings;

@@ -1,9 +1,14 @@
-import React from 'react';
+import React, { Component } from 'react';
+import WidePane from '../../layout/WidePane';
 
-const Procedures = (props) => (
-  <div className={`main-group wide-group ${props.animateClass}`}>
-    Procedures
-  </div>
-);
+class Procedures extends Component {
+  render() {
+    return (
+      <WidePane animateClass={this.props.animateClass}>
+        Procedures
+      </WidePane>
+    );
+  }
+};
 
 export default Procedures;

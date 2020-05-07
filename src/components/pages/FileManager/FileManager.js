@@ -1,9 +1,14 @@
-import React from 'react';
+import React, { Component } from 'react';
+import WidePane from '../../layout/WidePane';
 
-const FileManager = (props) => (
-  <div className={`main-group wide-group ${props.animateClass}`}>
-    FileManager
-  </div>
-);
+class FileManager extends Component {
+  render() {
+    return (
+      <WidePane animateClass={this.props.animateClass}>
+        FileManager
+      </WidePane>
+    );
+  }
+};
 
 export default FileManager;

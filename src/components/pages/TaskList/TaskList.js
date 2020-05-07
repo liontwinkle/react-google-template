@@ -1,9 +1,14 @@
-import React from 'react';
+import React, { Component } from 'react';
+import WidePane from '../../layout/WidePane';
 
-const TaskList = (props) => (
-  <div className={`main-group wide-group ${props.animateClass}`}>
-    TaskList
-  </div>
-);
+class TaskList extends Component {
+  render() {
+    return (
+      <WidePane animateClass={this.props.animateClass}>
+        TaskList
+      </WidePane>
+    );
+  }
+};
 
 export default TaskList;
