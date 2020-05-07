@@ -16,6 +16,9 @@ import Settings from './Settings/Settings';
 
 const Routes = (props) => {
     const properties = props;
+
+    /* Change this way of passing props to pages to use Global state and make these rows much shorter */
+    
     return (
     <Switch>
         <Route render={(props) => <Dashboard {...props} animateClass={properties.pagesAnimation} />} exact path="/" />
