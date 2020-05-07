@@ -13,24 +13,28 @@ import FleetManagement from './FleetManagement/FleetManagement';
 import Procedures from './Procedures/Procedures';
 import Help from './Help/Help';
 import Settings from './Settings/Settings';
+import SignIn from './SignIn/SignIn';
 
 const Routes = (props) => {
     return (
-    <Switch>
-        <Route render={() => <Dashboard animateClass={props.pagesAnimation} />} exact path="/" />
-        <Route render={() => <IncidentLogging animateClass={props.pagesAnimation} />} exact path="/logging" />
-        <Route render={() => <ProgramActivationsAreas animateClass={props.pagesAnimation} />} exact path="/program" />
-        <Route render={() => <Chat animateClass={props.pagesAnimation} />} exact path="/chat" />
-        <Route render={() => <ContactList animateClass={props.pagesAnimation} />} exact path="/contacts" />
-        <Route render={() => <TaskList animateClass={props.pagesAnimation} />} exact path="/tasks" />
-        <Route render={() => <FileManager animateClass={props.pagesAnimation} />} exact path="/files" />
-        <Route render={() => <IntegratedMap animateClass={props.pagesAnimation} />} exact path="/map" />
-        <Route render={() => <ResourcePositioning animateClass={props.pagesAnimation} />} exact path="/resources" />
-        <Route render={() => <FleetManagement animateClass={props.pagesAnimation} />} exact path="/fleet" />
-        <Route render={() => <Procedures animateClass={props.pagesAnimation} />} exact path="/procedures" />
-        <Route render={() => <Help animateClass={props.pagesAnimation} />} exact path="/help" />
-        <Route render={() => <Settings animateClass={props.pagesAnimation} />} exact path="/settings" />
-    </Switch>
+        <Switch>
+            <Route render={() => <Dashboard animateClass={props.pagesAnimation} />} exact path="/" />
+            <Route render={() => <IncidentLogging animateClass={props.pagesAnimation} />} exact path="/logging" />
+            <Route render={() => <ProgramActivationsAreas animateClass={props.pagesAnimation} />} exact path="/program" />
+            <Route render={() => <Chat animateClass={props.pagesAnimation} />} exact path="/chat" />
+            <Route render={() => <ContactList animateClass={props.pagesAnimation} />} exact path="/contacts" />
+            <Route render={() => <TaskList animateClass={props.pagesAnimation} />} exact path="/tasks" />
+            <Route render={() => <FileManager animateClass={props.pagesAnimation} />} exact path="/files" />
+            <Route render={() => <IntegratedMap animateClass={props.pagesAnimation} />} exact path="/map" />
+            <Route render={() => <ResourcePositioning animateClass={props.pagesAnimation} />} exact path="/resources" />
+            <Route render={() => <FleetManagement animateClass={props.pagesAnimation} />} exact path="/fleet" />
+            <Route render={() => <Procedures animateClass={props.pagesAnimation} />} exact path="/procedures" />
+            <Route render={() => <Help animateClass={props.pagesAnimation} />} exact path="/help" />
+            <Route render={() => <Settings animateClass={props.pagesAnimation} />} exact path="/settings" />
+            <Route exact path="/signin">
+                <SignIn animateClass={props.pagesAnimation} />
+            </Route>
+        </Switch>
     );
 };
 
