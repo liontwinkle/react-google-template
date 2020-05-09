@@ -81,6 +81,13 @@ export default class Header extends Component {
           <div id="sessionTimeoutMessage" className="m-auto d-none d-sm-block"></div>
         </div>
         <div className="navbar-right">
+          <NavLink
+            exact
+            to="/signin"
+            activeClassName='active'
+            style={{marginRight: "10px"}}>
+            SignIn
+          </NavLink>
           <a href="dashforge.html" className="">Docs</a>
           <div className="dropdown dropdown-message">
             <a href="." className="dropdown-link new-indicator" data-toggle="dropdown">
