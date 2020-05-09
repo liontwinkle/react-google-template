@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import Tooltip from '../helpers/Tooltip';
+import Tooltip from '../../helpers/Tooltip';
 
 const MainMenu = (props) => {
 

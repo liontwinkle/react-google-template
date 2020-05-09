@@ -1,13 +1,31 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
+import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
+import thunk from 'redux-thunk';
 import './index.css';
 import CommandPost from './components/CommandPost';
-import {Dots} from 'react-preloaders';
+import { Dots } from 'react-preloaders';
 import * as serviceWorker from './serviceWorker';
+import authReducer from './store/reducers/auth';
+
+//const composeEnhancers = process.env.NODE_ENV === 'development' ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ : null || compose;
+const composeEnhancers = (process.env.NODE_ENV === 'development' ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ : null) || compose;
+
+
+const rootReducer = combineReducers({
+    auth: authReducer
+});
+
+const store = createStore(rootReducer, composeEnhancers(
+    applyMiddleware(thunk)
+));
 
 ReactDOM.render(
   <React.StrictMode>
-    <CommandPost />
+    <Provider store={store}>
+      <CommandPost />
+    </Provider>
     <Dots color={'#0168fa'} background="#ffffff" />
   </React.StrictMode>,
   document.getElementById('root')

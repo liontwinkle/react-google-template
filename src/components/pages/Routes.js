@@ -13,7 +13,7 @@ import FleetManagement from './FleetManagement/FleetManagement';
 import Procedures from './Procedures/Procedures';
 import Help from './Help/Help';
 import Settings from './Settings/Settings';
-import SignIn from './Auth/SignIn';
+import SignIn from './Auth/Auth';
 
 const Routes = (props) => {
     return (
