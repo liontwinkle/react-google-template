@@ -40,13 +40,13 @@ class Auth extends Component {
                 validationErr: 'Password must be longer than 6 characters.'
             }
         },
-        isSignup: true,
+        isSignup: false,
         isSubmitted: false,
         isValid: false
     }
 
     componentDidMount() {
-        if (!this.props.buildingBurger && this.props.authRedirectPath !== '/') {
+        if (this.props.authRedirectPath !== '/') {
             this.props.onSetAuthRedirectPath();
         }
     }
