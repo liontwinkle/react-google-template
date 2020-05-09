@@ -16,17 +16,33 @@ class Auth extends Component {
                 type: 'email',
                 placeholder: 'yourname@yourmail.com',
                 label: 'Email address',
-                value: ''
+                value: '',
+                validation: {
+                    required: true,
+                    isEmail: true
+                },
+                valid: false,
+                touched: false,
+                validationErr: 'This value should be a valid email.'
             },
             password: {
                 elementType: 'input',
                 type: 'password',
                 placeholder: 'Enter your password',
                 label: 'Password',
-                value: ''
+                value: '',
+                validation: {
+                    required: true,
+                    minLength: 6
+                },
+                valid: false,
+                touched: false,
+                validationErr: 'Password must be longer than 6 characters.'
             }
         },
-        isSignup: true
+        isSignup: true,
+        isSubmitted: false,
+        isValid: false
     }
 
     componentDidMount() {
@@ -43,12 +59,21 @@ class Auth extends Component {
                 touched: true
             })
         });
-        this.setState({ controls: updatedControls });
+
+        let formValid = true;
+        for (let control in updatedControls) {
+            if (!updatedControls[control].valid) formValid = false;
+        }
+
+        this.setState({ controls: updatedControls, isValid: formValid });
     }
 
     submitHandler = (event) => {
         event.preventDefault();
-        this.props.onAuth(this.state.controls.email.value, this.state.controls.password.value, this.state.isSignup);
+        this.setState({ isSubmitted: true });
+        if (this.state.isValid) {
+            this.props.onAuth(this.state.controls.email.value, this.state.controls.password.value, this.state.isSignup);
+        }
     }
 
     switchAuthModeHandler = () => {
@@ -76,10 +101,12 @@ class Auth extends Component {
                 key={formElement.id}>
                 <FormLabel>{formElement.config.label}</FormLabel>
                 <FormControl
-                    type={formElement.config.type}
+                    type={formElement.config.elementType}
                     value={formElement.config.value}
                     placeholder={formElement.config.placeholder}
+                    className={(!formElement.config.valid && formElement.config.touched) ? 'parsley-error' : ''}
                     onChange={(event) => this.inputChangedHandler(event, formElement.id)} />
+                <div className="parsley-errors-list filled mt-1">{(!formElement.config.valid && formElement.config.touched && this.state.isSubmitted) ? formElement.config.validationErr : ''}</div>
             </FormGroup>
         ));
 
@@ -108,7 +135,6 @@ class Auth extends Component {
                             <h3 className="tx-color-01 mg-b-5">Sign In</h3>
                             <p className="tx-color-03 tx-16 mg-b-40">Welcome back! Please signin to continue.</p>
                             {authRedirect}
-                            {errorMessage}
                             <form onSubmit={this.submitHandler}>
                                 {form}
                                 <Button
@@ -117,6 +143,7 @@ class Auth extends Component {
                                     block
                                     disabled={!this.validateForm()}>Continue</Button>
                             </form>
+                            {errorMessage}
                             <Button
                                 onClick={this.switchAuthModeHandler}
                                 className="btn btn-brand-02 btn-block wd-100p mt-3"
