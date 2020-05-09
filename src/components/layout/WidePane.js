@@ -1,5 +1,5 @@
 import React from 'react';
-import PageAnimator from './PageAnimator';
+import PageAnimator from '../../hoc/PageAnimator';
 
 const WidePane = (props) => (
     <PageAnimator animateClass={props.animateClass}>

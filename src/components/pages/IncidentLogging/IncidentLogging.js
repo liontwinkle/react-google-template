@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import PageAnimator from '../../layout/PageAnimator';
+import PageAnimator from '../../../hoc/PageAnimator';
 
 class IncidentLogging extends Component {
   render() {

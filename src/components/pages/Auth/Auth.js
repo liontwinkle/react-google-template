@@ -71,10 +71,11 @@ class Auth extends Component {
         }
 
         let form = formElementsArray.map(formElement => (
-            <FormGroup controlId={formElement.config.type}>
+            <FormGroup
+                controlId={formElement.config.type}
+                key={formElement.id}>
                 <FormLabel>{formElement.config.label}</FormLabel>
                 <FormControl
-                    key={formElement.id}
                     type={formElement.config.type}
                     value={formElement.config.value}
                     placeholder={formElement.config.placeholder}
