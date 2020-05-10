@@ -55,7 +55,7 @@ export const auth = (email, password, isSignup) => {
         axios.post(url, authData)
             .then(response => {
                 console.log(response);
-                if (response.data.code === 200) {
+                if (response.data.status.code === 200) {
                     console.log(response.data.user.user_first_name);
                     const expirationDate = new Date(new Date().getTime() + response.data.expiresIn * 1000);
                     localStorage.setItem('token', response.data.user.user_login_token);
@@ -63,10 +63,15 @@ export const auth = (email, password, isSignup) => {
                     localStorage.setItem('userId', response.data.user.id);
                     dispatch(authSuccess(response.data.user.user_login_token, response.data.user.id));
                     dispatch(checkAuthTimeout(response.data.expiresIn));
-                } else dispatch(authFail(response.data.error));
+                } else {
+                    dispatch(authFail(response.data.status));
+                }
             })
             .catch(err => {
-                dispatch(authFail(err.response.data.error));
+                console.log(err);
+                if (err.response) {
+                    dispatch(authFail(err.response.data.status));
+                } else dispatch(authFail('Something went wrong. Please try again later.'));
             });
     };
 };

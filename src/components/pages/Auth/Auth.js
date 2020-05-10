@@ -12,6 +12,7 @@ class Auth extends Component {
     state = {
         controls: {
             email: {
+                order: 1,
                 elementType: 'input',
                 type: 'email',
                 placeholder: 'yourname@yourmail.com',
@@ -26,6 +27,7 @@ class Auth extends Component {
                 validationErr: 'This value should be a valid email.'
             },
             password: {
+                order: 2,
                 elementType: 'input',
                 type: 'password',
                 placeholder: 'Enter your password',
@@ -65,7 +67,11 @@ class Auth extends Component {
             if (!updatedControls[control].valid) formValid = false;
         }
 
-        this.setState({ controls: updatedControls, isValid: formValid });
+        this.setState({ 
+            controls: updatedControls, 
+            isValid: formValid
+        });
+
     }
 
     submitHandler = (event) => {
@@ -87,6 +93,16 @@ class Auth extends Component {
     }
 
     render() {
+        let errorMessage = null;
+        let errorCode = null;
+
+        if (this.props.error) {
+            errorMessage = (
+                <div className="parsley-errors-list filled mt-1">{this.props.error.message}</div>
+            );
+            errorCode = this.props.error.code;
+        }
+
         const formElementsArray = [];
         for (let key in this.state.controls) {
             formElementsArray.push({
@@ -94,6 +110,8 @@ class Auth extends Component {
                 config: this.state.controls[key]
             });
         }
+
+        formElementsArray.sort((a, b) => Number(a.config.order) - Number(b.config.order));
 
         let form = formElementsArray.map(formElement => (
             <FormGroup
@@ -104,22 +122,16 @@ class Auth extends Component {
                     type={formElement.config.elementType}
                     value={formElement.config.value}
                     placeholder={formElement.config.placeholder}
-                    className={(!formElement.config.valid && formElement.config.touched) ? 'parsley-error' : ''}
+                    className={(!formElement.config.valid && formElement.config.touched && this.state.isSubmitted) ? 'parsley-error' : ''}
                     onChange={(event) => this.inputChangedHandler(event, formElement.id)} />
                 <div className="parsley-errors-list filled mt-1">{(!formElement.config.valid && formElement.config.touched && this.state.isSubmitted) ? formElement.config.validationErr : ''}</div>
+                {(formElement.id === 'email' && errorCode !== 406) ? errorMessage : null}
+                {(formElement.id === 'password' && errorCode === 406) ? errorMessage : null}
             </FormGroup>
         ));
 
         if (this.props.loading) {
             //form = <Spinner />
-        }
-
-        let errorMessage = null;
-
-        if (this.props.error) {
-            errorMessage = (
-                <p>{this.props.error.message}</p>
-            );
         }
 
         let authRedirect = null;
@@ -143,11 +155,10 @@ class Auth extends Component {
                                     block
                                     disabled={!this.validateForm()}>Continue</Button>
                             </form>
-                            {errorMessage}
-                            <Button
+                            {/* <Button
                                 onClick={this.switchAuthModeHandler}
                                 className="btn btn-brand-02 btn-block wd-100p mt-3"
-                            >SWITCH TO {this.state.isSignup ? 'SIGNIN' : 'SIGNUP'}</Button>
+                            >SWITCH TO {this.state.isSignup ? 'SIGNIN' : 'SIGNUP'}</Button> */}
                         </div>
                     </div>
                 </div>

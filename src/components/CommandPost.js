@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import Cookies from 'universal-cookie';
 import { BrowserRouter } from 'react-router-dom';
 import Routes from './pages/Routes';
+import { connect } from 'react-redux';
+import * as actions from '../store/actions/index';
 import Header from './layout/Header';
 import Footer from './layout/Footer';
 import MainMenu from './layout/MainMenu';
@@ -56,14 +58,22 @@ class CommandPost extends Component {
   }
 
   render() {
+    let mainMenu = null;
+
+    if ( this.props.isAuthenticated ) {
+      mainMenu = (
+        <MainMenu
+            click={() => this.switchThemeHandler()}
+            isDark={this.state.darkMode} />
+      );
+    }
+
     return (
       <BrowserRouter>
         <Header />
         <div className="main-wrapper">
-          <MainMenu
-            click={() => this.switchThemeHandler()}
-            isDark={this.state.darkMode} />
-          <Routes pagesAnimation={this.state.pagesAnimation} />
+          {mainMenu}
+          <Routes pagesAnimation={this.state.pagesAnimation} isAuth={this.props.isAuthenticated} />
         </div>
         <Footer />
       </BrowserRouter>
@@ -71,4 +81,16 @@ class CommandPost extends Component {
   }
 }
 
-export default CommandPost;
+const mapStateToProps = state => {
+  return {
+    isAuthenticated: state.auth.token !== null
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    onTryAutoSignup: () => dispatch( actions.authCheckState() )
+  };
+};
+
+export default connect( mapStateToProps, mapDispatchToProps )( CommandPost );
