@@ -4,6 +4,7 @@ import { updateObject } from '../../helpers/utility';
 const initialState = {
     token: null,
     userId: null,
+    userData: null,
     error: null,
     loading: false,
     authRedirectPath: '/'
@@ -17,6 +18,7 @@ const authSuccess = (state, action) => {
     return updateObject( state, { 
         token: action.idToken,
         userId: action.userId,
+        userData: action.userData,
         error: null,
         loading: false
      } );
@@ -43,7 +45,7 @@ const reducer = ( state = initialState, action ) => {
         case actionTypes.AUTH_SUCCESS: return authSuccess(state, action);
         case actionTypes.AUTH_FAIL: return authFail(state, action);
         case actionTypes.AUTH_LOGOUT: return authLogout(state, action);
-        case actionTypes.SET_AUTH_REDIRECT_PATH: return setAuthRedirectPath(state,action);
+        case actionTypes.SET_AUTH_REDIRECT_PATH: return setAuthRedirectPath(state, action);
         default:
             return state;
     }

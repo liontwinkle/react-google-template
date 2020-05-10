@@ -1,5 +1,5 @@
-import React from 'react';
-import { Switch, Route } from 'react-router-dom';
+import React, {Fragment} from 'react';
+import { Switch, Route, Redirect } from 'react-router-dom';
 import Dashboard from './Dashboard/Dashboard';
 import IncidentLogging from './IncidentLogging/IncidentLogging';
 import ProgramActivationsAreas from './ProgramActivationsAreas/ProgramActivationsAreas';
@@ -14,53 +14,73 @@ import Procedures from './Procedures/Procedures';
 import Help from './Help/Help';
 import Settings from './Settings/Settings';
 import SignIn from './Auth/Auth';
+import Logout from './Auth/Logout/Logout'
 
 const Routes = (props) => {
-    return (
+    let routes = (
         <Switch>
-            <Route exact path="/">
-                <Dashboard animateClass={props.pagesAnimation} />
-            </Route>
-            <Route exact path="/logging">
-                <IncidentLogging animateClass={props.pagesAnimation} />
-            </Route>
-            <Route exact path="/program">
-                <ProgramActivationsAreas animateClass={props.pagesAnimation} />
-            </Route>
-            <Route exact path="/chat">
-                <Chat animateClass={props.pagesAnimation} />
-            </Route>
-            <Route exact path="/contacts">
-                <ContactList animateClass={props.pagesAnimation} />
-            </Route>
-            <Route exact path="/tasks">
-                <TaskList animateClass={props.pagesAnimation} />
-            </Route>
-            <Route exact path="/files">
-                <FileManager animateClass={props.pagesAnimation} />
-            </Route>
-            <Route exact path="/map">
-                <IntegratedMap animateClass={props.pagesAnimation} />
-            </Route>
-            <Route exact path="/resources">
-                <ResourcePositioning animateClass={props.pagesAnimation} />
-            </Route>
-            <Route exact path="/fleet">
-                <FleetManagement animateClass={props.pagesAnimation} />
-            </Route>
-            <Route exact path="/procedures">
-                <Procedures animateClass={props.pagesAnimation} />
-            </Route>
-            <Route exact path="/help">
-                <Help animateClass={props.pagesAnimation} />
-            </Route>
-            <Route exact path="/settings">
-                <Settings animateClass={props.pagesAnimation} />
-            </Route>
             <Route exact path="/signin">
                 <SignIn animateClass={props.pagesAnimation} />
             </Route>
+            <Route exact path="/signout" component={Logout} />
         </Switch>
+    );
+
+    if (props.isAuth) {
+        routes = (
+            <Switch>
+                <Route exact path="/">
+                    <Dashboard animateClass={props.pagesAnimation} />
+                </Route>
+                <Route exact path="/logging">
+                    <IncidentLogging animateClass={props.pagesAnimation} />
+                </Route>
+                <Route exact path="/program">
+                    <ProgramActivationsAreas animateClass={props.pagesAnimation} />
+                </Route>
+                <Route exact path="/chat">
+                    <Chat animateClass={props.pagesAnimation} />
+                </Route>
+                <Route exact path="/contacts">
+                    <ContactList animateClass={props.pagesAnimation} />
+                </Route>
+                <Route exact path="/tasks">
+                    <TaskList animateClass={props.pagesAnimation} />
+                </Route>
+                <Route exact path="/files">
+                    <FileManager animateClass={props.pagesAnimation} />
+                </Route>
+                <Route exact path="/map">
+                    <IntegratedMap animateClass={props.pagesAnimation} />
+                </Route>
+                <Route exact path="/resources">
+                    <ResourcePositioning animateClass={props.pagesAnimation} />
+                </Route>
+                <Route exact path="/fleet">
+                    <FleetManagement animateClass={props.pagesAnimation} />
+                </Route>
+                <Route exact path="/procedures">
+                    <Procedures animateClass={props.pagesAnimation} />
+                </Route>
+                <Route exact path="/help">
+                    <Help animateClass={props.pagesAnimation} />
+                </Route>
+                <Route exact path="/settings">
+                    <Settings animateClass={props.pagesAnimation} />
+                </Route>
+                <Route exact path="/signin">
+                    <SignIn animateClass={props.pagesAnimation} />
+                </Route>
+                <Route exact path="/signout" component={Logout} />
+                <Redirect to="/" />
+            </Switch>
+        );
+    }
+
+    return (
+        <Fragment>
+            {routes}
+        </Fragment>
     );
 };
 

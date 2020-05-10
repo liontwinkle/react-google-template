@@ -8,11 +8,12 @@ export const authStart = () => {
     };
 };
 
-export const authSuccess = (token, userId) => {
+export const authSuccess = (token, userId, userData) => {
     return {
         type: actionTypes.AUTH_SUCCESS,
         idToken: token,
-        userId: userId
+        userId: userId,
+        userData: userData
     };
 };
 
@@ -27,6 +28,9 @@ export const logout = () => {
     localStorage.removeItem('token');
     localStorage.removeItem('expirationDate');
     localStorage.removeItem('userId');
+    localStorage.removeItem('userData');
+    //Redirect user to Signin after token failed
+    if (window.location.pathname.split('/').pop() !== 'signin') window.location.href = '/signin';
     return {
         type: actionTypes.AUTH_LOGOUT
     };
@@ -61,17 +65,18 @@ export const auth = (email, password, isSignup) => {
                     localStorage.setItem('token', response.data.user.user_login_token);
                     localStorage.setItem('expirationDate', expirationDate);
                     localStorage.setItem('userId', response.data.user.id);
-                    dispatch(authSuccess(response.data.user.user_login_token, response.data.user.id));
+                    localStorage.setItem('userData', JSON.stringify(response.data.user));
+                    dispatch(authSuccess(response.data.user.user_login_token, response.data.user.id, response.data.user));
                     dispatch(checkAuthTimeout(response.data.expiresIn));
                 } else {
                     dispatch(authFail(response.data.status));
                 }
             })
             .catch(err => {
-                console.log(err);
-                if (err.response) {
-                    dispatch(authFail(err.response.data.status));
-                } else dispatch(authFail('Something went wrong. Please try again later.'));
+                dispatch(authFail({
+                    "code": 0,
+                    "message": 'Something went wrong. Please try again later. ' + err
+                  }));
             });
     };
 };
@@ -94,7 +99,11 @@ export const authCheckState = () => {
                 dispatch(logout());
             } else {
                 const userId = localStorage.getItem('userId');
-                dispatch(authSuccess(token, userId));
+
+                //Dispatch data from Local storage to Redux store after page refresh
+                const userData = JSON.parse(localStorage.getItem('userData'));
+
+                dispatch(authSuccess(token, userId, userData));
                 dispatch(checkAuthTimeout((expirationDate.getTime() - new Date().getTime()) / 1000));
             }
         }

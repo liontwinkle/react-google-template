@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { Search, MessageSquare, Bell, Edit3, User, Menu, X, Edit, LogOut, HelpCircle, Settings } from 'react-feather';
 
-export default class Header extends Component {
+class Header extends Component {
 
   // Document ready event
   componentDidMount() {
@@ -51,47 +53,25 @@ export default class Header extends Component {
   }
 
   render() {
-    return (
-      <header className="navbar navbar-header navbar-header-fixed">
-        <a href="." id="mainSidebar" className="burger-menu d-md-none"><i data-feather="menu"></i></a>
-        <div className="navbar-brand">
-          <NavLink
-            exact
-            to="/"
-            activeClassName='active'>
-            <span className="df-logo">Command<span>Post</span></span>
-          </NavLink>
-        </div>
-        <div id="navbarMenu" className="navbar-menu-wrapper">
-          <div className="navbar-menu-header">
-            <NavLink
-              exact
-              to="/"
-              activeClassName='active'>
-              <span className="df-logo">Command<span>Post</span></span>
-            </NavLink>
-            <a id="mainMenuClose" href="."><i data-feather="x"></i></a>
+    let searchBlock = null;
+    let userBlock = null;
+
+    if (this.props.isAuth) {
+      searchBlock = (
+        <div id="headerSearch" className="d-flex">
+          <div className="search-form mg-l-15">
+            <input type="search" className="form-control" placeholder="Search" />
+            <button className="btn" type="button"><Search /></button>
           </div>
-          <div id="headerSearch" className="d-flex">
-            <div className="search-form mg-l-15">
-              <input type="search" className="form-control" placeholder="Search" />
-              <button className="btn" type="button"><i data-feather="search"></i></button>
-            </div>
-          </div>
-          <div id="sessionTimeoutMessage" className="m-auto d-none d-sm-block"></div>
         </div>
+      );
+
+      userBlock = (
         <div className="navbar-right">
-          <NavLink
-            exact
-            to="/signin"
-            activeClassName='active'
-            style={{marginRight: "10px"}}>
-            SignIn
-          </NavLink>
           <a href="dashforge.html" className="">Docs</a>
           <div className="dropdown dropdown-message">
             <a href="." className="dropdown-link new-indicator" data-toggle="dropdown">
-              <i data-feather="message-square"></i>
+              <MessageSquare />
               <span>5</span>
             </a>
             <div className="dropdown-menu dropdown-menu-right">
@@ -145,7 +125,7 @@ export default class Header extends Component {
           </div>
           <div className="dropdown dropdown-notification">
             <a href="." className="dropdown-link new-indicator" data-toggle="dropdown">
-              <i data-feather="bell"></i>
+              <Bell />
               <span>2</span>
             </a>
             <div className="dropdown-menu dropdown-menu-right">
@@ -201,20 +181,69 @@ export default class Header extends Component {
             <div className="dropdown-menu dropdown-menu-right tx-13 user-menu">
               <div className="avatar avatar-lg mg-b-15"><img src="https://via.placeholder.com/500"
                 className="rounded-circle" alt="" /></div>
-              <h6 className="tx-semibold mg-b-5">User data</h6>
-              <p className="mg-b-25 tx-12 tx-color-03">User data</p>
+              <h6 className="tx-semibold mg-b-5">{this.props.userData.user_first_name} {this.props.userData.user_last_name}</h6>
+              <p className="mg-b-25 tx-12 tx-color-03">{this.props.userData.user_role}</p>
 
-              <span className="dropdown-item d-none"><i data-feather="edit-3"></i> Edit Profile</span>
-              <span className="dropdown-item d-none"><i data-feather="user"></i> View Profile</span>
+              <span className="dropdown-item d-none"><Edit3 /> Edit Profile</span>
+              <span className="dropdown-item d-none"><User /> View Profile</span>
               <div className="dropdown-divider"></div>
-              <a href="https://ineedhelpers.com/" className="dropdown-item"><i data-feather="help-circle"></i> Help</a>
-              <span className="change-section dropdown-item" data-section-name="settings"><i data-feather="settings"></i> Settings</span>
-              <a href="change-password.php" className="dropdown-item"><i data-feather="edit"></i> Change Password</a>
-              <a href="signout.php" className="dropdown-item"><i data-feather="log-out"></i> Sign Out</a>
+              <a href="https://ineedhelpers.com/" className="dropdown-item"><HelpCircle /> Help</a>
+              <NavLink
+                exact
+                to="/settings"
+                activeClassName='active-dropdown'
+                className="dropdown-item">
+                <Settings /> Settings
+              </NavLink>
+              <a href="change-password.php" className="dropdown-item"><Edit /> Change Password</a>
+              <NavLink
+                exact
+                to="/signout"
+                activeClassName='active-dropdown'
+                className="dropdown-item">
+                <LogOut /> Sign Out
+              </NavLink>
             </div>
           </div>
         </div>
+      );
+    }
+
+    return (
+      <header className="navbar navbar-header navbar-header-fixed">
+        <a href="." id="mainSidebar" className="burger-menu d-md-none"><Menu /></a>
+        <div className="navbar-brand">
+          <NavLink
+            exact
+            to="/"
+            activeClassName='active'>
+            <span className="df-logo">Command<span>Post</span></span>
+          </NavLink>
+        </div>
+        <div id="navbarMenu" className="navbar-menu-wrapper">
+          <div className="navbar-menu-header">
+            <NavLink
+              exact
+              to="/"
+              activeClassName='active'>
+              <span className="df-logo">Command<span>Post</span></span>
+            </NavLink>
+            <a id="mainMenuClose" href="."><X /></a>
+          </div>
+          {searchBlock}
+          <div id="sessionTimeoutMessage" className="m-auto d-none d-sm-block"></div>
+        </div>
+        {userBlock}
       </header>
     )
   }
 }
+
+const mapStateToProps = state => {
+  return {
+      isAuthenticated: state.auth.token !== null,
+      userData: state.auth.userData
+  };
+};
+
+export default connect(mapStateToProps)(Header);

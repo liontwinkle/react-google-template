@@ -21,6 +21,7 @@ class CommandPost extends Component {
 
   // Document ready event
   componentDidMount() {
+    this.props.onTryAutoSignup();
     // Apply theme at page loading
     const cookies = new Cookies();
     const isDarkMode = (cookies.get('df-mode') === 'true');
@@ -60,22 +61,22 @@ class CommandPost extends Component {
   render() {
     let mainMenu = null;
 
-    if ( this.props.isAuthenticated ) {
+    if (this.props.isAuthenticated) {
       mainMenu = (
         <MainMenu
-            click={() => this.switchThemeHandler()}
-            isDark={this.state.darkMode} />
+          click={() => this.switchThemeHandler()}
+          isDark={this.state.darkMode} />
       );
     }
 
     return (
       <BrowserRouter>
-        <Header />
+        <Header isAuth={this.props.isAuthenticated} />
         <div className="main-wrapper">
           {mainMenu}
-          <Routes pagesAnimation={this.state.pagesAnimation} isAuth={this.props.isAuthenticated} />
+          <Routes isAuth={this.props.isAuthenticated} pagesAnimation={this.state.pagesAnimation} />
         </div>
-        <Footer />
+        <Footer isAuth={this.props.isAuthenticated} />
       </BrowserRouter>
     );
   }
@@ -89,8 +90,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onTryAutoSignup: () => dispatch( actions.authCheckState() )
+    onTryAutoSignup: () => dispatch(actions.authCheckState())
   };
 };
 
-export default connect( mapStateToProps, mapDispatchToProps )( CommandPost );
+export default connect(mapStateToProps, mapDispatchToProps)(CommandPost);

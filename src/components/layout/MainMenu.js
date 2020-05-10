@@ -1,23 +1,24 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import Tooltip from '../../helpers/Tooltip';
+import { Star, AlertCircle, Trello, MessageSquare, Phone, List, FileText, Map, MapPin, Truck, Book, HelpCircle, Settings } from 'react-feather';
 
 const MainMenu = (props) => {
 
   const menuItems = [
-    { label: 'Dashboard', link: '/', icon: 'star' },
-    { label: 'Incident Logging', link: '/logging', icon: 'alert-circle' },
-    { label: 'Program / Activations & Areas', link: '/program', icon: 'trello' },
-    { label: 'Chat', link: '/chat', icon: 'message-square' },
-    { label: 'Contact List', link: '/contacts', icon: 'phone' },
-    { label: 'Task List', link: '/tasks', icon: 'list' },
-    { label: 'File Manager', link: '/files', icon: 'file-text' },
-    { label: 'Integrated Map', link: '/map', icon: 'map' },
-    { label: 'Resource Positioning', link: '/resources', icon: 'map-pin' },
-    { label: 'Fleet Management', link: '/fleet', icon: 'truck' },
-    { label: 'Procedures', link: '/procedures', icon: 'book' },
-    { label: 'Help', link: '/help', icon: 'help-circle' },
-    { label: 'Settings', link: '/settings', icon: 'settings' }
+    { label: 'Dashboard', link: '/', icon: Star },
+    { label: 'Incident Logging', link: '/logging', icon: AlertCircle },
+    { label: 'Program / Activations & Areas', link: '/program', icon: Trello },
+    { label: 'Chat', link: '/chat', icon: MessageSquare },
+    { label: 'Contact List', link: '/contacts', icon: Phone },
+    { label: 'Task List', link: '/tasks', icon: List },
+    { label: 'File Manager', link: '/files', icon: FileText },
+    { label: 'Integrated Map', link: '/map', icon: Map },
+    { label: 'Resource Positioning', link: '/resources', icon: MapPin },
+    { label: 'Fleet Management', link: '/fleet', icon: Truck },
+    { label: 'Procedures', link: '/procedures', icon: Book },
+    { label: 'Help', link: '/help', icon: HelpCircle }, 
+    { label: 'Settings', link: '/settings', icon: Settings }
   ];
 
   let buttonProp = {
@@ -48,6 +49,7 @@ const MainMenu = (props) => {
                   to={menuItem.link}
                   activeClassName='active'>
                   <i data-feather={menuItem.icon}></i>
+                  <menuItem.icon />
                 </NavLink>
               </Tooltip>
             );
