@@ -56,13 +56,14 @@ class Auth extends Component {
                     name: 'id_instance',
                     placeholder: 'Select Instance',
                     label: 'Instance',
-                    value: '',
+                    value: 0,
                     validation: {
                         required: true
                     },
                     valid: false,
                     touched: false,
-                    validationErr: 'This value is required.'
+                    validationErr: 'This value is required.',
+                    selectedOption: 0
                 },
                 team: {
                     order: 2,
@@ -145,12 +146,17 @@ class Auth extends Component {
     }
 
     inputChangedHandler = (event, controlName) => {
+        let selectedOption = null;
+        if(event.target.tagName === 'SELECT') {
+            selectedOption = event.target.options[event.target.selectedIndex].getAttribute('selectedoption');
+        }
         const currentStep = this.props.currentStep;
         const updatedControls = updateObject(this.state[currentStep].controls, {
             [controlName]: updateObject(this.state[currentStep].controls[controlName], {
                 value: event.target.value,
                 valid: checkValidity(event.target.value, this.state[currentStep].controls[controlName].validation),
-                touched: true
+                touched: true,
+                selectedOption: selectedOption
             })
         });
 
@@ -184,14 +190,14 @@ class Auth extends Component {
             this.props.onAuth(this.state.step1.controls.email.value, this.state.step1.controls.password.value, this.state.isSignup, (userId) => {
                 // Callback after authorization
                 this.getInstancesHandler(userId);
-              });
+            });
         } else if (this.state.isValid && this.props.currentStep === 'step2') {
             // Submit selected Instance
         }
     }
 
     getInstancesHandler = (userId) => {
-        console.log('userId: '+userId);
+        console.log('userId: ' + userId);
         const userData = {
             userId: userId
         };
@@ -199,6 +205,13 @@ class Auth extends Component {
         axios.post(url, userData)
             .then(response => {
                 console.log(response);
+
+                const updatedInstance = { ...this.state.step2 }
+                updatedInstance.controls.instance.instance_list = response.data.instance_list;
+
+                this.setState({
+                    step2: updatedInstance
+                });
             })
             .catch(err => {
                 console.log(err);
@@ -240,6 +253,19 @@ class Auth extends Component {
             } else if (formElement.config.valid) {
                 errorClass = 'parsley-success';
             }
+            let selectOptions = null;
+            if (formElement.id === 'instance' && formElement.config.instance_list) {
+                selectOptions = formElement.config.instance_list.map((select, index) =>
+                    <option key={select.id} value={select.id} selectedoption={index}>{select.event_title + ' - ' + select.instance_title + ' (' + select.instance_shortname + ')'}</option>
+                  );
+            }
+            const instanceListPointer = this.state.step2.controls.instance.instance_list;
+            const selectedOption = this.state.step2.controls.instance.selectedOption;
+            if (formElement.id === 'team' && instanceListPointer) {
+                selectOptions = instanceListPointer[selectedOption].team_list.map(select =>
+                    <option key={select.id} value={select.id}>{select.team_title}</option>
+                  );
+            }
             return (
                 <FormGroup
                     key={formElement.id}>
@@ -251,7 +277,9 @@ class Auth extends Component {
                         value={formElement.config.value}
                         placeholder={formElement.config.placeholder}
                         className={errorClass}
-                        onChange={(event) => this.inputChangedHandler(event, formElement.id)} />
+                        onChange={(event) => this.inputChangedHandler(event, formElement.id)}>
+                    {selectOptions}
+                    </FormControl>
                     <div className="parsley-errors-list filled mt-1">{(!formElement.config.valid && formElement.config.touched && this.state.isSubmitted) ? formElement.config.validationErr : ''}</div>
                     {(formElement.id === 'email' && errorCode !== 406) ? errorMessage : null}
                     {(formElement.id === 'password' && errorCode === 406) ? errorMessage : null}
