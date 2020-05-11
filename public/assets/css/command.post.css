@@ -120,6 +120,14 @@ header.navbar.navbar-header.navbar-header-fixed, .main-sidebar {
     }
 }
 
+@media (min-width: 768px) {
+    .signin-group {
+        width: auto;
+        right: 0;
+        left: 0;
+    }
+}
+
 .chat-columns .chat-column {
     border-right: 1px solid rgba(72, 94, 144, 0.16);
 }

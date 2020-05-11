@@ -54,6 +54,7 @@ class Header extends Component {
 
   render() {
     let searchBlock = null;
+    let burgerMenuHidden = "burger-menu d-md-none d-none";
     let userBlock = null;
 
     if (this.props.isAuth) {
@@ -65,6 +66,8 @@ class Header extends Component {
           </div>
         </div>
       );
+
+      burgerMenuHidden = "burger-menu d-md-none";
 
       userBlock = (
         <div className="navbar-right">
@@ -211,7 +214,7 @@ class Header extends Component {
 
     return (
       <header className="navbar navbar-header navbar-header-fixed">
-        <a href="." id="mainSidebar" className="burger-menu d-md-none"><Menu /></a>
+        <a href="." id="mainSidebar" className={burgerMenuHidden}><Menu /></a>
         <div className="navbar-brand">
           <NavLink
             exact
