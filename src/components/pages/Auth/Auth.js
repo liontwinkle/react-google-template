@@ -192,8 +192,11 @@ class Auth extends Component {
 
     getInstancesHandler = (userId) => {
         console.log('userId: '+userId);
+        const userData = {
+            userId: userId
+        };
         let url = 'http://74.208.102.130:4000/api/getinstances';
-        axios.post(url, userId)
+        axios.post(url, userData)
             .then(response => {
                 console.log(response);
             })
