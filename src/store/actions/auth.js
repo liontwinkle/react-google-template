@@ -13,7 +13,8 @@ export const authSuccess = (token, userId, userData) => {
         type: actionTypes.AUTH_SUCCESS,
         idToken: token,
         userId: userId,
-        userData: userData
+        userData: userData,
+        currentStep: 'step2'
     };
 };
 

@@ -63,8 +63,7 @@ class Auth extends Component {
         isSignup: false,
         isSubmitted: false,
         isValid: false,
-        isTouched: false,
-        currentStep: 'step1'
+        isTouched: false
     }
 
     componentDidMount() {
@@ -74,7 +73,7 @@ class Auth extends Component {
     }
 
     inputChangedHandler = (event, controlName) => {
-        const currentStep = this.state.currentStep;
+        const currentStep = this.props.currentStep;
         const updatedControls = updateObject(this.state[currentStep].controls, {
             [controlName]: updateObject(this.state[currentStep].controls[controlName], {
                 value: event.target.value,
@@ -106,7 +105,7 @@ class Auth extends Component {
     submitHandler = (event) => {
         event.preventDefault();
         this.setState({ isSubmitted: true });
-        if (this.state.isValid && this.state.currentStep === 'step1') {
+        if (this.state.isValid && this.props.currentStep === 'step1') {
             this.props.onAuth(this.state.step1.controls.email.value, this.state.step1.controls.password.value, this.state.isSignup);
         }
     }
@@ -120,7 +119,7 @@ class Auth extends Component {
     render() {
         let errorMessage = null;
         let errorCode = null;
-        const currentStep = this.state.currentStep;
+        const currentStep = this.props.currentStep;
 
         if (this.props.error) {
             errorMessage = (
@@ -184,7 +183,7 @@ class Auth extends Component {
         }
 
         let authRedirect = null;
-        if (this.props.isAuthenticated) {
+        if (this.props.isAuthenticated && this.props.currentStep === 'finished') {
             authRedirect = <Redirect to={this.props.authRedirectPath} />
         }
 
@@ -217,7 +216,8 @@ const mapStateToProps = state => {
         loading: state.auth.loading,
         error: state.auth.error,
         isAuthenticated: state.auth.token !== null,
-        authRedirectPath: state.auth.authRedirectPath
+        authRedirectPath: state.auth.authRedirectPath,
+        currentStep: state.auth.currentStep
     };
 };
 
