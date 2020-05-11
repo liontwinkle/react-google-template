@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Redirect } from 'react-router-dom';
+import { Redirect, NavLink } from 'react-router-dom';
 import { Button, FormGroup, FormControl, FormLabel } from "react-bootstrap";
+import axios from 'axios';
 import WidePane from '../../layout/WidePane';
 import * as actions from '../../../store/actions/index';
 import { updateObject, checkValidity } from '../../../helpers/utility';
@@ -14,6 +15,7 @@ class Auth extends Component {
                     order: 1,
                     elementType: 'input',
                     type: 'email',
+                    name: 'user_email',
                     placeholder: 'yourname@yourmail.com',
                     label: 'Email address',
                     value: '',
@@ -27,8 +29,9 @@ class Auth extends Component {
                 },
                 password: {
                     order: 2,
-                    elementType: 'password',
+                    elementType: 'input',
                     type: 'password',
+                    name: 'user_password',
                     placeholder: 'Enter your password',
                     label: 'Password',
                     value: '',
@@ -40,14 +43,17 @@ class Auth extends Component {
                     touched: false,
                     validationErr: 'Password must be longer than 6 characters.'
                 }
-            }
+            },
+            title: 'Sign In',
+            description: 'Welcome back! Please signin to continue.'
         },
         step2: {
             controls: {
                 instance: {
                     order: 1,
                     elementType: 'select',
-                    type: 'instance',
+                    type: 'select',
+                    name: 'id_instance',
                     placeholder: 'Select Instance',
                     label: 'Instance',
                     value: '',
@@ -57,8 +63,74 @@ class Auth extends Component {
                     valid: false,
                     touched: false,
                     validationErr: 'This value is required.'
+                },
+                team: {
+                    order: 2,
+                    elementType: 'select',
+                    type: 'select',
+                    name: 'id_team',
+                    placeholder: 'Select Team',
+                    label: 'Team',
+                    value: '',
+                    validation: {
+                        required: true
+                    },
+                    valid: false,
+                    touched: false,
+                    validationErr: 'This value is required.'
+                },
+                role: {
+                    order: 3,
+                    elementType: 'input',
+                    type: 'text',
+                    name: 'user_role',
+                    placeholder: 'Enter your role',
+                    label: 'Role',
+                    value: '',
+                    validation: {
+                        required: true
+                    },
+                    valid: false,
+                    touched: false,
+                    validationErr: 'This value is required.'
+                },
+                company: {
+                    order: 4,
+                    elementType: 'input',
+                    type: 'text',
+                    name: 'user_company',
+                    placeholder: 'Enter company name',
+                    label: 'Agency / Company Name',
+                    value: '',
+                    validation: {
+                        required: true
+                    },
+                    valid: false,
+                    touched: false,
+                    validationErr: 'This value is required.'
+                },
+                number: {
+                    order: 5,
+                    elementType: 'input',
+                    type: 'text',
+                    name: 'user_contact_number',
+                    placeholder: 'Enter your contact number',
+                    label: 'Contact number',
+                    value: '',
+                    validation: {
+                        required: true
+                    },
+                    valid: false,
+                    touched: false,
+                    validationErr: 'This value is required.'
                 }
-            }
+            },
+            title: 'Select Instance',
+            description: 'Select your Instance and team to continue.'
+        },
+        step3: {
+            title: 'Complete training',
+            description: 'Complete your training to continue.'
         },
         isSignup: false,
         isSubmitted: false,
@@ -94,8 +166,11 @@ class Auth extends Component {
             if (!updatedControls[control].touched) formTouched = false;
         }
 
+        const updatedStep = { ...this.state[currentStep] }
+        updatedStep.controls = updatedControls;
+
         this.setState({
-            [currentStep]: { controls: updatedControls },
+            [currentStep]: updatedStep,
             isValid: formValid,
             isTouched: formTouched
         });
@@ -106,8 +181,25 @@ class Auth extends Component {
         event.preventDefault();
         this.setState({ isSubmitted: true });
         if (this.state.isValid && this.props.currentStep === 'step1') {
-            this.props.onAuth(this.state.step1.controls.email.value, this.state.step1.controls.password.value, this.state.isSignup);
+            this.props.onAuth(this.state.step1.controls.email.value, this.state.step1.controls.password.value, this.state.isSignup, (userId) => {
+                // Callback after authorization
+                this.getInstancesHandler(userId);
+              });
+        } else if (this.state.isValid && this.props.currentStep === 'step2') {
+            // Submit selected Instance
         }
+    }
+
+    getInstancesHandler = (userId) => {
+        console.log('userId: '+userId);
+        let url = 'http://74.208.102.130:4000/api/getinstances';
+        axios.post(url, userId)
+            .then(response => {
+                console.log(response);
+            })
+            .catch(err => {
+                console.log(err);
+            });
     }
 
     switchAuthModeHandler = () => {
@@ -147,11 +239,12 @@ class Auth extends Component {
             }
             return (
                 <FormGroup
-                    controlId={formElement.config.type}
                     key={formElement.id}>
                     <FormLabel>{formElement.config.label}</FormLabel>
                     <FormControl
-                        type={formElement.config.elementType}
+                        type={formElement.config.type}
+                        as={formElement.config.elementType}
+                        name={formElement.config.name}
                         value={formElement.config.value}
                         placeholder={formElement.config.placeholder}
                         className={errorClass}
@@ -187,18 +280,28 @@ class Auth extends Component {
             authRedirect = <Redirect to={this.props.authRedirectPath} />
         }
 
+        let signOutLink = null;
+        if (this.props.currentStep !== 'step1') {
+            signOutLink = (
+                <div className="tx-13 mg-t-20 tx-center">
+                    Something is wrong? <NavLink exact to="/signout">Sign Out</NavLink>
+                </div>
+            );
+        }
+
         return (
             <WidePane animateClass={this.props.animateClass} layoutClass="main-group wide-group signin-group">
                 <div className="d-flex align-items-stretch justify-content-center ht-100p pd-30 pos-relative">
                     <div className="sign-wrapper justify-content-start">
                         <div className="wd-100p" id="signin_form_wrapper">
-                            <h3 className="tx-color-01 mg-b-5">Sign In</h3>
-                            <p className="tx-color-03 tx-16 mg-b-40">Welcome back! Please signin to continue.</p>
+                            <h3 className="tx-color-01 mg-b-5">{this.state[currentStep].title}</h3>
+                            <p className="tx-color-03 tx-16 mg-b-40">{this.state[currentStep].description}</p>
                             {authRedirect}
                             <form onSubmit={this.submitHandler}>
                                 {form}
                                 {submitButton}
                             </form>
+                            {signOutLink}
                             {/* <Button
                                 onClick={this.switchAuthModeHandler}
                                 className="btn btn-brand-02 btn-block wd-100p mt-3"
@@ -223,7 +326,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onAuth: (email, password, isSignup) => dispatch(actions.auth(email, password, isSignup)),
+        onAuth: (email, password, isSignup, callback) => dispatch(actions.auth(email, password, isSignup, callback)),
         onSetAuthRedirectPath: () => dispatch(actions.setAuthRedirectPath('/'))
     };
 };
