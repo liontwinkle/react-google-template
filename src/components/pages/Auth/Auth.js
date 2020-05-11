@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-
 import { Button, FormGroup, FormControl, FormLabel } from "react-bootstrap";
-//import Spinner from '../../components/UI/Spinner/Spinner';
 import WidePane from '../../layout/WidePane';
 import * as actions from '../../../store/actions/index';
 import { updateObject, checkValidity } from '../../../helpers/utility';
