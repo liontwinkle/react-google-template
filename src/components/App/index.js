@@ -4,6 +4,7 @@ import {
   Route,
   Switch
 } from 'react-router-dom';
+import Loader from '../Loader';
 import Navigation from '../Navigation';
 import Home from '../Home';
 import Signin from '../Signin';
@@ -22,7 +23,7 @@ function App() {
 
   const { loading } = useMappedState(mapState);
 
-  if (loading) return <h1>Loading...</h1>
+  if (loading) return <Loader />
 
   return (
     <Router basename={process.env.PUBLIC_URL}>

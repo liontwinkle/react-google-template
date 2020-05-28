@@ -4,13 +4,15 @@ import axios from 'axios';
 import * as actions from '../../constants/action_types';
 
 async function authenticate(dispatch) {
+    axios.defaults.withCredentials = true;
+
     try {
-        const user = await axios.get('http://localhost:4000/auth/verifyToken', {withCredentials: true});
+        const { data } = await axios.get('http://localhost:4000/auth/verifyToken');
         
-        if (user) {
+        if (data) {
             dispatch({
                 type: actions.SET_AUTH_USER,
-                authUser: user
+                authUser: data
             })
         }
         else {

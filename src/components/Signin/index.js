@@ -40,7 +40,6 @@ function Signin(props) {
                     type: actions.SET_AUTH_USER,
                     authUser: data
                 })
-                
                 props.history.push(routes.HOME);
             }
         }
