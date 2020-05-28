@@ -1,11 +1,10 @@
 .loader {
-    width: 10%;
-    display: block;
-    overflow: hidden;
-    transform: translate3d(0,0,0);
-    text-align: center;
-    opacity: 1;
-    
+	width: 10%;
+	display: block;
+	overflow: hidden;
+	transform: translate3d(0,0,0);
+	text-align: center;
+	opacity: 1;
 	margin: 0;
 	position: absolute;
 	top: 50%;
