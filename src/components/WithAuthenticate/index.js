@@ -28,7 +28,7 @@ function useWithAuthenticate() {
     const dispatch = useDispatch();
     useEffect(() => {
         authenticate(dispatch);
-    }, [])
+    }, [dispatch])
 }
 
 export default useWithAuthenticate;

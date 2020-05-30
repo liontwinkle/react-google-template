@@ -1,16 +1,12 @@
-import React, { useCallback } from 'react';
-import { useMappedState } from 'redux-react-hook';
-import AuthHome from './auth';
-import NonAuthHome from './nonauth';
+import React from 'react';
 
 function Home() {
-    const mapState = useCallback((state) => ({
-        authUser: state.sessionState.authUser
-    }), [])
-
-    const { authUser } = useMappedState(mapState);
-
-    return authUser ? <AuthHome /> : <NonAuthHome />
+	return (
+		<>
+			<h1>Home</h1>
+			<p>You are logged in</p>
+		</>
+	)
 }
 
 export default Home;
