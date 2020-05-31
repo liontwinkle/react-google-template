@@ -6,6 +6,7 @@ import {
   Redirect
 } from 'react-router-dom';
 import Header from '../Layout/Header';
+import Footer from '../Layout/Footer';
 import Loader from '../Loader';
 import Signin from '../Auth/Signin';
 import Home from '../Home';
@@ -34,9 +35,12 @@ function App() {
           <Route exact path={routes.HOME}>
             {authUser ? <Home /> : <Redirect to={routes.SIGNIN} />}
           </Route>
-          <Route exact path={routes.SIGNIN} component={() => <Signin />} />
+          <Route exact path={routes.SIGNIN}>
+            {!authUser ? <Signin /> : <Redirect to={routes.HOME} />}
+          </Route>
           <Route component={NotFound} />
         </Switch>
+        <Footer />
     </Router>
   );
 }
