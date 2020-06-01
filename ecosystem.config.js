@@ -1,31 +1,22 @@
 module.exports = {
   apps : [{
-    name: 'CommandPost',
-    script: 'npx',
-    
-    // Options reference: https://pm2.keymetrics.io/docs/usage/application-declaration/
-    interpreter   : 'none',
-    args: 'serve build -s',
-    instances: 1,
-    autorestart: true,
-    watch: false,
-    max_memory_restart: '1G',
-    env: {
-      NODE_ENV: 'development'
-    },
-    env_production: {
-      NODE_ENV: 'production'
-    }
+    script: 'index.js',
+    watch: '.'
+  }, {
+    script: './service-worker/',
+    watch: ['./service-worker']
   }],
 
   deploy : {
     production : {
-      user : 'node',
-      host : '212.83.163.1',
+      user : 'SSH_USERNAME',
+      host : 'SSH_HOSTMACHINE',
       ref  : 'origin/master',
-      repo : 'git@github.com:repo.git',
-      path : '/var/www/production',
-      'post-deploy' : 'npm install && pm2 reload ecosystem.config.js --env production'
+      repo : 'GIT_REPOSITORY',
+      path : 'DESTINATION_PATH',
+      'pre-deploy-local': '',
+      'post-deploy' : 'npm install && pm2 reload ecosystem.config.js --env production',
+      'pre-setup': ''
     }
   }
 };
