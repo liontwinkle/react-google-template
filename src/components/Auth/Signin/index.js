@@ -28,7 +28,7 @@ function Signin(props) {
                 password: password
             };
 
-            const { data } = await axios.post('http://74.208.102.130:4000/auth/signin', requestBody);
+            const { data } = await axios.post('https://api.commandpost.com.au/auth/signin', requestBody);
 
             if (data.error) {
                 setError(data.message);

@@ -7,7 +7,7 @@ async function authenticate(dispatch) {
     axios.defaults.withCredentials = true;
 
     try {
-        const { data } = await axios.get('http://74.208.102.130:4000/auth/verifyToken');
+        const { data } = await axios.get('https://api.commandpost.com.au/auth/verifyToken');
         
         if (data) {
             dispatch({
