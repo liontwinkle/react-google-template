@@ -12631,6 +12631,9 @@ textarea.parsley-success:focus {
   @media (min-width: 992px) {
     .navbar-header {
       height: 60px; } }
+  @media (min-width: 1200px) {
+    .navbar-header {
+      height: 55px; } }
   .navbar-header > .container {
     padding: 0; }
     @media (max-width: 1139px) {
@@ -13189,6 +13192,9 @@ textarea.parsley-success:focus {
   @media (min-width: 992px) {
     .df-logo {
       font-size: 24px; } }
+  @media (min-width: 1200px) {
+    .df-logo {
+      font-size: 20px; } }
   .df-logo:hover, .df-logo:focus {
     color: #03217a; }
   .df-logo span {
