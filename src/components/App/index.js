@@ -26,7 +26,7 @@ function App() {
 
   const { loading, authUser } = useMappedState(mapState);
 
-  if (loading && <Route exact path={routes.SIGNIN}>) {
+  if (loading && window.location.pathname == routes.SIGNIN) {
     return false;
   } else if (loading) {
     return <Loader />
