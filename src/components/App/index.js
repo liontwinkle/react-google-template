@@ -26,8 +26,12 @@ function App() {
 
   const { loading, authUser } = useMappedState(mapState);
 
-  if (loading && authUser) return <Loader />
-console.log('authUser', authUser, 'loading', loading);
+  if (loading && authUser) {
+    return <Loader />
+  } else if (loading) {
+    return false;
+  }
+  
   return (
     <Router basename={process.env.PUBLIC_URL}>
         <Header />
