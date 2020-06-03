@@ -996,7 +996,11 @@ body {
   line-height: 1.5;
   color: #001737;
   text-align: left;
-  background-color: #fff; }
+  background-color: #fff;
+  -webkit-user-select: none;  
+  -moz-user-select: none;    
+  -ms-user-select: none;      
+  user-select: none; }
 
 [tabindex="-1"]:focus {
   outline: 0 !important; }
