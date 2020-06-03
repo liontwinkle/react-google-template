@@ -72,7 +72,7 @@ function Signin(props) {
                         </div>
                         <Form.Control type="password" placeholder="Enter your password" onChange={handleChange(setPassword)} />
                       </Form.Group>
-                      <Button variant="brand-02" block={true} type="submit">{loading ? '<span className="spinner-grow spinner-grow-sm mr-2" role="status" aria-hidden="true"></span>Processing' : 'Sign In'}</Button>
+                      <Button variant="brand-02" block={true} type="submit">{loading ? (<span className="spinner-grow spinner-grow-sm mr-2" role="status" aria-hidden="true"></span>Processing) : 'Sign In'}</Button>
                     </Form>
                   </div>
                 </div>
