@@ -51,19 +51,6 @@ function Signin(props) {
         }
     }
 
-    const signinButtonContent = () => {
-        if (loading) {
-            return (
-                <>
-                    <span className="spinner-grow spinner-grow-sm mr-2" role="status" aria-hidden="true"></span>
-                    <span>Processing</span>
-                </>
-            );
-        }
-
-        return 'Sign In'
-    }
-
     return (
         <>
           <div className="content content-fixed content-auth">
@@ -86,7 +73,12 @@ function Signin(props) {
                         <Form.Control type="password" placeholder="Enter your password" onChange={handleChange(setPassword)} />
                       </Form.Group>
                       <Button variant="brand-02" block={true} type="submit">
-                        <signinButtonContent />
+                        {loading ? (
+                            <>
+                                <span className="spinner-grow spinner-grow-sm mr-2" role="status" aria-hidden="true"></span>
+                                <span>Processing</span>
+                            </>
+                        ) : 'Sign In'}
                       </Button>
                     </Form>
                   </div>
