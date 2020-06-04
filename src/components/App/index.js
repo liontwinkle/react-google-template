@@ -9,6 +9,7 @@ import Header from '../Layout/Header';
 import Footer from '../Layout/Footer';
 import Loader from '../Loader';
 import Signin from '../Auth/Signin';
+import SelectInstance from '../Auth/SelectInstance';
 import Home from '../Home';
 import NotFound from '../NotFound';
 import useWithAuthenticate from '../WithAuthenticate';
@@ -21,22 +22,28 @@ function App() {
   
   const mapState = useCallback((state) => ({
     loading: state.sessionState.loading,
-    authUser: state.sessionState.authUser
+    authUser: state.sessionState.authUser,
+    isInstanceSelected: state.sessionState.isInstanceSelected,
   }), [])
 
-  const { loading, authUser } = useMappedState(mapState);
+  const { loading, authUser, isInstanceSelected } = useMappedState(mapState);
 
-  if (loading) return <Loader />
-    
+  if (loading && authUser) return <Loader />
+
+  if (loading) return false;
+
   return (
     <Router basename={process.env.PUBLIC_URL}>
         <Header />
         <Switch>
           <Route exact path={routes.HOME}>
-            {authUser ? <Home /> : <Redirect to={routes.SIGNIN} />}
+            {authUser ? (isInstanceSelected ? <Home /> : <Redirect to={routes.SELECT_INSTANCE} />) : <Redirect to={routes.SIGNIN} />}
           </Route>
           <Route exact path={routes.SIGNIN}>
-            {!authUser ? <Signin /> : <Redirect to={routes.HOME} />}
+            {!authUser ? <Signin /> : (isInstanceSelected ? <Redirect to={routes.HOME} /> : <Redirect to={routes.SELECT_INSTANCE} />)}
+          </Route>
+          <Route exact path={routes.SELECT_INSTANCE}>
+            {authUser ? (!isInstanceSelected ? <SelectInstance /> : <Redirect to={routes.HOME} />) : <Redirect to={routes.HOME} />}
           </Route>
           <Route component={NotFound} />
         </Switch>

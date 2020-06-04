@@ -6,14 +6,29 @@ import { Container, Form, Button } from 'react-bootstrap';
 import { useForm } from "react-hook-form";
 import * as actions from '../../../constants/action_types';
 import * as routes from '../../../constants/routes';
-import './Signin.css';
+import './SelectInstance.css';
 
-function Signin(props) {
-    const { register, handleSubmit, formState, errors, setError } = useForm();
-    const [loading, setLoading] = useState(false);
+function SelectInstance(props) {
+
     const dispatch = useDispatch();
 
+    // just for test
+    setTimeout(function() {
+        // set isInstanceSelected data
+        dispatch({
+            type: actions.SET_LOGIN_STEP,
+            isInstanceSelected: true
+        })
+
+        // redirect to HOME route
+        props.history.push(routes.HOME);
+    }, 10000);
+    /*
+    const { register, handleSubmit, formState, errors, setError } = useForm();
+    const [loading, setLoading] = useState(false);
+
     const submit = async (formData) => {
+        console.log('formData', formData);
         setLoading(true);
 
         try {
@@ -22,28 +37,34 @@ function Signin(props) {
                 password: formData.password
             };
 
-            const { data } = await axios.post(process.env.REACT_APP_API_URL + '/auth/signin', requestBody);
-
+            const { data } = await axios.post('https://api.commandpost.com.au/auth/signin', requestBody);
+            // const { data } = await axios.post('http://localhost:4000/auth/signin', requestBody); // dev env, need to setup env later
             setLoading(false);
             // set authUser data
             dispatch({
                 type: actions.SET_AUTH_USER,
                 authUser: data
             })
-            // redirect to SELECT_INSTANCE route
+            // set isInstanceSelected data
+            dispatch({
+                type: actions.SET_LOGIN_STEP,
+                isInstanceSelected: true
+            })
             props.history.push(routes.SELECT_INSTANCE);
         }
         catch (e) {
-            if (e.response && e.response.data.error && e.response.data.type === 'validation') {
+            if (e.response.data.error && e.response.data.type === 'validation') {
                 setError(e.response.data.field, e.response.data.type, e.response.data.message);
                 setLoading(false);
             } else {
-                console.log("Unexpected error: Signin:submit", e.response);
+                console.log("Unexpected error: Signin:submit");
             }
         }
     }
+    */
 
     return (
+        /*
         <>
           <div className="content content-fixed content-auth">
             <Container>
@@ -55,7 +76,7 @@ function Signin(props) {
                     <Form onSubmit={handleSubmit(submit)}>
                       <Form.Group controlId="username">
                         <Form.Label>Email address</Form.Label>
-                        { /* eslint-disable-next-line */ }
+                        { // eslint-disable-next-line }
                         <Form.Control name="username" type="text" placeholder="yourname@yourmail.com" ref={register({ required: true, pattern: /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/ })} className={errors.username ? "parsley-error" : (formState.isSubmitted && formState.touched.username && "parsley-success")} />
                         {errors.username && errors.username.type === "required" && (<div className="parsley-errors-list filled mt-1">This value is required.</div>)}
                         {errors.username && errors.username.type === "pattern" && (<div className="parsley-errors-list filled mt-1">This value should be a valid email.</div>)}
@@ -85,7 +106,11 @@ function Signin(props) {
             </Container>
           </div>
         </>
+        */
+        <>
+            <p className="mt-5">instance selection</p>
+        </>
     )
 }
 
-export default withRouter(Signin);
+export default withRouter(SelectInstance);

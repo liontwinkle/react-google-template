@@ -7,8 +7,7 @@ async function authenticate(dispatch) {
     axios.defaults.withCredentials = true;
 
     try {
-        const { data } = await axios.get('https://api.commandpost.com.au/auth/verifyToken');
-        // const { data } = await axios.get('http://localhost:4000/auth/verifyToken'); // dev env, need to setup env later
+        const { data } = await axios.get(process.env.REACT_APP_API_URL + '/auth/verifyToken');
         
         if (data) {
             dispatch({
@@ -17,11 +16,13 @@ async function authenticate(dispatch) {
             })
         }
         else {
-            dispatch({ type: actions.SET_AUTH_USER, authUser: null });                
+            dispatch({ type: actions.SET_AUTH_USER, authUser: null });
+            dispatch({ type: actions.SET_LOGIN_STEP, isInstanceSelected: false });
         }
     }
     catch {
         dispatch({ type: actions.SET_AUTH_USER, authUser: null });
+        dispatch({ type: actions.SET_LOGIN_STEP, isInstanceSelected: false });
     }
 }
 

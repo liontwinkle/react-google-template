@@ -5,12 +5,13 @@ import NonAuthHeader from './nonauth';
 
 function Header() {
     const mapState = useCallback((state) => ({
-        authUser: state.sessionState.authUser
+        authUser: state.sessionState.authUser,
+        isInstanceSelected: state.sessionState.isInstanceSelected
     }), [])
 
-    const { authUser } = useMappedState(mapState);
+    const { authUser, isInstanceSelected } = useMappedState(mapState);
 
-    return authUser ? <AuthHeader /> : <NonAuthHeader />
+    return authUser && isInstanceSelected ? <AuthHeader /> : <NonAuthHeader />
 }
 
 export default Header;
