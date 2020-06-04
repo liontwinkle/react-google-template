@@ -26,12 +26,8 @@ function App() {
 
   const { loading, authUser } = useMappedState(mapState);
 
-  if (loading && window.location.pathname == routes.SIGNIN) {
-    return false;
-  } else if (loading) {
-    return <Loader />
-  }
-
+  if (loading) return <Loader />
+    
   return (
     <Router basename={process.env.PUBLIC_URL}>
         <Header />
