@@ -43,7 +43,7 @@ function App() {
             {!authUser ? <Signin /> : (isInstanceSelected ? <Redirect to={routes.HOME} /> : <Redirect to={routes.SELECT_INSTANCE} />)}
           </Route>
           <Route exact path={routes.SELECT_INSTANCE}>
-            {authUser ? (!isInstanceSelected ? <SelectInstance /> : <Redirect to={routes.HOME} />) : <Redirect to={routes.HOME} />}
+            {authUser ? (!isInstanceSelected ? <SelectInstance userId={authUser.id} /> : <Redirect to={routes.HOME} />) : <Redirect to={routes.HOME} />}
           </Route>
           <Route component={NotFound} />
         </Switch>
