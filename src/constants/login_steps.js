@@ -1,0 +1,2 @@
+export const SELECT_INSTANCE = "SELECT_INSTANCE";
+export const SELECT_TEAM = "SELECT_TEAM";

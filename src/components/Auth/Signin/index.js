@@ -30,8 +30,8 @@ function Signin(props) {
                 type: actions.SET_AUTH_USER,
                 authUser: data
             })
-            // redirect to SELECT_INSTANCE route
-            props.history.push(routes.SELECT_INSTANCE);
+            // redirect to SELECT_INSTANCE_TEAM route
+            props.history.push(routes.SELECT_INSTANCE_TEAM);
         }
         catch (e) {
             if (e.response && e.response.data.error && e.response.data.type === 'validation') {

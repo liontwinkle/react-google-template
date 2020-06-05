@@ -2,7 +2,7 @@ import { SET_AUTH_USER, SET_LOGIN_STEP } from '../constants/action_types';
 
 const INITIAL_STATE = {
 	authUser: localStorage.getItem('authUser') ? JSON.parse(localStorage.getItem('authUser')) : null,
-	isInstanceSelected: localStorage.getItem('isInstanceSelected') ? true : false,
+	loginStep: localStorage.getItem('loginStep') || false,
 	loading: true
 };
 
@@ -14,15 +14,15 @@ function sessionReducer(state = INITIAL_STATE, action) {
 			} else {
 				localStorage.removeItem('authUser');
 			}
-			return { authUser: action.authUser, isInstanceSelected: localStorage.getItem('isInstanceSelected') || false, loading: false };
+			return { authUser: action.authUser, loginStep: localStorage.getItem('loginStep') || false, loading: false };
 		}
 		case SET_LOGIN_STEP: {
-			if (action.isInstanceSelected) {
-				localStorage.setItem('isInstanceSelected', action.isInstanceSelected);
+			if (action.loginStep) {
+				localStorage.setItem('loginStep', action.loginStep);
 			} else {
-				localStorage.removeItem('isInstanceSelected');
+				localStorage.removeItem('loginStep');
 			}
-			return { authUser: localStorage.getItem('authUser') ? JSON.parse(localStorage.getItem('authUser')) : null, isInstanceSelected: action.isInstanceSelected, loading: false };
+			return { authUser: localStorage.getItem('authUser') ? JSON.parse(localStorage.getItem('authUser')) : null, loginStep: action.loginStep, loading: false };
 		}
 		default: return state;
 	}

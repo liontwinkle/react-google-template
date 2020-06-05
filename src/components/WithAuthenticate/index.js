@@ -17,12 +17,12 @@ async function authenticate(dispatch) {
         }
         else {
             dispatch({ type: actions.SET_AUTH_USER, authUser: null });
-            dispatch({ type: actions.SET_LOGIN_STEP, isInstanceSelected: false });
+            dispatch({ type: actions.SET_LOGIN_STEP, loginStep: false });
         }
     }
     catch {
         dispatch({ type: actions.SET_AUTH_USER, authUser: null });
-        dispatch({ type: actions.SET_LOGIN_STEP, isInstanceSelected: false });
+        dispatch({ type: actions.SET_LOGIN_STEP, loginStep: false });
     }
 }
 

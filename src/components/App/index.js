@@ -9,7 +9,7 @@ import Header from '../Layout/Header';
 import Footer from '../Layout/Footer';
 import Loader from '../Loader';
 import Signin from '../Auth/Signin';
-import SelectInstance from '../Auth/SelectInstance';
+import SelectInstanceTeam from '../Auth/SelectInstanceTeam';
 import Home from '../Home';
 import NotFound from '../NotFound';
 import useWithAuthenticate from '../WithAuthenticate';
@@ -23,10 +23,10 @@ function App() {
   const mapState = useCallback((state) => ({
     loading: state.sessionState.loading,
     authUser: state.sessionState.authUser,
-    isInstanceSelected: state.sessionState.isInstanceSelected,
+    loginStep: state.sessionState.loginStep,
   }), [])
 
-  const { loading, authUser, isInstanceSelected } = useMappedState(mapState);
+  const { loading, authUser, loginStep } = useMappedState(mapState);
 
   if (loading && authUser) return <Loader />
 
@@ -37,13 +37,13 @@ function App() {
         <Header />
         <Switch>
           <Route exact path={routes.HOME}>
-            {authUser ? (isInstanceSelected ? <Home /> : <Redirect to={routes.SELECT_INSTANCE} />) : <Redirect to={routes.SIGNIN} />}
+            {authUser ? (loginStep ? <Home /> : <Redirect to={routes.SELECT_INSTANCE_TEAM} />) : <Redirect to={routes.SIGNIN} />}
           </Route>
           <Route exact path={routes.SIGNIN}>
-            {!authUser ? <Signin /> : (isInstanceSelected ? <Redirect to={routes.HOME} /> : <Redirect to={routes.SELECT_INSTANCE} />)}
+            {!authUser ? <Signin /> : (loginStep ? <Redirect to={routes.HOME} /> : <Redirect to={routes.SELECT_INSTANCE_TEAM} />)}
           </Route>
-          <Route exact path={routes.SELECT_INSTANCE}>
-            {authUser ? (!isInstanceSelected ? <SelectInstance userId={authUser.id} /> : <Redirect to={routes.HOME} />) : <Redirect to={routes.HOME} />}
+          <Route exact path={routes.SELECT_INSTANCE_TEAM}>
+            {authUser ? (!loginStep ? <SelectInstanceTeam authUser={authUser} /> : <Redirect to={routes.HOME} />) : <Redirect to={routes.HOME} />}
           </Route>
           <Route component={NotFound} />
         </Switch>
