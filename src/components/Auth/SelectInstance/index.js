@@ -97,7 +97,9 @@ function SelectInstance(props) {
                     <Form onSubmit={handleSubmit(submit)}>
                       <Form.Group controlId="id_instance">
                         <Form.Label>Instance <span className="tx-danger">*</span></Form.Label>
-                        <Form.Control name="id_instance" as="select" ref={register({ required: true })} className={errors.id_instance ? "parsley-error" : (formState.isSubmitted && formState.touched.id_instance && "parsley-success")}>
+                        <Form.Control name="id_instance" as="select" ref={register({ required: true })} className={errors.id_instance ? "custom-select parsley-error" : (formState.isSubmitted && formState.touched.id_instance && "custom-select parsley-success")}>
+                            <option value="" disabled selected hidden>Select Instance</option>
+                            <option value="new_instance">Create a new Instance</option>
                             {instances.map((instance, index) => <option key={instance.id} value={instance.id}>{instance.event_title + ' - ' + instance.instance_title + ' (' + instance.instance_shortname + ')'}</option>)}
                         </Form.Control>
                         {errors.id_instance && errors.id_instance.type === "required" && (<div className="parsley-errors-list filled mt-1">This value is required.</div>)}
