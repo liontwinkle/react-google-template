@@ -6,7 +6,7 @@ import { Container, Form, Button, Spinner } from 'react-bootstrap';
 import { useForm } from "react-hook-form";
 import * as actions from '../../../constants/action_types';
 import * as routes from '../../../constants/routes';
-import './Signin.css';
+import '../Auth.css';
 
 function Signin(props) {
     const { register, handleSubmit, formState, errors, setError } = useForm();

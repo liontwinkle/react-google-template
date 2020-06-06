@@ -41,3 +41,16 @@
   .sign-wrapper .form-group label {
     display: block;
     margin-bottom: 5px; }
+
+.custom-select {
+  height: calc(1.5em + 0.9375rem + 3px); }
+  .custom-select.invalid {
+    color: #97a3b9; }
+
+form .alert {
+  padding: 3px 10px; }
+
+.custom-select {
+  height: calc(1.5em + 0.9375rem + 3px);
+  overflow: hidden; }
+  

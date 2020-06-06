@@ -10,7 +10,7 @@ import * as loginSteps from '../../../constants/login_steps';
 import Instances from './instances';
 import Teams from './teams';
 import Signout from '../Signout';
-import './SelectInstanceTeam.css';
+import '../Auth.css';
 
 function SelectInstanceTeam(props) {
 
@@ -45,6 +45,17 @@ function SelectInstanceTeam(props) {
     */
 
     const submit = async (formData) => {
+
+        if (formData.id_instance === "new_instance") {
+            dispatch({
+                type: actions.SET_LOGIN_STEP,
+                loginStep: loginSteps.CREATE_NEW_INSTANCE
+            })
+            // redirect to CREATE_NEW_INSTANCE route
+            props.history.push(routes.CREATE_NEW_INSTANCE);
+            return;
+        }
+        
         console.log('formData', formData);
         setLoading(true);
         setTimeout(function() {

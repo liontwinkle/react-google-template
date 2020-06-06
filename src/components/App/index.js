@@ -10,10 +10,12 @@ import Footer from '../Layout/Footer';
 import Loader from '../Loader';
 import Signin from '../Auth/Signin';
 import SelectInstanceTeam from '../Auth/SelectInstanceTeam';
+import CreateNewInstance from '../Auth/CreateNewInstance';
 import Home from '../Home';
 import NotFound from '../NotFound';
 import useWithAuthenticate from '../WithAuthenticate';
 import * as routes from '../../constants/routes';
+import * as loginSteps from '../../constants/login_steps';
 import { useMappedState } from 'redux-react-hook';
 import './App.css';
 
@@ -37,13 +39,16 @@ function App() {
         <Header />
         <Switch>
           <Route exact path={routes.HOME}>
-            {authUser ? (loginStep ? <Home /> : <Redirect to={routes.SELECT_INSTANCE_TEAM} />) : <Redirect to={routes.SIGNIN} />}
+            {authUser ? (loginStep ? (loginStep === loginSteps.CREATE_NEW_INSTANCE ? <Redirect to={routes.CREATE_NEW_INSTANCE} /> : <Home />) : <Redirect to={routes.SELECT_INSTANCE_TEAM} />) : <Redirect to={routes.SIGNIN} />}
           </Route>
           <Route exact path={routes.SIGNIN}>
-            {!authUser ? <Signin /> : (loginStep ? <Redirect to={routes.HOME} /> : <Redirect to={routes.SELECT_INSTANCE_TEAM} />)}
+            {authUser ? (loginStep ? (loginStep === loginSteps.CREATE_NEW_INSTANCE ? <Redirect to={routes.CREATE_NEW_INSTANCE} /> : <Redirect to={routes.HOME} />) : <Redirect to={routes.SELECT_INSTANCE_TEAM} />) : <Signin />}
           </Route>
           <Route exact path={routes.SELECT_INSTANCE_TEAM}>
-            {authUser ? (!loginStep ? <SelectInstanceTeam authUser={authUser} /> : <Redirect to={routes.HOME} />) : <Redirect to={routes.HOME} />}
+            {authUser ? (!loginStep ? <SelectInstanceTeam authUser={authUser} /> : (loginStep === loginSteps.CREATE_NEW_INSTANCE ? <Redirect to={routes.CREATE_NEW_INSTANCE} /> : <Redirect to={routes.HOME} />)) : <Redirect to={routes.SIGNIN} />}
+          </Route>
+          <Route exact path={routes.CREATE_NEW_INSTANCE}>
+            {authUser ? (!loginStep ? <Redirect to={routes.SELECT_INSTANCE_TEAM} /> : (loginStep === loginSteps.CREATE_NEW_INSTANCE ? <CreateNewInstance /> : <Redirect to={routes.HOME} />)) : <Redirect to={routes.SIGNIN} />}
           </Route>
           <Route component={NotFound} />
         </Switch>
