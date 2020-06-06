@@ -5,7 +5,7 @@ function Footer() {
 		<>
 			<footer className="footer">
 	            <div>
-		            <span>&copy; 2020 I NEED HELPERS | ALL RIGHTS RESERVED</span>
+		            <span>&copy; CommandPost | ALL RIGHTS RESERVED</span>
 	            </div>
 	            <div>
 		            <nav className="nav">
