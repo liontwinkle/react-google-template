@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useDispatch } from 'redux-react-hook';
 import { withRouter } from 'react-router-dom';
-import { Container, Form, Button } from 'react-bootstrap';
+import { Container, Form, Button, Spinner } from 'react-bootstrap';
 import { useForm } from "react-hook-form";
 import * as actions from '../../../constants/action_types';
 import * as routes from '../../../constants/routes';
@@ -120,7 +120,7 @@ function SelectInstanceTeam(props) {
                       <Button variant="brand-02" block={true} type="submit">
                         {loading ? (
                             <>
-                                <span className="spinner-grow spinner-grow-sm mr-2" role="status" aria-hidden="true"></span>
+                                <Spinner size="sm" animation="grow" className="mr-2" />
                                 <span>Processing</span>
                             </>
                         ) : 'Continue'}
