@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useDispatch } from 'redux-react-hook';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 import { Container, Form, Button, Spinner } from 'react-bootstrap';
 import { useForm } from "react-hook-form";
 import * as actions from '../../../constants/action_types';
@@ -126,7 +126,7 @@ function SelectInstanceTeam(props) {
                         ) : 'Continue'}
                       </Button>
                     </Form>
-                    <div className="tx-13 mg-t-20 tx-center">Something is wrong? <a href=".">Sign Out</a></div>
+                    <div className="tx-13 mg-t-20 tx-center">Something is wrong? <Link to={routes.SIGNOUT}>Sign Out</Link></div>
                   </div>
                 </div>
               </div>

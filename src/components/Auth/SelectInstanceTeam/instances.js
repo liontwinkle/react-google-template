@@ -15,7 +15,7 @@ function Instances(props) {
             catch (e) {
                 // if unauthorized
                 if (e.response.status === 401) {
-                    // redirect to SIGNIN route
+                    // shold be shown logout information modal
                     return;
                 }
                 console.log("Unexpected error: Instances:getInstancesHandler", e);

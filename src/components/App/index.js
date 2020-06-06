@@ -9,6 +9,7 @@ import Header from '../Layout/Header';
 import Footer from '../Layout/Footer';
 import Loader from '../Loader';
 import Signin from '../Auth/Signin';
+import Signout from '../Auth/Signout';
 import SelectInstanceTeam from '../Auth/SelectInstanceTeam';
 import Home from '../Home';
 import NotFound from '../NotFound';
@@ -41,6 +42,9 @@ function App() {
           </Route>
           <Route exact path={routes.SIGNIN}>
             {!authUser ? <Signin /> : (loginStep ? <Redirect to={routes.HOME} /> : <Redirect to={routes.SELECT_INSTANCE_TEAM} />)}
+          </Route>
+          <Route exact path={routes.SIGNOUT}>
+            {!authUser ? <Signin /> : <Signout />}
           </Route>
           <Route exact path={routes.SELECT_INSTANCE_TEAM}>
             {authUser ? (!loginStep ? <SelectInstanceTeam authUser={authUser} /> : <Redirect to={routes.HOME} />) : <Redirect to={routes.HOME} />}
