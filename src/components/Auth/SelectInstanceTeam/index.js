@@ -48,7 +48,7 @@ function SelectInstanceTeam(props) {
         setLoading(true);
         setTimeout(function() {
             setLoading(false);
-        }, 1000);
+        }, 5000);
         /*
         try {
             const requestBody = {
