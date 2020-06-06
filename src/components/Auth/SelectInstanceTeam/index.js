@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useDispatch } from 'redux-react-hook';
-import { withRouter, Link } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import { Container, Form, Button, Spinner } from 'react-bootstrap';
 import { useForm } from "react-hook-form";
 import * as actions from '../../../constants/action_types';
@@ -9,6 +9,7 @@ import * as routes from '../../../constants/routes';
 import * as loginSteps from '../../../constants/login_steps';
 import Instances from './instances';
 import Teams from './teams';
+import Signout from '../Signout';
 import './SelectInstanceTeam.css';
 
 function SelectInstanceTeam(props) {
@@ -126,7 +127,7 @@ function SelectInstanceTeam(props) {
                         ) : 'Continue'}
                       </Button>
                     </Form>
-                    <div className="tx-13 mg-t-20 tx-center">Something is wrong? <Link to={routes.SIGNOUT}>Sign Out</Link></div>
+                    <div className="tx-13 mg-t-20 tx-center">Something is wrong? <Signout /></div>
                   </div>
                 </div>
               </div>
