@@ -1,8 +1,9 @@
-import { SET_AUTH_USER, SET_LOGIN_STEP } from '../constants/action_types';
+import { SET_AUTH_USER, SET_LOGIN_STEP, SET_SESSION_DATA } from '../constants/action_types';
 
 const INITIAL_STATE = {
 	authUser: localStorage.getItem('authUser') ? JSON.parse(localStorage.getItem('authUser')) : null,
 	loginStep: localStorage.getItem('loginStep') || false,
+	sessionData: localStorage.getItem('sessionData') ? JSON.parse(localStorage.getItem('sessionData')) : null,
 	loading: true
 };
 
@@ -14,7 +15,12 @@ function sessionReducer(state = INITIAL_STATE, action) {
 			} else {
 				localStorage.removeItem('authUser');
 			}
-			return { authUser: action.authUser, loginStep: localStorage.getItem('loginStep') || false, loading: false };
+			return {
+				authUser: action.authUser,
+				loginStep: localStorage.getItem('loginStep') || false,
+				sessionData: localStorage.getItem('sessionData') ? JSON.parse(localStorage.getItem('sessionData')) : null,
+				loading: false 
+			};
 		}
 		case SET_LOGIN_STEP: {
 			if (action.loginStep) {
@@ -22,7 +28,25 @@ function sessionReducer(state = INITIAL_STATE, action) {
 			} else {
 				localStorage.removeItem('loginStep');
 			}
-			return { authUser: localStorage.getItem('authUser') ? JSON.parse(localStorage.getItem('authUser')) : null, loginStep: action.loginStep, loading: false };
+			return {
+				authUser: localStorage.getItem('authUser') ? JSON.parse(localStorage.getItem('authUser')) : null,
+				loginStep: action.loginStep,
+				sessionData: localStorage.getItem('sessionData') ? JSON.parse(localStorage.getItem('sessionData')) : null,
+				loading: false
+			};
+		}
+		case SET_SESSION_DATA: {
+			if (action.sessionData) {
+				localStorage.setItem('sessionData', JSON.stringify(action.sessionData));
+			} else {
+				localStorage.removeItem('sessionData');
+			}
+			return {
+				authUser: localStorage.getItem('authUser') ? JSON.parse(localStorage.getItem('authUser')) : null,
+				loginStep: localStorage.getItem('loginStep') || false,
+				sessionData: action.sessionData,
+				loading: false
+			};
 		}
 		default: return state;
 	}

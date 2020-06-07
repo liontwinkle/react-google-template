@@ -16,13 +16,17 @@ async function authenticate(dispatch) {
             })
         }
         else {
+            // reset all sessions
             dispatch({ type: actions.SET_AUTH_USER, authUser: null });
             dispatch({ type: actions.SET_LOGIN_STEP, loginStep: false });
+            dispatch({ type: actions.SET_SESSION_DATA, sessionData: null });
         }
     }
     catch {
+        // reset all sessions
         dispatch({ type: actions.SET_AUTH_USER, authUser: null });
         dispatch({ type: actions.SET_LOGIN_STEP, loginStep: false });
+        dispatch({ type: actions.SET_SESSION_DATA, sessionData: null });
     }
 }
 

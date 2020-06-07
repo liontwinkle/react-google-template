@@ -16,6 +16,8 @@ function Signout(props) {
             dispatch({ type: actions.SET_AUTH_USER, authUser: null });
             // unset loginStep data
             dispatch({ type: actions.SET_LOGIN_STEP, loginStep: false });
+            // unset sessionData data
+            dispatch({ type: actions.SET_SESSION_DATA, sessionData: null });
             // redirect to SIGNIN route
             props.history.push(routes.SIGNIN);
         }

@@ -14,84 +14,115 @@ import '../Auth.css';
 
 function SelectInstanceTeam(props) {
 
-    const { register, handleSubmit, formState, errors, setError } = useForm();
+    const { register, handleSubmit, formState, errors } = useForm();
     const [loading, setLoading] = useState(false);
-    const [idInstance, setIdInstance] = useState(false);
-    const [idEvent, setIdEvent] = useState(false);
-    const [idTeam, setIdTeam] = useState(false);
+    const [idInstance, setIdInstance] = useState(props.sessionData ? props.sessionData.id_instance : false);
+    const [idEvent, setIdEvent] = useState(props.sessionData ? props.sessionData.id_event : false);
+    const [idTeam, setIdTeam] = useState(props.sessionData ? props.sessionData.id_team : false);
     const dispatch = useDispatch();
 
     const changeInstanceHandler = (event) => {
         setIdInstance(event.target.value);
-        setIdEvent(event.target.options[event.target.selectedIndex].getAttribute('idevent'));
+        setIdEvent(event.target.options[event.target.selectedIndex].getAttribute('idevent') ? event.target.options[event.target.selectedIndex].getAttribute('idevent') : false);
+        // set sessionData data
+        dispatch({
+            type: actions.SET_SESSION_DATA,
+            sessionData: {
+                id_instance: event.target.value,
+                id_team: idTeam,
+                id_event: event.target.options[event.target.selectedIndex].getAttribute('idevent')
+            }
+        })
     }
 
     const changeTeamHandler = (event) => {
         setIdTeam(event.target.value);
+        // set sessionData data
+        dispatch({
+            type: actions.SET_SESSION_DATA,
+            sessionData: {
+                id_instance: idInstance,
+                id_team: event.target.value,
+                id_event: idEvent
+            }
+        })
     }
 
-    /*
-    // just for test
-    setTimeout(function() {
-        // set loginStep data
-        dispatch({
-            type: actions.SET_LOGIN_STEP,
-            loginStep: loginSteps.SELECT_TEAM
-        })
-
-        // redirect to HOME route
-        props.history.push(routes.HOME);
-    }, 10000);
-    */
-
     const submit = async (formData) => {
+        setLoading(true);
 
         if (formData.id_instance === "new_instance") {
             dispatch({
                 type: actions.SET_LOGIN_STEP,
                 loginStep: loginSteps.CREATE_NEW_INSTANCE
             })
+            setLoading(false);
             // redirect to CREATE_NEW_INSTANCE route
             props.history.push(routes.CREATE_NEW_INSTANCE);
             return;
         }
         
-        console.log('formData', formData);
-        setLoading(true);
-        setTimeout(function() {
-            setLoading(false);
-        }, 5000);
-        /*
         try {
             const requestBody = {
-                username: formData.username,
-                password: formData.password
+                role: formData.role,
+                company: formData.company,
+                contact_number: formData.contact_number
             };
 
-            const { data } = await axios.post('https://api.commandpost.com.au/auth/signin', requestBody);
-            // const { data } = await axios.post('http://localhost:4000/auth/signin', requestBody); // dev env, need to setup env later
-            setLoading(false);
-            // set authUser data
+            // update user data
+            await axios.put(process.env.REACT_APP_API_URL + '/user', requestBody);
+
+            // set authUser updated data
+            let updatedAuthUser = Object.assign(props.authUser, requestBody);
             dispatch({
                 type: actions.SET_AUTH_USER,
-                authUser: data
+                authUser: updatedAuthUser
             })
-            // set loginStep data
+
+            // set sessionData data
             dispatch({
-                type: actions.SET_LOGIN_STEP,
-                loginStep: loginSteps.SELECT_INSTANCE
+                type: actions.SET_SESSION_DATA,
+                sessionData: {
+                    id_instance: idInstance,
+                    id_team: idTeam,
+                    id_event: idEvent
+                }
             })
-            props.history.push(routes.SELECT_INSTANCE_TEAM);
-        }
-        catch (e) {
-            if (e.response.data.error && e.response.data.type === 'validation') {
-                setError(e.response.data.field, e.response.data.type, e.response.data.message);
+
+            // here should be condition for checking user training completed or not for setting up loginStep and redirection to that step
+            if (false) { // just for test, training not completed
+                // set loginStep data
+                dispatch({
+                    type: actions.SET_LOGIN_STEP,
+                    loginStep: loginSteps.FINISHED
+                })
+
                 setLoading(false);
+
+                // redirect to HOME route
+                props.history.push(routes.HOME);
             } else {
-                console.log("Unexpected error: Signin:submit");
+                // set loginStep data
+                dispatch({
+                    type: actions.SET_LOGIN_STEP,
+                    loginStep: loginSteps.COMPLETE_TRAINING
+                })
+
+                setLoading(false);
+
+                // redirect to COMPLETE_TRAINING route
+                props.history.push(routes.COMPLETE_TRAINING);
             }
         }
-        */
+        catch (e) {
+            // if unauthorized
+            if (e.response.status === 401) {
+                // shold be shown logout information modal
+                return;
+            }
+            console.log("Unexpected error: SelectInstanceTeam:submit", e);
+        }
+
     }
 
     return (
