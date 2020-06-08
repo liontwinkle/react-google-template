@@ -5,7 +5,7 @@ import { Form } from 'react-bootstrap';
 function Instances(props) {
     const [instances, setInstances] = useState([]);
 
-     useEffect(() => {
+    useEffect(() => {
         const getInstancesHandler = async (userId) => {
             try {
                 const { data } = await axios.get(process.env.REACT_APP_API_URL + '/auth/instances');
@@ -24,7 +24,8 @@ function Instances(props) {
             }
         }
         getInstancesHandler(props.userId);
-    }, [props])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [props.userId])
 
     return (
         <>

@@ -25,7 +25,8 @@ function Teams(props) {
             }
         }
         getTeamsHandler(props.idInstance, props.idEvent);
-    }, [props])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [props.idInstance, props.idEvent])
 
     return (
         <>
