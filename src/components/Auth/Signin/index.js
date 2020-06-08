@@ -25,13 +25,11 @@ function Signin(props) {
             const { data } = await axios.post(process.env.REACT_APP_API_URL + '/auth/signin', requestBody);
 
             setLoading(false);
-            // set authUser data
+            // set authUser data, will redirect to required route automatically
             dispatch({
                 type: actions.SET_AUTH_USER,
                 authUser: data
             })
-            // redirect to SELECT_INSTANCE_TEAM route
-            props.history.push(routes.SELECT_INSTANCE_TEAM);
         }
         catch (e) {
             if (e.response && e.response.data.error && e.response.data.type === 'validation') {

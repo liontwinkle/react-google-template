@@ -3,7 +3,6 @@ import axios from 'axios';
 import { useDispatch } from 'redux-react-hook';
 import { withRouter } from 'react-router-dom';
 import * as actions from '../../constants/action_types';
-import * as routes from '../../constants/routes';
 
 function Signout(props) {
     const dispatch = useDispatch();
@@ -18,8 +17,7 @@ function Signout(props) {
             dispatch({ type: actions.SET_LOGIN_STEP, loginStep: false });
             // unset sessionData data
             dispatch({ type: actions.SET_SESSION_DATA, sessionData: null });
-            // redirect to SIGNIN route
-            props.history.push(routes.SIGNIN);
+            // will redirect to required route related with sessions unset
         }
         catch (e) {
             console.log("Unexpected error: Signout:signoutHandler", e);

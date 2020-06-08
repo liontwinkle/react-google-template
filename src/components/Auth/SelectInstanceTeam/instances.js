@@ -1,26 +1,28 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Form } from 'react-bootstrap';
 
 function Instances(props) {
     const [instances, setInstances] = useState([]);
 
-    const getInstancesHandler = async (userId) => {
-        try {
-            const { data } = await axios.get(process.env.REACT_APP_API_URL + '/auth/instances');
-            // set instances data
-            setInstances(data.instances);
-        }
-        catch (e) {
-            // if unauthorized
-            if (e.response.status === 401) {
-                // shold be shown logout information modal
-                return;
+     useEffect(() => {
+        const getInstancesHandler = async (userId) => {
+            try {
+                const { data } = await axios.get(process.env.REACT_APP_API_URL + '/auth/instances');
+                // set instances data
+                setInstances(data.instances);
             }
-            console.log("Unexpected error: Instances:getInstancesHandler", e);
+            catch (e) {
+                // if unauthorized
+                if (e.response.status === 401) {
+                    // shold be shown logout information modal
+                    return;
+                }
+                console.log("Unexpected error: Instances:getInstancesHandler", e);
+            }
         }
-    }
-    getInstancesHandler(props.userId);
+        getInstancesHandler(props.userId);
+    }, [props.userId])
 
     return (
         <>

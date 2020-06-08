@@ -5,7 +5,6 @@ import { withRouter } from 'react-router-dom';
 import { Container, Form, Button, Spinner } from 'react-bootstrap';
 import { useForm } from "react-hook-form";
 import * as actions from '../../../constants/action_types';
-import * as routes from '../../../constants/routes';
 import * as loginSteps from '../../../constants/login_steps';
 import Instances from './instances';
 import Teams from './teams';
@@ -52,13 +51,13 @@ function SelectInstanceTeam(props) {
         setLoading(true);
 
         if (formData.id_instance === "new_instance") {
-            dispatch({
-                type: actions.SET_LOGIN_STEP,
-                loginStep: loginSteps.CREATE_NEW_INSTANCE
-            })
-            setLoading(false);
-            // redirect to CREATE_NEW_INSTANCE route
-            props.history.push(routes.CREATE_NEW_INSTANCE);
+            setTimeout(() => {
+                // set loginStep data, will redirect to required route automatically
+                dispatch({
+                    type: actions.SET_LOGIN_STEP,
+                    loginStep: loginSteps.CREATE_NEW_INSTANCE
+                })
+            }, 2000);
             return;
         }
         
@@ -89,30 +88,17 @@ function SelectInstanceTeam(props) {
                 }
             })
 
-            // here should be condition for checking user training completed or not for setting up loginStep and redirection to that step
-            if (false) { // just for test, training not completed
-                // set loginStep data
-                dispatch({
-                    type: actions.SET_LOGIN_STEP,
-                    loginStep: loginSteps.FINISHED
-                })
-
-                setLoading(false);
-
-                // redirect to HOME route
-                props.history.push(routes.HOME);
-            } else {
-                // set loginStep data
-                dispatch({
-                    type: actions.SET_LOGIN_STEP,
-                    loginStep: loginSteps.COMPLETE_TRAINING
-                })
-
-                setLoading(false);
-
-                // redirect to COMPLETE_TRAINING route
-                props.history.push(routes.COMPLETE_TRAINING);
-            }
+            // checking user training completed or not for setting up loginStep and redirection to that step
+            const { data } = await axios.get(process.env.REACT_APP_API_URL + '/user/trainings_count');
+            let trainingCompleted = data.count > 0;
+            let loginStep = trainingCompleted ? loginSteps.FINISHED : loginSteps.COMPLETE_TRAINING;
+            setLoading(false);
+            
+            // set loginStep data, will redirect to required route automatically
+            dispatch({
+                type: actions.SET_LOGIN_STEP,
+                loginStep: loginStep
+            })
         }
         catch (e) {
             // if unauthorized

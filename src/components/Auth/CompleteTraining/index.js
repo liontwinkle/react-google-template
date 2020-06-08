@@ -4,29 +4,24 @@ import { withRouter } from 'react-router-dom';
 import { Container, Form, Button, Spinner } from 'react-bootstrap';
 import { useForm } from "react-hook-form";
 import * as actions from '../../../constants/action_types';
-import * as routes from '../../../constants/routes';
 import * as loginSteps from '../../../constants/login_steps';
 import Signout from '../Signout';
 import '../Auth.css';
 
-function CompleteTraining(props) {
-
+function CompleteTraining() {
   const { handleSubmit } = useForm();
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
 
   const submit = async (formData) => {
     setLoading(true);
-    // set loginStep data
-    dispatch({
-        type: actions.SET_LOGIN_STEP,
-        loginStep: loginSteps.FINISHED
-    })
     setTimeout(() => {
-
       setLoading(false);
-      // redirect to HOME route
-      props.history.push(routes.HOME);
+      // set loginStep data, will redirect to required route automatically
+      dispatch({
+          type: actions.SET_LOGIN_STEP,
+          loginStep: loginSteps.FINISHED
+      })
     }, 2000);
   }
 

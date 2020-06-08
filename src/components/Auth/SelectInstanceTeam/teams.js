@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Form } from 'react-bootstrap';
 import { AlertCircle } from 'react-feather';
@@ -6,22 +6,24 @@ import { AlertCircle } from 'react-feather';
 function Teams(props) {
     const [teams, setTeams] = useState([]);
 
-    const getTeamsHandler = async (idInstance, idEvent) => {
-        try {
-            const { data } = await axios.get(process.env.REACT_APP_API_URL + '/auth/teams/' + idInstance + '/' + idEvent);
-            // set teams data
-            setTeams(data.teams);
-        }
-        catch (e) {
-            // if unauthorized
-            if (e.response.status === 401) {
-                // redirect to SIGNIN route
-                return;
+    useEffect(() => {
+        const getTeamsHandler = async (idInstance, idEvent) => {
+            try {
+                const { data } = await axios.get(process.env.REACT_APP_API_URL + '/auth/teams/' + idInstance + '/' + idEvent);
+                // set teams data
+                setTeams(data.teams);
             }
-            console.log("Unexpected error: SelectTeam:getTeamsHandler", e);
+            catch (e) {
+                // if unauthorized
+                if (e.response.status === 401) {
+                    // redirect to SIGNIN route
+                    return;
+                }
+                console.log("Unexpected error: SelectTeam:getTeamsHandler", e);
+            }
         }
-    }
-    getTeamsHandler(props.idInstance, props.idEvent);
+        getTeamsHandler(props.idInstance, props.idEvent);
+    }, [props.idInstance, props.idEvent])
 
     return (
         <>
