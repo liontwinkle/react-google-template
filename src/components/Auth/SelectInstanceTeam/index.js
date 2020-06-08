@@ -13,7 +13,7 @@ import '../Auth.css';
 
 function SelectInstanceTeam(props) {
 
-    const { register, handleSubmit, formState, errors } = useForm();
+    const { register, handleSubmit, formState, errors, setValue } = useForm();
     const [loading, setLoading] = useState(false);
     const [idInstance, setIdInstance] = useState(props.sessionData ? props.sessionData.id_instance : false);
     const [idEvent, setIdEvent] = useState(props.sessionData ? props.sessionData.id_event : false);
@@ -93,7 +93,7 @@ function SelectInstanceTeam(props) {
             let trainingCompleted = data.count > 0;
             let loginStep = trainingCompleted ? loginSteps.FINISHED : loginSteps.COMPLETE_TRAINING;
             setLoading(false);
-            
+
             // set loginStep data, will redirect to required route automatically
             dispatch({
                 type: actions.SET_LOGIN_STEP,
@@ -121,11 +121,11 @@ function SelectInstanceTeam(props) {
                     <h3 className="tx-color-01 mg-b-5">Select Instance</h3>
                     <p className="tx-color-03 tx-16 mg-b-40">Select your Instance and team to continue.</p>
                     <Form onSubmit={handleSubmit(submit)}>
-                      <Instances userId={props.authUser.id} idInstance={idInstance} changeInstanceHandler={changeInstanceHandler} register={register} formState={formState} errors={errors} />
+                      <Instances userId={props.authUser.id} idInstance={idInstance} changeInstanceHandler={changeInstanceHandler} register={register} formState={formState} errors={errors} setValue={setValue} />
                       {
                         idInstance && idInstance !== "new_instance" && idEvent ? (
                             <>
-                                <Teams idInstance={idInstance} idEvent={idEvent} idTeam={idTeam} changeTeamHandler={changeTeamHandler} register={register} formState={formState} errors={errors} />
+                                <Teams idInstance={idInstance} idEvent={idEvent} idTeam={idTeam} changeTeamHandler={changeTeamHandler} register={register} formState={formState} errors={errors} setValue={setValue} />
                                 <Form.Group controlId="role">
                                     <Form.Label>Role <span className="tx-danger">*</span></Form.Label>
                                     <Form.Control defaultValue={props.authUser.role} name="role" type="text" placeholder="Enter your role" ref={register({ required: true })} className={errors.role ? "parsley-error" : (formState.isSubmitted && formState.touched.role && "parsley-success")} />

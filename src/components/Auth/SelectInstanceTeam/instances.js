@@ -11,6 +11,8 @@ function Instances(props) {
                 const { data } = await axios.get(process.env.REACT_APP_API_URL + '/auth/instances');
                 // set instances data
                 setInstances(data.instances);
+                // set default value
+                props.setValue("id_instance", props.idInstance || "");
             }
             catch (e) {
                 // if unauthorized
@@ -22,13 +24,13 @@ function Instances(props) {
             }
         }
         getInstancesHandler(props.userId);
-    }, [props.userId])
+    }, [props])
 
     return (
         <>
             <Form.Group controlId="id_instance">
                 <Form.Label>Instance <span className="tx-danger">*</span></Form.Label>
-                <Form.Control onChange={props.changeInstanceHandler} value={props.idInstance || ""} name="id_instance" as="select" ref={props.register({ required: true })} className={(props.errors.id_instance ? "parsley-error" : (props.formState.isSubmitted && props.formState.touched.id_instance ? "parsley-success" : "")) + " custom-select " + (!props.idInstance ? " invalid" : "")}>
+                <Form.Control onChange={props.changeInstanceHandler} name="id_instance" as="select" ref={props.register({ required: true })} className={(props.errors.id_instance ? "parsley-error" : (props.formState.isSubmitted && props.formState.touched.id_instance ? "parsley-success" : "")) + " custom-select " + (!props.idInstance ? " invalid" : "")}>
                     <option value="" disabled hidden className="invalid">Select Instance</option>
                     <option value="new_instance">Create a new Instance</option>
                     {instances.map((instance, index) => <option key={instance.id} value={instance.id} idevent={instance.id_event}>{instance.event_title + ' - ' + instance.instance_title + ' (' + instance.instance_shortname + ')'}</option>)}

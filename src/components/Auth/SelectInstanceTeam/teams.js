@@ -12,6 +12,8 @@ function Teams(props) {
                 const { data } = await axios.get(process.env.REACT_APP_API_URL + '/auth/teams/' + idInstance + '/' + idEvent);
                 // set teams data
                 setTeams(data.teams);
+                // set default value
+                props.setValue("id_team", props.idTeam || "");
             }
             catch (e) {
                 // if unauthorized
@@ -23,13 +25,13 @@ function Teams(props) {
             }
         }
         getTeamsHandler(props.idInstance, props.idEvent);
-    }, [props.idInstance, props.idEvent])
+    }, [props])
 
     return (
         <>
             <Form.Group controlId="id_team">
                 <Form.Label>Team <span className="tx-danger">*</span></Form.Label>
-                <Form.Control onChange={props.changeTeamHandler} value={props.idTeam || ""} name="id_team" as="select" ref={props.register({ required: true })} className={(props.errors.id_team ? "parsley-error" : (props.formState.isSubmitted && props.formState.touched.id_team ? "parsley-success" : "")) + " custom-select " + (!props.idTeam ? " invalid" : "")}>
+                <Form.Control onChange={props.changeTeamHandler} name="id_team" as="select" ref={props.register({ required: true })} className={(props.errors.id_team ? "parsley-error" : (props.formState.isSubmitted && props.formState.touched.id_team ? "parsley-success" : "")) + " custom-select " + (!props.idTeam ? " invalid" : "")}>
                     <option value="" disabled hidden className="invalid">Select Team</option>
                     {teams.map((team, index) => <option key={team.id} value={team.id}>{team.team_title}</option>)}
                 </Form.Control>
