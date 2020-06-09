@@ -1,19 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Form } from 'react-bootstrap';
+import { Form, Spinner } from 'react-bootstrap';
 import { AlertCircle } from 'react-feather';
 
 function Teams(props) {
     const [teams, setTeams] = useState([]);
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         const getTeamsHandler = async (idInstance, idEvent) => {
+            setLoading(true);
             try {
                 const { data } = await axios.get(process.env.REACT_APP_API_URL + '/auth/teams/' + idInstance + '/' + idEvent);
                 // set teams data
                 setTeams(data.teams);
                 // set default value
                 props.setValue("id_team", props.idTeam || "");
+                setLoading(false);
             }
             catch (e) {
                 // if unauthorized
@@ -31,8 +34,9 @@ function Teams(props) {
     return (
         <>
             <Form.Group controlId="id_team">
+                {loading && <Spinner size="sm" animation="grow" />}
                 <Form.Label>Team <span className="tx-danger">*</span></Form.Label>
-                <Form.Control onChange={props.changeTeamHandler} name="id_team" as="select" ref={props.register({ required: true })} className={(props.errors.id_team ? "parsley-error" : (props.formState.isSubmitted && props.formState.touched.id_team ? "parsley-success" : "")) + " custom-select " + (!props.idTeam ? " invalid" : "")}>
+                <Form.Control disabled={loading} onChange={props.changeTeamHandler} name="id_team" as="select" ref={props.register({ required: true })} className={(props.errors.id_team ? "parsley-error" : (props.formState.isSubmitted && props.formState.touched.id_team ? "parsley-success" : "")) + " custom-select " + (!props.idTeam ? " invalid" : "")}>
                     <option value="" disabled hidden className="invalid">Select Team</option>
                     {teams.map((team, index) => <option key={team.id} value={team.id}>{team.team_title}</option>)}
                 </Form.Control>

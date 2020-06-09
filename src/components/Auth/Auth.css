@@ -41,6 +41,12 @@
   .sign-wrapper .form-group label {
     display: block;
     margin-bottom: 5px; }
+  .sign-wrapper .form-group {
+    position: relative; }
+    .sign-wrapper .form-group .spinner-grow {
+      position: absolute;
+      right: .4rem;
+      top: 2.3rem; }
 
 .custom-select {
   height: calc(1.5em + 0.9375rem + 3px); }
@@ -53,4 +59,3 @@ form .alert {
 .custom-select {
   height: calc(1.5em + 0.9375rem + 3px);
   overflow: hidden; }
-  
