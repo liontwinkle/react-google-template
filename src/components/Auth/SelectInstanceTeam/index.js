@@ -23,12 +23,13 @@ function SelectInstanceTeam(props) {
     const changeInstanceHandler = (event) => {
         setIdInstance(event.target.value);
         setIdEvent(event.target.options[event.target.selectedIndex].getAttribute('idevent') ? event.target.options[event.target.selectedIndex].getAttribute('idevent') : false);
+        setIdTeam(false);
         // set sessionData data
         dispatch({
             type: actions.SET_SESSION_DATA,
             sessionData: {
                 id_instance: event.target.value,
-                id_team: idTeam,
+                id_team: false,
                 id_event: event.target.options[event.target.selectedIndex].getAttribute('idevent')
             }
         })
