@@ -1,0 +1,9 @@
+#headerSearch {
+    align-items: center; }
+@media (min-width: 1200px) {
+	.search-form .form-control {
+	    height: 35px; } }
+    @media (max-width: 991px) {
+		#headerSearch .search-form {
+			margin-top: 15px;
+			margin-left: 25px; } }

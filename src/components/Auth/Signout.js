@@ -3,6 +3,8 @@ import axios from 'axios';
 import { useDispatch } from 'redux-react-hook';
 import { withRouter } from 'react-router-dom';
 import * as actions from '../../constants/action_types';
+import { LogOut } from 'react-feather';
+import { Dropdown } from 'react-bootstrap';
 
 function Signout(props) {
     const dispatch = useDispatch();
@@ -24,7 +26,11 @@ function Signout(props) {
         }
     }
 
-    return <a href="." className={props.className} onClick={signoutHandler}>Sign Out</a>
+    if (props.isDropdownItem) {
+        return <Dropdown.Item onClick={signoutHandler}><LogOut /> Sign Out</Dropdown.Item>
+    }
+
+    return <a href="." onClick={signoutHandler}>Sign Out</a>
 }
 
 export default withRouter(Signout);
