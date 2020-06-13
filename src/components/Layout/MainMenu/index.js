@@ -1,12 +1,16 @@
-import React, {useState, useRef} from 'react';
-import { Star, AlertCircle, Trello, MessageSquare, Phone, List, FileText, Map, MapPin, Truck, Book, HelpCircle, Settings } from 'react-feather';
+import React, {useState, useRef, useEffect} from 'react';
+import * as Icon from 'react-feather';
 import { Tooltip, OverlayTrigger } from 'react-bootstrap';
+import axios from 'axios';
 import useOutsideAlerter from '../../OutsideAlerter';
 import Scrollbar from 'perfect-scrollbar-react';
 
-function MainMenu() {
+function MainMenu(props) {
 	const wrapperRef = useRef(null);
 	useOutsideAlerter(wrapperRef);
+
+	const [apps, setApps] = useState([]);
+    const [loading, setLoading] = useState(false);
 	const [activeItem, setActiveItem] = useState(0);
 
 	const clickMenuItemHandler = (index, e) => {
@@ -14,21 +18,26 @@ function MainMenu() {
 		setActiveItem(index);
 	}
 
-	const menuItems = [
-		{ title: 'Dashboard', icon: Star },
-		{ title: 'Incident Logging', icon: AlertCircle },
-		{ title: 'Program / Activations & Areas', icon: Trello },
-		{ title: 'Chat', icon: MessageSquare },
-		{ title: 'Contact List', icon: Phone },
-		{ title: 'Task List', icon: List },
-		{ title: 'File Manager', icon: FileText },
-		{ title: 'Integrated Map', icon: Map },
-		{ title: 'Resource Positioning', icon: MapPin },
-		{ title: 'Fleet Management', icon: Truck },
-		{ title: 'Procedures', icon: Book },
-		{ title: 'Help', icon: HelpCircle }, 
-		{ title: 'Settings', icon: Settings }
-	];
+    useEffect(() => {
+        const getAppsHandler = async (userId, eventId) => {
+            setLoading(true);
+            try {
+                const { data } = await axios.get(process.env.REACT_APP_API_URL + '/apps/' + eventId);
+                // set apps data
+                setApps(data.apps);
+                setLoading(false);
+            }
+            catch (e) {
+                // if unauthorized
+                if (e.response.status === 401) {
+                    // shold be shown logout information modal
+                    return;
+                }
+                console.log("Unexpected error: MainMenu:getAppsHandler", e);
+            }
+        }
+        getAppsHandler(props.userId, props.eventId);
+    }, [props.userId, props.eventId])
 
 	return (
 		<>
@@ -37,19 +46,22 @@ function MainMenu() {
 					<Scrollbar>
 						<div className="pd-y-15">
 							<nav className="nav nav-sidebar tx-13">
-								{menuItems.map((menuItem, index) => (
-									<OverlayTrigger
-								        key={index}
-								        placement="right"
-								        overlay={
-								          <Tooltip id={"tooltip-" + index}>
-								            {menuItem.title}
-								          </Tooltip>
-								        }
-							      	>
-										<a href="." onClick={(e) => clickMenuItemHandler(index, e)} className={activeItem === index ? 'nav-link active' : 'nav-link'}><menuItem.icon /></a>
-									</OverlayTrigger>
-								))}
+								{apps.map((app, index) => {
+									let AppIcon = Icon[app.app_icon];
+									return (
+										<OverlayTrigger
+									        key={index}
+									        placement="right"
+									        overlay={
+									          <Tooltip id={"tooltip-" + index}>
+									            {app.application_title}
+									          </Tooltip>
+									        }
+								      	>
+											<a href="." onClick={(e) => clickMenuItemHandler(index, e)} className={activeItem === index ? 'nav-link active' : 'nav-link'}><AppIcon /></a>
+										</OverlayTrigger>
+									)
+								})}
 							</nav>
 						</div>
 					</Scrollbar>

@@ -45,7 +45,7 @@ function App() {
         <Header authUser={authUser} loginStep={loginStep} isMainMenuOpened={isMainMenuOpened} isNavbarMenuOpened={isNavbarMenuOpened} />
         <Switch>
           <Route exact path={routes.HOME}>
-            {authUser ? (loginStep ? (loginStep === loginSteps.CREATE_NEW_INSTANCE ? <Redirect to={routes.CREATE_NEW_INSTANCE} /> : (loginStep === loginSteps.COMPLETE_TRAINING ? <Redirect to={routes.COMPLETE_TRAINING} /> : <div className="mail-wrapper"><MainMenu /><Home /></div>)) : <Redirect to={routes.SELECT_INSTANCE_TEAM} />) : <Redirect to={routes.SIGNIN} />}
+            {authUser ? (loginStep ? (loginStep === loginSteps.CREATE_NEW_INSTANCE ? <Redirect to={routes.CREATE_NEW_INSTANCE} /> : (loginStep === loginSteps.COMPLETE_TRAINING ? <Redirect to={routes.COMPLETE_TRAINING} /> : <div className="mail-wrapper"><MainMenu userId={authUser.id} eventId={sessionData.id_event} /><Home /></div>)) : <Redirect to={routes.SELECT_INSTANCE_TEAM} />) : <Redirect to={routes.SIGNIN} />}
           </Route>
           <Route exact path={routes.SIGNIN}>
             {authUser ? (loginStep ? (loginStep === loginSteps.CREATE_NEW_INSTANCE ? <Redirect to={routes.CREATE_NEW_INSTANCE} /> : (loginStep === loginSteps.COMPLETE_TRAINING ? <Redirect to={routes.COMPLETE_TRAINING} /> : <Redirect to={routes.HOME} />)) : <Redirect to={routes.SELECT_INSTANCE_TEAM} />) : <Signin />}
