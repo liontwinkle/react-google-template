@@ -14,6 +14,17 @@ function Signin(props) {
     const dispatch = useDispatch();
 
     const submit = async (formData) => {
+
+        // unset authUser data
+        dispatch({ type: actions.SET_AUTH_USER, authUser: null });
+        // unset loginStep data
+        dispatch({ type: actions.SET_LOGIN_STEP, loginStep: false });
+        // unset sessionData data
+        dispatch({ type: actions.SET_SESSION_DATA, sessionData: null });
+        // will redirect to required route related with sessions unset
+        // close session expiry modal
+        dispatch({ type: actions.SET_SESSION_EXPIRY_MODAL_STATE, isSessionExpiryModalOpened: false });
+    
         setLoading(true);
 
         try {

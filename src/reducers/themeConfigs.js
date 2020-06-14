@@ -1,8 +1,9 @@
-import { SET_MAIN_MENU_STATE, SET_NAVBAR_MENU_STATE } from '../constants/action_types';
+import { SET_MAIN_MENU_STATE, SET_NAVBAR_MENU_STATE, SET_SESSION_EXPIRY_MODAL_STATE } from '../constants/action_types';
 
 const INITIAL_STATE = {
 	isMainMenuOpened: localStorage.getItem('isMainMenuOpened') ? true : false,
-	isNavbarMenuOpened: localStorage.getItem('isNavbarMenuOpened') ? true : false
+	isNavbarMenuOpened: localStorage.getItem('isNavbarMenuOpened') ? true : false,
+	isSessionExpiryModalOpened: localStorage.getItem('isSessionExpiryModalOpened') ? true : false
 };
 
 function themeConfigsReducer(state = INITIAL_STATE, action) {
@@ -21,7 +22,8 @@ function themeConfigsReducer(state = INITIAL_STATE, action) {
 			}
 			return {
 				isMainMenuOpened: action.isMainMenuOpened,
-				isNavbarMenuOpened: localStorage.getItem('isNavbarMenuOpened') ? true : false
+				isNavbarMenuOpened: localStorage.getItem('isNavbarMenuOpened') ? true : false,
+				isSessionExpiryModalOpened: localStorage.getItem('isSessionExpiryModalOpened') ? true : false
 			};
 		}
 		case SET_NAVBAR_MENU_STATE: {
@@ -38,7 +40,20 @@ function themeConfigsReducer(state = INITIAL_STATE, action) {
 			}
 			return {
 				isMainMenuOpened: localStorage.getItem('isMainMenuOpened') ? true : false,
-				isNavbarMenuOpened: action.isNavbarMenuOpened
+				isNavbarMenuOpened: action.isNavbarMenuOpened,
+				isSessionExpiryModalOpened: localStorage.getItem('isSessionExpiryModalOpened') ? true : false
+			};
+		}
+		case SET_SESSION_EXPIRY_MODAL_STATE: {
+			if (action.isSessionExpiryModalOpened) {
+				localStorage.setItem('isSessionExpiryModalOpened', true);
+			} else {
+				localStorage.removeItem('isSessionExpiryModalOpened');
+			}
+			return {
+				isMainMenuOpened: localStorage.getItem('isMainMenuOpened') ? true : false,
+				isNavbarMenuOpened: localStorage.getItem('isNavbarMenuOpened') ? true : false,
+				isSessionExpiryModalOpened: action.isSessionExpiryModalOpened
 			};
 		}
 		default: return state;

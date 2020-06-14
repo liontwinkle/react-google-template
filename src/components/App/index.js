@@ -13,6 +13,7 @@ import Signin from '../Auth/Signin';
 import SelectInstanceTeam from '../Auth/SelectInstanceTeam';
 import CreateNewInstance from '../Auth/CreateNewInstance';
 import CompleteTraining from '../Auth/CompleteTraining';
+import SessionExpiryModal from '../Auth/SessionExpiryModal';
 import Home from '../Home';
 import NotFound from '../NotFound';
 import useWithAuthenticate from '../WithAuthenticate';
@@ -31,10 +32,11 @@ function App() {
     loginStep: state.sessionState.loginStep,
     sessionData: state.sessionState.sessionData,
     isMainMenuOpened: state.themeConfigsState.isMainMenuOpened,
-    isNavbarMenuOpened: state.themeConfigsState.isNavbarMenuOpened
+    isNavbarMenuOpened: state.themeConfigsState.isNavbarMenuOpened,
+    isSessionExpiryModalOpened: state.themeConfigsState.isSessionExpiryModalOpened
   }), [])
 
-  const { loading, authUser, loginStep, sessionData, isMainMenuOpened, isNavbarMenuOpened } = useMappedState(mapState);
+  const { loading, authUser, loginStep, sessionData, isMainMenuOpened, isNavbarMenuOpened, isSessionExpiryModalOpened } = useMappedState(mapState);  
 
   if (loading && authUser) return <Loader />
 
@@ -63,6 +65,7 @@ function App() {
         </Switch>
         <Footer />
         {loginStep === loginSteps.FINISHED && <div className="backdrop"></div>}
+        {authUser && <SessionExpiryModal show={isSessionExpiryModalOpened} />}
     </Router>
   );
 }

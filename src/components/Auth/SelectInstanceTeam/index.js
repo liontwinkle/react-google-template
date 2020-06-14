@@ -20,32 +20,61 @@ function SelectInstanceTeam(props) {
     const [idTeam, setIdTeam] = useState(props.sessionData ? props.sessionData.id_team : false);
     const dispatch = useDispatch();
 
-    const changeInstanceHandler = (event) => {
-        setIdInstance(event.target.value);
-        setIdEvent(event.target.options[event.target.selectedIndex].getAttribute('idevent') ? event.target.options[event.target.selectedIndex].getAttribute('idevent') : false);
+    const changeInstanceHandler = async (event) => {
+        let id_instance = event.target.value;
+        let id_event = event.target.options[event.target.selectedIndex].getAttribute('idevent') ? event.target.options[event.target.selectedIndex].getAttribute('idevent') : false;
         setIdTeam(false);
-        // set sessionData data
-        dispatch({
-            type: actions.SET_SESSION_DATA,
-            sessionData: {
-                id_instance: event.target.value,
-                id_team: false,
-                id_event: event.target.options[event.target.selectedIndex].getAttribute('idevent')
-            }
-        })
+
+        // check session
+        try {
+            await axios.get(process.env.REACT_APP_API_URL + '/auth/verifyToken');
+            
+            // functionality start
+            setIdInstance(id_instance);
+            setIdEvent(id_event);
+            // set sessionData data
+            dispatch({
+                type: actions.SET_SESSION_DATA,
+                sessionData: {
+                    id_instance: id_instance,
+                    id_team: false,
+                    id_event: id_event
+                }
+            })
+            // end of functionality
+        }
+        catch {
+            // open session expiry modal
+            dispatch({ type: actions.SET_SESSION_EXPIRY_MODAL_STATE, isSessionExpiryModalOpened: true });
+        }
+        // end of check session
     }
 
-    const changeTeamHandler = (event) => {
-        setIdTeam(event.target.value);
-        // set sessionData data
-        dispatch({
-            type: actions.SET_SESSION_DATA,
-            sessionData: {
-                id_instance: idInstance,
-                id_team: event.target.value,
-                id_event: idEvent
-            }
-        })
+    const changeTeamHandler = async (event) => {
+        let id_team = event.target.value;
+
+        // check session
+        try {
+            await axios.get(process.env.REACT_APP_API_URL + '/auth/verifyToken');
+            
+            // functionality start
+            setIdTeam(id_team);
+            // set sessionData data
+            dispatch({
+                type: actions.SET_SESSION_DATA,
+                sessionData: {
+                    id_instance: idInstance,
+                    id_team: id_team,
+                    id_event: idEvent
+                }
+            })
+            // end of functionality
+        }
+        catch {
+            // open session expiry modal
+            dispatch({ type: actions.SET_SESSION_EXPIRY_MODAL_STATE, isSessionExpiryModalOpened: true });
+        }
+        // end of check session
     }
 
     const submit = async (formData) => {
@@ -104,7 +133,9 @@ function SelectInstanceTeam(props) {
         catch (e) {
             // if unauthorized
             if (e.response.status === 401) {
-                // shold be shown logout information modal
+                // open session expiry modal
+                dispatch({ type: actions.SET_SESSION_EXPIRY_MODAL_STATE, isSessionExpiryModalOpened: true });
+                setLoading(false);
                 return;
             }
             console.log("Unexpected error: SelectInstanceTeam:submit", e);

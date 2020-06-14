@@ -40,7 +40,6 @@ function NavbarRight(props) {
 	return (
 		<>
 			<div className="navbar-right">
-				<a href="https://ineedhelpers.com/staff-upload/commandpost/dashforge.html">Docs</a>
 				<Dropdown className="dropdown-message">
 					<Dropdown.Toggle as={CustomToggle}>
 						<MessageSquare />

@@ -2,8 +2,11 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Form, Spinner } from 'react-bootstrap';
 import { AlertCircle } from 'react-feather';
+import { useDispatch } from 'redux-react-hook';
+import * as actions from '../../../constants/action_types';
 
 function Teams(props) {
+    const dispatch = useDispatch();
     const [teams, setTeams] = useState([]);
     const [loading, setLoading] = useState(false);
 
@@ -15,13 +18,16 @@ function Teams(props) {
                 // set teams data
                 setTeams(data.teams);
                 // set default value
+                console.log('props.idTeam', props.idTeam);
                 props.setValue("id_team", props.idTeam || "");
                 setLoading(false);
             }
             catch (e) {
                 // if unauthorized
                 if (e.response.status === 401) {
-                    // redirect to SIGNIN route
+                    // open session expiry modal
+                    dispatch({ type: actions.SET_SESSION_EXPIRY_MODAL_STATE, isSessionExpiryModalOpened: true });
+                    setLoading(false);
                     return;
                 }
                 console.log("Unexpected error: SelectTeam:getTeamsHandler", e);

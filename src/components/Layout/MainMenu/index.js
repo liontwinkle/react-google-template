@@ -4,40 +4,61 @@ import { Tooltip, OverlayTrigger } from 'react-bootstrap';
 import axios from 'axios';
 import useOutsideAlerter from '../../OutsideAlerter';
 import Scrollbar from 'perfect-scrollbar-react';
+import { useDispatch } from 'redux-react-hook';
+import * as actions from '../../../constants/action_types';
 
 function MainMenu(props) {
+	const dispatch = useDispatch();
 	const wrapperRef = useRef(null);
 	useOutsideAlerter(wrapperRef);
 
 	const [apps, setApps] = useState([]);
-    const [loading, setLoading] = useState(false);
 	const [activeItem, setActiveItem] = useState(0);
 
-	const clickMenuItemHandler = (index, e) => {
+	const clickMenuItemHandler = async (index, e) => {
 		e.preventDefault();
-		setActiveItem(index);
+		// check session
+		try {
+	        const { data } = await axios.get(process.env.REACT_APP_API_URL + '/auth/verifyToken');
+	        
+	        if (data) {
+	            setActiveItem(index);
+	            dispatch({
+	                type: actions.SET_AUTH_USER,
+	                authUser: data
+	            })
+	        }
+	        else {
+	            // open session expiry modal
+	            dispatch({ type: actions.SET_SESSION_EXPIRY_MODAL_STATE, isSessionExpiryModalOpened: true });
+	        }
+	    }
+	    catch {
+	        // open session expiry modal
+	        dispatch({ type: actions.SET_SESSION_EXPIRY_MODAL_STATE, isSessionExpiryModalOpened: true });
+	    }
+	    // end of check session
 	}
 
     useEffect(() => {
         const getAppsHandler = async (userId, eventId) => {
-            setLoading(true);
             try {
                 const { data } = await axios.get(process.env.REACT_APP_API_URL + '/apps/' + eventId);
                 // set apps data
                 setApps(data.apps);
-                setLoading(false);
             }
             catch (e) {
                 // if unauthorized
                 if (e.response.status === 401) {
-                    // shold be shown logout information modal
+                    // open session expiry modal
+                    dispatch({ type: actions.SET_SESSION_EXPIRY_MODAL_STATE, isSessionExpiryModalOpened: true });
                     return;
                 }
                 console.log("Unexpected error: MainMenu:getAppsHandler", e);
             }
         }
         getAppsHandler(props.userId, props.eventId);
-    }, [props.userId, props.eventId])
+    }, [props.userId, props.eventId, dispatch])
 
 	return (
 		<>

@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Form, Spinner } from 'react-bootstrap';
+import { useDispatch } from 'redux-react-hook';
+import * as actions from '../../../constants/action_types';
 
 function Instances(props) {
+    const dispatch = useDispatch();
     const [instances, setInstances] = useState([]);
     const [loading, setLoading] = useState(false);
 
@@ -20,7 +23,9 @@ function Instances(props) {
             catch (e) {
                 // if unauthorized
                 if (e.response.status === 401) {
-                    // shold be shown logout information modal
+                    // open session expiry modal
+                    dispatch({ type: actions.SET_SESSION_EXPIRY_MODAL_STATE, isSessionExpiryModalOpened: true });
+                    setLoading(false);
                     return;
                 }
                 console.log("Unexpected error: Instances:getInstancesHandler", e);

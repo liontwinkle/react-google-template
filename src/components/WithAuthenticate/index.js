@@ -20,6 +20,8 @@ async function authenticate(dispatch) {
             dispatch({ type: actions.SET_AUTH_USER, authUser: null });
             dispatch({ type: actions.SET_LOGIN_STEP, loginStep: false });
             dispatch({ type: actions.SET_SESSION_DATA, sessionData: null });
+            // close session expiry modal
+            dispatch({ type: actions.SET_SESSION_EXPIRY_MODAL_STATE, isSessionExpiryModalOpened: false });
         }
     }
     catch {
@@ -27,6 +29,8 @@ async function authenticate(dispatch) {
         dispatch({ type: actions.SET_AUTH_USER, authUser: null });
         dispatch({ type: actions.SET_LOGIN_STEP, loginStep: false });
         dispatch({ type: actions.SET_SESSION_DATA, sessionData: null });
+        // close session expiry modal
+        dispatch({ type: actions.SET_SESSION_EXPIRY_MODAL_STATE, isSessionExpiryModalOpened: false });
     }
 }
 
