@@ -6,6 +6,7 @@ import NavbarMenu from './NavbarMenu';
 import NavbarRight from './NavbarRight';
 import { Menu, ArrowLeft } from 'react-feather';
 import classNames from 'classnames';
+
 import { SET_MAIN_MENU_STATE, SET_NAVBAR_MENU_STATE } from '../../../../constants/action_types';
 
 function AuthHeader(props) {

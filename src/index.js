@@ -1,15 +1,20 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
+import { Provider } from 'react-redux';
+import { ConnectedRouter } from "connected-react-router";
 import App from './components/App';
 import * as serviceWorker from './serviceWorker';
-import { StoreContext } from 'redux-react-hook';
-import store from './store';
+import store, {history} from './redux/store';
+
+import './index.css';
+
 
 ReactDOM.render(
-  <StoreContext.Provider value={store}>
-    <App />
-  </StoreContext.Provider>,
+  <Provider store={store}>
+    <ConnectedRouter history={history}>
+      <App />
+    </ConnectedRouter>
+  </Provider>,
   document.getElementById('root')
 );
 

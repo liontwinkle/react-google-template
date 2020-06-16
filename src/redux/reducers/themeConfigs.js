@@ -1,4 +1,4 @@
-import { SET_MAIN_MENU_STATE, SET_NAVBAR_MENU_STATE, SET_SESSION_EXPIRY_MODAL_STATE } from '../constants/action_types';
+import types from '../actionTypes';
 
 const INITIAL_STATE = {
 	isMainMenuOpened: localStorage.getItem('isMainMenuOpened') ? true : false,
@@ -6,9 +6,9 @@ const INITIAL_STATE = {
 	isSessionExpiryModalOpened: localStorage.getItem('isSessionExpiryModalOpened') ? true : false
 };
 
-function themeConfigsReducer(state = INITIAL_STATE, action) {
+export default(state = INITIAL_STATE, action) => {
 	switch (action.type) {
-		case SET_MAIN_MENU_STATE: {
+		case types.SET_MAIN_MENU_STATE: {
 			if (action.isMainMenuOpened) {
 				localStorage.setItem('isMainMenuOpened', true);
 				if (!document.body.classList.contains('mail-sidebar-show')) {
@@ -26,7 +26,7 @@ function themeConfigsReducer(state = INITIAL_STATE, action) {
 				isSessionExpiryModalOpened: localStorage.getItem('isSessionExpiryModalOpened') ? true : false
 			};
 		}
-		case SET_NAVBAR_MENU_STATE: {
+		case types.SET_NAVBAR_MENU_STATE: {
 			if (action.isNavbarMenuOpened) {
 				localStorage.setItem('isNavbarMenuOpened', true);
 				if (!document.body.classList.contains('navbar-nav-show')) {
@@ -44,7 +44,7 @@ function themeConfigsReducer(state = INITIAL_STATE, action) {
 				isSessionExpiryModalOpened: localStorage.getItem('isSessionExpiryModalOpened') ? true : false
 			};
 		}
-		case SET_SESSION_EXPIRY_MODAL_STATE: {
+		case types.SET_SESSION_EXPIRY_MODAL_STATE: {
 			if (action.isSessionExpiryModalOpened) {
 				localStorage.setItem('isSessionExpiryModalOpened', true);
 			} else {
@@ -59,5 +59,3 @@ function themeConfigsReducer(state = INITIAL_STATE, action) {
 		default: return state;
 	}
 }
-
-export default themeConfigsReducer;

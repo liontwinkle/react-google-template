@@ -1,51 +1,84 @@
 import React from 'react';
-import axios from 'axios';
-import { useDispatch } from 'redux-react-hook';
-import { withRouter } from 'react-router-dom';
-import * as actions from '../../constants/action_types';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import PropTypes from 'prop-types';
+
 import { LogOut } from 'react-feather';
 import { Dropdown } from 'react-bootstrap';
 
-function Signout(props) {
-    const dispatch = useDispatch();
+import {
+    signOut,
+    setAuthUser,
+    setLoginStep,
+    setSessionData,
+    setSessionExpiryModalState,
+} from '../../../redux/action';
 
+function Signout({
+    setAuthUser,
+    signOut,
+    setLoginStep,
+    setSessionData,
+    setSessionExpiryModalState,
+    isDropdownItem,
+}) {
     const signoutHandler = async (e) => {
         e.preventDefault();
         try {
-            await axios.get(process.env.REACT_APP_API_URL + '/auth/signout');
+            await signOut();
             // unset authUser data
-            dispatch({ type: actions.SET_AUTH_USER, authUser: null });
+            setAuthUser(null);
             // unset loginStep data
-            dispatch({ type: actions.SET_LOGIN_STEP, loginStep: false });
+            setLoginStep(false);
             // unset sessionData data
-            dispatch({ type: actions.SET_SESSION_DATA, sessionData: null });
+            setSessionData(null);
             // will redirect to required route related with sessions unset
             // close session expiry modal
-            dispatch({ type: actions.SET_SESSION_EXPIRY_MODAL_STATE, isSessionExpiryModalOpened: false });
+            setSessionExpiryModalState(false);
         }
         catch (e) {
             // if unauthorized
             if (e.response.status === 401) {
                 // unset authUser data
-                dispatch({ type: actions.SET_AUTH_USER, authUser: null });
+                setAuthUser(null);
                 // unset loginStep data
-                dispatch({ type: actions.SET_LOGIN_STEP, loginStep: false });
+                setLoginStep(false);
                 // unset sessionData data
-                dispatch({ type: actions.SET_SESSION_DATA, sessionData: null });
+                setSessionData(null);
                 // will redirect to required route related with sessions unset
                 // close session expiry modal
-                dispatch({ type: actions.SET_SESSION_EXPIRY_MODAL_STATE, isSessionExpiryModalOpened: false });
+                setSessionExpiryModalState(false);
                 return;
             }
             console.log("Unexpected error: Signout:signoutHandler", e);
         }
     }
 
-    if (props.isDropdownItem) {
+    if (isDropdownItem) {
         return <Dropdown.Item onClick={signoutHandler}><LogOut /> Sign Out</Dropdown.Item>
     }
 
     return <a href="." onClick={signoutHandler}>Sign Out</a>
 }
 
-export default withRouter(Signout);
+Signout.propTypes = {
+    setAuthUser: PropTypes.func.isRequired,
+    signOut: PropTypes.func.isRequired,
+    setLoginStep: PropTypes.func.isRequired,
+    setSessionData: PropTypes.func.isRequired,
+    setSessionExpiryModalState: PropTypes.func.isRequired,
+    isDropdownItem: PropTypes.bool.isRequired,
+};
+
+const mapDispatchToProps = (dispatch) => bindActionCreators({
+    setAuthUser,
+    signOut,
+    setLoginStep,
+    setSessionData,
+    setSessionExpiryModalState
+}, dispatch);
+
+export default connect(
+    null,
+    mapDispatchToProps,
+)(Signout);

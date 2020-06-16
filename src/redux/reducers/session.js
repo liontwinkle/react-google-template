@@ -1,4 +1,4 @@
-import { SET_AUTH_USER, SET_LOGIN_STEP, SET_SESSION_DATA } from '../constants/action_types';
+import types from '../actionTypes';
 
 const INITIAL_STATE = {
 	authUser: localStorage.getItem('authUser') ? JSON.parse(localStorage.getItem('authUser')) : null,
@@ -7,9 +7,9 @@ const INITIAL_STATE = {
 	loading: true
 };
 
-function sessionReducer(state = INITIAL_STATE, action) {
+export default (state = INITIAL_STATE, action) => {
 	switch (action.type) {
-		case SET_AUTH_USER: {
+		case types.SET_AUTH_USER: {
 			if (action.authUser) {
 				localStorage.setItem('authUser', JSON.stringify(action.authUser));
 			} else {
@@ -22,7 +22,7 @@ function sessionReducer(state = INITIAL_STATE, action) {
 				loading: false 
 			};
 		}
-		case SET_LOGIN_STEP: {
+		case types.SET_LOGIN_STEP: {
 			if (action.loginStep) {
 				localStorage.setItem('loginStep', action.loginStep);
 			} else {
@@ -35,7 +35,7 @@ function sessionReducer(state = INITIAL_STATE, action) {
 				loading: false
 			};
 		}
-		case SET_SESSION_DATA: {
+		case types.SET_SESSION_DATA: {
 			if (action.sessionData) {
 				localStorage.setItem('sessionData', JSON.stringify(action.sessionData));
 			} else {
@@ -51,5 +51,3 @@ function sessionReducer(state = INITIAL_STATE, action) {
 		default: return state;
 	}
 }
-
-export default sessionReducer;

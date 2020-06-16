@@ -1,26 +1,29 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'redux-react-hook';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import PropTypes from 'prop-types';
+
 import { withRouter } from 'react-router-dom';
 import { Container, Form, Button, Spinner } from 'react-bootstrap';
 import { useForm } from "react-hook-form";
-import * as actions from '../../../constants/action_types';
 import Signout from '../Signout';
+
+import { setLoginStep } from '../../../redux/action';
+
 import '../Auth.css';
 
-function CreateNewInstance() {
+function CreateNewInstance({
+  setLoginStep,
+}) {
   const { handleSubmit } = useForm();
   const [loading, setLoading] = useState(false);
-  const dispatch = useDispatch();
 
   const submit = async (formData) => {
     setLoading(true);
     setTimeout(() => {
       setLoading(false);
       // set loginStep data, will redirect to required route automatically
-      dispatch({
-          type: actions.SET_LOGIN_STEP,
-          loginStep: false
-      })
+      setLoginStep(false);
     }, 2000);
   }
 
@@ -53,4 +56,15 @@ function CreateNewInstance() {
 	)
 }
 
-export default withRouter(CreateNewInstance);
+CreateNewInstance.propTypes = {
+  setLoginStep:  PropTypes.func.isRequired,
+}
+
+const mapDispatchToProps = (dispatch) => bindActionCreators({
+  setLoginStep,
+}, dispatch);
+
+export default connect(
+    null,
+    mapDispatchToProps,
+)(withRouter(CreateNewInstance));
