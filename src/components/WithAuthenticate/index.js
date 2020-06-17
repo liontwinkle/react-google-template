@@ -1,44 +1,84 @@
 import { useEffect } from 'react';
-import { useDispatch } from 'redux-react-hook';
-import axios from 'axios';
-import * as actions from '../../constants/action_types';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import PropTypes from 'prop-types';
 
-async function authenticate(dispatch) {
+import axios from 'axios';
+
+import { setSessionExpiryModalState } from '../../redux/action/themeConfigs';
+import { setAuthUser, setLoginStep, setSessionData, verifyToken } from '../../redux/action/session';
+
+async function authenticate(
+    setAuthUser,
+    setLoginStep,
+    setSessionData,
+    verifyToken,
+    setSessionExpiryModalState
+) {
     axios.defaults.withCredentials = true;
 
     try {
-        const { data } = await axios.get(process.env.REACT_APP_API_URL + '/auth/verifyToken');
-        
+        const { data } = await verifyToken();
+
         if (data) {
-            dispatch({
-                type: actions.SET_AUTH_USER,
-                authUser: data
-            })
+            setAuthUser(data);
         }
         else {
             // reset all sessions
-            dispatch({ type: actions.SET_AUTH_USER, authUser: null });
-            dispatch({ type: actions.SET_LOGIN_STEP, loginStep: false });
-            dispatch({ type: actions.SET_SESSION_DATA, sessionData: null });
-            // close session expiry modal
-            dispatch({ type: actions.SET_SESSION_EXPIRY_MODAL_STATE, isSessionExpiryModalOpened: false });
+            setAuthUser(null);
+            setLoginStep(null);
+            setSessionData(null);
+            setSessionExpiryModalState(false);
         }
     }
     catch {
         // reset all sessions
-        dispatch({ type: actions.SET_AUTH_USER, authUser: null });
-        dispatch({ type: actions.SET_LOGIN_STEP, loginStep: false });
-        dispatch({ type: actions.SET_SESSION_DATA, sessionData: null });
-        // close session expiry modal
-        dispatch({ type: actions.SET_SESSION_EXPIRY_MODAL_STATE, isSessionExpiryModalOpened: false });
+        setAuthUser(null);
+        setLoginStep(false);
+        setSessionData(null);
+        setSessionExpiryModalState(false);
     }
 }
 
-function useWithAuthenticate() {
-    const dispatch = useDispatch();
+function useWithAuthenticate({
+    setAuthUser,
+    setLoginStep,
+    setSessionData,
+    verifyToken,
+    setSessionExpiryModalState
+}) {
     useEffect(() => {
-        authenticate(dispatch);
-    }, [dispatch])
+        authenticate(
+            setAuthUser,
+            setLoginStep,
+            setSessionData,
+            verifyToken,
+            setSessionExpiryModalState
+        );
+    }, [setAuthUser,
+        setLoginStep,
+        setSessionData,
+        verifyToken,
+        setSessionExpiryModalState])
 }
 
-export default useWithAuthenticate;
+useWithAuthenticate.propTypes = {
+    setAuthUser: PropTypes.func.isRequired,
+    setLoginStep: PropTypes.func.isRequired,
+    setSessionData: PropTypes.func.isRequired,
+    verifyToken: PropTypes.func.isRequired,
+    setSessionExpiryModalState: PropTypes.func.isRequired,
+}
+
+const mapDispatchToProps = (dispatch) => bindActionCreators({
+    setAuthUser,
+    setLoginStep,
+    setSessionData,
+    verifyToken,
+    setSessionExpiryModalState
+}, dispatch);
+
+export default connect(
+    null,
+    mapDispatchToProps,
+)(useWithAuthenticate);

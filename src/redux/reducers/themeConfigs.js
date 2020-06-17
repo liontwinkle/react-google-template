@@ -1,4 +1,4 @@
-import types from '../actionTypes';
+import types from '../actionType';
 
 const INITIAL_STATE = {
 	isMainMenuOpened: localStorage.getItem('isMainMenuOpened') ? true : false,

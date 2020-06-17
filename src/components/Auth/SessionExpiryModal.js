@@ -1,30 +1,40 @@
 import React from 'react';
-import { useDispatch } from 'redux-react-hook';
-import * as actions from '../../constants/action_types';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import PropTypes from 'prop-types';
+
 import { Modal, Button } from 'react-bootstrap';
 
-function SessionExpiryModal(props) {
-    const dispatch = useDispatch();
+import { setSessionExpiryModalState } from '../../redux/action/themeConfigs';
+import { setAuthUser, setLoginStep, setSessionData } from '../../redux/action/session';
+
+function SessionExpiryModal({
+    setAuthUser,
+    setLoginStep,
+    setSessionData,
+    setSessionExpiryModalState,
+    show,
+}) {
 
     const signInHandler = (e) => {
         // unset authUser data
-        dispatch({ type: actions.SET_AUTH_USER, authUser: null });
+        setAuthUser(null);
         // unset loginStep data
-        dispatch({ type: actions.SET_LOGIN_STEP, loginStep: false });
+        setLoginStep(false);
         // unset sessionData data
-        dispatch({ type: actions.SET_SESSION_DATA, sessionData: null });
+        setSessionData(null);
         // will redirect to required route related with sessions unset
         // close session expiry modal
-        dispatch({ type: actions.SET_SESSION_EXPIRY_MODAL_STATE, isSessionExpiryModalOpened: false });
+        setSessionExpiryModalState(false);
     }
 
     const onHideHandler = (e) => {
         // close session expiry modal
-        dispatch({ type: actions.SET_SESSION_EXPIRY_MODAL_STATE, isSessionExpiryModalOpened: false });
+        setSessionExpiryModalState(false);
     }
 
     return (
-        <Modal show={props.show} onHide={onHideHandler} aria-labelledby="session-expiry-modal-title" centered >
+        <Modal show={show} onHide={onHideHandler} aria-labelledby="session-expiry-modal-title" centered >
             <Modal.Header closeButton>
                 <Modal.Title id="session-expiry-modal-title">
                     Please Sign In again
@@ -42,5 +52,22 @@ function SessionExpiryModal(props) {
         </Modal>
     );
 }
+SessionExpiryModal.propTypes = {
+    show: PropTypes.bool.isRequired,
+    setAuthUser: PropTypes.func.isRequired,
+    setLoginStep: PropTypes.func.isRequired,
+    setSessionData: PropTypes.func.isRequired,
+    setSessionExpiryModalState: PropTypes.func.isRequired,
+}
 
-export default SessionExpiryModal;
+const mapDispatchToProps = (dispatch) => bindActionCreators({
+	setAuthUser,
+    setLoginStep,
+    setSessionData,
+    setSessionExpiryModalState,
+}, dispatch);
+
+export default connect(
+	null,
+	mapDispatchToProps,
+)(SessionExpiryModal);

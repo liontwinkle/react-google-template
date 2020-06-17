@@ -8,7 +8,7 @@ import { Container, Form, Button, Spinner } from 'react-bootstrap';
 import { useForm } from "react-hook-form";
 import Signout from '../Signout';
 
-import { setLoginStep } from '../../../redux/action';
+import { setLoginStep } from '../../../redux/action/session';
 
 import '../Auth.css';
 

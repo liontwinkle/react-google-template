@@ -9,7 +9,7 @@ import { useForm } from "react-hook-form";
 import * as loginSteps from '../../../constants/login_steps';
 import Signout from '../Signout';
 
-import { setLoginStep } from '../../../redux/action';
+import { setLoginStep } from '../../../redux/action/session';
 
 import '../Auth.css';
 

@@ -1,5 +1,8 @@
 import React from 'react';
-import { useDispatch } from 'redux-react-hook';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import PropTypes from 'prop-types';
+
 import { Link } from 'react-router-dom';
 import * as routes from '../../../../constants/routes';
 import NavbarMenu from './NavbarMenu';
@@ -7,54 +10,72 @@ import NavbarRight from './NavbarRight';
 import { Menu, ArrowLeft } from 'react-feather';
 import classNames from 'classnames';
 
-import { SET_MAIN_MENU_STATE, SET_NAVBAR_MENU_STATE } from '../../../../constants/action_types';
+import { setMainMenuState, setNavbarMenuState } from '../../../../redux/action/themeConfigs';
 
-function AuthHeader(props) {
-	const dispatch = useDispatch();
+function AuthHeader({
+	setNavbarMenuState,
+	setMainMenuState,
+	isMainMenuOpened,
+	authUser,
+}) {
 
 	const navbarMenuOpenHandler = (e) => {
 		e.preventDefault();
-		dispatch({
-            type: SET_NAVBAR_MENU_STATE,
-            isNavbarMenuOpened: true
-        })
+		setNavbarMenuState(true);
 	}
 
 	const mainMenuOpenHandler = (e) => {
 		e.preventDefault();
-		dispatch({
-            type: SET_MAIN_MENU_STATE,
-            isMainMenuOpened: true
-        })
+		setMainMenuState(true);
 	}
 
 	let navbarMenuOpenClasses = classNames({
 		'burger-menu': true,
 		'd-md-flex': true,
 		'd-lg-none': true,
-		'd-none': !props.isMainMenuOpened
-    });
+		'd-none': !isMainMenuOpened
+	});
 
-    let mainMenuOpenClasses = classNames({
-    	'burger-menu': true,
+	let mainMenuOpenClasses = classNames({
+		'burger-menu': true,
 		'd-md-none': true,
-		'd-none': props.isMainMenuOpened
-    });
+		'd-none': isMainMenuOpened
+	});
 
 	return (
 		<>
 			<header className="navbar navbar-header navbar-header-fixed">
 				<a href="." id="navbarMenuOpen" onClick={navbarMenuOpenHandler} className={navbarMenuOpenClasses} isnavbarmenuopenclicked="true" ><Menu isnavbarmenuopenclicked="true" /></a>
 				<a href="." id="mainMenuOpen" onClick={mainMenuOpenHandler} className={mainMenuOpenClasses}><ArrowLeft /></a>
-				
-	            <div className="navbar-brand">
-	            	<Link className="df-logo" to={routes.HOME}>Command<span>Post</span></Link>
-	            </div>
-	            <NavbarMenu/>
-	            <NavbarRight authUser={props.authUser} />
-            </header>
+
+				<div className="navbar-brand">
+					<Link className="df-logo" to={routes.HOME}>Command<span>Post</span></Link>
+				</div>
+				<NavbarMenu />
+				<NavbarRight authUser={authUser} />
+			</header>
 		</>
 	)
 }
 
-export default AuthHeader;
+AuthHeader.propTypes = {
+	setMainMenuState: PropTypes.func.isRequired,
+	setNavbarMenuState: PropTypes.func.isRequired,
+	isMainMenuOpened: PropTypes.bool.isRequired,
+	authUser: PropTypes.string.isRequired,
+}
+
+const mapDispatchToProps = (dispatch) => bindActionCreators({
+	setMainMenuState,
+	setNavbarMenuState
+}, dispatch);
+
+const mapStateToProps = (store) => ({
+	isMainMenuOpened: store.themeConfigData.isMainMenuOpened,
+	authUser: store.sessionData.authUser
+});
+
+export default connect(
+	mapStateToProps,
+	mapDispatchToProps,
+)(AuthHeader);

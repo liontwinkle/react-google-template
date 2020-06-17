@@ -17,8 +17,9 @@ import {
     verifyToken,
     updateUser,
     getTrainingCount,
-    setSessionExpiryModalState,
-} from '../../../redux/action';
+} from '../../../redux/action/session';
+
+import { setSessionExpiryModalState } from '../../../redux/action/themeConfigs';
 
 import '../Auth.css';
 

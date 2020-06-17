@@ -13,8 +13,9 @@ import {
   setAuthUser,
   setLoginStep,
   setSessionData,
-  setSessionExpiryModalState,
-} from '../../../redux/action';
+} from '../../../redux/action/session';
+
+import { setSessionExpiryModalState } from '../../../redux/action/themeConfigs';
 
 
 import '../Auth.css';

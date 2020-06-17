@@ -6,10 +6,8 @@ import PropTypes from 'prop-types';
 import { Form, Spinner } from 'react-bootstrap';
 import { AlertCircle } from 'react-feather';
 
-import {
-    getTeams,
-    setSessionExpiryModalState,
-} from '../../../redux/action';
+import { getTeams } from '../../../redux/action/session';
+import { setSessionExpiryModalState } from '../../../redux/action/themeConfigs';
 
 function Teams({
     getTeams,

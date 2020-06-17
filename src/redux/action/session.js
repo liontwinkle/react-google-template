@@ -1,5 +1,5 @@
-import sessionService from 'services/serssion.service';
-import types from '../actionTypes';
+import sessionService from '../../services/session.service';
+import types from '../actionType';
 
 export const signInAuth = (requestBody) => (dispatch) => {
 
@@ -69,12 +69,5 @@ export const setSessionData = (data) => (dispatch) => {
     dispatch({
         type: types.SET_SESSION_DATA,
         sessionData: data
-    })
-}
-
-export const setSessionExpiryModalState = (expiryState) => (dispatch) => {
-    dispatch({
-        type: types.SET_SESSION_EXPIRY_MODAL_STATE,
-        isSessionExpiryModalOpened: expiryState
     })
 }

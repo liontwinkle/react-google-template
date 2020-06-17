@@ -1,4 +1,4 @@
-import types from '../actionTypes';
+import types from '../actionType';
 
 const INITIAL_STATE = {
 	authUser: localStorage.getItem('authUser') ? JSON.parse(localStorage.getItem('authUser')) : null,

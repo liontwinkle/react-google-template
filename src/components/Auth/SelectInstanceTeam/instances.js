@@ -5,10 +5,8 @@ import PropTypes from 'prop-types';
 import { Form, Spinner } from 'react-bootstrap';
 
 
-import {
-    getInstances,
-    setSessionExpiryModalState,
-} from '../../../redux/action';
+import { getInstances } from '../../../redux/action/session';
+import { setSessionExpiryModalState } from '../../../redux/action/themeConfigs';
 
 function Instances({
     userId,

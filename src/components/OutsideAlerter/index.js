@@ -1,12 +1,16 @@
 import { useEffect } from 'react';
-import { useDispatch } from 'redux-react-hook';
-import { SET_MAIN_MENU_STATE, SET_NAVBAR_MENU_STATE } from '../../constants/action_types';
-
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import PropTypes from 'prop-types';
+import { setMainMenuState, setNavbarMenuState } from '../../redux/action/themeConfigs';
 /**
  * Hook that detects clicks outside of the passed ref
  */
-function useOutsideAlerter(ref) {
-	const dispatch = useDispatch();
+function useOutsideAlerter({
+	ref,
+	setMainMenuState,
+	setNavbarMenuState
+}) {
 	useEffect(() => {
 		/**
 		* if clicked on outside of element
@@ -15,22 +19,13 @@ function useOutsideAlerter(ref) {
 			if (ref.current && !ref.current.contains(event.target)) {
 				// clicked outside of NavbarMenu component
 				if (ref.current.id === "navbarMenu" && document.body.classList.contains('navbar-nav-show')) {
-					dispatch({
-		                type: SET_NAVBAR_MENU_STATE,
-		                isNavbarMenuOpened: false
-		            })
-		            dispatch({
-		                type: SET_MAIN_MENU_STATE,
-		                isMainMenuOpened: false
-		            })
+					setNavbarMenuState(false);
+					setMainMenuState(false);
 				}
 
 				// clicked outside of MainMenu component
 				if (ref.current.id === "mainMenu" && document.body.classList.contains('mail-sidebar-show') && !event.target.getAttribute('isnavbarmenuopenclicked') && !event.target.parentNode.getAttribute('isnavbarmenuopenclicked')) {
-					dispatch({
-		                type: SET_MAIN_MENU_STATE,
-		                isMainMenuOpened: false
-		            })
+					setMainMenuState(false);
 				}
 			}
 		}
@@ -41,7 +36,22 @@ function useOutsideAlerter(ref) {
 			// Unbind the event listener on clean up
 			document.removeEventListener("mousedown", handleClickOutside);
 		};
-	}, [ref, dispatch]);
+	}, [ref, setMainMenuState, setNavbarMenuState]);
 }
 
-export default useOutsideAlerter;
+
+useOutsideAlerter.propTypes = {
+	setMainMenuState: PropTypes.func.isRequired,
+	setNavbarMenuState: PropTypes.func.isRequired,
+	ref: PropTypes.object.isRequired,
+}
+
+const mapDispatchToProps = (dispatch) => bindActionCreators({
+	setMainMenuState,
+	setNavbarMenuState
+}, dispatch);
+
+export default connect(
+	null,
+	mapDispatchToProps,
+)(useOutsideAlerter);

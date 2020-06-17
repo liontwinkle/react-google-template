@@ -1,18 +1,17 @@
-import React, { useState, useCallback, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import PropTypes from 'prop-types';
+
 import axios from 'axios';
-import { useDispatch, useMappedState } from 'redux-react-hook';
-import * as actions from '../../constants/action_types';
 import Loader from '../Loader';
 
-function Dashboard() {
+import { setSessionExpiryModalState } from '../../redux/action/themeConfigs';
 
-	const mapState = useCallback((state) => ({
-		sessionData: state.sessionState.sessionData
-	}), [])
-
-	const { sessionData } = useMappedState(mapState);
-
-	const dispatch = useDispatch();
+function Dashboard({
+    setSessionExpiryModalState,
+    sessionData
+}) {
     const [info, setInfo] = useState(false);
     const [loading, setLoading] = useState(false);
 
@@ -29,7 +28,7 @@ function Dashboard() {
                 // if unauthorized
                 if (e.response.status === 401) {
                     // open session expiry modal
-                    dispatch({ type: actions.SET_SESSION_EXPIRY_MODAL_STATE, isSessionExpiryModalOpened: true });
+                    setSessionExpiryModalState(true);
                     setLoading(false);
                     return;
                 }
@@ -57,4 +56,20 @@ function Dashboard() {
 	)
 }
 
-export default Dashboard;
+Dashboard.propTypes = {
+	setSessionExpiryModalState: PropTypes.func.isRequired,
+	sessionData: PropTypes.object.isRequired,
+}
+
+const mapDispatchToProps = (dispatch) => bindActionCreators({
+	setSessionExpiryModalState,
+}, dispatch);
+
+const mapStateToProps = (store) => ({
+	sessionData: store.sessionData.sessionData,
+});
+
+export default connect(
+	mapStateToProps,
+	mapDispatchToProps,
+)(Dashboard);
