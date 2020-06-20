@@ -23,7 +23,7 @@ function CreateNewInstance({
     setTimeout(() => {
       setLoading(false);
       // set loginStep data, will redirect to required route automatically
-      setLoginStep(false);
+      setLoginStep(null);
     }, 2000);
   }
 

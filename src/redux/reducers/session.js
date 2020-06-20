@@ -2,7 +2,7 @@ import types from '../actionType';
 
 const INITIAL_STATE = {
 	authUser: localStorage.getItem('authUser') ? JSON.parse(localStorage.getItem('authUser')) : null,
-	loginStep: localStorage.getItem('loginStep') || false,
+	loginStep: localStorage.getItem('loginStep') || null,
 	sessionData: localStorage.getItem('sessionData') ? JSON.parse(localStorage.getItem('sessionData')) : null,
 	instances: [],
 	teams: [],
@@ -20,7 +20,7 @@ export default (state = INITIAL_STATE, action) => {
 			return {
 				...state,
 				authUser: action.authUser,
-				loginStep: localStorage.getItem('loginStep') || false,
+				loginStep: localStorage.getItem('loginStep') || null,
 				sessionData: localStorage.getItem('sessionData') ? JSON.parse(localStorage.getItem('sessionData')) : null,
 				loading: false 
 			};
@@ -48,7 +48,7 @@ export default (state = INITIAL_STATE, action) => {
 			return {
 				...state,
 				authUser: localStorage.getItem('authUser') ? JSON.parse(localStorage.getItem('authUser')) : null,
-				loginStep: localStorage.getItem('loginStep') || false,
+				loginStep: localStorage.getItem('loginStep') || null,
 				sessionData: action.sessionData,
 				loading: false
 			};
@@ -73,7 +73,7 @@ export default (state = INITIAL_STATE, action) => {
 			return {
 				...state,
 				authUser: null,
-				loginStep: false,
+				loginStep: null,
 				sessionData: null,
 			}
 		}

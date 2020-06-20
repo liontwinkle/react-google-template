@@ -91,7 +91,7 @@ function App({
 App.propTypes = {
   loading: PropTypes.bool.isRequired,
   authUser: PropTypes.object,
-  loginStep: PropTypes.bool.isRequired,
+  loginStep: PropTypes.string,
   sessionData: PropTypes.object,
   isMainMenuOpened: PropTypes.bool.isRequired,
   isNavbarMenuOpened: PropTypes.bool.isRequired,
@@ -104,6 +104,7 @@ App.propTypes = {
 App.defaultProps = {
   authUser: null,
   sessionData: null,
+  loginStep: null,
 }
 
 const mapStateToProps = (store) => ({

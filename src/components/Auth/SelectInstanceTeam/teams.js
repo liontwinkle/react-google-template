@@ -57,7 +57,7 @@ function Teams({
                 <Form.Label>Team <span className="tx-danger">*</span></Form.Label>
                 <Form.Control disabled={loading} onChange={changeTeamHandler} name="id_team" as="select" ref={register({ required: true })} className={(errors.id_team ? "parsley-error" : (formState.isSubmitted && formState.touched.id_team ? "parsley-success" : "")) + " custom-select " + (!idTeam ? " invalid" : "")}>
                     <option value="" disabled hidden className="invalid">Select Team</option>
-                    {teams.map((team, index) => <option key={team.id} value={team.id}>{team.team_title}</option>)}
+                    {teams.map((team) => <option key={team.id} value={team.id}>{team.team_title}</option>)}
                 </Form.Control>
                 {errors.id_team && errors.id_team.type === "required" && (<div className="parsley-errors-list filled mt-1">This value is required.</div>)}
                 <div className="alert alert-light d-flex align-items-center mt-2" role="alert">

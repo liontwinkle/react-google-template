@@ -26,8 +26,17 @@ export const verifyToken = () => (dispatch) => {
         })
 }
 
-export const updateUser = (userData) => {
-    return sessionService.updateUser(userData);
+export const updateUser = (userData) => (dispatch, getState) => {
+    const currentAuthUser = getState().sessionData.authUser;
+    return sessionService.UpdateUser(userData)
+        .then(() => {
+            console.log('userData: ', userData); // fixme
+            console.log('currentAuth: ', currentAuthUser); // fixme
+            dispatch({
+                type: types.SET_AUTH_USER,
+                authUser: Object.assign(currentAuthUser, userData)
+            });
+        })
 }
 
 export const getTrainingCount = (loginSteps) => (dispatch) => {
@@ -65,12 +74,12 @@ export const setInstances = (data) => (dispatch) => {
 
 export const getTeams = (idInstance, idEvent) => (dispatch) => {
     return sessionService.GetTeams(idInstance, idEvent)
-    .then(({data}) => {
-        dispatch({
-            type: types.SET_TEAMS,
-            teams: data.teams
+        .then(({ data }) => {
+            dispatch({
+                type: types.SET_TEAMS,
+                teams: data.teams
+            })
         })
-    })
 }
 
 export const setAuthUser = (value) => (dispatch) => {

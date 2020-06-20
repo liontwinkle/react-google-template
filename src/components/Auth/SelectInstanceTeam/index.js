@@ -47,49 +47,43 @@ function SelectInstanceTeam({
         setIdTeam(null);
 
         // check session
-        try {
-            await verifyToken();
-
-            // functionality start
-            setIdInstance(id_instance);
-            setIdEvent(id_event);
-            // set sessionData data
-            setSessionData({
-                id_instance: id_instance,
-                id_team: null,
-                id_event: id_event
-            });
-            // end of functionality
-        }
-        catch {
-            // open session expiry modal
-            setSessionExpiryModalState(true);
-        }
-        // end of check session
+        verifyToken()
+            .then(() => {
+                // functionality start
+                setIdInstance(id_instance);
+                setIdEvent(id_event);
+                // set sessionData data
+                setSessionData({
+                    id_instance: id_instance,
+                    id_team: null,
+                    id_event: id_event
+                });
+                // end of functionality
+            })
+            .catch(() => {
+                // open session expiry modal
+                setSessionExpiryModalState(true);
+            })
     }
 
     const changeTeamHandler = async (event) => {
         let id_team = event.target.value;
 
         // check session
-        try {
-            await verifyToken();
-
-            // functionality start
-            setIdTeam(id_team);
-            // set sessionData data
-            sessionData({
-                id_instance: idInstance,
-                id_team: id_team,
-                id_event: idEvent
-            })
-            // end of functionality
-        }
-        catch {
-            // open session expiry modal
-            setSessionExpiryModalState(true);
-        }
-        // end of check session
+        verifyToken()
+            .then(() => {
+                // functionality start
+                setIdTeam(id_team);
+                // set sessionData data
+                setSessionData({
+                    id_instance: idInstance,
+                    id_team: id_team,
+                    id_event: idEvent
+                })
+            }).catch((error) => {
+                console.log('error: ', error); // fixme
+                setSessionExpiryModalState(true);
+            });
     }
 
     const submit = async (formData) => {
@@ -103,42 +97,28 @@ function SelectInstanceTeam({
             return;
         }
 
-        try {
-            const requestBody = {
-                role: formData.role,
-                company: formData.company,
-                contact_number: formData.contact_number
-            };
+        const requestBody = {
+            role: formData.role,
+            company: formData.company,
+            contact_number: formData.contact_number
+        };
 
-            // update user data
-            await updateUser(requestBody);
-
-            // set authUser updated data
-            let updatedAuthUser = Object.assign(authUser, requestBody);
-            setAuthUser(updatedAuthUser);
-
-            // set sessionData data
-            setSessionData({
-                id_instance: idInstance,
-                id_team: idTeam,
-                id_event: idEvent
+        // update user data
+        updateUser(requestBody)
+            .then(() => {
+                setSessionData({
+                    id_instance: idInstance,
+                    id_team: idTeam,
+                    id_event: idEvent
+                })
+                getTrainingCount(loginSteps);
+                setLoading(false);
             })
-
-            // checking user training completed or not for setting up loginStep and redirection to that step
-            getTrainingCount(loginSteps);
-            setLoading(false);
-        }
-        catch (e) {
-            // if unauthorized
-            if (e.response.status === 401) {
-                // open session expiry modal
+            .catch((e) => {
                 setSessionExpiryModalState(true);
                 setLoading(false);
                 return;
-            }
-            console.log("Unexpected error: SelectInstanceTeam:submit", e);
-        }
-
+            })
     }
 
     return (
@@ -151,7 +131,15 @@ function SelectInstanceTeam({
                                 <h3 className="tx-color-01 mg-b-5">Select Instance</h3>
                                 <p className="tx-color-03 tx-16 mg-b-40">Select your Instance and team to continue.</p>
                                 <Form onSubmit={handleSubmit(submit)}>
-                                    <Instances userId={authUser.id} idInstance={idInstance} changeInstanceHandler={changeInstanceHandler} register={register} formState={formState} errors={errors} setValue={setValue} />
+                                    <Instances
+                                        userId={authUser.id}
+                                        idInstance={idInstance}
+                                        changeInstanceHandler={changeInstanceHandler}
+                                        register={register}
+                                        formState={formState}
+                                        errors={errors}
+                                        setValue={setValue}
+                                    />
                                     {
                                         idInstance && idInstance !== "new_instance" && idEvent ? (
                                             <>
@@ -162,7 +150,9 @@ function SelectInstanceTeam({
                                                     changeTeamHandler={changeTeamHandler}
                                                     register={register}
                                                     formState={formState}
-                                                    errors={errors} setValue={setValue} />
+                                                    errors={errors}
+                                                    setValue={setValue}
+                                                />
 
                                                 <Form.Group controlId="role">
                                                     <Form.Label>Role <span className="tx-danger">*</span></Form.Label>

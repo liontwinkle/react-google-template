@@ -6,12 +6,11 @@ import PropTypes from 'prop-types';
 import axios from 'axios';
 
 import { setSessionExpiryModalState } from '../../redux/action/themeConfigs';
-import { setAuthUser, setLoginStep, setSessionData, verifyToken } from '../../redux/action/session';
+import { resetSessionData, verifyToken } from '../../redux/action/session';
 
 async function authenticate(
     setAuthUser,
-    setLoginStep,
-    setSessionData,
+    resetSessionData,
     verifyToken,
     setSessionExpiryModalState
 ) {
@@ -25,55 +24,41 @@ async function authenticate(
         }
         else {
             // reset all sessions
-            setAuthUser(null);
-            setLoginStep(null);
-            setSessionData(null);
+            resetSessionData();
             setSessionExpiryModalState(false);
         }
     }
     catch {
         // reset all sessions
-        setAuthUser(null);
-        setLoginStep(false);
-        setSessionData(null);
+        resetSessionData();
         setSessionExpiryModalState(false);
     }
 }
 
 function useWithAuthenticate({
-    setAuthUser,
-    setLoginStep,
-    setSessionData,
+    resetSessionData,
     verifyToken,
     setSessionExpiryModalState
 }) {
     useEffect(() => {
         authenticate(
-            setAuthUser,
-            setLoginStep,
-            setSessionData,
+            resetSessionData,
             verifyToken,
             setSessionExpiryModalState
         );
-    }, [setAuthUser,
-        setLoginStep,
-        setSessionData,
+    }, [resetSessionData,
         verifyToken,
         setSessionExpiryModalState])
 }
 
 useWithAuthenticate.propTypes = {
-    setAuthUser: PropTypes.func.isRequired,
-    setLoginStep: PropTypes.func.isRequired,
-    setSessionData: PropTypes.func.isRequired,
+    resetSessionData: PropTypes.func.isRequired,
     verifyToken: PropTypes.func.isRequired,
     setSessionExpiryModalState: PropTypes.func.isRequired,
 }
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({
-    setAuthUser,
-    setLoginStep,
-    setSessionData,
+    resetSessionData,
     verifyToken,
     setSessionExpiryModalState
 }, dispatch);
