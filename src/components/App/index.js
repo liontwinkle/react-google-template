@@ -25,7 +25,7 @@ import Home from '../Home';
 import NotFound from '../NotFound';
 
 import { setSessionExpiryModalState } from '../../redux/action/themeConfigs';
-import { setAuthUser, setLoginStep, setSessionData, verifyToken } from '../../redux/action/session';
+import { verifyToken, resetSessionData } from '../../redux/action/session';
 
 import * as routes from '../../constants/routes';
 import * as loginSteps from '../../constants/login_steps';
@@ -41,43 +41,19 @@ function App({
   isMainMenuOpened,
   isNavbarMenuOpened,
   isSessionExpiryModalOpened,
-  setAuthUser,
-  setLoginStep,
-  setSessionData,
+  resetSessionData,
   verifyToken,
   setSessionExpiryModalState
 }) {
   const authenticate = useCallback(async () => {
     axios.defaults.withCredentials = true;
-
-    try {
-      const { data } = await verifyToken();
-
-      if (data) {
-        setAuthUser(data);
-      }
-      else {
+    verifyToken()
+      .catch(() => {
         // reset all sessions
-        setAuthUser(null);
-        setLoginStep(null);
-        setSessionData(null);
+        resetSessionData();
         setSessionExpiryModalState(false);
-      }
-    }
-    catch {
-      // reset all sessions
-      setAuthUser(null);
-      setLoginStep(false);
-      setSessionData(null);
-      setSessionExpiryModalState(false);
-    }
-  }, [
-    setAuthUser,
-    setLoginStep,
-    setSessionData,
-    verifyToken,
-    setSessionExpiryModalState
-  ])
+      })
+  }, [resetSessionData, verifyToken, setSessionExpiryModalState])
 
   useEffect(() => {
     authenticate();
@@ -117,17 +93,20 @@ function App({
 
 App.propTypes = {
   loading: PropTypes.bool.isRequired,
-  authUser: PropTypes.string.isRequired,
+  authUser: PropTypes.object,
   loginStep: PropTypes.bool.isRequired,
-  sessionData: PropTypes.object.isRequired,
+  sessionData: PropTypes.object,
   isMainMenuOpened: PropTypes.bool.isRequired,
   isNavbarMenuOpened: PropTypes.bool.isRequired,
   isSessionExpiryModalOpened: PropTypes.bool.isRequired,
-  setAuthUser: PropTypes.func.isRequired,
-  setLoginStep: PropTypes.func.isRequired,
-  setSessionData: PropTypes.func.isRequired,
   verifyToken: PropTypes.func.isRequired,
+  resetSessionData: PropTypes.func.isRequired,
   setSessionExpiryModalState: PropTypes.func.isRequired,
+}
+
+App.defaultProps = {
+  authUser: null,
+  sessionData: null,
 }
 
 const mapStateToProps = (store) => ({
@@ -141,10 +120,8 @@ const mapStateToProps = (store) => ({
 });
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({
-  setAuthUser,
-  setLoginStep,
-  setSessionData,
   verifyToken,
+  resetSessionData,
   setSessionExpiryModalState
 }, dispatch);
 

@@ -10,9 +10,8 @@ import * as routes from '../../../constants/routes';
 
 import {
   signInAuth,
-  setAuthUser,
-  setLoginStep,
-  setSessionData,
+  getInstances,
+  resetSessionData,
 } from '../../../redux/action/session';
 
 import { setSessionExpiryModalState } from '../../../redux/action/themeConfigs';
@@ -21,10 +20,9 @@ import { setSessionExpiryModalState } from '../../../redux/action/themeConfigs';
 import '../Auth.css';
 
 function Signin({
-  setAuthUser,
   signInAuth,
-  setLoginStep,
-  setSessionData,
+  getInstances,
+  resetSessionData,
   setSessionExpiryModalState,
 }) {
   const { register, handleSubmit, formState, errors, setError } = useForm();
@@ -32,12 +30,7 @@ function Signin({
 
   const submit = async (formData) => {
 
-    // unset authUser data
-    setAuthUser(null);
-    // unset loginStep data
-    setLoginStep(false);
-    // unset sessionData data
-    setSessionData(null);
+    resetSessionData();
     // will redirect to required route related with sessions unset
     // close session expiry modal
     setSessionExpiryModalState(false);
@@ -51,6 +44,7 @@ function Signin({
       };
 
       signInAuth(requestBody);
+      getInstances();
 
       setLoading(false);
     }
@@ -110,18 +104,16 @@ function Signin({
 }
 
 Signin.propTypes = {
-  setAuthUser: PropTypes.func.isRequired,
   signInAuth: PropTypes.func.isRequired,
-  setLoginStep: PropTypes.func.isRequired,
-  setSessionData: PropTypes.func.isRequired,
+  getInstances: PropTypes.func.isRequired,
+  resetSessionData: PropTypes.func.isRequired,
   setSessionExpiryModalState: PropTypes.func.isRequired,
 };
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({
-  setAuthUser,
   signInAuth,
-  setLoginStep,
-  setSessionData,
+  getInstances,
+  resetSessionData,
   setSessionExpiryModalState
 }, dispatch);
 

@@ -4,6 +4,7 @@ const INITIAL_STATE = {
 	authUser: localStorage.getItem('authUser') ? JSON.parse(localStorage.getItem('authUser')) : null,
 	loginStep: localStorage.getItem('loginStep') || false,
 	sessionData: localStorage.getItem('sessionData') ? JSON.parse(localStorage.getItem('sessionData')) : null,
+	instances: [],
 	loading: true
 };
 
@@ -48,6 +49,22 @@ export default (state = INITIAL_STATE, action) => {
 				loading: false
 			};
 		}
+		case types.SET_INSTANCES: {
+			const { instances } = action;
+			return {
+				...state,
+				instances,
+			}
+		}
+
+		case types.RESET_SESSION_DATA: {
+			return {
+				authUser: null,
+				loginStep: false,
+				sessionData: null,
+			}
+		}
+
 		default: return state;
 	}
 }

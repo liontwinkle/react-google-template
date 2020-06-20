@@ -1,4 +1,5 @@
 import { createStore, applyMiddleware, compose } from 'redux';
+import logger from 'redux-logger';
 import { routerMiddleware } from 'react-router-redux';
 import * as History from 'history';
 import thunk from 'redux-thunk';
@@ -10,7 +11,7 @@ const enhancers = [];
 
 export const history = History.createBrowserHistory();
 
-const middleware = [thunk, routerMiddleware(history)];
+const middleware = [thunk, logger, routerMiddleware(history)];
 
 if (process.env.NODE_ENV === 'development') {
     const { devToolsExtension } = window;

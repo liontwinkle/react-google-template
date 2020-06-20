@@ -5,12 +5,11 @@ import PropTypes from 'prop-types';
 import { Form, Spinner } from 'react-bootstrap';
 
 
-import { getInstances } from '../../../redux/action/session';
 import { setSessionExpiryModalState } from '../../../redux/action/themeConfigs';
 
 function Instances({
     userId,
-    getInstances,
+    instances,
     setValue,
     idInstance,
     changeInstanceHandler,
@@ -19,17 +18,12 @@ function Instances({
     formState,
     setSessionExpiryModalState,
 }) {
-    const [instances, setInstances] = useState([]);
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         const getInstancesHandler = async (userId) => {
             setLoading(true);
             try {
-                const { data } = getInstances();
-                // set instances data
-                setInstances(data.instances);
-                // set default value
                 setValue("id_instance", idInstance || "");
                 setLoading(false);
             }
@@ -65,7 +59,6 @@ function Instances({
 }
 Instances.propTypes = {
     setSessionExpiryModalState: PropTypes.func.isRequired,
-    getInstances: PropTypes.func.isRequired,
     setValue: PropTypes.func.isRequired,
     register: PropTypes.func.isRequired,
     changeInstanceHandler: PropTypes.func.isRequired,
@@ -73,15 +66,17 @@ Instances.propTypes = {
     formState: PropTypes.object.isRequired,
     sessionData: PropTypes.object,
     authUser: PropTypes.object,
-    idInstance: PropTypes.string,
-    userId: PropTypes.string,
+    idInstance: PropTypes.bool,
+    userId: PropTypes.number,
+    instances: PropTypes.array,
 }
 
 Instances.defaultProps = {
     sessionData: {},
-    authUser: {},
-    idInstance: "",
-    userId: ""
+    authUser: null,
+    idInstance: false,
+    instances: [],
+    userId: null,
 }
 
 const mapStateToProps = (store) => ({
@@ -89,7 +84,6 @@ const mapStateToProps = (store) => ({
 });
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({
-    getInstances,
     setSessionExpiryModalState,
 }, dispatch);
 

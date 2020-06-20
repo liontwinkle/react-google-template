@@ -15,12 +15,15 @@ export const signInAuth = (requestBody) => (dispatch) => {
         });
 };
 
-export const signOut = () => {
-    return sessionService.SignOut()
-};
-
-export const verifyToken = () => {
+export const verifyToken = () => (dispatch) => {
     return sessionService.VerifyToken()
+        .then((data) => {
+            dispatch({
+                type: types.SET_AUTH_USER,
+                authUser: data
+            })
+            return data;
+        })
 }
 
 export const updateUser = (userData) => {
@@ -43,8 +46,21 @@ export const getTrainingCount = (loginSteps) => (dispatch) => {
         });
 }
 
-export const getInstances = () => {
+export const getInstances = () => (dispatch) => {
     return sessionService.GetInstancecs()
+        .then((data) => {
+            dispatch({
+                type: types.SET_INSTANCES,
+                authUser: data.instances,
+            })
+        })
+}
+
+export const setInstances = (data) => (dispatch) => {
+    dispatch({
+        type: types.SET_AUTH_USER,
+        authUser: data
+    })
 }
 
 export const getTeams = (idInstance, idEvent) => {
@@ -69,5 +85,26 @@ export const setSessionData = (data) => (dispatch) => {
     dispatch({
         type: types.SET_SESSION_DATA,
         sessionData: data
+    })
+}
+
+export const signOut = () => (dispatch) => {
+    return sessionService.SignOut()
+        .then(() => {
+            dispatch({
+                type: types.RESET_SESSION_DATA,
+            })
+        })
+        .catch((error) => {
+            dispatch({
+                type: types.RESET_SESSION_DATA,
+            })
+            throw error;
+        })
+};
+
+export const resetSessionData = () => (dispatch) => {
+    dispatch({
+        type: types.RESET_SESSION_DATA,
     })
 }
