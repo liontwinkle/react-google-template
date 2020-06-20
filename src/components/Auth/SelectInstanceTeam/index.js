@@ -37,14 +37,14 @@ function SelectInstanceTeam({
 
     const { register, handleSubmit, formState, errors, setValue } = useForm();
     const [loading, setLoading] = useState(false);
-    const [idInstance, setIdInstance] = useState(sessionData ? sessionData.id_instance : false);
-    const [idEvent, setIdEvent] = useState(sessionData ? sessionData.id_event : false);
-    const [idTeam, setIdTeam] = useState(sessionData ? sessionData.id_team : false);
+    const [idInstance, setIdInstance] = useState(sessionData ? sessionData.id_instance : null);
+    const [idEvent, setIdEvent] = useState(sessionData ? sessionData.id_event : null);
+    const [idTeam, setIdTeam] = useState(sessionData ? sessionData.id_team : null);
 
     const changeInstanceHandler = async (event) => {
         let id_instance = event.target.value;
         let id_event = event.target.options[event.target.selectedIndex].getAttribute('idevent') ? event.target.options[event.target.selectedIndex].getAttribute('idevent') : false;
-        setIdTeam(false);
+        setIdTeam(null);
 
         // check session
         try {
@@ -56,7 +56,7 @@ function SelectInstanceTeam({
             // set sessionData data
             setSessionData({
                 id_instance: id_instance,
-                id_team: false,
+                id_team: null,
                 id_event: id_event
             });
             // end of functionality
@@ -155,7 +155,15 @@ function SelectInstanceTeam({
                                     {
                                         idInstance && idInstance !== "new_instance" && idEvent ? (
                                             <>
-                                                <Teams idInstance={idInstance} idEvent={idEvent} idTeam={idTeam} changeTeamHandler={changeTeamHandler} register={register} formState={formState} errors={errors} setValue={setValue} />
+                                                <Teams
+                                                    idInstance={idInstance}
+                                                    idEvent={idEvent}
+                                                    idTeam={idTeam}
+                                                    changeTeamHandler={changeTeamHandler}
+                                                    register={register}
+                                                    formState={formState}
+                                                    errors={errors} setValue={setValue} />
+
                                                 <Form.Group controlId="role">
                                                     <Form.Label>Role <span className="tx-danger">*</span></Form.Label>
                                                     <Form.Control defaultValue={authUser.role} name="role" type="text" placeholder="Enter your role" ref={register({ required: true })} className={errors.role ? "parsley-error" : (formState.isSubmitted && formState.touched.role && "parsley-success")} />

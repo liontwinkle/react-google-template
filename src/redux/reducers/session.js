@@ -5,7 +5,8 @@ const INITIAL_STATE = {
 	loginStep: localStorage.getItem('loginStep') || false,
 	sessionData: localStorage.getItem('sessionData') ? JSON.parse(localStorage.getItem('sessionData')) : null,
 	instances: [],
-	loading: true
+	teams: [],
+	loading: false
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -17,6 +18,7 @@ export default (state = INITIAL_STATE, action) => {
 				localStorage.removeItem('authUser');
 			}
 			return {
+				...state,
 				authUser: action.authUser,
 				loginStep: localStorage.getItem('loginStep') || false,
 				sessionData: localStorage.getItem('sessionData') ? JSON.parse(localStorage.getItem('sessionData')) : null,
@@ -30,6 +32,7 @@ export default (state = INITIAL_STATE, action) => {
 				localStorage.removeItem('loginStep');
 			}
 			return {
+				...state,
 				authUser: localStorage.getItem('authUser') ? JSON.parse(localStorage.getItem('authUser')) : null,
 				loginStep: action.loginStep,
 				sessionData: localStorage.getItem('sessionData') ? JSON.parse(localStorage.getItem('sessionData')) : null,
@@ -43,6 +46,7 @@ export default (state = INITIAL_STATE, action) => {
 				localStorage.removeItem('sessionData');
 			}
 			return {
+				...state,
 				authUser: localStorage.getItem('authUser') ? JSON.parse(localStorage.getItem('authUser')) : null,
 				loginStep: localStorage.getItem('loginStep') || false,
 				sessionData: action.sessionData,
@@ -57,8 +61,17 @@ export default (state = INITIAL_STATE, action) => {
 			}
 		}
 
+		case types.SET_TEAMS: {
+			const{ teams } = action;
+			return {
+				...state,
+				teams,
+			}
+		}
+
 		case types.RESET_SESSION_DATA: {
 			return {
+				...state,
 				authUser: null,
 				loginStep: false,
 				sessionData: null,

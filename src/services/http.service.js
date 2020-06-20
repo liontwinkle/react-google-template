@@ -5,6 +5,7 @@ import storage from './storage.service';
 const USER_TOKEN_KEY = 'access_token';
 const baseURL = process.env.REACT_APP_API;
 
+axios.defaults.withCredentials = true;
 const http = axios.create({ baseURL: `${baseURL}/` });
 
 function get(url, headers = {}, params = {}) {

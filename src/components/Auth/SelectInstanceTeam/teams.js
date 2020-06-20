@@ -11,6 +11,7 @@ import { setSessionExpiryModalState } from '../../../redux/action/themeConfigs';
 
 function Teams({
     getTeams,
+    teams,
     setValue,
     errors,
     formState,
@@ -21,18 +22,16 @@ function Teams({
     setSessionExpiryModalState,
     changeTeamHandler,
 }) {
-    const [teams, setTeams] = useState([]);
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         const getTeamsHandler = async (idInstance, idEvent) => {
             setLoading(true);
             try {
-                const { data } = await getTeams(idInstance, idEvent);
-                // set teams data
-                setTeams(data.teams);
+                if (teams.length === 0) {
+                    getTeams(idInstance, idEvent)
+                }
                 // set default value
-                console.log('props.idTeam', idTeam);
                 setValue("id_team", idTeam || "");
                 setLoading(false);
             }
@@ -72,6 +71,7 @@ function Teams({
 Teams.propTypes = {
     setSessionExpiryModalState: PropTypes.func.isRequired,
     getTeams: PropTypes.func.isRequired,
+    teams: PropTypes.array.isRequired,
     setValue: PropTypes.func.isRequired,
     register: PropTypes.func.isRequired,
     errors: PropTypes.object.isRequired,
@@ -88,14 +88,16 @@ Teams.propTypes = {
 Teams.defaultProps = {
     sessionData: {},
     authUser: {},
-    idInstance: "",
-    idEvent: "",
-    idTeam: "",
-    userId: ""
+    idInstance: null,
+    idEvent: null,
+    idTeam: null,
+    userId: "",
+    teams: [],
 }
 
 const mapStateToProps = (store) => ({
     sessionData: store.sessionData.sessionData,
+    teams: store.sessionData.teams,
 });
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({

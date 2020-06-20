@@ -3,8 +3,6 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 
-import axios from 'axios';
-
 import {
   BrowserRouter as Router,
   Route,
@@ -46,7 +44,6 @@ function App({
   setSessionExpiryModalState
 }) {
   const authenticate = useCallback(async () => {
-    axios.defaults.withCredentials = true;
     verifyToken()
       .catch(() => {
         // reset all sessions

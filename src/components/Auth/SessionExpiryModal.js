@@ -6,23 +6,18 @@ import PropTypes from 'prop-types';
 import { Modal, Button } from 'react-bootstrap';
 
 import { setSessionExpiryModalState } from '../../redux/action/themeConfigs';
-import { setAuthUser, setLoginStep, setSessionData } from '../../redux/action/session';
+import { resetSessionData } from '../../redux/action/session';
 
 function SessionExpiryModal({
-    setAuthUser,
-    setLoginStep,
-    setSessionData,
+    resetSessionData,
     setSessionExpiryModalState,
     show,
 }) {
 
     const signInHandler = (e) => {
-        // unset authUser data
-        setAuthUser(null);
-        // unset loginStep data
-        setLoginStep(false);
-        // unset sessionData data
-        setSessionData(null);
+        
+        // reste session data
+        resetSessionData()
         // will redirect to required route related with sessions unset
         // close session expiry modal
         setSessionExpiryModalState(false);
@@ -54,16 +49,12 @@ function SessionExpiryModal({
 }
 SessionExpiryModal.propTypes = {
     show: PropTypes.bool.isRequired,
-    setAuthUser: PropTypes.func.isRequired,
-    setLoginStep: PropTypes.func.isRequired,
-    setSessionData: PropTypes.func.isRequired,
+    resetSessionData: PropTypes.func.isRequired,
     setSessionExpiryModalState: PropTypes.func.isRequired,
 }
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({
-	setAuthUser,
-    setLoginStep,
-    setSessionData,
+	resetSessionData,
     setSessionExpiryModalState,
 }, dispatch);
 

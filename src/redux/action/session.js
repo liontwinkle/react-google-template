@@ -51,7 +51,7 @@ export const getInstances = () => (dispatch) => {
         .then((data) => {
             dispatch({
                 type: types.SET_INSTANCES,
-                authUser: data.instances,
+                instances: data.data.instances,
             })
         })
 }
@@ -63,8 +63,14 @@ export const setInstances = (data) => (dispatch) => {
     })
 }
 
-export const getTeams = (idInstance, idEvent) => {
+export const getTeams = (idInstance, idEvent) => (dispatch) => {
     return sessionService.GetTeams(idInstance, idEvent)
+    .then(({data}) => {
+        dispatch({
+            type: types.SET_TEAMS,
+            teams: data.teams
+        })
+    })
 }
 
 export const setAuthUser = (value) => (dispatch) => {
