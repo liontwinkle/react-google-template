@@ -145,10 +145,14 @@ function MainMenu({
 MainMenu.propTypes = {
 	setAuthUser: PropTypes.func.isRequired,
 	setSessionExpiryModalState: PropTypes.func.isRequired,
-	userId: PropTypes.string.isRequired,
+	userId: PropTypes.number,
 	eventId: PropTypes.string.isRequired,
 	setMainMenuState: PropTypes.func.isRequired,
 	setNavbarMenuState: PropTypes.func.isRequired,
+}
+
+MainMenu.defaultProps = {
+	userId: null,
 }
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({

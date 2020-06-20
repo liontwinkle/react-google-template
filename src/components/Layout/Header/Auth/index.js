@@ -62,7 +62,7 @@ AuthHeader.propTypes = {
 	setMainMenuState: PropTypes.func.isRequired,
 	setNavbarMenuState: PropTypes.func.isRequired,
 	isMainMenuOpened: PropTypes.bool.isRequired,
-	authUser: PropTypes.string.isRequired,
+	authUser: PropTypes.object.isRequired,
 }
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({

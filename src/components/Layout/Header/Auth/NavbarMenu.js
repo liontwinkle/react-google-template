@@ -64,7 +64,6 @@ function NavbarMenu({
 				</div>
 				<div id="sessionTimeoutMessage" className="m-auto d-none d-sm-block"></div>
 			</div>
-			<useOutsideAlerter ref={wrapperRef} />
 		</>
 	)
 }
