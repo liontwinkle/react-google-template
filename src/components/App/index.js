@@ -21,6 +21,8 @@ import CompleteTraining from '../Auth/CompleteTraining';
 import SessionExpiryModal from '../Auth/SessionExpiryModal';
 import Home from '../Home';
 import NotFound from '../NotFound';
+import { FullStoryAPI } from 'react-fullstory';
+
 
 import { setSessionExpiryModalState } from '../../redux/action/themeConfigs';
 import { verifyToken, resetSessionData } from '../../redux/action/session';
@@ -56,10 +58,17 @@ function App({
     authenticate();
   }, [authenticate]);
 
+  if (authUser) {
+    // Identify method
+    FullStoryAPI('identify', authUser.userId, {
+      userName: authUser.userName,
+      email: authUser.email
+    });
+  }
+
   if (loading && authUser) return <Loader />
 
   if (loading) return false;
-
   return (
     <Router basename={process.env.PUBLIC_URL}>
       <Header authUser={authUser} loginStep={loginStep} isMainMenuOpened={isMainMenuOpened} isNavbarMenuOpened={isNavbarMenuOpened} />

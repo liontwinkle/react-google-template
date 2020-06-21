@@ -29,7 +29,7 @@ function Teams({
             setLoading(true);
             try {
                 if (teams.length === 0) {
-                    getTeams(idInstance, idEvent)
+                    // getTeams(idInstance, idEvent)
                 }
                 // set default value
                 setValue("id_team", idTeam || "");

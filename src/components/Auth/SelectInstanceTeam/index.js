@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
@@ -16,6 +16,7 @@ import {
     setSessionData,
     verifyToken,
     updateUser,
+    getTeams,
     getTrainingCount,
 } from '../../../redux/action/session';
 
@@ -33,6 +34,8 @@ function SelectInstanceTeam({
     setSessionExpiryModalState,
     sessionData,
     authUser,
+    getTeams,
+    teams,
 }) {
 
     const { register, handleSubmit, formState, errors, setValue } = useForm();
@@ -41,6 +44,11 @@ function SelectInstanceTeam({
     const [idEvent, setIdEvent] = useState(sessionData ? sessionData.id_event : null);
     const [idTeam, setIdTeam] = useState(sessionData ? sessionData.id_team : null);
 
+    useEffect(() => {
+        if(teams.length === 0 && idEvent && idInstance) {
+            getTeams(idInstance, idEvent);
+        }
+    }, [teams, idEvent, idInstance, getTeams])
     const changeInstanceHandler = async (event) => {
         let id_instance = event.target.value;
         let id_event = event.target.options[event.target.selectedIndex].getAttribute('idevent') ? event.target.options[event.target.selectedIndex].getAttribute('idevent') : false;
@@ -52,6 +60,7 @@ function SelectInstanceTeam({
                 // functionality start
                 setIdInstance(id_instance);
                 setIdEvent(id_event);
+                getTeams(id_instance, id_event);
                 // set sessionData data
                 setSessionData({
                     id_instance: id_instance,
@@ -200,17 +209,21 @@ SelectInstanceTeam.propTypes = {
     verifyToken: PropTypes.func.isRequired,
     updateUser: PropTypes.func.isRequired,
     getTrainingCount: PropTypes.func.isRequired,
+    getTeams: PropTypes.func.isRequired,
     setSessionExpiryModalState: PropTypes.func.isRequired,
     sessionData: PropTypes.object,
-    authUser: PropTypes.object
+    authUser: PropTypes.object,
+    teams: PropTypes.array
 }
 
 SelectInstanceTeam.defaultProps = {
     sessionData: {},
+    teams: [],
     authUser: {},
 }
 const mapStateToProps = (store) => ({
     sessionData: store.sessionData.sessionData,
+    teams: store.sessionData.teams,
 });
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({
@@ -220,6 +233,7 @@ const mapDispatchToProps = (dispatch) => bindActionCreators({
     verifyToken,
     updateUser,
     getTrainingCount,
+    getTeams,
     setSessionExpiryModalState,
 }, dispatch);
 
