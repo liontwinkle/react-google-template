@@ -70,35 +70,25 @@ function SelectInstanceTeam({
         let id_instance = event.target.value;
         let id_event = event.target.options[event.target.selectedIndex].getAttribute('idevent') ? event.target.options[event.target.selectedIndex].getAttribute('idevent') : false;
         setIdTeam(null);
+        // functionality start
+        setIdInstance(id_instance);
+        setIdEvent(id_event);
+        // set sessionData data
+        setSessionData({
+            id_instance: id_instance,
+            id_team: null,
+            id_event: id_event
+        });
 
-        // check session
-        verifyToken()
-            .then(() => {
-                // functionality start
-                setIdInstance(id_instance);
-                setIdEvent(id_event);
-                // set sessionData data
-                setSessionData({
-                    id_instance: id_instance,
-                    id_team: null,
-                    id_event: id_event
-                });
+        const updateTeams = teams.filter((teamItem) => (
+            parseInt(teamItem.id_event, 10) === 0
+            || parseInt(teamItem.id_event, 10) === parseInt(id_event, 10)
+        )).filter((filterItem) => (
+            parseInt(filterItem.id_instance, 10) === 0
+            || parseInt(filterItem.id_instance, 10) === parseInt(id_instance, 10)
+        ));
 
-                const updateTeams = teams.filter((teamItem) => (
-                    parseInt(teamItem.id_event, 10) === 0
-                    || parseInt(teamItem.id_event, 10) === parseInt(id_event, 10)
-                )).filter((filterItem) => (
-                    parseInt(filterItem.id_instance, 10) === 0
-                    || parseInt(filterItem.id_instance, 10) === parseInt(id_instance, 10)
-                ));
-
-                setSelectTeams(updateTeams);
-                // end of functionality
-            })
-            .catch(() => {
-                // open session expiry modal
-                setSessionExpiryModalState(true);
-            })
+        setSelectTeams(updateTeams);
     }
 
     const changeTeamHandler = async (event) => {
