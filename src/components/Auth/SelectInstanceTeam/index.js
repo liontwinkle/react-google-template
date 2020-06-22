@@ -43,12 +43,29 @@ function SelectInstanceTeam({
     const [idInstance, setIdInstance] = useState(sessionData ? sessionData.id_instance : null);
     const [idEvent, setIdEvent] = useState(sessionData ? sessionData.id_event : null);
     const [idTeam, setIdTeam] = useState(sessionData ? sessionData.id_team : null);
+    const [selectTeams, setSelectTeams] = useState([]);
 
     useEffect(() => {
-        if(teams.length === 0 && idEvent && idInstance) {
-            getTeams(idInstance, idEvent);
+        if (teams.length === 0) {
+            verifyToken()
+                .then(() => {
+                    getTeams();
+                })
+                .catch(() => {
+                    setSessionExpiryModalState(true);
+                })
+        } else if (idInstance & idEvent) {
+            const defaultTeams = teams.filter((teamItem) => (
+                parseInt(teamItem.id_event, 10) === 0
+                || parseInt(teamItem.id_event, 10) === parseInt(idEvent, 10)
+            )).filter((filterItem) => (
+                parseInt(filterItem.id_instance, 10) === 0
+                || parseInt(filterItem.id_instance, 10) === parseInt(idInstance, 10)
+            ));
+            setSelectTeams(defaultTeams);
         }
-    }, [teams, idEvent, idInstance, getTeams])
+    }, [teams, verifyToken, idInstance, idEvent, setSessionExpiryModalState, getTeams])
+
     const changeInstanceHandler = async (event) => {
         let id_instance = event.target.value;
         let id_event = event.target.options[event.target.selectedIndex].getAttribute('idevent') ? event.target.options[event.target.selectedIndex].getAttribute('idevent') : false;
@@ -60,13 +77,22 @@ function SelectInstanceTeam({
                 // functionality start
                 setIdInstance(id_instance);
                 setIdEvent(id_event);
-                getTeams(id_instance, id_event);
                 // set sessionData data
                 setSessionData({
                     id_instance: id_instance,
                     id_team: null,
                     id_event: id_event
                 });
+
+                const updateTeams = teams.filter((teamItem) => (
+                    parseInt(teamItem.id_event, 10) === 0
+                    || parseInt(teamItem.id_event, 10) === parseInt(id_event, 10)
+                )).filter((filterItem) => (
+                    parseInt(filterItem.id_instance, 10) === 0
+                    || parseInt(filterItem.id_instance, 10) === parseInt(id_instance, 10)
+                ));
+
+                setSelectTeams(updateTeams);
                 // end of functionality
             })
             .catch(() => {
@@ -160,6 +186,7 @@ function SelectInstanceTeam({
                                                     register={register}
                                                     formState={formState}
                                                     errors={errors}
+                                                    teams={selectTeams}
                                                     setValue={setValue}
                                                 />
 

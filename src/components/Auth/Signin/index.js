@@ -11,6 +11,7 @@ import * as routes from '../../../constants/routes';
 import {
   signInAuth,
   getInstances,
+  getTeams,
   resetSessionData,
 } from '../../../redux/action/session';
 
@@ -22,6 +23,7 @@ import '../Auth.css';
 function Signin({
   signInAuth,
   getInstances,
+  getTeams,
   resetSessionData,
   setSessionExpiryModalState,
 }) {
@@ -45,6 +47,7 @@ function Signin({
 
       signInAuth(requestBody);
       getInstances();
+      getTeams();
 
       setLoading(false);
     }
@@ -106,6 +109,7 @@ function Signin({
 Signin.propTypes = {
   signInAuth: PropTypes.func.isRequired,
   getInstances: PropTypes.func.isRequired,
+  getTeams: PropTypes.func.isRequired,
   resetSessionData: PropTypes.func.isRequired,
   setSessionExpiryModalState: PropTypes.func.isRequired,
 };
@@ -113,6 +117,7 @@ Signin.propTypes = {
 const mapDispatchToProps = (dispatch) => bindActionCreators({
   signInAuth,
   getInstances,
+  getTeams,
   resetSessionData,
   setSessionExpiryModalState
 }, dispatch);

@@ -30,8 +30,6 @@ export const updateUser = (userData) => (dispatch, getState) => {
     const currentAuthUser = getState().sessionData.authUser;
     return sessionService.UpdateUser(userData)
         .then(() => {
-            console.log('userData: ', userData); // fixme
-            console.log('currentAuth: ', currentAuthUser); // fixme
             dispatch({
                 type: types.SET_AUTH_USER,
                 authUser: Object.assign(currentAuthUser, userData)
@@ -72,8 +70,8 @@ export const setInstances = (data) => (dispatch) => {
     })
 }
 
-export const getTeams = (idInstance, idEvent) => (dispatch) => {
-    return sessionService.GetTeams(idInstance, idEvent)
+export const getTeams = () => (dispatch) => {
+    return sessionService.GetTeams()
         .then(({ data }) => {
             dispatch({
                 type: types.SET_TEAMS,

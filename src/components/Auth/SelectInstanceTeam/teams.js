@@ -6,16 +6,14 @@ import PropTypes from 'prop-types';
 import { Form, Spinner } from 'react-bootstrap';
 import { AlertCircle } from 'react-feather';
 
-import { getTeams } from '../../../redux/action/session';
 import { setSessionExpiryModalState } from '../../../redux/action/themeConfigs';
 
 function Teams({
-    getTeams,
-    teams,
     setValue,
     errors,
     formState,
     idTeam,
+    teams,
     idInstance,
     idEvent,
     register,
@@ -28,9 +26,6 @@ function Teams({
         const getTeamsHandler = async (idInstance, idEvent) => {
             setLoading(true);
             try {
-                if (teams.length === 0) {
-                    // getTeams(idInstance, idEvent)
-                }
                 // set default value
                 setValue("id_team", idTeam || "");
                 setLoading(false);
@@ -70,7 +65,6 @@ function Teams({
 
 Teams.propTypes = {
     setSessionExpiryModalState: PropTypes.func.isRequired,
-    getTeams: PropTypes.func.isRequired,
     teams: PropTypes.array.isRequired,
     setValue: PropTypes.func.isRequired,
     register: PropTypes.func.isRequired,
@@ -97,11 +91,9 @@ Teams.defaultProps = {
 
 const mapStateToProps = (store) => ({
     sessionData: store.sessionData.sessionData,
-    teams: store.sessionData.teams,
 });
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({
-    getTeams,
     setSessionExpiryModalState,
 }, dispatch);
 

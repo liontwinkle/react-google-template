@@ -19,7 +19,7 @@ const GetTrainingCount = () => httpService.get('/user/trainings_count')
 
 const GetInstancecs = () => httpService.get(`${authUrl}/instances`);
 
-const GetTeams = (idInstance, idEvent) => httpService.get(`${authUrl}/teams/${idInstance}/${idEvent}`);
+const GetTeams = () => httpService.get(`${authUrl}/teams`);
 
 export default {
     SignIn,
