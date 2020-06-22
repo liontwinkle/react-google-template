@@ -32,7 +32,7 @@ function MainMenu({
 		e.preventDefault();
 		// check session
 		try {
-			const { data } = await axios.get(process.env.REACT_APP_API_URL + '/auth/verifyToken');
+			const { data } = await axios.get(process.env.REACT_APP_API + '/auth/verifyToken');
 
 			if (data) {
 				setActiveItem(index);
@@ -80,7 +80,7 @@ function MainMenu({
 
 		const getAppsHandler = async (userId, eventId) => {
 			try {
-				const { data } = await axios.get(process.env.REACT_APP_API_URL + '/apps/' + eventId);
+				const { data } = await axios.get(process.env.REACT_APP_API + '/apps/' + eventId);
 				// set apps data
 				setApps(data.apps);
 			}

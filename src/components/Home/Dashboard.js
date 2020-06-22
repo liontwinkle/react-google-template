@@ -19,7 +19,7 @@ function Dashboard({
         const getInfoHandler = async () => {
             setLoading(true);
             try {
-                const { data } = await axios.get(process.env.REACT_APP_API_URL + '/auth/info/' + sessionData.id_instance + '/' + sessionData.id_team + '/' + sessionData.id_event);
+                const { data } = await axios.get(process.env.REACT_APP_API + '/auth/info/' + sessionData.id_instance + '/' + sessionData.id_team + '/' + sessionData.id_event);
                 // set instances data
                 setInfo(data.info);
                 setLoading(false);
