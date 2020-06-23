@@ -7,6 +7,7 @@ import * as serviceWorker from './serviceWorker';
 import store, {history} from './redux/store';
 
 import './index.css';
+import "draft-js/dist/Draft.css";
 
 
 ReactDOM.render(

@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import { LogOut } from 'react-feather';
 import { Dropdown } from 'react-bootstrap';
 
-import { signOut } from '../../redux/action/session';
+import { signOut, resetSessionData } from '../../redux/action/session';
 import { setSessionExpiryModalState } from '../../redux/action/themeConfigs';
 
 function Signout({
@@ -19,9 +19,11 @@ function Signout({
         signOut()
             .then(() => {
                 setSessionExpiryModalState(false);
+                resetSessionData();
             })
             .catch((error) => {
                 setSessionExpiryModalState(false);
+                resetSessionData();
             })
     }
 

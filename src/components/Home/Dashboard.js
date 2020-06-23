@@ -5,12 +5,17 @@ import PropTypes from 'prop-types';
 
 import axios from 'axios';
 import Loader from '../Loader';
+import './style.scss';
 
 import { setSessionExpiryModalState } from '../../redux/action/themeConfigs';
+import { resetSessionData } from '../../redux/action/session';
+
+import TaskBar from '../common/TaskBar';
 
 function Dashboard({
     setSessionExpiryModalState,
-    sessionData
+    sessionData,
+    resetSessionData
 }) {
     const [info, setInfo] = useState(false);
     const [loading, setLoading] = useState(false);
@@ -26,7 +31,7 @@ function Dashboard({
             }
             catch (e) {
                 // if unauthorized
-                if (e.response.status === 401) {
+                if (e.response.status !== 400) {
                     // open session expiry modal
                     setSessionExpiryModalState(true);
                     setLoading(false);
@@ -36,40 +41,46 @@ function Dashboard({
             }
         }
         getInfoHandler();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     if (loading) return <Loader />
 
-	return (
-		<>
-			<div className="mail-group">
-				<div className="alert alert-secondary m-3" role="alert">
-					<strong>Event: </strong> {info.event_title} (ID: {sessionData.id_event} )
-					<br/><strong>Instance: </strong> {info.instance_title} - {info.instance_shortname}  (ID: {sessionData.id_instance})
-					<br/><strong>Team: </strong> {info.team_title} (ID: {sessionData.id_team})
-					<br/><strong>User: </strong> {info.user_first_name} {info.user_last_name} ({info.user_role})
+    return (
+        <>
+            <div className="mail-group">
+                <div className="alert alert-secondary m-3" role="alert">
+                    <strong>Event: </strong> {info.event_title} (ID: {sessionData.id_event} )
+					<br /><strong>Instance: </strong> {info.instance_title} - {info.instance_shortname}  (ID: {sessionData.id_instance})
+					<br /><strong>Team: </strong> {info.team_title} (ID: {sessionData.id_team})
+					<br /><strong>User: </strong> {info.user_first_name} {info.user_last_name} ({info.user_role})
 				</div>
-			</div>
-			<div className="mail-content"></div>
-		</>
-	)
+            </div>
+            <div className="mail-content">
+                <div class="mail-content__footer">
+                    <TaskBar />
+                </div>
+            </div>
+        </>
+    )
 }
 
 Dashboard.propTypes = {
-	setSessionExpiryModalState: PropTypes.func.isRequired,
-	sessionData: PropTypes.object.isRequired,
+    setSessionExpiryModalState: PropTypes.func.isRequired,
+    resetSessionData: PropTypes.func.isRequired,
+    sessionData: PropTypes.object.isRequired,
 }
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({
-	setSessionExpiryModalState,
+    setSessionExpiryModalState,
+    resetSessionData,
 }, dispatch);
 
 const mapStateToProps = (store) => ({
-	sessionData: store.sessionData.sessionData,
+    sessionData: store.sessionData.sessionData,
 });
 
 export default connect(
-	mapStateToProps,
-	mapDispatchToProps,
+    mapStateToProps,
+    mapDispatchToProps,
 )(Dashboard);

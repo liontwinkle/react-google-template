@@ -11,7 +11,6 @@ import Teams from './teams';
 import Signout from '../Signout';
 
 import {
-    setAuthUser,
     setLoginStep,
     setSessionData,
     verifyToken,
@@ -25,7 +24,6 @@ import { setSessionExpiryModalState } from '../../../redux/action/themeConfigs';
 import '../Auth.css';
 
 function SelectInstanceTeam({
-    setAuthUser,
     setLoginStep,
     setSessionData,
     verifyToken,
@@ -106,7 +104,6 @@ function SelectInstanceTeam({
                     id_event: idEvent
                 })
             }).catch((error) => {
-                console.log('error: ', error); // fixme
                 setSessionExpiryModalState(true);
             });
     }
@@ -166,7 +163,7 @@ function SelectInstanceTeam({
                                         setValue={setValue}
                                     />
                                     {
-                                        idInstance && idInstance !== "new_instance" && idEvent ? (
+                                        idInstance && idInstance !== "new_instance" && idEvent && (
                                             <>
                                                 <Teams
                                                     idInstance={idInstance}
@@ -198,7 +195,7 @@ function SelectInstanceTeam({
                                                     {errors.contact_number && errors.contact_number.type === "pattern" && (<div className="parsley-errors-list filled mt-1">This value should be digits.</div>)}
                                                 </Form.Group>
                                             </>
-                                        ) : <></>
+                                        )
                                     }
                                     <Button variant="brand-02" block={true} type="submit">
                                         {loading ? (
@@ -220,7 +217,6 @@ function SelectInstanceTeam({
 }
 
 SelectInstanceTeam.propTypes = {
-    setAuthUser: PropTypes.func.isRequired,
     setLoginStep: PropTypes.func.isRequired,
     setSessionData: PropTypes.func.isRequired,
     verifyToken: PropTypes.func.isRequired,
@@ -244,7 +240,6 @@ const mapStateToProps = (store) => ({
 });
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({
-    setAuthUser,
     setLoginStep,
     setSessionData,
     verifyToken,

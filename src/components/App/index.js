@@ -21,7 +21,7 @@ import CompleteTraining from '../Auth/CompleteTraining';
 import SessionExpiryModal from '../Auth/SessionExpiryModal';
 import Home from '../Home';
 import NotFound from '../NotFound';
-import { FullStoryAPI } from 'react-fullstory';
+import FullStory , { FullStoryAPI } from 'react-fullstory';
 
 
 import { setSessionExpiryModalState } from '../../redux/action/themeConfigs';
@@ -47,10 +47,13 @@ function App({
 }) {
   const authenticate = useCallback(async () => {
     verifyToken()
-      .catch(() => {
+      .catch((e) => {
         // reset all sessions
+        if(e.response.status === 401) {
+          setSessionExpiryModalState(true);
+        } else {
         resetSessionData();
-        setSessionExpiryModalState(false);
+        }
       })
   }, [resetSessionData, verifyToken, setSessionExpiryModalState])
 
@@ -71,6 +74,7 @@ function App({
   if (loading) return false;
   return (
     <Router basename={process.env.PUBLIC_URL}>
+      <FullStory org='org-id' debug='debug-id' host='host-id' namespace='namespace'/>
       <Header authUser={authUser} loginStep={loginStep} isMainMenuOpened={isMainMenuOpened} isNavbarMenuOpened={isNavbarMenuOpened} />
       <Switch>
         <Route exact path={routes.HOME}>

@@ -17,7 +17,7 @@ export const signInAuth = (requestBody) => (dispatch) => {
 
 export const verifyToken = () => (dispatch) => {
     return sessionService.VerifyToken()
-        .then((data) => {
+        .then(({data}) => {
             dispatch({
                 type: types.SET_AUTH_USER,
                 authUser: data
