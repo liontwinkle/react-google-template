@@ -21,7 +21,7 @@ import CompleteTraining from '../Auth/CompleteTraining';
 import SessionExpiryModal from '../Auth/SessionExpiryModal';
 import Home from '../Home';
 import NotFound from '../NotFound';
-import FullStory , { FullStoryAPI } from 'react-fullstory';
+import FullStory, { FullStoryAPI } from 'react-fullstory';
 
 
 import { setSessionExpiryModalState } from '../../redux/action/themeConfigs';
@@ -49,10 +49,10 @@ function App({
     verifyToken()
       .catch((e) => {
         // reset all sessions
-        if(e.response.status === 401) {
+        if (e.response.status === 401) {
           setSessionExpiryModalState(true);
         } else {
-        resetSessionData();
+          resetSessionData();
         }
       })
   }, [resetSessionData, verifyToken, setSessionExpiryModalState])
@@ -74,7 +74,13 @@ function App({
   if (loading) return false;
   return (
     <Router basename={process.env.PUBLIC_URL}>
-      <FullStory org='org-id' debug='debug-id' host='host-id' namespace='namespace'/>
+      <FullStory
+        org='W49VA'
+        script='edge.fullstory.com/s/fs.js'
+        debug={false}
+        host='fullstory.com'
+        namespace='FS'
+      />
       <Header authUser={authUser} loginStep={loginStep} isMainMenuOpened={isMainMenuOpened} isNavbarMenuOpened={isNavbarMenuOpened} />
       <Switch>
         <Route exact path={routes.HOME}>
