@@ -1,0 +1,47 @@
+.incident-multi-panel {
+  text-align: center;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.horizontal-menu {
+  position: relative;
+  justify-content: center;
+  width: 50%;
+}
+
+.menu-wrapper {
+  border: 1px solid;
+}
+
+.menu-item {
+  height: 600px;
+  padding: 0 40px;
+  margin: 5px 10px;
+  user-select: none;
+  cursor: pointer;
+  border: none;
+}
+
+.menu-item-wrapper.active {
+  border: 1px blue solid;
+}
+
+.menu-item.active {
+  border: 1px green solid;
+}
+
+.scroll-menu-arrow {
+  padding: 20px;
+  cursor: pointer;
+  position: absolute;
+  bottom: -50px;
+}
+
+.scroll-menu-arrow:first-child {
+  right: 200px;
+}
+
+.scroll-menu-arrow:last-child {
+  right: 100px;
+}

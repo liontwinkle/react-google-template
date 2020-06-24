@@ -14,19 +14,21 @@ import {
 } from '../../../redux/action/themeConfigs';
 
 import { setAuthUser } from '../../../redux/action/session';
+import { setViewIndex } from '../../../redux/action/dashboard';
 
 function MainMenu({
-	setAuthUser,
-	setSessionExpiryModalState,
 	userId,
 	eventId,
+	viewIndex,
+	setAuthUser,
+	setViewIndex,
 	setMainMenuState,
 	setNavbarMenuState,
+	setSessionExpiryModalState,
 }) {
 	const wrapperRef = useRef(null);
 
 	const [apps, setApps] = useState([]);
-	const [activeItem, setActiveItem] = useState(0);
 
 	const clickMenuItemHandler = async (index, e) => {
 		e.preventDefault();
@@ -35,7 +37,7 @@ function MainMenu({
 			const { data } = await axios.get(process.env.REACT_APP_API + '/auth/verifyToken');
 
 			if (data) {
-				setActiveItem(index);
+				setViewIndex(index);
 				setAuthUser(data);
 			}
 			else {
@@ -117,19 +119,19 @@ function MainMenu({
 					<Scrollbar>
 						<div className="pd-y-15">
 							<nav className="nav nav-sidebar tx-13">
-								{apps.map((app, index) => {
+								{apps.map((app) => {
 									let AppIcon = Icon[app.app_icon];
 									return (
 										<OverlayTrigger
-											key={index}
+											key={app.id_app}
 											placement="right"
 											overlay={
-												<Tooltip id={"tooltip-" + index}>
+												<Tooltip id={"tooltip-" + app.id_app}>
 													{app.application_title}
 												</Tooltip>
 											}
 										>
-											<a href="." onClick={(e) => clickMenuItemHandler(index, e)} className={activeItem === index ? 'nav-link active' : 'nav-link'}><AppIcon /></a>
+											<a href="." onClick={(e) => clickMenuItemHandler(app.id_app, e)} className={viewIndex === app.id_app ? 'nav-link active' : 'nav-link'}><AppIcon /></a>
 										</OverlayTrigger>
 									)
 								})}
@@ -143,26 +145,34 @@ function MainMenu({
 }
 
 MainMenu.propTypes = {
-	setAuthUser: PropTypes.func.isRequired,
-	setSessionExpiryModalState: PropTypes.func.isRequired,
 	userId: PropTypes.number,
+	viewIndex: PropTypes.number,
 	eventId: PropTypes.string.isRequired,
+	setAuthUser: PropTypes.func.isRequired,
+	setViewIndex: PropTypes.func.isRequired,
 	setMainMenuState: PropTypes.func.isRequired,
 	setNavbarMenuState: PropTypes.func.isRequired,
+	setSessionExpiryModalState: PropTypes.func.isRequired,
 }
 
 MainMenu.defaultProps = {
 	userId: null,
+	viewIndex: null,
 }
+
+const mapStateToProps = (store) => ({
+    viewIndex: store.dashboardData.viewIndex,
+});
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({
 	setAuthUser,
-	setSessionExpiryModalState,
+	setViewIndex,
 	setMainMenuState,
 	setNavbarMenuState,
+	setSessionExpiryModalState,
 }, dispatch);
 
 export default connect(
-	null,
+	mapStateToProps,
 	mapDispatchToProps,
 )(MainMenu);

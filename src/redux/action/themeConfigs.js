@@ -20,3 +20,10 @@ export const setSessionExpiryModalState = (expiryState) => (dispatch) => {
         isSessionExpiryModalOpened: expiryState
     })
 }
+
+export const setLoadingFg = (value) => (dispatch) => {
+    dispatch({
+        type: types.SET_LOADING_VALUE,
+        isLoading: value,
+    })
+}

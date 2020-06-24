@@ -105,13 +105,10 @@ export const signOut = () => (dispatch) => {
     return sessionService.SignOut()
         .then(() => {
             dispatch({
-                type: types.RESET_SESSION_DATA,
+                type: types.SIGN_OUT,
             })
         })
         .catch((error) => {
-            dispatch({
-                type: types.RESET_SESSION_DATA,
-            })
             throw error;
         })
 };

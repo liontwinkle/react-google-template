@@ -78,6 +78,15 @@ export default (state = INITIAL_STATE, action) => {
 			}
 		}
 
+		case types.SIGN_OUT: {
+			localStorage.clear();
+			return {
+				...state,
+				authUser: null,
+				loginStep: null,
+				sessionData: null,
+			}
+		}
 		default: return state;
 	}
 }

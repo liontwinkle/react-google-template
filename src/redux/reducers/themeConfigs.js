@@ -3,7 +3,8 @@ import types from '../actionType';
 const INITIAL_STATE = {
 	isMainMenuOpened: localStorage.getItem('isMainMenuOpened') ? true : false,
 	isNavbarMenuOpened: localStorage.getItem('isNavbarMenuOpened') ? true : false,
-	isSessionExpiryModalOpened: localStorage.getItem('isSessionExpiryModalOpened') ? true : false
+	isSessionExpiryModalOpened: localStorage.getItem('isSessionExpiryModalOpened') ? true : false,
+	isLoading: false,
 };
 
 export default(state = INITIAL_STATE, action) => {
@@ -55,6 +56,13 @@ export default(state = INITIAL_STATE, action) => {
 				isNavbarMenuOpened: localStorage.getItem('isNavbarMenuOpened') ? true : false,
 				isSessionExpiryModalOpened: action.isSessionExpiryModalOpened
 			};
+		}
+		case types.SET_LOADING_VALUE: {
+			const isLoading = action.isLoading;
+			return {
+				...state,
+				isLoading,
+			}
 		}
 		default: return state;
 	}
