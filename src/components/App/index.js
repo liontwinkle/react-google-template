@@ -20,7 +20,7 @@ import CompleteTraining from '../Auth/CompleteTraining'
 import SessionExpiryModal from '../Auth/SessionExpiryModal'
 import Home from '../Home'
 import NotFound from '../NotFound'
-import FullStory, { FullStoryAPI } from 'react-fullstory'
+import * as FullStory from '@fullstory/browser'
 
 import * as routes from '../../constants/routes'
 import * as loginSteps from '../../constants/login_steps'
@@ -36,28 +36,13 @@ function App ({
   sessionData,
   isMainMenuOpened,
   isNavbarMenuOpened,
-  isSessionExpiryModalOpened,
+  isSessionExpiryModalOpened
 }) {
-  if (authUser) {
-    // Identify method
-    FullStoryAPI('identify', authUser.userId, {
-      userName: authUser.userName,
-      email: authUser.email
-    })
-  }
-
   if (loading && authUser) return <Loader />
 
   if (loading) return false
   return (
     <Router basename={process.env.PUBLIC_URL}>
-      <FullStory
-        org='W49VA'
-        script='edge.fullstory.com/s/fs.js'
-        debug={false}
-        host='fullstory.com'
-        namespace='FS'
-      />
       <Header
         authUser={authUser}
         loginStep={loginStep}
@@ -172,7 +157,7 @@ App.propTypes = {
   sessionData: PropTypes.object,
   isMainMenuOpened: PropTypes.bool.isRequired,
   isNavbarMenuOpened: PropTypes.bool.isRequired,
-  isSessionExpiryModalOpened: PropTypes.bool.isRequired,
+  isSessionExpiryModalOpened: PropTypes.bool.isRequired
 }
 
 App.defaultProps = {

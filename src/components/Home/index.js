@@ -36,7 +36,7 @@ function Home ({ viewIndex, isLoading }) {
       <div className='mail-group'>{LeftBar()}</div>
       <div className='mail-content'>
         {ContentBody()}
-        <div class='mail-content__footer'></div>
+        <div className='mail-content__footer'></div>
       </div>
     </div>
   )
