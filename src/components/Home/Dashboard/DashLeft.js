@@ -41,25 +41,13 @@ function DashLeft ({
             setInfo(data.info)
             setLoadingFg(false)
           })
-          .catch((e) => {
+          .catch(e => {
             if (e.response.status === 401) {
               setSessionExpiryModalState(true)
             } else {
               resetSessionData()
             }
           })
-        // const { data } = await axios.get(
-        //   process.env.REACT_APP_API +
-        //     '/auth/info/' +
-        //     sessionData.id_instance +
-        //     '/' +
-        //     sessionData.id_team +
-        //     '/' +
-        //     sessionData.id_event
-        // )
-        // set instances data
-        // setInfo(data.info)
-        // setLoadingFg(false)
       } catch (e) {
         // if unauthorized
         if (e.response.status !== 400) {

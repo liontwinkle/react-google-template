@@ -1,7 +1,6 @@
-import React, { useEffect, useCallback } from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
-import { bindActionCreators } from 'redux'
 
 import {
   BrowserRouter as Router,
@@ -23,9 +22,6 @@ import Home from '../Home'
 import NotFound from '../NotFound'
 import FullStory, { FullStoryAPI } from 'react-fullstory'
 
-import { setSessionExpiryModalState } from '../../redux/action/themeConfigs'
-import { verifyToken, resetSessionData } from '../../redux/action/session'
-
 import * as routes from '../../constants/routes'
 import * as loginSteps from '../../constants/login_steps'
 
@@ -41,25 +37,7 @@ function App ({
   isMainMenuOpened,
   isNavbarMenuOpened,
   isSessionExpiryModalOpened,
-  resetSessionData,
-  verifyToken,
-  setSessionExpiryModalState
 }) {
-  const authenticate = useCallback(async () => {
-    // verifyToken().catch(e => {
-    //   // reset all sessions
-    //   if (e.response.status === 401) {
-    //     setSessionExpiryModalState(true)
-    //   } else {
-    //     resetSessionData()
-    //   }
-    // })
-  }, [])
-
-  useEffect(() => {
-    authenticate()
-  }, [authenticate])
-
   if (authUser) {
     // Identify method
     FullStoryAPI('identify', authUser.userId, {
@@ -195,9 +173,6 @@ App.propTypes = {
   isMainMenuOpened: PropTypes.bool.isRequired,
   isNavbarMenuOpened: PropTypes.bool.isRequired,
   isSessionExpiryModalOpened: PropTypes.bool.isRequired,
-  verifyToken: PropTypes.func.isRequired,
-  resetSessionData: PropTypes.func.isRequired,
-  setSessionExpiryModalState: PropTypes.func.isRequired
 }
 
 App.defaultProps = {
@@ -217,14 +192,4 @@ const mapStateToProps = store => ({
   isSessionExpiryModalOpened: store.themeConfigData.isSessionExpiryModalOpened
 })
 
-const mapDispatchToProps = dispatch =>
-  bindActionCreators(
-    {
-      verifyToken,
-      resetSessionData,
-      setSessionExpiryModalState
-    },
-    dispatch
-  )
-
-export default connect(mapStateToProps, mapDispatchToProps)(App)
+export default connect(mapStateToProps)(App)

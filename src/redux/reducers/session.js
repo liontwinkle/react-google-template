@@ -70,6 +70,7 @@ export default (state = INITIAL_STATE, action) => {
 		}
 
 		case types.RESET_SESSION_DATA: {
+			localStorage.clear();
 			return {
 				...state,
 				authUser: null,
