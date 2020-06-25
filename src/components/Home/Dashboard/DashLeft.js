@@ -11,15 +11,15 @@ import {
   setMainMenuState,
   setLoadingFg
 } from '../../../redux/action/themeConfigs'
-import { resetSessionData } from '../../../redux/action/session'
-
+import { resetSessionData, verifyToken } from '../../../redux/action/session'
 
 function DashLeft ({
   setSessionExpiryModalState,
   sessionData,
   setLoadingFg,
   isLoading,
-  resetSessionData
+  resetSessionData,
+  verifyToken
 }) {
   const [info, setInfo] = useState(false)
 
@@ -27,18 +27,39 @@ function DashLeft ({
     const getInfoHandler = async () => {
       setLoadingFg(true)
       try {
-        const { data } = await axios.get(
-          process.env.REACT_APP_API +
-            '/auth/info/' +
-            sessionData.id_instance +
-            '/' +
-            sessionData.id_team +
-            '/' +
-            sessionData.id_event
-        )
+        verifyToken()
+          .then(async () => {
+            const { data } = await axios.get(
+              process.env.REACT_APP_API +
+                '/auth/info/' +
+                sessionData.id_instance +
+                '/' +
+                sessionData.id_team +
+                '/' +
+                sessionData.id_event
+            )
+            setInfo(data.info)
+            setLoadingFg(false)
+          })
+          .catch((e) => {
+            if (e.response.status === 401) {
+              setSessionExpiryModalState(true)
+            } else {
+              resetSessionData()
+            }
+          })
+        // const { data } = await axios.get(
+        //   process.env.REACT_APP_API +
+        //     '/auth/info/' +
+        //     sessionData.id_instance +
+        //     '/' +
+        //     sessionData.id_team +
+        //     '/' +
+        //     sessionData.id_event
+        // )
         // set instances data
-        setInfo(data.info)
-        setLoadingFg(false)
+        // setInfo(data.info)
+        // setLoadingFg(false)
       } catch (e) {
         // if unauthorized
         if (e.response.status !== 400) {
@@ -75,6 +96,7 @@ function DashLeft ({
 }
 
 DashLeft.propTypes = {
+  verifyToken: PropTypes.func.isRequired,
   setSessionExpiryModalState: PropTypes.func.isRequired,
   setMainMenuState: PropTypes.func.isRequired,
   setLoadingFg: PropTypes.func.isRequired,
@@ -89,7 +111,8 @@ const mapDispatchToProps = dispatch =>
       setSessionExpiryModalState,
       setMainMenuState,
       setLoadingFg,
-      resetSessionData
+      resetSessionData,
+      verifyToken
     },
     dispatch
   )

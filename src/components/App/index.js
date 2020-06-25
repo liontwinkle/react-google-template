@@ -46,15 +46,15 @@ function App ({
   setSessionExpiryModalState
 }) {
   const authenticate = useCallback(async () => {
-    verifyToken().catch(e => {
-      // reset all sessions
-      if (e.response.status === 401) {
-        setSessionExpiryModalState(true)
-      } else {
-        resetSessionData()
-      }
-    })
-  }, [resetSessionData, verifyToken, setSessionExpiryModalState])
+    // verifyToken().catch(e => {
+    //   // reset all sessions
+    //   if (e.response.status === 401) {
+    //     setSessionExpiryModalState(true)
+    //   } else {
+    //     resetSessionData()
+    //   }
+    // })
+  }, [])
 
   useEffect(() => {
     authenticate()
