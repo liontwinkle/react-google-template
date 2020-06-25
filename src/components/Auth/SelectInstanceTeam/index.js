@@ -222,6 +222,7 @@ SelectInstanceTeam.propTypes = {
     verifyToken: PropTypes.func.isRequired,
     updateUser: PropTypes.func.isRequired,
     getTrainingCount: PropTypes.func.isRequired,
+    resetSession: PropTypes.func.isRequired,
     getTeams: PropTypes.func.isRequired,
     setSessionExpiryModalState: PropTypes.func.isRequired,
     sessionData: PropTypes.object,

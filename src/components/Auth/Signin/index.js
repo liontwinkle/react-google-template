@@ -15,7 +15,10 @@ import {
   resetSessionData
 } from '../../../redux/action/session'
 
-import { setSessionExpiryModalState } from '../../../redux/action/themeConfigs'
+import {
+  setSessionExpiryModalState,
+  setLoadingFg
+} from '../../../redux/action/themeConfigs'
 
 import '../Auth.css'
 
@@ -23,11 +26,11 @@ function Signin ({
   signInAuth,
   getInstances,
   getTeams,
+  isLoading,
   resetSessionData,
   setSessionExpiryModalState
 }) {
   const { register, handleSubmit, formState, errors, setError } = useForm()
-  const [loading, setLoading] = useState(false)
 
   const submit = async formData => {
     resetSessionData()
@@ -35,7 +38,7 @@ function Signin ({
     // close session expiry modal
     setSessionExpiryModalState(false)
 
-    setLoading(true)
+    setLoadingFg(true)
 
     try {
       const requestBody = {
@@ -46,7 +49,7 @@ function Signin ({
       signInAuth(requestBody).then(() => {
         getInstances().then(() => {
           getTeams()
-          setLoading(false)
+          setLoadingFg(false)
         })
       })
     } catch (e) {
@@ -60,7 +63,7 @@ function Signin ({
           e.response.data.type,
           e.response.data.message
         )
-        setLoading(false)
+        setLoadingFg(false)
       } else {
         console.log('Unexpected error: Signin:submit', e)
       }
@@ -148,7 +151,7 @@ function Signin ({
                       )}
                   </Form.Group>
                   <Button variant='brand-02' block={true} type='submit'>
-                    {loading ? (
+                    {isLoading ? (
                       <>
                         <Spinner size='sm' animation='grow' className='mr-2' />
                         <span>Processing</span>
@@ -168,17 +171,24 @@ function Signin ({
 }
 
 Signin.propTypes = {
+  isLoading: PropTypes.bool,
   signInAuth: PropTypes.func.isRequired,
   getInstances: PropTypes.func.isRequired,
+  setLoadingFg: PropTypes.func.isRequired,
   getTeams: PropTypes.func.isRequired,
   resetSessionData: PropTypes.func.isRequired,
   setSessionExpiryModalState: PropTypes.func.isRequired
+}
+
+Signin.defaultProps = {
+  isLoading: false
 }
 
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
       signInAuth,
+      setLoadingFg,
       getInstances,
       getTeams,
       resetSessionData,
@@ -187,4 +197,8 @@ const mapDispatchToProps = dispatch =>
     dispatch
   )
 
-export default connect(null, mapDispatchToProps)(withRouter(Signin))
+const mapStateToProps = store => ({
+  isLoading: store.themeConfigData.isLoading,
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Signin))

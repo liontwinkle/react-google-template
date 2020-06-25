@@ -108,7 +108,7 @@ function App ({
           )}
         </Route>
         <Route exact path={routes.SELECT_INSTANCE_TEAM}>
-          {authUser ? (
+          {!isLoading && authUser ? (
             !loginStep ? (
               <SelectInstanceTeam
                 authUser={authUser}
