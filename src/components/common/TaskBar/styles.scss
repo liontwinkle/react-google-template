@@ -1,17 +1,60 @@
-.task-bar-editor {
-    box-sizing: border-box;
-    cursor: text;
-    padding: 16px;
-    border-radius: 2px;
-    margin-bottom: 2em;
-    box-shadow: inset 0px 1px 8px -3px #ababab;
-    background: #fefefe;
-}
+.task-bar-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
 
-.task-bar-editor :global(.public-DraftEditor-content) {
-    min-height: 140px;
-}
+  .task-bar-edit-container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 90%;
+    height: 100%;
 
-.task-bar-options {
-    margin-bottom: 20px;
+    .plus_box {
+      height: 100%;
+      display: flex;
+      width: 85px;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      border: 1px solid rgba(72, 94, 144, 0.16);
+    }
+
+    .editor {
+      width: 95%;
+      height: 100%;
+      padding: 0 10px;
+      box-sizing: border-box;
+      border: 1px solid #ddd;
+      cursor: text;
+      border-radius: 2px;
+      background: #fefefe;
+    }
+
+    .editor :global(.public-DraftEditor-content) {
+      min-height: 140px;
+      display: flex;
+      align-items: center;
+    }
+    .DraftEditor-root {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+  }
+
+  .options {
+    &-icon {
+      margin-right: 10px;
+    }
+    margin-right: 10px;
+    button {
+      width: auto;
+      margin-right: 10px;
+      border: none;
+      background: none;
+    }
+    position: relative;
+  }
 }

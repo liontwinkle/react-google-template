@@ -8,6 +8,7 @@ import DashContent from './Dashboard/DashContent'
 
 import IncidentLeft from './IncidentLogging/IncidentLeft'
 import IncidentContent from './IncidentLogging/IncidentContent'
+import TaskBar from "../common/TaskBar";
 
 import './style.scss'
 
@@ -36,7 +37,9 @@ function Home ({ viewIndex, isLoading }) {
       <div className='mail-group'>{LeftBar()}</div>
       <div className='mail-content'>
         {ContentBody()}
-        <div className='mail-content__footer'></div>
+        <div className='mail-content__footer'>
+          <TaskBar />
+        </div>
       </div>
     </div>
   )

@@ -143,38 +143,39 @@ function App ({
         <Route component={NotFound} />
       </Switch>
       <Footer />
-      {loginStep === loginSteps.FINISHED && <div className='backdrop'></div>}
+      {loginStep === loginSteps.FINISHED && <div className='backdrop' />}
       {authUser && <SessionExpiryModal show={isSessionExpiryModalOpened} />}
     </Router>
   )
 }
 
 App.propTypes = {
-  loading: PropTypes.bool.isRequired,
-  isLoading: PropTypes.bool.isRequired,
-  authUser: PropTypes.object,
   loginStep: PropTypes.string,
+  authUser: PropTypes.object,
   sessionData: PropTypes.object,
+  loading: PropTypes.bool.isRequired,
+  isLoading: PropTypes.bool,
   isMainMenuOpened: PropTypes.bool.isRequired,
   isNavbarMenuOpened: PropTypes.bool.isRequired,
   isSessionExpiryModalOpened: PropTypes.bool.isRequired
-}
+};
 
 App.defaultProps = {
   authUser: null,
+  loginStep: null,
   sessionData: null,
-  loginStep: null
-}
+  isLoading: null,
+};
 
 const mapStateToProps = store => ({
   loading: store.sessionData.loading,
-  isLoading: store.themeConfigData.isLoading,
   authUser: store.sessionData.authUser,
   loginStep: store.sessionData.loginStep,
   sessionData: store.sessionData.sessionData,
+  isLoading: store.themeConfigData.isLoading,
   isMainMenuOpened: store.themeConfigData.isMainMenuOpened,
   isNavbarMenuOpened: store.themeConfigData.isNavbarMenuOpened,
   isSessionExpiryModalOpened: store.themeConfigData.isSessionExpiryModalOpened
-})
+});
 
 export default connect(mapStateToProps)(App)

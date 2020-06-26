@@ -7,15 +7,17 @@
 .horizontal-menu {
   position: relative;
   justify-content: center;
-  width: 50%;
+  height: 100%;
+  width: 100%;
 }
 
 .menu-wrapper {
   border: 1px solid;
+  height: 100%;
 }
 
 .menu-item {
-  height: 600px;
+  height: 100%;
   padding: 0 40px;
   margin: 5px 10px;
   user-select: none;
@@ -23,19 +25,31 @@
   border: none;
 }
 
+.menu-item-wrapper {
+  width: 25vw;
+  height: 100%;
+  padding: 10px;
+}
+
+.menu-wrapper--inner {
+  height: 100%;
+}
+
 .menu-item-wrapper.active {
-  border: 1px blue solid;
+  border: none !important;
 }
 
 .menu-item.active {
-  border: 1px green solid;
+  border: none !important;
 }
 
 .scroll-menu-arrow {
   padding: 20px;
   cursor: pointer;
   position: absolute;
-  bottom: -50px;
+  bottom:5px;
+  left: 150px;
+  z-index: 100;
 }
 
 .scroll-menu-arrow:first-child {
@@ -44,4 +58,43 @@
 
 .scroll-menu-arrow:last-child {
   right: 100px;
+}
+
+.incident-card {
+  width: 33.33%;
+  height: 100%;
+  border: 1px solid rgba(72, 94, 144, 0.16);
+
+  &-header {
+    border-bottom: 1px solid rgba(72, 94, 144, 0.16);
+    padding: 25px 20px;
+    width: 100%;
+    height: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    &-action {
+      width: 35px;
+      display: flex;
+      justify-content: space-between;
+    }
+  }
+
+  .incident-card-body {
+    height: calc( 100% - 50px );
+  }
+}
+
+.incident-multi-panel {
+  width: 100%;
+  height: 91%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  .incident-content {
+    width: 100%;
+    height: 100%;
+    display: flex;
+  }
 }
