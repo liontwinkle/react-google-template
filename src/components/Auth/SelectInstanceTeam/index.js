@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
-import { Container, Form, Button, Spinner } from 'react-bootstrap';
 import { useForm } from "react-hook-form";
-import * as loginSteps from '../../../constants/login_steps';
-import Instances from './instances';
+import { Container, Form, Button, Spinner } from 'react-bootstrap';
+
 import Teams from './teams';
 import Signout from '../Signout';
+import Instances from './instances';
+import * as loginSteps from '../../../constants/login_steps';
 
 import {
     setLoginStep,
@@ -24,16 +25,16 @@ import { setSessionExpiryModalState } from '../../../redux/action/themeConfigs';
 import '../Auth.css';
 
 function SelectInstanceTeam({
-    setLoginStep,
-    setSessionData,
+    teams,
+    getTeams,
     verifyToken,
     updateUser,
+    authUser,
+    setLoginStep,
+    setSessionData,
     getTrainingCount,
     setSessionExpiryModalState,
     sessionData,
-    authUser,
-    getTeams,
-    teams,
 }) {
 
     const { register, handleSubmit, formState, errors, setValue } = useForm();
@@ -87,7 +88,7 @@ function SelectInstanceTeam({
         ));
 
         setSelectTeams(updateTeams);
-    }
+    };
 
     const changeTeamHandler = async (event) => {
         let id_team = event.target.value;
@@ -106,7 +107,7 @@ function SelectInstanceTeam({
             }).catch((error) => {
                 setSessionExpiryModalState(true);
             });
-    }
+    };
 
     const submit = async (formData) => {
         setLoading(true);
@@ -141,7 +142,7 @@ function SelectInstanceTeam({
                 setLoading(false);
                 return;
             })
-    }
+    };
 
     return (
         <>
@@ -217,6 +218,9 @@ function SelectInstanceTeam({
 }
 
 SelectInstanceTeam.propTypes = {
+    teams: PropTypes.array,
+    authUser: PropTypes.object,
+    sessionData: PropTypes.object,
     setLoginStep: PropTypes.func.isRequired,
     setSessionData: PropTypes.func.isRequired,
     verifyToken: PropTypes.func.isRequired,
@@ -225,16 +229,14 @@ SelectInstanceTeam.propTypes = {
     resetSession: PropTypes.func.isRequired,
     getTeams: PropTypes.func.isRequired,
     setSessionExpiryModalState: PropTypes.func.isRequired,
-    sessionData: PropTypes.object,
-    authUser: PropTypes.object,
-    teams: PropTypes.array
-}
+};
 
 SelectInstanceTeam.defaultProps = {
     sessionData: {},
     teams: [],
     authUser: {},
-}
+};
+
 const mapStateToProps = (store) => ({
     sessionData: store.sessionData.sessionData,
     teams: store.sessionData.teams,

@@ -1,7 +1,7 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import PropTypes from 'prop-types';
 
 import { LogOut } from 'react-feather';
 import { Dropdown } from 'react-bootstrap';
@@ -10,9 +10,9 @@ import { signOut, resetSessionData } from '../../redux/action/session';
 import { setSessionExpiryModalState } from '../../redux/action/themeConfigs';
 
 function Signout({
+    isDropdownItem,
     signOut,
     setSessionExpiryModalState,
-    isDropdownItem,
 }) {
     const signoutHandler = (e) => {
         e.preventDefault();
@@ -25,7 +25,7 @@ function Signout({
                 setSessionExpiryModalState(false);
                 resetSessionData();
             })
-    }
+    };
 
     if (isDropdownItem) {
         return <Dropdown.Item onClick={signoutHandler}><LogOut /> Sign Out</Dropdown.Item>
@@ -35,14 +35,15 @@ function Signout({
 }
 
 Signout.propTypes = {
+    isDropdownItem: PropTypes.bool.isRequired,
     signOut: PropTypes.func.isRequired,
     setSessionExpiryModalState: PropTypes.func.isRequired,
-    isDropdownItem: PropTypes.bool.isRequired,
 };
 
 Signout.defaultProps = {
     isDropdownItem: false,
-}
+};
+
 const mapDispatchToProps = (dispatch) => bindActionCreators({
     signOut,
     setSessionExpiryModalState

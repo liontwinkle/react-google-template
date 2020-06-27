@@ -1,7 +1,10 @@
 import React from 'react';
+import TeamPanel from "./TeamPanel";
 
 const IncidentLeft = () => (
-    <div />
+    <div>
+        <TeamPanel />
+    </div>
 )
 
 export default IncidentLeft;

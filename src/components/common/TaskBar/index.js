@@ -12,14 +12,6 @@ const {EmojiSuggestions, EmojiSelect} = emojiPlugin;
 const plugins = [emojiPlugin];
 const text = ``;
 
-const toneSelectStyles = `.emojiSelectPopoverToneSelect {
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: -700px;
-  bottom: 0;
-  z-index: 2;
-}`;
 
 export default class SimpleEmojiEditor extends Component {
 

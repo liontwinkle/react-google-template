@@ -1,0 +1,32 @@
+.team-panel {
+  .ant-dropdown-link {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 10px;
+    border-bottom: 1px solid rgba(72, 94, 144, 0.16);
+    font-weight: 600;
+    color: #001737;
+    span {
+      display: flex !important;
+      align-items: center;
+    }
+  }
+  .ant-tabs-nav-list {
+    width: 100%;
+    display: flex !important;
+    justify-content: space-around;
+    button {
+      margin: 0;
+      &:focus {
+        outline: none;
+      }
+    }
+  }
+}
+.ant-dropdown-menu {
+  li {
+    padding: 3px 15px;
+    cursor: pointer;
+  }
+}

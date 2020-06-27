@@ -1,7 +1,7 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import PropTypes from 'prop-types';
 
 import { Modal, Button } from 'react-bootstrap';
 
@@ -17,11 +17,11 @@ function SessionExpiryModal({
     const signInHandler = (e) => {
         
         // reste session data
-        resetSessionData()
+        resetSessionData();
         // will redirect to required route related with sessions unset
         // close session expiry modal
         setSessionExpiryModalState(false);
-    }
+    };
 
     const onHideHandler = (e) => {
         // close session expiry modal

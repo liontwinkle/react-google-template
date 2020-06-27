@@ -12,7 +12,6 @@
 }
 
 .menu-wrapper {
-  border: 1px solid;
   height: 100%;
 }
 
@@ -39,25 +38,25 @@
   border: none !important;
 }
 
+.menu-item-wrapper:focus {
+  outline: none;
+}
 .menu-item.active {
   border: none !important;
 }
 
-.scroll-menu-arrow {
-  padding: 20px;
-  cursor: pointer;
+.arrow {
   position: absolute;
-  bottom:5px;
-  left: 150px;
-  z-index: 100;
+  bottom: 10px;
+  z-index: 10;
 }
 
-.scroll-menu-arrow:first-child {
-  right: 200px;
+.arrow-prev {
+  left: 20px;
 }
 
-.scroll-menu-arrow:last-child {
-  right: 100px;
+.arrow-next {
+  right: 20px;
 }
 
 .incident-card {

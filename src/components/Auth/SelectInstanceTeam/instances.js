@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import PropTypes from 'prop-types';
 import { Form, Spinner } from 'react-bootstrap';
-
 
 import { setSessionExpiryModalState } from '../../../redux/action/themeConfigs';
 import { getInstances } from '../../../redux/action/session';
@@ -63,19 +62,19 @@ function Instances({
     )
 }
 Instances.propTypes = {
+    userId: PropTypes.number,
+    idInstance: PropTypes.string,
+    instances: PropTypes.array,
+    authUser: PropTypes.object,
+    sessionData: PropTypes.object,
+    errors: PropTypes.object.isRequired,
+    formState: PropTypes.object.isRequired,
     setSessionExpiryModalState: PropTypes.func.isRequired,
     setValue: PropTypes.func.isRequired,
     register: PropTypes.func.isRequired,
     getInstances: PropTypes.func.isRequired,
     changeInstanceHandler: PropTypes.func.isRequired,
-    errors: PropTypes.object.isRequired,
-    formState: PropTypes.object.isRequired,
-    sessionData: PropTypes.object,
-    authUser: PropTypes.object,
-    idInstance: PropTypes.string,
-    userId: PropTypes.number,
-    instances: PropTypes.array,
-}
+};
 
 Instances.defaultProps = {
     sessionData: {},
@@ -83,7 +82,7 @@ Instances.defaultProps = {
     idInstance: null,
     instances: [],
     userId: null,
-}
+};
 
 const mapStateToProps = (store) => ({
     sessionData: store.sessionData.sessionData,

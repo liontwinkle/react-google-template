@@ -1,15 +1,14 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import PropTypes from 'prop-types';
-
 import { withRouter } from 'react-router-dom';
 import { Container, Form, Button, Spinner } from 'react-bootstrap';
 import { useForm } from "react-hook-form";
-import * as loginSteps from '../../../constants/login_steps';
-import Signout from '../Signout';
 
+import Signout from '../Signout';
 import { setLoginStep } from '../../../redux/action/session';
+import * as loginSteps from '../../../constants/login_steps';
 
 import '../Auth.css';
 
@@ -24,7 +23,7 @@ function CompleteTraining({ setLoginStep }) {
       // set loginStep data, will redirect to required route automatically
       setLoginStep(loginSteps.FINISHED);
     }, 2000);
-  }
+  };
 
   return (
     <>
@@ -57,7 +56,7 @@ function CompleteTraining({ setLoginStep }) {
 
 CompleteTraining.propTypes = {
   setLoginStep: PropTypes.func.isRequired,
-}
+};
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({
   setLoginStep,

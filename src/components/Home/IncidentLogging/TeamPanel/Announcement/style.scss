@@ -1,0 +1,12 @@
+.announcement-panel {
+  padding: 0 5px;
+  display: flex;
+  flex-direction: column;
+  .ant-input {
+    margin-top: 5px;
+    border-radius: 4px;
+  }
+  .ant-input-affix-wrapper {
+    margin-top: 5px;
+  }
+}
