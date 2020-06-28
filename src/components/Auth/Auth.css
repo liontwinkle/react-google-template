@@ -59,3 +59,7 @@ form .alert {
 .custom-select {
   height: calc(1.5em + 0.9375rem + 3px);
   overflow: hidden; }
+.spinner-grow {
+  width: 1rem !important;
+  height: 1rem !important;
+}
