@@ -45,8 +45,8 @@ function AuthHeader({
 	return (
 		<>
 			<header className="navbar navbar-header navbar-header-fixed">
-				<a href="." id="navbarMenuOpen" onClick={navbarMenuOpenHandler} className={navbarMenuOpenClasses} isnavbarmenuopenclicked="true" ><Menu isnavbarmenuopenclicked="true" /></a>
-				<a href="." id="mainMenuOpen" onClick={mainMenuOpenHandler} className={mainMenuOpenClasses}><ArrowLeft /></a>
+				<a href="" id="mainMenuOpen" className="burger-menu"><i data-feather="menu" /></a>
+				<a href="" id="chatContentClose" className="burger-menu d-none"><i data-feather="arrow-left" /></a>
 
 				<div className="navbar-brand">
 					<Link className="df-logo" to={routes.HOME}>Command<span>Post</span></Link>

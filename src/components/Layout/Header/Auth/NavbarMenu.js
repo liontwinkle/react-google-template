@@ -62,7 +62,7 @@ function NavbarMenu({
 						<Button variant="search"><Search /></Button>
 					</div>
 				</div>
-				<div id="sessionTimeoutMessage" className="m-auto d-none d-sm-block"></div>
+				<div id="sessionTimeoutMessage" className="m-auto d-none d-sm-block" />
 			</div>
 		</>
 	)

@@ -38,18 +38,18 @@
     transform: translateX(0);
   }
 }
-@media (min-width: 992px) {
+@media (min-width: 1000px) {
   .mail-wrapper {
     top: 60px;
   }
 }
-@media (min-width: 1200px) {
+@media (min-width: 1400px) {
   .mail-wrapper {
     top: 55px;
   }
 }
 
-@media (min-width: 992px) {
+@media (min-width: 1000px) {
   .mail-wrapper-two {
     position: relative;
     height: 100%;
@@ -78,7 +78,7 @@
     visibility: visible;
   }
 }
-@media (min-width: 1200px) {
+@media (min-width: 1400px) {
   .mail-sidebar {
     width: 45px;
   }
@@ -93,7 +93,7 @@
   border-radius: 0.25rem;
   transition: all 0.2s ease-in-out;
 }
-@media (min-width: 1200px) {
+@media (min-width: 1400px) {
   .mail-sidebar .nav-link {
     height: 35px;
   }
@@ -133,7 +133,7 @@
     left: 60px;
   }
 }
-@media (min-width: 1200px) {
+@media (min-width: 1400px) {
   .mail-group {
     width: 300px;
     left: 45px;
@@ -235,7 +235,7 @@
   width: 100vw;
   background-color: #ffffff;
 }
-@media (min-width: 1200px) {
+@media (min-width: 1400px) {
   .mail-content {
     left: 345px;
     width: auto;
@@ -390,7 +390,7 @@
     transition: none;
   }
 }
-@media (min-width: 992px) {
+@media (min-width: 1000px) {
   .mail-compose-body {
     padding: 30px;
   }
@@ -399,7 +399,7 @@
   box-shadow: none !important;
 }
 
-@media (min-width: 992px) {
+@media (min-width: 1000px) {
   .aside-mail + .content {
     margin-left: 60px;
   }

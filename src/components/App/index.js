@@ -20,7 +20,6 @@ import CompleteTraining from '../Auth/CompleteTraining'
 import SessionExpiryModal from '../Auth/SessionExpiryModal'
 import Home from '../Home'
 import NotFound from '../NotFound'
-import * as FullStory from '@fullstory/browser'
 
 import * as routes from '../../constants/routes'
 import * as loginSteps from '../../constants/login_steps'
@@ -40,7 +39,7 @@ function App ({
 }) {
   if (loading && authUser) return <Loader />
 
-  if (loading) return false
+  // if (loading) return false
   return (
     <Router basename={process.env.PUBLIC_URL}>
       <Header

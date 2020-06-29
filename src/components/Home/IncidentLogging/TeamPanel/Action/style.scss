@@ -5,7 +5,7 @@
   &__iconlist {
     display: flex;
     align-items: center;
-    justify-content: space-around;
+    justify-content: center;
     border-bottom: 1px solid rgba(72, 94, 144, 0.16);
     padding-bottom: 5px;
   }
@@ -16,5 +16,43 @@
   }
   .ant-input-affix-wrapper {
     margin-top: 5px;
+  }
+
+  .fa-siren-on {
+    &:before {
+      content: "\f92e";
+    }
+  }
+  .fad:before {
+    position: absolute;
+    opacity: 1;
+  }
+  .fa-fire-alt:before {
+    content: "\f7e4";
+  }
+  .fad.fa-fire-alt:after {
+    content: "\10f7e4";
+  }
+  .vertical_line {
+    width: 1px;
+    height: 20px;
+    border-right: solid 1px #8392a5;
+    margin: 0 10px;
+  }
+
+  .action-icon-font {
+    font-size: 1.75em;
+    margin-right: 10px;
+  }
+  @media (min-width: 1400px) {
+    .action-icon-font {
+      font-size: 1.35rem;
+    }
+  }
+
+
+  .action_part {
+    display: flex;
+    align-items: center;
   }
 }

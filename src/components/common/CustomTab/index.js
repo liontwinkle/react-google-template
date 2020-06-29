@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types'
-import { DownOutlined } from '@ant-design/icons';
 import { Tabs } from 'antd';
+import './style.scss';
 
 const CustomTab = ({tabList}) => {
     const { TabPane } = Tabs;

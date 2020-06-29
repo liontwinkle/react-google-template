@@ -21,7 +21,7 @@ function Home ({ viewIndex, isLoading }) {
       default:
         return <DashboardLeft />
     }
-  }
+  };
 
   const ContentBody = () => {
     switch (viewIndex) {
@@ -30,7 +30,7 @@ function Home ({ viewIndex, isLoading }) {
       default:
         return <DashContent />
     }
-  }
+  };
 
   return (
     <div className='mail-body'>
@@ -47,16 +47,16 @@ function Home ({ viewIndex, isLoading }) {
 
 Home.propTypes = {
   viewIndex: PropTypes.number,
-}
+};
 
 Home.defaultProps = {
   viewIndex: null
-}
+};
 
 const mapStateToProps = store => ({
   viewIndex: store.dashboardData.viewIndex,
-})
+});
 
-const mapDispatchToProps = dispatch => bindActionCreators({}, dispatch)
+const mapDispatchToProps = dispatch => bindActionCreators({}, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home)

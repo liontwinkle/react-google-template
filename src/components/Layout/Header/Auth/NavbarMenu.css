@@ -1,6 +1,6 @@
 #headerSearch {
     align-items: center; }
-@media (min-width: 1200px) {
+@media (min-width: 1400px) {
 	.search-form .form-control {
 	    height: 35px; } }
     @media (max-width: 991px) {
