@@ -1,5 +1,9 @@
 import React from 'react';
 import Signout from '../../../Auth/Signout';
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {
+    f
+} from '@fortawesome/pro-solid-svg-icons';
 
 function NavbarRight(props) {
     return (
@@ -7,7 +11,11 @@ function NavbarRight(props) {
             <div className="navbar-right">
                 <div className="dropdown dropdown-message">
                     <a href="" className="dropdown-link new-indicator" data-toggle="dropdown">
-                        <i data-feather="message-square"/>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                             stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
+                             className="feather feather-message-square">
+                            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+                        </svg>
                         <span>5</span>
                     </a>
                     <div className="dropdown-menu dropdown-menu-right">
@@ -66,7 +74,12 @@ function NavbarRight(props) {
                 </div>
                 <div className="dropdown dropdown-notification">
                     <a href="" className="dropdown-link new-indicator" data-toggle="dropdown">
-                        <i data-feather="bell"/>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                             stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
+                             className="feather feather-bell">
+                            <path
+                                d="M22 17H2a3 3 0 0 0 3-3V9a7 7 0 0 1 14 0v5a3 3 0 0 0 3 3zm-8.27 4a2 2 0 0 1-3.46 0" />
+                        </svg>
                         <span>2</span>
                     </a>
                     <div className="dropdown-menu dropdown-menu-right">
