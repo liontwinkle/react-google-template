@@ -28,17 +28,20 @@ const IncidentContent = () => {
         <div className='chat-content-body'>
             <div style={{
                 padding: `0 ${chevronWidth}px`,
-                height: '100%'
+                height: '100%',
+                minWidth: '1500px',
             }}>
                 <ItemsCarousel
                     requestToChangeActive={setActiveItemIndex}
                     activeItemIndex={activeItemIndex}
-                    numberOfCards={3}
+                    numberOfCards={Datalist.length}
                     gutter={20}
                     leftChevron={<FontAwesomeIcon className="arrow arrow-prev" icon={faArrowLeft}/>}
                     rightChevron={<FontAwesomeIcon className="arrow arrow-next" icon={faArrowRight}/>}
                     outsideChevron
                     chevronWidth={chevronWidth}
+                    showSlither
+                    freeScrolling
                 >
                     {
                         Datalist.map(el => (

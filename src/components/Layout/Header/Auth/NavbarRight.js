@@ -2,8 +2,10 @@ import React from 'react';
 import Signout from '../../../Auth/Signout';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {
-    f
-} from '@fortawesome/pro-solid-svg-icons';
+    faQuestionCircle,
+    faCog,
+    faEdit
+} from '@fortawesome/pro-light-svg-icons';
 
 function NavbarRight(props) {
     return (
@@ -144,9 +146,9 @@ function NavbarRight(props) {
                         <h6 className="tx-semibold mg-b-5">{props.authUser.first_name} {props.authUser.last_name}</h6>
                         <p className="mg-b-25 tx-12 tx-color-03">{props.authUser.role}</p>
                         <div className="dropdown-divider"/>
-                        <a href="https://ineedhelpers.com" className="dropdown-item"><i data-feather="help-circle"/> Help </a>
-                        <a href="" className="dropdown-item"><i data-feather="settings"/>Settings</a>
-                        <a href="" className="dropdown-item"><i data-feather="edit"/>Change Password</a>
+                        <a href="https://ineedhelpers.com" className="dropdown-item"><FontAwesomeIcon icon={faQuestionCircle} /> Help </a>
+                        <a href="" className="dropdown-item"><FontAwesomeIcon icon={faCog} /></a>
+                        <a href="" className="dropdown-item"><FontAwesomeIcon icon={faEdit} />Change Password</a>
                         <Signout isDropdownItem={true} />
                     </div>
                 </div>
