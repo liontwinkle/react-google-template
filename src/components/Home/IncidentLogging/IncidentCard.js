@@ -30,7 +30,7 @@ const IncidentCard = ({children, title}) => {
                         x1="3" y1="18" x2="3" y2="18" /></svg>
                 </span>
             </div>
-            <div className="incident-card-body">
+            <div className="incident-card-body p-1">
                 {children}
             </div>
         </div>
