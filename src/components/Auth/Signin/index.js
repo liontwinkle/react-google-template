@@ -27,6 +27,7 @@ function Signin ({
   getInstances,
   getTeams,
   isLoading,
+  setLoadingFg,
   resetSessionData,
   setSessionExpiryModalState
 }) {
@@ -38,7 +39,7 @@ function Signin ({
     // close session expiry modal
     setSessionExpiryModalState(false)
 
-    setLoadingFg(true)
+    setLoadingFg(true);
 
     try {
       const requestBody = {
@@ -49,26 +50,20 @@ function Signin ({
       signInAuth(requestBody).then(() => {
         getInstances().then(() => {
           getTeams()
-          setLoadingFg(false)
+          setLoadingFg(false);
         })
+      }).catch(err => {
+        setError(
+          err.data.field,
+          err.data.type,
+          err.data.message
+        );
+        setLoadingFg(false);
       })
     } catch (e) {
-      if (
-        e.response &&
-        e.response.data.error &&
-        e.response.data.type === 'validation'
-      ) {
-        setError(
-          e.response.data.field,
-          e.response.data.type,
-          e.response.data.message
-        )
-        setLoadingFg(false)
-      } else {
-        console.log('Unexpected error: Signin:submit', e)
-      }
+      console.log('Unexpected error: Signin:submit', e);
     }
-  }
+  };
 
   return (
     <>
@@ -152,10 +147,12 @@ function Signin ({
                   </Form.Group>
                   <Button variant='brand-02' block={true} type='submit'>
                     {isLoading ? (
-                      <>
-                        <Spinner size='sm' animation='grow' className='mr-2' />
-                        <span>Processing</span>
-                      </>
+                      <div>
+                        <div className="spinner-grow" role="status">
+                          <span className="sr-only">Loading...</span>
+                        </div>
+                        <span className="align-items-center ml-2">Processing</span>
+                      </div>
                     ) : (
                       'Sign In'
                     )}
