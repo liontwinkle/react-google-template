@@ -34,14 +34,12 @@ const IncidentContent = () => {
                 <ItemsCarousel
                     requestToChangeActive={setActiveItemIndex}
                     activeItemIndex={activeItemIndex}
-                    numberOfCards={Datalist.length}
+                    numberOfCards={3}
                     gutter={20}
                     leftChevron={<FontAwesomeIcon className="arrow arrow-prev" icon={faArrowLeft}/>}
                     rightChevron={<FontAwesomeIcon className="arrow arrow-next" icon={faArrowRight}/>}
                     outsideChevron
                     chevronWidth={chevronWidth}
-                    showSlither
-                    freeScrolling
                 >
                     {
                         Datalist.map(el => (
