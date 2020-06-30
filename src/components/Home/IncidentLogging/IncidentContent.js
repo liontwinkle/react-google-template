@@ -1,5 +1,6 @@
 import React, {useState} from 'react'
 import ItemsCarousel from 'react-items-carousel';
+
 import {Datalist} from '../../../constants/static';
 import IncidentCard from './IncidentCard';
 import ActionCard from "../../common/ActionCard";
@@ -34,7 +35,7 @@ const IncidentContent = () => {
                 <ItemsCarousel
                     requestToChangeActive={setActiveItemIndex}
                     activeItemIndex={activeItemIndex}
-                    numberOfCards={3}
+                    numberOfCards={5}
                     gutter={20}
                     leftChevron={<FontAwesomeIcon className="arrow arrow-prev" icon={faArrowLeft}/>}
                     rightChevron={<FontAwesomeIcon className="arrow arrow-next" icon={faArrowRight}/>}
