@@ -1,4 +1,14 @@
 .mail-body {
-  display: flex;
-  width: auto;
+  top: 107px;
+  bottom: 205px;
+}
+@media (min-width: 1200px) {
+  .mail-body {
+    top: 87px;
+    bottom: 55px;
+  }
+}
+
+.chat-sidebar {
+  border-right: none;
 }

@@ -44,7 +44,7 @@ function Instances({
             getInstances();
         }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [userId, instances])
+    }, [userId, instances]);
     
     return (
         <>

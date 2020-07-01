@@ -37,19 +37,34 @@
     width: 1px;
     height: 20px;
     border-right: solid 1px #8392a5;
-    margin: 0 10px;
+    margin: 0 10px 0 0;
   }
 
   .action-icon-font {
-    font-size: 1.75em;
-    margin-right: 10px;
+    font-size: 1.35em;
   }
-  @media (min-width: 1400px) {
+  @media (min-width: 1200px) {
     .action-icon-font {
-      font-size: 1.35rem;
+      font-size: 1.15rem;
     }
   }
 
+  .action_tab_a {
+    .action-icon-font {
+      margin-right: 10px;
+    }
+    @media (min-width: 1200px) {
+      .action-icon-font {
+        margin-right: 13px;
+      }
+    }
+  }
+
+  .action_tab_b {
+    .action-icon-font {
+      margin-right: 10px;
+    }
+  }
 
   .action_part {
     display: flex;

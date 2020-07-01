@@ -1,18 +1,28 @@
-.ant-tabs-nav-list {
-  width: 100%;
-  display: flex;
-  flex: 1 1;
+#command_tabs {
   justify-content: center;
-  button {
-    margin: 0 10px;
-  }
-  @media (min-width: 1400px) {
-    width: 100%;
-    display: flex;
-    flex: 1 1;
-    justify-content: space-around;
-    button {
-      margin: 0;
-    }
+  height: 47px;
+  padding-top: 8px;
+}
+
+@media (min-width: 1200px) {
+  #command_tabs {
+    height: 37px;
   }
 }
+
+.nav-line .nav-item + .nav-item {
+  margin-left: 15px;
+}
+
+ul#command_tabs > li > a {
+  font-size: 14px !important;
+}
+
+@media (min-width: 1200px) {
+  ul#command_tabs > li > a {
+    padding-top: 0;
+    font-size: 12px;
+    padding-bottom: 6px;
+  }
+}
+

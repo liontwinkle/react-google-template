@@ -31,7 +31,7 @@ const TeamPanel = () => {
                     <div id="chatDirectMsg" className="chat-msg-list">
                         <a href="#" className="media">
                             <FontAwesomeIcon icon={faHomeAlt} size="lg" />
-                            <div className="media-body mg-l-10">
+                            <div className="media-body p-2 ps">
                                 <h6 className="mg-b-0">Actions</h6>
                                 <small className="d-block tx-color-04">Team Actions</small>
                             </div>

@@ -81,16 +81,16 @@ const ActionCard = ({type, index}) => {
             <div className="card-body tx-13">
                 <div className="action-card-title d-flex justify-content-between align-items-center">
                     <p>#210 Signage Hazard - Millstons Point</p>
-                    <label className="pt-0 pb-0 pl-2 pr-2 rounded d-flex align-items-center m-0">3m</label>
+                    <span className="pt-0 pb-0 pl-2 pr-2 rounded d-flex align-items-center m-0">3m</span>
                 </div>
-                <p className="action-card-subheader pt-0 pb-0 pl-2 pr-2 rounded d-flex align-items-center m-0 bg-dark">Event
-                    Control Centre(ECC)</p>
+                <span className="action-card-subheader pt-0 pb-0 pl-2 pr-2 rounded d-flex align-items-center bg-dark">Event
+                    Control Centre(ECC)</span>
 
-                <label className="action-card-content">
+                <p className="action-card-content">
                     Royalty-free(RF) material subject to copyright subject to copyright or other intellectual property
                     rights may be used rights may be used without the need to pay royalities or liences fees for each
                     use.
-                </label>
+                </p>
             </div>
             <div className="card-footer tx-13 d-flex flex-column align-items-center">
                 <div className="w-100 d-flex justify-content-between align-items-center p-2">
@@ -109,7 +109,7 @@ const ActionCard = ({type, index}) => {
                             <a data-toggle="collapse" href={`#${type}-${index}`} role="button" aria-expanded="false"
                                aria-controls="collapseExample">
                                 <FontAwesomeIcon icon={faCommentAlt} size="lg" color="#8392a5"/>
-                                <span className="ml-1 text-blue">2</span>
+                                <span className="ml-1 text-blue msg-number">2</span>
                             </a>
                         </Tooltip>
                         <Tooltip placement="top" title="Attachment">
@@ -144,8 +144,8 @@ const ActionCard = ({type, index}) => {
                                 <div className="media-body">
                                     <h6>katherine <small>Today at 1:30am</small></h6>
 
-                                    <p>Hello everyone, this is my first message to this channel</p>
-                                    <p>anybody here?</p>
+                                    <p className="tx-12 tx-color-03">Hello everyone, this is my first message to this channel</p>
+                                    <p className="tx-12 tx-color-03">anybody here?</p>
                                 </div>
                             </>
                             <FontAwesomeIcon icon={faThumbsUp} size="lg" color="#8392a5"/>
@@ -157,13 +157,13 @@ const ActionCard = ({type, index}) => {
                                 </div>
                                 <div className="media-body">
                                     <h6>katherine <small>Today at 1:30am</small></h6>
-                                    <p>Hello everyone, this is my first message to this channel</p>
-                                    <p>Hello everyone, this is my first message to this channel</p>
-                                    <p>Hello everyone, this is my first message to this channel</p>
-                                    <p>Hello everyone, this is my first message to this channel</p>
-                                    <p>Hello everyone, this is my first message to this channel</p>
-                                    <p>Hello everyone, this is my first message to this channel</p>
-                                    <p>anybody here?</p>
+                                    <p className="tx-12 tx-color-03">Hello everyone, this is my first message to this channel</p>
+                                    <p className="tx-12 tx-color-03">Hello everyone, this is my first message to this channel</p>
+                                    <p className="tx-12 tx-color-03">Hello everyone, this is my first message to this channel</p>
+                                    <p className="tx-12 tx-color-03">Hello everyone, this is my first message to this channel</p>
+                                    <p className="tx-12 tx-color-03">Hello everyone, this is my first message to this channel</p>
+                                    <p className="tx-12 tx-color-03">Hello everyone, this is my first message to this channel</p>
+                                    <p className="tx-12 tx-color-03">anybody here?</p>
                                 </div>
                             </>
                             <FontAwesomeIcon icon={faThumbsUp} size="lg" color="#8392a5"/>

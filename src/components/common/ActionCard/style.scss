@@ -1,3 +1,14 @@
+.ant-tabs-nav-list {
+  button {
+    margin: 0 2px;
+  }
+  @media (min-width: 1400px) {
+    button {
+      margin: 0 10px;
+    }
+  }
+}
+
 .action-card-title {
   & > p {
     font-size: 14px;
@@ -7,14 +18,19 @@
     margin: 0;
   }
 
-  @media (min-width: 1400px) {
+  @media (min-width: 1200px) {
     & > p {
-      font-size: 18px;
+      font-size: 16px;
     }
   }
 
-  label {
+  span {
     background-color: #cdd4e0;
+    font-size: 10px;
+    font-weight: 700;
+    font-family: -apple-system, BlinkMacSystemFont, "Inter UI", Roboto, sans-serif;
+    padding: 3px 5px 4px;
+    border-radius: 3px;
   }
 }
 
@@ -22,12 +38,25 @@
   font-size: 12px;
   width: fit-content;
   color: white;
+  font-weight: 500;
+  margin-top: 5px;
 }
 
 .action-card-content {
+  font-size: 13px;
   white-space: pre-wrap;
   color: black;
   margin-top: 10px;
+}
+
+.msg-number {
+  font-size: 0.9rem;
+  color: #0168fa;
+}
+.avatar-initial {
+  background-color: pink;
+  font-weight: 400;
+  font-size: 10px !important;
 }
 
 .bt-markcomp {

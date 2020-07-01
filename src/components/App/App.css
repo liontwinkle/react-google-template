@@ -6,3 +6,69 @@
     font-family: "Font Awesome 5 Pro", sans-serif !important;
     font-weight: 900;
 }
+
+@media (min-width: 992px) {
+    .navbar-header {
+        height: 55px;
+    }
+    .navbar-header .navbar-brand {
+        width: 240px;
+        padding: 0 0 0 15px;
+    }
+}
+.chat-sidebar-header .dropdown-link > span svg {
+    width: 0.875em;
+}
+
+.p-1 {
+    padding: 0.5rem !important;
+}
+
+@media (min-width: 1000px) {
+    .mail-wrapper {
+        top: 50px !important;
+    }
+}
+
+@media (min-width: 1200px) {
+    .avatar-sm {
+        width: 24px;
+        height: 24px;
+    }
+    .dropdown-message .dropdown-link svg, .dropdown-notification .dropdown-link svg {
+        width: 16px;
+        height: 16px;
+        stroke-width: 2.25px;
+    }
+    .dropdown-message .dropdown-link.new-indicator span, .dropdown-notification .dropdown-link.new-indicator span {
+        width: 11px;
+        height: 11px;
+        font-size: 7px;
+    }
+    .dropdown-message .dropdown-link.new-indicator span, .dropdown-notification .dropdown-link.new-indicator span {
+       top: -4px;
+       right: -2px;
+    }
+    .mail-wrapper {
+        top: 55px;
+    }
+}
+
+.chat-sidebar-header {
+    border-bottom: 1px solid rgba(72, 94, 144, 0.16);
+    height: 50px;
+}
+
+.chat-sidebar-header .dropdown-link {
+    height: 50px;
+}
+.df-logo {
+    font-weight: 700;
+    font-size: 19px;
+    letter-spacing: 0;
+    display: flex;
+    align-items: center;
+    position: relative;
+    color: #031a61;
+    margin-top: -5px;
+}

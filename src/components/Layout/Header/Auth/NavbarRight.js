@@ -11,6 +11,7 @@ function NavbarRight(props) {
     return (
         <>
             <div className="navbar-right">
+                <a href='dashforge.html'>Docs</a>
                 <div className="dropdown dropdown-message">
                     <a href="" className="dropdown-link new-indicator" data-toggle="dropdown">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
@@ -147,7 +148,7 @@ function NavbarRight(props) {
                         <p className="mg-b-25 tx-12 tx-color-03">{props.authUser.role}</p>
                         <div className="dropdown-divider"/>
                         <a href="https://ineedhelpers.com" className="dropdown-item"><FontAwesomeIcon icon={faQuestionCircle} /> Help </a>
-                        <a href="" className="dropdown-item"><FontAwesomeIcon icon={faCog} /></a>
+                        <a href="" className="dropdown-item"><FontAwesomeIcon icon={faCog} />Settings</a>
                         <a href="" className="dropdown-item"><FontAwesomeIcon icon={faEdit} />Change Password</a>
                         <Signout isDropdownItem={true} />
                     </div>

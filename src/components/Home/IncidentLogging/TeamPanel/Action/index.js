@@ -3,13 +3,13 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {Tooltip, Input } from "antd";
 import {
     faSirenOn,
-    faUserCircle,
     faEllipsisH
 } from "@fortawesome/pro-solid-svg-icons";
 
 import {
     faAmbulance,
     faChild,
+    faUserCircle,
     faCctv
 } from "@fortawesome/pro-regular-svg-icons"
 import {
