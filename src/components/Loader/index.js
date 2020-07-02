@@ -14,9 +14,7 @@ function Loader() {
     };
  
     return (
-		<div className="loader">
-			<Lottie options={defaultOptions} />
-		</div>
+		<div className="loader" />
     )
 }
 

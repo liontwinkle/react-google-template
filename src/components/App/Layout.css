@@ -103,7 +103,7 @@
   height: 100%;
 }
 
-.mail-group {
+.main-group {
   width: 100vw;
   position: absolute;
   top: 0;
@@ -112,24 +112,24 @@
   transition: all 0.3s;
 }
 @media (prefers-reduced-motion: reduce) {
-  .mail-group {
+  .main-group {
     transition: none;
   }
 }
 @media (min-width: 375px) {
-  .mail-group {
+  .main-group {
     left: 220px;
   }
 }
 @media (min-width: 768px) {
-  .mail-group {
+  .main-group {
     width: auto;
     right: 0;
     left: 60px;
   }
 }
 @media (min-width: 1000px) {
-  .mail-group {
+  .main-group {
     width: 300px;
     left: 45px;
     border-right: 1px solid rgba(72, 94, 144, 0.16);
@@ -222,7 +222,7 @@
   margin-top: 0;
 }
 
-.mail-content {
+.main-content {
   position: absolute;
   top: 0;
   left: 200vw;
@@ -231,7 +231,7 @@
   background-color: #ffffff;
 }
 @media (min-width: 1000px) {
-  .mail-content {
+  .main-content {
     left: 345px;
     width: auto;
     right: 0;

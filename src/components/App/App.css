@@ -16,7 +16,7 @@
         padding: 0 0 0 15px;
     }
 }
-.chat-sidebar-header .dropdown-link > span svg {
+.incident-sidebar-header .dropdown-link > span svg {
     width: 0.875em;
 }
 
@@ -54,12 +54,12 @@
     }
 }
 
-.chat-sidebar-header {
+.incident-sidebar-header {
     border-bottom: 1px solid rgba(72, 94, 144, 0.16);
     height: 50px;
 }
 
-.chat-sidebar-header .dropdown-link {
+.incident-sidebar-header .dropdown-link {
     height: 50px;
 }
 .df-logo {

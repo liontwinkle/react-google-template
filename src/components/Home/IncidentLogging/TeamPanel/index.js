@@ -21,10 +21,12 @@ const TeamPanel = () => {
         {key: 'program', value: 'Program', children: <Program/>},
         {key: 'announcement', value: 'Announcement', children: <Announcement/>}
     ];
-
+    /**
+     * we are using chat page of template here.
+     */
     return (
-        <div className="chat-sidebar d-flex flex-column justify-content-between">
-            <div className="chat-sidebar-body">
+        <div className="incident-sidebar d-flex flex-column justify-content-between">
+            <div className="incident-sidebar-body">
                 <CustomDropDown/>
                 <CustomTab tabList={tabList}/>
                 <div className=" nav_action_link flex-fill pd-y-20 pd-x-10 bd-t">

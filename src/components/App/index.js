@@ -29,6 +29,7 @@ import './Layout.css'
 
 function App ({
   loading,
+  teamFg,
   isLoading,
   authUser,
   loginStep,
@@ -38,8 +39,6 @@ function App ({
   isSessionExpiryModalOpened
 }) {
   if (loading && authUser) return <Loader />
-
-  // if (loading) return false
   return (
     <Router basename={process.env.PUBLIC_URL}>
       <Header
@@ -68,7 +67,9 @@ function App ({
                 </div>
               )
             ) : (
-              <Redirect to={routes.SELECT_INSTANCE_TEAM} />
+                teamFg && (
+                    <Redirect to={routes.SELECT_INSTANCE_TEAM} />
+                )
             )
           ) : (
             <Redirect to={routes.SIGNIN} />
@@ -154,6 +155,7 @@ App.propTypes = {
   sessionData: PropTypes.object,
   loading: PropTypes.bool.isRequired,
   isLoading: PropTypes.bool,
+  teamFg: PropTypes.bool,
   isMainMenuOpened: PropTypes.bool.isRequired,
   isNavbarMenuOpened: PropTypes.bool.isRequired,
   isSessionExpiryModalOpened: PropTypes.bool.isRequired
@@ -164,10 +166,12 @@ App.defaultProps = {
   loginStep: null,
   sessionData: null,
   isLoading: null,
+  teamFg: null,
 };
 
 const mapStateToProps = store => ({
   loading: store.sessionData.loading,
+  teamFg: store.sessionData.teamFg,
   authUser: store.sessionData.authUser,
   loginStep: store.sessionData.loginStep,
   sessionData: store.sessionData.sessionData,

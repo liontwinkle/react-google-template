@@ -6,7 +6,8 @@ const INITIAL_STATE = {
 	sessionData: localStorage.getItem('sessionData') ? JSON.parse(localStorage.getItem('sessionData')) : null,
 	instances: [],
 	teams: [],
-	loading: false
+	loading: false,
+	teamFg: false,
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -66,6 +67,7 @@ export default (state = INITIAL_STATE, action) => {
 			return {
 				...state,
 				teams,
+				teamFg: true,
 			}
 		}
 

@@ -1,11 +1,11 @@
-#command_tabs {
+#incident_tabs {
   justify-content: center;
   height: 47px;
   padding-top: 8px;
 }
 
 @media (min-width: 1200px) {
-  #command_tabs {
+  #incident_tabs {
     height: 37px;
   }
 }
@@ -14,15 +14,45 @@
   margin-left: 15px;
 }
 
-ul#command_tabs > li > a {
+ul#incident_tabs > li > a {
   font-size: 14px !important;
 }
 
 @media (min-width: 1200px) {
-  ul#command_tabs > li > a {
+  ul#incident_tabs > li > a {
     padding-top: 0;
     font-size: 12px;
     padding-bottom: 6px;
+  }
+}
+.ant-tabs-nav-wrap.ant-tabs-nav-wrap-ping-right {
+  width: 100%;
+  overflow: unset;
+}
+.ant-tabs > .ant-tabs-nav .ant-tabs-nav-list, .ant-tabs > div > .ant-tabs-nav .ant-tabs-nav-list {
+  justify-content: center;
+  height: 47px;
+  position: relative;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-transition: none;
+  transition: none;
+  transform: unset;
+  flex: 1 1;
+  button {
+    margin: 0;
+    outline: none;
+    align-items: center;
+  }
+}
+
+@media (min-width: 1200px) {
+  .ant-tabs > .ant-tabs-nav .ant-tabs-nav-list, .ant-tabs > div > .ant-tabs-nav .ant-tabs-nav-list {
+    height: 37px;
+    button {
+      margin: 0;
+      outline: none;
+    }
   }
 }
 

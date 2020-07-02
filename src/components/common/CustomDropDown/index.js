@@ -17,7 +17,7 @@ import './style.scss';
 
 const CustomDropDown = ({dataList, title, Icon}) => {
     return (
-        <div className="chat-sidebar-header">
+        <div className="incident-sidebar-header">
             <a href="#" data-toggle="dropdown" className="dropdown-link">
                 <div className="d-flex align-items-center">
                     <div className="avatar avatar-sm mg-r-8"><span className="avatar-initial rounded-circle">T</span>

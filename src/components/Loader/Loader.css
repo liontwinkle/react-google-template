@@ -1,16 +1,14 @@
 .loader {
-	width: 10%;
-	display: block;
-	overflow: hidden;
-	transform: translate3d(0,0,0);
-	text-align: center;
-	opacity: 1;
-	margin: 0;
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	-ms-transform: translate(-50%, -50%);
-	transform: translate(-50%, -50%);
+	position: fixed;
+	top: calc(50% - 50px);
+	left: calc(50% - 50px);
+	width: 100px;
+	height: 100px;
+	z-index: 9999;
+	background-image: url(./Eclipse-1s-84px.gif);
+	background-repeat: no-repeat;
+	background-color: #FFF;
+	background-position: center;
 }
 
 /* Smartphones (portrait and landscape) ----------- */

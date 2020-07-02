@@ -476,24 +476,24 @@ h1, h2, h3, h4, h5, h6,
     .chat-navleft .nav-link:not(.active):hover, .chat-navleft .nav-link:not(.active):focus {
       color: #fff; }
 
-.chat-sidebar {
+.incident-sidebar {
   background-color: #141c2b; }
 
-.chat-sidebar-header {
+.incident-sidebar-header {
   background-color: #172032; }
-  .chat-sidebar-header .dropdown-link > span {
+  .incident-sidebar-header .dropdown-link > span {
     color: #3b4863; }
-  .chat-sidebar-header .dropdown-link:hover > span, .chat-sidebar-header .dropdown-link:focus > span {
+  .incident-sidebar-header .dropdown-link:hover > span, .incident-sidebar-header .dropdown-link:focus > span {
     color: #cdd4e0; }
-  .chat-sidebar-header .dropdown-menu {
+  .incident-sidebar-header .dropdown-menu {
     background-color: #192235; }
-    .chat-sidebar-header .dropdown-menu::before {
+    .incident-sidebar-header .dropdown-menu::before {
       border-bottom-color: rgba(255, 255, 255, 0.08); }
-    .chat-sidebar-header .dropdown-menu::after {
+    .incident-sidebar-header .dropdown-menu::after {
       border-bottom-color: #192235; }
-  .chat-sidebar-header .dropdown-item {
+  .incident-sidebar-header .dropdown-item {
     color: #97a3b9; }
-    .chat-sidebar-header .dropdown-item:hover, .chat-sidebar-header .dropdown-item:focus {
+    .incident-sidebar-header .dropdown-item:hover, .incident-sidebar-header .dropdown-item:focus {
       color: #fff;
       background-color: #1f2c43; }
 

@@ -31,13 +31,16 @@ function Home ({ viewIndex, isLoading }) {
         return <DashContent />
     }
   };
-
+  /**
+   * The main component for the Body of site
+   * It consists of two parts; left bar and content.
+   */
   return (
-    <div className='mail-body'>
-      <div className='mail-group'>{LeftBar()}</div>
-      <div className='mail-content'>
+    <div className='main-body'>
+      <div className='main-group'>{LeftBar()}</div>
+      <div className='main-content'>
         {ContentBody()}
-        <div className='mail-content__footer'>
+        <div className='main-content__footer'>
           <TaskBar />
         </div>
       </div>
