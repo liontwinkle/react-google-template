@@ -23,6 +23,7 @@ import NotFound from '../NotFound'
 
 import * as routes from '../../constants/routes'
 import * as loginSteps from '../../constants/login_steps'
+import * as FullStory from "@fullstory/browser";
 
 import './App.css'
 import './Layout.css'
@@ -39,6 +40,14 @@ function App ({
   isSessionExpiryModalOpened
 }) {
   if (loading && authUser) return <Loader />
+
+  if(authUser) {
+    FullStory.event('identify', {
+      uid: authUser.userId,
+      displayName: authUser.username,
+      email: authUser.email,
+    })
+  }
   return (
     <Router basename={process.env.PUBLIC_URL}>
       <Header

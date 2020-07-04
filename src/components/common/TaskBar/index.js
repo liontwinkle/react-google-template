@@ -1,25 +1,93 @@
-import React, {Component} from 'react';
-import Editor, {createEditorStateWithText} from 'draft-js-plugins-editor';
-import createEmojiPlugin from 'draft-js-emoji-plugin';
+import React, { Component } from 'react';
+import { EditorState } from 'draft-js';
+import Editor from 'draft-js-plugins-editor';
+import createMentionPlugin, { defaultSuggestionsFilter } from 'draft-js-mention-plugin';
+import editorStyles from './styles.css';
+import mentionsStyles from './metion.css';
+import { mentions } from '../../../constants/static';
+import 'draft-js-mention-plugin/lib/plugin.css';
 
-import './styles.scss';
+const positionSuggestions = ({ state, props }) => {
+    let transform;
+    let transition;
 
-const emojiPlugin = createEmojiPlugin();
-const {EmojiSuggestions} = emojiPlugin;
-const plugins = [emojiPlugin];
-const text = ``;
+    if (state.isActive && props.suggestions.length > 0) {
+        transform = 'scaleY(1)';
+        transition = 'all 0.25s cubic-bezier(.3,1.2,.2,1)';
+    } else if (state.isActive) {
+        transform = 'scaleY(0)';
+        transition = 'all 0.25s cubic-bezier(.3,1,.2,1)';
+    }
 
+    return {
+        transform,
+        transition,
+    };
+};
+
+const Entry = (props) => {
+    const {
+        mention,
+        theme,
+        searchValue, // eslint-disable-line no-unused-vars
+        isFocused, // eslint-disable-line no-unused-vars
+        ...parentProps
+    } = props;
+
+    return (
+        <div {...parentProps}>
+            <div className={theme.mentionSuggestionsEntryContainer}>
+                <div className={theme.mentionSuggestionsEntryContainerLeft}>
+                    <img
+                        src={mention.avatar}
+                        className={theme.mentionSuggestionsEntryAvatar}
+                        role="presentation"
+                    />
+                </div>
+
+                <div className={theme.mentionSuggestionsEntryContainerRight}>
+                    <div className={theme.mentionSuggestionsEntryText}>
+                        {mention.name}
+                    </div>
+
+                    <div className={theme.mentionSuggestionsEntryTitle}>
+                        {mention.title}
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
+};
 
 export default class SimpleEmojiEditor extends Component {
 
-    state = {
-        editorState: createEditorStateWithText(text),
-    };
+    constructor(props) {
+        super(props);
 
+        this.mentionPlugin = createMentionPlugin({
+            mentions,
+            entityMutability: 'IMMUTABLE',
+            theme: mentionsStyles,
+            positionSuggestions,
+            mentionPrefix: '@',
+            supportWhitespace: true
+        });
+    }
+
+    state = {
+        editorState: EditorState.createEmpty(),
+        suggestions: mentions,
+    };
 
     onChange = (editorState) => {
         this.setState({
             editorState,
+        });
+    };
+
+    onSearchChange = ({ value }) => {
+        this.setState({
+            suggestions: defaultSuggestionsFilter(value, mentions),
         });
     };
 
@@ -28,6 +96,10 @@ export default class SimpleEmojiEditor extends Component {
     };
 
     render() {
+        const { MentionSuggestions } = this.mentionPlugin;
+        const plugins = [this.mentionPlugin];
+
+        console.log('styles:', editorStyles); // fixme
         return (
             <div className='chat-content-footer w-100 pr-5'>
                 <a href="" data-toggle="tooltip" title="Add File" className="chat-plus">
@@ -37,17 +109,20 @@ export default class SimpleEmojiEditor extends Component {
                         <line x1="12" y1="5" x2="12" y2="19" />
                         <line x1="5" y1="12" x2="19" y2="12" />
                     </svg></a>
-                <div className='form-control align-self-center bd-0 editor' onClick={this.focus}>
+                <div className={`${editorStyles.editor} form-control bd-0`} onClick={this.focus}>
                     <Editor
                         editorState={this.state.editorState}
                         onChange={this.onChange}
                         plugins={plugins}
+                        ref={(element) => { this.editor = element; }}
                         placeholder="Create task... ie. @Bob can you complete incident report before today 8pm?"
-                        ref={(element) => {
-                            this.editor = element;
-                        }}
                     />
-                    <EmojiSuggestions/>
+                    <MentionSuggestions
+                        onSearchChange={this.onSearchChange}
+                        suggestions={this.state.suggestions}
+                        onAddMention={this.onAddMention}
+                        entryComponent={Entry}
+                    />
                 </div>
                 <nav>
                     <a href="" data-toggle="tooltip" title="Add GIF">

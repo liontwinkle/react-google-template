@@ -75,7 +75,6 @@ function Home ({
 
   if (isLoading) return <Loader />;
   // todo here need to components selector
-
   const LeftBar = () => {
     switch (viewIndex) {
       case 2:
