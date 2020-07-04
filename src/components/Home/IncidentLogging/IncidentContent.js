@@ -1,11 +1,13 @@
 import React, {useState} from 'react'
 import ItemsCarousel from 'react-items-carousel';
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faArrowRight, faArrowLeft} from "@fortawesome/free-solid-svg-icons";
+
+import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 
 import {Datalist} from '../../../constants/static';
 import IncidentCard from './IncidentCard';
 import ActionCard from "../../common/ActionCard";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faArrowRight, faArrowLeft} from "@fortawesome/free-solid-svg-icons";
 
 import './style.scss';
 
@@ -33,14 +35,21 @@ const IncidentContent = () => {
                 minWidth: '1500px',
             }}>
                 <ItemsCarousel
+                    infiniteLoop={false}
+                    gutter={12}
+                    activePosition={'center'}
+                    chevronWidth={chevronWidth}
+                    disableSwipe={false}
+                    alwaysShowChevrons={false}
+                    numberOfCards={4}
+                    slidesToScroll={4}
+                    outsideChevron={true}
+                    showSlither={false}
+                    firstAndLastGutter={false}
                     requestToChangeActive={setActiveItemIndex}
                     activeItemIndex={activeItemIndex}
-                    numberOfCards={5}
-                    gutter={20}
                     leftChevron={<FontAwesomeIcon className="arrow arrow-prev" icon={faArrowLeft}/>}
                     rightChevron={<FontAwesomeIcon className="arrow arrow-next" icon={faArrowRight}/>}
-                    outsideChevron
-                    chevronWidth={chevronWidth}
                 >
                     {
                         Datalist.map(el => (

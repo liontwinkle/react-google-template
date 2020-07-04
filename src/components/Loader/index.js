@@ -14,7 +14,10 @@ function Loader() {
     };
  
     return (
-		<div className="loader" />
+		<div className="loader">
+			<Lottie options={defaultOptions} />
+		</div>
+		// <div className="loader" />
     )
 }
 
