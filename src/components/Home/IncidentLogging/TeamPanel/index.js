@@ -1,4 +1,7 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import {connect} from 'react-redux'
+import {bindActionCreators} from 'redux'
+import PropTypes from 'prop-types'
 import CustomDropDown from "../../../common/CustomDropDown";
 import ActionPanel from './Action';
 import Announcement from "./Announcement";
@@ -11,12 +14,26 @@ import {
     faHomeAlt,
 } from '@fortawesome/pro-regular-svg-icons';
 
+import {getActionTabs, setActiveIndex} from "../../../../redux/action/incident";
 
 import './style.scss';
 
-const TeamPanel = () => {
+const TeamPanel = ({
+                       getActionTabs,
+                       setActiveIndex,
+                       sessionData,
+                       isFetchingFlag,
+                       actionTabs,
+                       activeTabIndex,
+                   }) => {
+    useEffect(() => {
+        if(sessionData) {
+            getActionTabs(sessionData.id_event, sessionData.id_instance);
+        }
+    }, [getActionTabs]);
+
     const tabList = [
-        {key: 'action', value: 'Action', children: <ActionPanel/>},
+        {key: 'action', value: 'Action', children: <ActionPanel actionTabs={actionTabs} activeTabIndex={activeTabIndex} setActiveIndex={setActiveIndex}/>},
         {key: 'update', value: 'Update', children: <Update/>},
         {key: 'program', value: 'Program', children: <Program/>},
         {key: 'announcement', value: 'Announcement', children: <Announcement/>}
@@ -62,4 +79,38 @@ const TeamPanel = () => {
     )
 };
 
-export default TeamPanel;
+TeamPanel.propTypes = {
+    isFetchingFlag: PropTypes.bool,
+    getActionTabs: PropTypes.func,
+    setActiveIndex: PropTypes.func,
+    sessionData: PropTypes.object,
+    actionTabs: PropTypes.array,
+    activeTabIndex: PropTypes.number,
+};
+
+TeamPanel.defaultProps = {
+    getActionTabs: () => {},
+    setActiveIndex: () => {},
+    isFetchingFlag: false,
+    sessionData: {},
+    actionTabs:[],
+    activeTabIndex: 0,
+};
+
+const mapDispatchToProps = dispatch =>
+    bindActionCreators(
+        {
+            getActionTabs,
+            setActiveIndex
+        },
+        dispatch
+    );
+
+const mapStateToProps = store => ({
+    isFetchingFlag: store.incidentData.isFetchingFlag,
+    sessionData: store.sessionData.sessionData,
+    actionTabs: store.incidentData.actionTabs,
+    activeTabIndex: store.incidentData.activeTabIndex,
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(TeamPanel)

@@ -27,14 +27,14 @@ const CustomDropDown = ({dataList, title, Icon}) => {
                 <span><FontAwesomeIcon icon={faChevronDown} /></span>
             </a>
             <div className="dropdown-menu dropdown-menu-right">
-                <a href="" className="dropdown-item"><FontAwesomeIcon icon={faUserPlus} /> Invite People</a>
-                <a href="" className="dropdown-item"><FontAwesomeIcon icon={faPlusSquare} /> Create Channel</a>
-                <a href="" className="dropdown-item"><FontAwesomeIcon icon={faServer} /> Server Settings</a>
-                <a href="" className="dropdown-item"><FontAwesomeIcon icon={faBell} /> Notification Settings</a>
-                <a href="" className="dropdown-item"><FontAwesomeIcon icon={faBolt} /> Privacy Settings</a>
+                <a href="#" className="dropdown-item"><FontAwesomeIcon icon={faUserPlus} /> Invite People</a>
+                <a href="#" className="dropdown-item"><FontAwesomeIcon icon={faPlusSquare} /> Create Channel</a>
+                <a href="#" className="dropdown-item"><FontAwesomeIcon icon={faServer} /> Server Settings</a>
+                <a href="#" className="dropdown-item"><FontAwesomeIcon icon={faBell} /> Notification Settings</a>
+                <a href="#" className="dropdown-item"><FontAwesomeIcon icon={faBolt} /> Privacy Settings</a>
                 <div className="dropdown-divider" />
-                <a href="" className="dropdown-item"><FontAwesomeIcon icon={faEdit} /> Edit Team Details</a>
-                <a href="" className="dropdown-item">
+                <a href="#" className="dropdown-item"><FontAwesomeIcon icon={faEdit} /> Edit Team Details</a>
+                <a href="#" className="dropdown-item">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                          stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
                          className="feather feather-shield-off">

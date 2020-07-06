@@ -47,7 +47,7 @@ function AuthHeader({
 	return (
 		<>
 			<header className="navbar navbar-header navbar-header-fixed">
-				<a href="" id="mainMenuOpen" className="burger-menu">
+				<a href="#" id="mainMenuOpen" className="burger-menu">
 					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
 						 stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
 						 className="feather feather-menu">
@@ -55,7 +55,7 @@ function AuthHeader({
 						<line x1="3" y1="6" x2="21" y2="6" />
 						<line x1="3" y1="18" x2="21" y2="18" />
 					</svg></a>
-				<a href="" id="chatContentClose" className="burger-menu d-none">
+				<a href="#" id="chatContentClose" className="burger-menu d-none">
 					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
 						 stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
 						 className="feather feather-arrow-left">

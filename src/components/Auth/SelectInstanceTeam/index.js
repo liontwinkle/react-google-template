@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, {useState, useEffect} from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { withRouter } from 'react-router-dom';
-import { useForm } from "react-hook-form";
-import { Container, Form, Button, Spinner } from 'react-bootstrap';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
+import {withRouter} from 'react-router-dom';
+import {useForm} from "react-hook-form";
+import {Container, Form, Button, Spinner} from 'react-bootstrap';
 
 import Teams from './teams';
 import Signout from '../Signout';
@@ -20,24 +20,24 @@ import {
     getTrainingCount,
 } from '../../../redux/action/session';
 
-import { setSessionExpiryModalState } from '../../../redux/action/themeConfigs';
+import {setSessionExpiryModalState} from '../../../redux/action/themeConfigs';
 
 import '../Auth.css';
 
 function SelectInstanceTeam({
-    teams,
-    getTeams,
-    verifyToken,
-    updateUser,
-    authUser,
-    setLoginStep,
-    setSessionData,
-    getTrainingCount,
-    setSessionExpiryModalState,
-    sessionData,
-}) {
+                                teams,
+                                getTeams,
+                                verifyToken,
+                                updateUser,
+                                authUser,
+                                setLoginStep,
+                                setSessionData,
+                                getTrainingCount,
+                                setSessionExpiryModalState,
+                                sessionData,
+                            }) {
 
-    const { register, handleSubmit, formState, errors, setValue } = useForm();
+    const {register, handleSubmit, formState, errors, setValue} = useForm();
     const [loading, setLoading] = useState(false);
     const [idInstance, setIdInstance] = useState(sessionData ? sessionData.id_instance : null);
     const [idEvent, setIdEvent] = useState(sessionData ? sessionData.id_event : null);
@@ -92,21 +92,12 @@ function SelectInstanceTeam({
 
     const changeTeamHandler = async (event) => {
         let id_team = event.target.value;
-
-        // check session
-        verifyToken()
-            .then(() => {
-                // functionality start
-                setIdTeam(id_team);
-                // set sessionData data
-                setSessionData({
-                    id_instance: idInstance,
-                    id_team: id_team,
-                    id_event: idEvent
-                })
-            }).catch((error) => {
-                setSessionExpiryModalState(true);
-            });
+        setIdTeam(id_team);
+        setSessionData({
+            id_instance: idInstance,
+            id_team: id_team,
+            id_event: idEvent
+        })
     };
 
     const submit = async (formData) => {
@@ -180,20 +171,40 @@ function SelectInstanceTeam({
 
                                                 <Form.Group controlId="role">
                                                     <Form.Label>Role <span className="tx-danger">*</span></Form.Label>
-                                                    <Form.Control defaultValue={authUser.role} name="role" type="text" placeholder="Enter your role" ref={register({ required: true })} className={errors.role ? "parsley-error" : (formState.isSubmitted && formState.touched.role && "parsley-success")} />
-                                                    {errors.role && errors.role.type === "required" && (<div className="parsley-errors-list filled mt-1">This value is required.</div>)}
+                                                    <Form.Control defaultValue={authUser.role} name="role" type="text"
+                                                                  placeholder="Enter your role"
+                                                                  ref={register({required: true})}
+                                                                  className={errors.role ? "parsley-error" : (formState.isSubmitted && formState.touched.role && "parsley-success")}/>
+                                                    {errors.role && errors.role.type === "required" && (
+                                                        <div className="parsley-errors-list filled mt-1">This value is
+                                                            required.</div>)}
                                                 </Form.Group>
                                                 <Form.Group controlId="company">
-                                                    <Form.Label>Agency / Company Name <span className="tx-danger">*</span></Form.Label>
-                                                    <Form.Control defaultValue={authUser.company} name="company" type="text" placeholder="Enter company name" ref={register({ required: true })} className={errors.company ? "parsley-error" : (formState.isSubmitted && formState.touched.company && "parsley-success")} />
-                                                    {errors.company && errors.company.type === "required" && (<div className="parsley-errors-list filled mt-1">This value is required.</div>)}
+                                                    <Form.Label>Agency / Company Name <span
+                                                        className="tx-danger">*</span></Form.Label>
+                                                    <Form.Control defaultValue={authUser.company} name="company"
+                                                                  type="text" placeholder="Enter company name"
+                                                                  ref={register({required: true})}
+                                                                  className={errors.company ? "parsley-error" : (formState.isSubmitted && formState.touched.company && "parsley-success")}/>
+                                                    {errors.company && errors.company.type === "required" && (
+                                                        <div className="parsley-errors-list filled mt-1">This value is
+                                                            required.</div>)}
                                                 </Form.Group>
                                                 <Form.Group controlId="contact_number">
-                                                    <Form.Label>Contact number <span className="tx-danger">*</span></Form.Label>
+                                                    <Form.Label>Contact number <span
+                                                        className="tx-danger">*</span></Form.Label>
                                                     { /* eslint-disable-next-line */}
-                                                    <Form.Control defaultValue={authUser.contact_number} name="contact_number" type="text" placeholder="Enter your contact number" ref={register({ required: true, pattern: /^\d+$/ })} className={errors.contact_number ? "parsley-error" : (formState.isSubmitted && formState.touched.contact_number && "parsley-success")} />
-                                                    {errors.contact_number && errors.contact_number.type === "required" && (<div className="parsley-errors-list filled mt-1">This value is required.</div>)}
-                                                    {errors.contact_number && errors.contact_number.type === "pattern" && (<div className="parsley-errors-list filled mt-1">This value should be digits.</div>)}
+                                                    <Form.Control defaultValue={authUser.contact_number}
+                                                                  name="contact_number" type="text"
+                                                                  placeholder="Enter your contact number"
+                                                                  ref={register({required: true, pattern: /^\d+$/})}
+                                                                  className={errors.contact_number ? "parsley-error" : (formState.isSubmitted && formState.touched.contact_number && "parsley-success")}/>
+                                                    {errors.contact_number && errors.contact_number.type === "required" && (
+                                                        <div className="parsley-errors-list filled mt-1">This value is
+                                                            required.</div>)}
+                                                    {errors.contact_number && errors.contact_number.type === "pattern" && (
+                                                        <div className="parsley-errors-list filled mt-1">This value
+                                                            should be digits.</div>)}
                                                 </Form.Group>
                                             </>
                                         )
@@ -201,13 +212,13 @@ function SelectInstanceTeam({
                                     <Button variant="brand-02" block={true} type="submit">
                                         {loading ? (
                                             <>
-                                                <Spinner size="sm" animation="grow" className="mr-2" />
+                                                <Spinner size="sm" animation="grow" className="mr-2"/>
                                                 <span>Processing</span>
                                             </>
                                         ) : 'Continue'}
                                     </Button>
                                 </Form>
-                                <div className="tx-13 mg-t-20 tx-center">Something is wrong? <Signout /></div>
+                                <div className="tx-13 mg-t-20 tx-center">Something is wrong? <Signout/></div>
                             </div>
                         </div>
                     </div>

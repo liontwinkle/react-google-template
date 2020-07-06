@@ -1,47 +1,31 @@
 import React from 'react';
+import PropTypes from 'prop-types'
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {Tooltip, Input } from "antd";
-import {
-    faSirenOn,
-    faEllipsisH
-} from "@fortawesome/pro-solid-svg-icons";
-
-import {
-    faAmbulance,
-    faChild,
-    faUserCircle,
-    faCctv
-} from "@fortawesome/pro-regular-svg-icons"
-import {
-    faFireAlt
-} from "@fortawesome/pro-duotone-svg-icons"
-
+import { faEllipsisH } from "@fortawesome/pro-solid-svg-icons";
+import { faUserCircle } from "@fortawesome/pro-regular-svg-icons";
 import { Switch } from 'antd';
-import GoogleMapComponent from '../../../../common/GoogleMap';
+import DefaultAction from "./defaultAction";
 
 import './style.scss';
+import FieldAction from "./fieldAction";
 
-const ActionPanel = () => {
-    const iconListA = [
-        {key: 'police', value: 'Police', icon: <FontAwesomeIcon icon={faSirenOn} className="action-icon-font" color='#8392a5' />},
-        {key: 'fire_rescue', value: 'Fire / Rescue', icon: <FontAwesomeIcon icon={faFireAlt} className="action-icon-font" color='#8392a5' />},
-        {key: 'ambulance', value: 'Ambulance / First-Aid', icon: <FontAwesomeIcon icon={faAmbulance} className="action-icon-font" color='#8392a5'/>},
-        {key: 'missing', value: 'Missing Lost Child or Vunerable', icon:<FontAwesomeIcon icon={faChild} className="action-icon-font" color='#8392a5'/>},
-        {key: 'security', value: 'Security', icon:<FontAwesomeIcon icon={faCctv} size={"2x"} className="action-icon-font" color='#8392a5'/>},
-    ];
+
+const ActionPanel = ({actionTabs, activeTabIndex, setActiveIndex}) => {
+    console.log('active tab index: ', activeTabIndex); // fixme
     const iconListB = [
         {key: 'agency_response', value: 'All Agency Response', icon: <Switch className='act-switch-icon action-icon-font' size="small" />},
         {key: 'name_email', value: 'Name or Email', icon: <FontAwesomeIcon icon={faUserCircle} className="action-icon-font" color='#8392a5'/>},
         {key: 'more', value: 'More Options', icon: <FontAwesomeIcon icon={faEllipsisH} className="action-icon-font" color='#8392a5'/>}
     ];
-    const { TextArea } = Input;
+
     return (
         <div className='action-panel'>
             <div className='action-panel__iconlist'>
                 <div className='action_tab_a action_part'>
                     {
-                        iconListA.map((iconItem) => (
-                            <Tooltip id={iconItem.key} key={iconItem.key} className="options-icon" placement="top" title={iconItem.value}>
+                        actionTabs.map((iconItem) => (
+                            <Tooltip id={iconItem.key} onClick={() => setActiveIndex(iconItem.id)} key={iconItem.key} className="options-icon" placement="top" title={iconItem.value}>
                                 {iconItem.icon}
                             </Tooltip>
                         ))
@@ -58,12 +42,18 @@ const ActionPanel = () => {
                     }
                 </div>
             </div>
-            <TextArea rows={4} placeholder="Action Information"/>
-            <Input placeholder="Title*" allowClear />
-            <Input placeholder="Area / Grid / Room*" allowClear />
-            <br/>
-            <GoogleMapComponent isMarkerShown />
+            {
+                activeTabIndex === 0 ? (
+                    <DefaultAction />
+                ) : (
+                    <FieldAction tabIndex={activeTabIndex} />
+                )
+            }
         </div>
     )
+};
+ActionPanel.propTypes = {
+    actionTabs: PropTypes.array.isRequired,
+    activeTabIndex: PropTypes.number,
 };
 export default ActionPanel;

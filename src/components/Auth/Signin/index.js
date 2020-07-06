@@ -47,8 +47,9 @@ function Signin({
 
             signInAuth(requestBody).then(() => {
                 getInstances().then(() => {
-                    getTeams();
-                    setLoadingFg(false);
+                    getTeams().then(() => {
+                        setLoadingFg(false);
+                    })
                 })
             }).catch(err => {
                 setError(

@@ -1,71 +1,49 @@
-.mention {
-    color: #4a85bb;
-    text-decoration: none;
+.mentions {
 }
 
-.mentionSuggestions {
-    border-top: 1px solid #eee;
-    background: #fff;
-    border-radius: 2px;
-    cursor: pointer;
-    padding-top: 8px;
-    padding-bottom: 8px;
-    display: flex;
-    flex-direction: column;
-    box-sizing: border-box;
-    transform-origin: 50% 0%;
-    transform: scaleY(0);
-    margin: -16px;
+.mentions--singleLine .mentions__control {
+    display: inline-block;
+}
+.mentions--singleLine .mentions__higlighter {
+    padding: 1px;
+    border: 2px inset transparent;
+}
+.mentions--singleLine .mentions__input {
+    padding: 5px;
+    border: 2px inset;
 }
 
-.mentionSuggestionsEntryContainer {
-    display: table;
-    width: 100%;
+.mentions--multiLine .mentions__control {
+    font-family: monospace;
+}
+.mentions--multiLine .mentions__highlighter {
+    padding: 9px;
+}
+.mentions--multiLine .mentions__input {
+    padding: 9px;
+    height: 100px;
+    outline: 0;
+    border: 0;
 }
 
-.mentionSuggestionsEntryContainerLeft,
-.mentionSuggestionsEntryContainerRight {
-    display: table-cell;
-    vertical-align: middle;
+.mentions__suggestions__list {
+    background-color: white;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    font-size: 10pt;
+    position: absolute;
+    top: -100px;
+    overflow-y: auto;
 }
 
-.mentionSuggestionsEntryContainerRight {
-    width: 100%;
-    padding-left: 8px;
+.mentions__suggestions__item {
+    padding: 5px 15px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.15);
 }
 
-.mentionSuggestionsEntry {
-    padding: 7px 10px 3px 10px;
-    transition: background-color 0.4s cubic-bezier(.27,1.27,.48,.56);
+.mentions__suggestions__item--focused {
+    background-color: #cee4e5;
 }
 
-.mentionSuggestionsEntry:active {
-    background-color: #cce7ff;
-}
-
-.mentionSuggestionsEntryFocused {
-    composes: mentionSuggestionsEntry;
-    background-color: #e6f3ff;
-}
-
-.mentionSuggestionsEntryText,
-.mentionSuggestionsEntryTitle {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-.mentionSuggestionsEntryText {
-}
-
-.mentionSuggestionsEntryTitle {
-    font-size: 80%;
-    color: #a7a7a7;
-}
-
-.mentionSuggestionsEntryAvatar {
-    display: block;
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
+.mentions__mention {
+    background-color: #cee4e5;
 }

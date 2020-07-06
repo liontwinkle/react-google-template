@@ -13,7 +13,7 @@ function NavbarRight(props) {
             <div className="navbar-right">
                 <a href='dashforge.html'>Docs</a>
                 <div className="dropdown dropdown-message">
-                    <a href="" className="dropdown-link new-indicator" data-toggle="dropdown">
+                    <a href="#" className="dropdown-link new-indicator" data-toggle="dropdown">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                              stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
                              className="feather feather-message-square">
@@ -23,11 +23,11 @@ function NavbarRight(props) {
                     </a>
                     <div className="dropdown-menu dropdown-menu-right">
                         <div className="dropdown-header">New Messages</div>
-                        <a href="" className="dropdown-item">
+                        <a href="#" className="dropdown-item">
                             <div className="media">
                                 <div className="avatar avatar-sm avatar-online">
                                     <img
-                                        src="https://via.placeholder.com/350" className="rounded-circle" alt=""/>
+                                        src="https://via.placeholder.com/350" className="rounded-circle" alt="avatar"/>
                                 </div>
                                 <div className="media-body mg-l-15">
                                     <strong>Socrates Itumay</strong>
@@ -36,10 +36,10 @@ function NavbarRight(props) {
                                 </div>
                             </div>
                         </a>
-                        <a href="" className="dropdown-item">
+                        <a href="#" className="dropdown-item">
                             <div className="media">
                                 <div className="avatar avatar-sm avatar-online"><img
-                                    src="https://via.placeholder.com/500" className="rounded-circle" alt=""/>
+                                    src="https://via.placeholder.com/500" className="rounded-circle" alt="avatar"/>
                                 </div>
                                 <div className="media-body mg-l-15">
                                     <strong>Joyce Chua</strong>
@@ -48,9 +48,9 @@ function NavbarRight(props) {
                                 </div>
                             </div>
                         </a>
-                        <a href="" className="dropdown-item">
+                        <a href="#" className="dropdown-item">
                             <div className="media">
-                                <div className="avatar avatar-sm avatar-online"><img
+                                <div className="avatar avatar-sm avatar-online"><imgavatar
                                     src="https://via.placeholder.com/600" className="rounded-circle" alt=""/>
                                 </div>
                                 <div className="media-body mg-l-15">
@@ -60,10 +60,10 @@ function NavbarRight(props) {
                                 </div>
                             </div>
                         </a>
-                        <a href="" className="dropdown-item">
+                        <a href="#" className="dropdown-item">
                             <div className="media">
                                 <div className="avatar avatar-sm avatar-online"><img
-                                    src="https://via.placeholder.com/500" className="rounded-circle" alt=""/>
+                                    src="https://via.placeholder.com/500" className="rounded-circle" alt="avatar"/>
                                 </div>
                                 <div className="media-body mg-l-15">
                                     <strong>Adrian Monino</strong>
@@ -72,11 +72,11 @@ function NavbarRight(props) {
                                 </div>
                             </div>
                         </a>
-                        <div className="dropdown-footer"><a href="">View all Messages</a></div>
+                        <div className="dropdown-footer"><a href="#">View all Messages</a></div>
                     </div>
                 </div>
                 <div className="dropdown dropdown-notification">
-                    <a href="" className="dropdown-link new-indicator" data-toggle="dropdown">
+                    <a href="#" className="dropdown-link new-indicator" data-toggle="dropdown">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                              stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
                              className="feather feather-bell">
@@ -87,10 +87,10 @@ function NavbarRight(props) {
                     </a>
                     <div className="dropdown-menu dropdown-menu-right">
                         <div className="dropdown-header">Notifications</div>
-                        <a href="" className="dropdown-item">
+                        <a href="#" className="dropdown-item">
                             <div className="media">
                                 <div className="avatar avatar-sm avatar-online"><img
-                                    src="https://via.placeholder.com/350" className="rounded-circle" alt=""/>
+                                    src="https://via.placeholder.com/350" className="rounded-circle" alt="avatar"/>
                                 </div>
                                 <div className="media-body mg-l-15">
                                     <p>Congratulate <strong>Socrates Itumay</strong> for work anniversaries</p>
@@ -98,10 +98,10 @@ function NavbarRight(props) {
                                 </div>
                             </div>
                         </a>
-                        <a href="" className="dropdown-item">
+                        <a href="#" className="dropdown-item">
                             <div className="media">
                                 <div className="avatar avatar-sm avatar-online"><img
-                                    src="https://via.placeholder.com/500" className="rounded-circle" alt=""/>
+                                    src="https://via.placeholder.com/500" className="rounded-circle" alt="avatar"/>
                                 </div>
                                 <div className="media-body mg-l-15">
                                     <p><strong>Joyce Chua</strong> just created a new blog post</p>
@@ -109,10 +109,10 @@ function NavbarRight(props) {
                                 </div>
                             </div>
                         </a>
-                        <a href="" className="dropdown-item">
+                        <a href="#" className="dropdown-item">
                             <div className="media">
                                 <div className="avatar avatar-sm avatar-online"><img
-                                    src="https://via.placeholder.com/600" className="rounded-circle" alt=""/>
+                                    src="https://via.placeholder.com/600" className="rounded-circle" alt="avatar"/>
                                 </div>
                                 <div className="media-body mg-l-15">
                                     <p><strong>Althea Cabardo</strong> just created a new blog post</p>
@@ -120,10 +120,10 @@ function NavbarRight(props) {
                                 </div>
                             </div>
                         </a>
-                        <a href="" className="dropdown-item">
+                        <a href="#" className="dropdown-item">
                             <div className="media">
                                 <div className="avatar avatar-sm avatar-online"><img
-                                    src="https://via.placeholder.com/500" className="rounded-circle" alt=""/>
+                                    src="https://via.placeholder.com/500" className="rounded-circle" alt="avatar"/>
                                 </div>
                                 <div className="media-body mg-l-15">
                                     <p><strong>Adrian Monino</strong> added new comment on your photo</p>
@@ -131,25 +131,25 @@ function NavbarRight(props) {
                                 </div>
                             </div>
                         </a>
-                        <div className="dropdown-footer"><a href="">View all Notifications</a></div>
+                        <div className="dropdown-footer"><a href="#">View all Notifications</a></div>
                     </div>
                 </div>
                 <div className="dropdown dropdown-profile">
-                    <a href="" className="dropdown-link" data-toggle="dropdown" data-display="static">
+                    <a href="#" className="dropdown-link" data-toggle="dropdown" data-display="static">
                         <div className="avatar avatar-sm">
-                            <img src="https://via.placeholder.com/500" className="rounded-circle" alt=""/>
+                            <img src="https://via.placeholder.com/500" className="rounded-circle" alt="avatar"/>
                         </div>
                     </a>
                     <div className="dropdown-menu dropdown-menu-right">
                         <div className="avatar avatar-lg mg-b-15">
-                            <img src="https://via.placeholder.com/500" className="rounded-circle" alt=""/>
+                            <img src="https://via.placeholder.com/500" className="rounded-circle" alt="avatar"/>
                         </div>
                         <h6 className="tx-semibold mg-b-5">{props.authUser.first_name} {props.authUser.last_name}</h6>
                         <p className="mg-b-25 tx-12 tx-color-03">{props.authUser.role}</p>
                         <div className="dropdown-divider"/>
                         <a href="https://ineedhelpers.com" className="dropdown-item"><FontAwesomeIcon icon={faQuestionCircle} /> Help </a>
-                        <a href="" className="dropdown-item"><FontAwesomeIcon icon={faCog} />Settings</a>
-                        <a href="" className="dropdown-item"><FontAwesomeIcon icon={faEdit} />Change Password</a>
+                        <a href="#" className="dropdown-item"><FontAwesomeIcon icon={faCog} />Settings</a>
+                        <a href="#" className="dropdown-item"><FontAwesomeIcon icon={faEdit} />Change Password</a>
                         <Signout isDropdownItem={true} />
                     </div>
                 </div>
