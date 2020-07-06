@@ -1,31 +1,29 @@
 import React, {useState} from 'react';
 import PropTypes from 'prop-types'
+import {Radio} from "antd";
 
 const ActionMultiAgencyFire = ({tabIndex, fieldItem, options}) => {
     const [newOptions, setNewOptions] = useState([]);
     const required = (fieldItem.field_required === "1");
+    const [value, setValue] = useState('Police');
     const customOptions = options.filter((optionItem) => (optionItem.id === fieldItem.id));
     if (customOptions.options) {
         setNewOptions(customOptions.options);
     }
+    const handleSizeChange = e => {
+        setValue(e.target.value);
+    };
     return (
         <div
             className="custom-rad custom-mult-fire"
             id={`tab_${tabIndex}_field_${fieldItem.field_type}_${fieldItem.id}`}
             data-tab-id={tabIndex}
         >
-            <div className="gp-radios">
-                <input type="checkbox" className="MultAgencyOn" name={`tab_${tabIndex}_field_${fieldItem.field_type}-police_${fieldItem.id}`} value="Police" />
-                <span>Police</span>
-            </div>
-            <div className="gp-radios">
-                <input type="checkbox" className="MultAgencyOn" name={`tab_${tabIndex}_field_${fieldItem.field_type}-ambulance_${fieldItem.id}`} value="Ambulance" />
-                <span>Ambulance</span>
-            </div>
-            <div className="gp-radios">
-                <input type="checkbox" className="MultAgencyCancel" name={`tab_${tabIndex}_field_${fieldItem.field_type}-no_${fieldItem.id}`} value="No" />
-                <span>No</span>
-            </div>
+            <Radio.Group value={value} onChange={handleSizeChange}>
+                <Radio.Button value="Police">Police</Radio.Button>
+                <Radio.Button value="Fire">Fire</Radio.Button>
+                <Radio.Button value="Ambulance">Ambulance</Radio.Button>
+            </Radio.Group>
         </div>
 )
 };

@@ -1,6 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
+import { Map, Marker, GoogleApiWrapper } from 'google-maps-react'
 
 import {
     BrowserRouter as Router,
@@ -195,4 +196,6 @@ const mapStateToProps = store => ({
     isSessionExpiryModalOpened: store.themeConfigData.isSessionExpiryModalOpened
 });
 
-export default connect(mapStateToProps)(App)
+export default GoogleApiWrapper({
+    apiKey: 'AIzaSyAQHX0rJGGbt6qbf0P5587hwE09u2Ggdm8',
+})(connect(mapStateToProps)(App))

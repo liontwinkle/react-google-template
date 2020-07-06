@@ -25,7 +25,14 @@ const ActionPanel = ({actionTabs, activeTabIndex, setActiveIndex}) => {
                 <div className='action_tab_a action_part'>
                     {
                         actionTabs.map((iconItem) => (
-                            <Tooltip id={iconItem.key} onClick={() => setActiveIndex(iconItem.id)} key={iconItem.key} className="options-icon" placement="top" title={iconItem.value}>
+                            <Tooltip
+                                id={iconItem.key}
+                                onClick={() => setActiveIndex(iconItem.id)}
+                                key={iconItem.key}
+                                className={`options-icon ${iconItem.id === activeTabIndex ? 'selected' : ''}`}
+                                placement="top"
+                                title={iconItem.value}
+                            >
                                 {iconItem.icon}
                             </Tooltip>
                         ))

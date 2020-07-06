@@ -32,19 +32,7 @@ const ActionAgeField = ({tabIndex, fieldItem, options}) => {
                 data-name={`tab_${tabIndex}_field_age-field1_${fieldItem.id}`}
                 placeholder="Age Info"
             />
-            <div className="range-b">
-                <div className="range-b-block">
-                    <input
-                        className="age-input age-range-input-1"
-                        type="number"
-                        data-name={`tab_${tabIndex}_field_age-field2_${fieldItem.id}`}
-                        placeholder="0"
-                        min="0"/>
-                    <span>To</span>
-                    <input className="age-input age-range-input-2" type="number"
-                           data-name={`tab_${tabIndex}_field_age-field3_${fieldItem.id}`} placeholder="1" min="1"/>
-                </div>
-            </div>
+
         </div>
     )
 };
