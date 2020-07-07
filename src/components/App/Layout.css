@@ -23,6 +23,28 @@
   transform: translateX(-100vw);
   transition: all 0.3s;
 }
+
+.ant-tabs-nav-wrap.ant-tabs-nav-wrap-ping-right {
+  width: 100%;
+  overflow: unset;
+}
+.ant-tabs > .ant-tabs-nav .ant-tabs-nav-list, .ant-tabs > div > .ant-tabs-nav .ant-tabs-nav-list {
+  justify-content: center;
+  height: 47px;
+  position: relative;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-transition: none;
+  transition: none;
+  transform: unset;
+  flex: 1 1;
+}
+button {
+  margin: 0 4px;
+  outline: none;
+  align-items: center;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .mail-wrapper {
     transition: none;
