@@ -11,7 +11,7 @@
   }
   .custom-rad {
     align-items: center;
-    background-color: #7987a1 !important;
+    background-color: #0168fa;
     padding: 0;
     display: flex;
     justify-content: space-between;
@@ -26,6 +26,8 @@
     }
     button {
       padding: 0.36875rem !important;
+      width: 100%;
+      flex: 1 1;
     }
   }
 
