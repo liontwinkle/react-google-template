@@ -9,9 +9,9 @@ const ActionMultiAgency = ({tabIndex, fieldItem}) => {
             data-tab-id={tabIndex}
         >
             <div className="btn-group custom-rad" aria-label="Basic example">
-                <button type="button" className="btn btn-primary">Police</button>
-                <button type="button" className="btn btn-primary">Ambulance</button>
-                <button type="button" className="btn btn-primary">No</button>
+                <button type="button" className="btn btn-dim btn-outline-primary">Police</button>
+                <button type="button" className="btn btn-dim btn-outline-primary">Ambulance</button>
+                <button type="button" className="btn btn-dim btn-outline-primary">No</button>
             </div>
         </div>
     )

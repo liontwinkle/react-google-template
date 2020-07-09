@@ -66,7 +66,6 @@ function Home ({
           setLoadingFg(false);
           return
         }
-        console.log('Unexpected error: Dashboard:getInfoHandler', e)
       }
     };
     getInfoHandler()

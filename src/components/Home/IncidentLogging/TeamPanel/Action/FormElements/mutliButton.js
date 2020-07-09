@@ -9,9 +9,9 @@ const ActionMultiButton = ({tabIndex, fieldItem}) => {
             data-tab-id={tabIndex}
         >
             <div className="btn-group custom-rad" aria-label="Basic example">
-                <button type="button" className="btn btn-primary">Yes</button>
-                <button type="button" className="btn btn-primary">No</button>
-                <button type="button" className="btn btn-primary">Unknown</button>
+                <button type="button" className="btn btn-dim btn-outline-primary">Yes</button>
+                <button type="button" className="btn btn-dim btn-outline-primary">No</button>
+                <button type="button" className="btn btn-dim btn-outline-primary">Unknown</button>
             </div>
         </div>
     )

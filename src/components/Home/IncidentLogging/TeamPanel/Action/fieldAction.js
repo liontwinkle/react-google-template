@@ -24,17 +24,11 @@ const FieldAction = ({actionFields, tabIndex}) => {
     const [options, setOptions] = useState([]);
     useEffect(() => {
         const newFields = actionFields.filter((actionItem) => (actionItem.id === tabIndex));
-        console.log('fields: ', newFields); // fixme
         if (newFields[0].field) {
             setFields(newFields[0].field);
-            console.log('fields: ', newFields[0].field); // fixme
             setOptions(newFields[0].options);
         }
     }, [tabIndex, setFields]);
-
-    const onSubmit = () => {
-        console.log('submit');
-    };
 
     const newActionBody = (fieldItem) => {
         switch (fieldItem.field_type) {
@@ -66,80 +60,70 @@ const FieldAction = ({actionFields, tabIndex}) => {
     };
 
     return (
-        <div className="action-tab-content mg-t-20">
-            <form method="post" className="action-form" onSubmit={onSubmit}>
-                <div className="form-group row">
-                    <label htmlFor={`tab_${tabIndex} _field_action-type_0`}
-                           className="col-sm-4 col-form-label">Type*</label>
-                    <div className="col-sm-8">
-                        <div className="typeahead__container">
-                            <div className="typeahead__field">
-                                <div className="typeahead__query">
-                                    <input
-                                        data-tab-id={tabIndex}
-                                        id={`tab_${tabIndex}_field_action-type_0`}
-                                        name={`tab_${tabIndex}_field_action-type_0`}
-                                        type="text"
-                                        className="form-control action-type-input"
-                                        autoComplete="off"
-                                        placeholder="Type"
-                                        spellCheck="false"
-                                        dir="auto"
-                                        required
-                                    />
-                                </div>
+        <>
+            <div className="form-group row">
+                <label htmlFor={`tab_${tabIndex} _field_action-type_0`}
+                       className="col-sm-4 col-form-label">Type*</label>
+                <div className="col-sm-8">
+                    <div className="typeahead__container">
+                        <div className="typeahead__field">
+                            <div className="typeahead__query">
+                                <input
+                                    data-tab-id={tabIndex}
+                                    id={`tab_${tabIndex}_field_action-type_0`}
+                                    name={`tab_${tabIndex}_field_action-type_0`}
+                                    type="text"
+                                    className="form-control action-type-input"
+                                    autoComplete="off"
+                                    placeholder="Type"
+                                    spellCheck="false"
+                                    dir="auto"
+                                    required
+                                />
                             </div>
                         </div>
                     </div>
                 </div>
-                <div className="form-group row">
-                    <label htmlFor={`tab_${tabIndex}_field_location_0`}
-                           className="col-sm-4 col-form-label text-dark">Location*</label>
-                    <div className="col-sm-8">
-                        <PlacesAutocomplete
-                            data-tab-id={tabIndex}
-                            id={`tab_${tabIndex}_field_location_0`}
-                            name={`tab_${tabIndex}_field_location_0`}
-                        />
-                    </div>
-                </div>
-                {
-                    fields.map((fieldItem) => (
-                        <div className="form-group row" key={fieldItem.id}>
-                            <label htmlFor={`tab_${tabIndex}_field_${fieldItem.field_type}_${fieldItem.id}`}
-                                   className="col-sm-4 col-form-label text-dark">
-                                {`${fieldItem.fied_text}${fieldItem.field_required === "1" ? "*" : ""}`}
-                            </label>
-                            <div className="col-sm-8">
-                                {newActionBody(fieldItem)}
-                            </div>
-                        </div>
-                    ))
-                }
-                <div className="form-group row">
-                    <label htmlFor={`tab_${tabIndex}_field_dispatch-location_0`}
-                           className="col-sm-4 col-form-label condensed-lb">Dispatch Location</label>
-                    <div className="col-sm-8">
-                        <input
-                            type="text"
-                            className="form-control"
-                            placeholder="Dispatch Location"
-                            data-tab-id={tabIndex}
-                            id={`tab_${tabIndex}_field_dispatch-location_0`}
-                            name={`tab_${tabIndex}_field_dispatch-location_0`}
-                        />
-                    </div>
-                </div>
-                <div className="first-group mb-3">
-                    <iframe
-                        className="mt-2"
-                        width="100%" height="250px"
-                        src="https://maps.google.com/maps?hl=en&amp;q=-33.8714672,151.2080955&amp;ie=UTF8&amp;t=&amp;z=17&amp;iwloc=B&amp;output=embed"
-                        frameBorder="0" scrolling="no" marginHeight="0" marginWidth="0"
+            </div>
+            <div className="form-group row">
+                <label htmlFor={`tab_${tabIndex}_field_location_0`}
+                       className="col-sm-4 col-form-label text-dark">Location*</label>
+                <div className="col-sm-8">
+                    <PlacesAutocomplete
+                        data-tab-id={tabIndex}
+                        id={`tab_${tabIndex}_field_location_0`}
+                        name={`tab_${tabIndex}_field_location_0`}
                     />
                 </div>
-            </form>
-        </div>
+            </div>
+            {
+                fields.map((fieldItem) => (
+                    <div className="form-group row" key={fieldItem.id}>
+                        <label htmlFor={`tab_${tabIndex}_field_${fieldItem.field_type}_${fieldItem.id}`}
+                               className="col-sm-4 col-form-label text-dark">
+                            {`${fieldItem.fied_text}${fieldItem.field_required === "1" ? "*" : ""}`}
+                        </label>
+                        <div className="col-sm-8">
+                            {newActionBody(fieldItem)}
+                        </div>
+                    </div>
+                ))
+            }
+            <div className="form-group row">
+                <label htmlFor={`tab_${tabIndex}_field_dispatch-location_0`}
+                       className="col-sm-4 col-form-label condensed-lb">Dispatch Location</label>
+                <div className="col-sm-8">
+                    <input
+                        type="text"
+                        className="form-control"
+                        placeholder="Dispatch Location"
+                        data-tab-id={tabIndex}
+                        id={`tab_${tabIndex}_field_dispatch-location_0`}
+                        name={`tab_${tabIndex}_field_dispatch-location_0`}
+                    />
+                </div>
+            </div>
+        </>
     )
 };
 

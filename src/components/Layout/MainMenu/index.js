@@ -93,7 +93,6 @@ function MainMenu({
 					setSessionExpiryModalState(true);
 					return;
 				}
-				console.log("Unexpected error: MainMenu:getAppsHandler", e);
 			}
 		}
 		getAppsHandler(userId, eventId);

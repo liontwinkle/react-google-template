@@ -17,7 +17,6 @@ export default (state = INITIAL_STATE, action) => {
         }
         case types.GET_ACTION_TABS_SUCCESS: {
             const { actionData } = action;
-            console.log('actionTabs: ', actionData); // fixme
             const newActionTabs = actionData.tabs.map((actionTabItem) => (
                 {
                     id: actionTabItem.id,
