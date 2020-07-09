@@ -6,9 +6,9 @@ import { faEllipsisH } from "@fortawesome/pro-solid-svg-icons";
 import { faUserCircle } from "@fortawesome/pro-regular-svg-icons";
 import { Switch } from 'antd';
 import DefaultAction from "./defaultAction";
+import FieldAction from "./fieldAction";
 
 import './style.scss';
-import FieldAction from "./fieldAction";
 
 
 const ActionPanel = ({actionTabs, activeTabIndex, setActiveIndex}) => {

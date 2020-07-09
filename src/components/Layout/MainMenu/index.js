@@ -33,7 +33,6 @@ function MainMenu({
 	const clickMenuItemHandler = async (index, e) => {
 		e.preventDefault();
 		// check session
-		console.log('index::: ', index); // fixme
 		try {
 			const { data } = await axios.get(process.env.REACT_APP_API + '/auth/verifyToken');
 

@@ -29,6 +29,12 @@
     margin: 50px 0 0;
   }
 }
+
 .incident-sidebar {
   border-right: none;
+}
+.incident-card .incident-card-body {
+  height: calc(100% - 50px);
+  overflow-y: auto;
+  border-right: 1px solid rgba(72, 94, 144, 0.16);
 }

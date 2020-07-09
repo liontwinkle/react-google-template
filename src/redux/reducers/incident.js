@@ -40,9 +40,10 @@ export default (state = INITIAL_STATE, action) => {
             }
         }
         case types.SET_ACTION_TAB: {
+            const activeIndex = (state.activeTabIndex !== action.tabIndex) ? action.tabIndex : 0;
             return {
                 ...state,
-                activeTabIndex: action.tabIndex,
+                activeTabIndex: activeIndex,
             }
         }
         default: return state;

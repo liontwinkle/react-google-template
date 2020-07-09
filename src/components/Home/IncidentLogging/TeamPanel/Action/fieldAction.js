@@ -16,6 +16,7 @@ import ActionTextField from "./FormElements/textField";
 import ActionMultiSelect from "./FormElements/multiSelect";
 
 import './style.scss';
+import PlacesAutocomplete from "./FormElements/PlacesAutocomplete";
 
 
 const FieldAction = ({actionFields, tabIndex}) => {
@@ -95,14 +96,10 @@ const FieldAction = ({actionFields, tabIndex}) => {
                     <label htmlFor={`tab_${tabIndex}_field_location_0`}
                            className="col-sm-4 col-form-label text-dark">Location*</label>
                     <div className="col-sm-8">
-                        <input
+                        <PlacesAutocomplete
                             data-tab-id={tabIndex}
                             id={`tab_${tabIndex}_field_location_0`}
                             name={`tab_${tabIndex}_field_location_0`}
-                            type="text"
-                            className="form-control action-location-input"
-                            placeholder="Area / Grid / Room"
-                            required
                         />
                     </div>
                 </div>

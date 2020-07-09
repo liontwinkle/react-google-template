@@ -1,13 +1,17 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import PropTypes from 'prop-types'
 
 const ActionDropDown = ({tabIndex, fieldItem, options}) => {
     const [newOptions, setNewOptions] = useState([]);
+    useEffect(() => {
+        const customOptions = options.filter((optionItem) => (optionItem.id === fieldItem.id));
+        if (customOptions[0].options) {
+            setNewOptions(customOptions[0].options);
+        }
+    },[setNewOptions, fieldItem, options]);
+
     const required = (fieldItem.field_required === "1");
-    const customOptions = options.filter((optionItem) => (optionItem.id === fieldItem.id));
-    if (customOptions.options) {
-        setNewOptions(customOptions.options);
-    }
+
     return (
         <select
             className="custom-select form-control"
@@ -24,7 +28,7 @@ const ActionDropDown = ({tabIndex, fieldItem, options}) => {
             <option value="0" selected>Unknown</option>
             {
                 newOptions.map((customOptionItem) => (
-                    <option value={customOptionItem.id}>{customOptionItem.option_text}</option>
+                    <option key={customOptionItem.id} value={customOptionItem.id}>{customOptionItem.option_text}</option>
                 ))
             }
         </select>

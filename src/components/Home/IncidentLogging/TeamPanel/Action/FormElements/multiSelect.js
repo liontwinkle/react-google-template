@@ -1,29 +1,43 @@
-import React, {useState} from 'react';
-import PropTypes from 'prop-types'
+import React, {useState, useEffect} from 'react';
+import PropTypes from 'prop-types';
+import {Select} from 'antd';
+
+import './style.scss';
+
+const {Option} = Select;
 
 const ActionMultiSelect = ({tabIndex, fieldItem, options}) => {
     const [newOptions, setNewOptions] = useState([]);
     const required = (fieldItem.field_required === "1");
-    const customOptions = options.filter((optionItem) => (optionItem.id === fieldItem.id));
-    if (customOptions.options) {
-        setNewOptions(customOptions.options);
-    }
+
+    useEffect(() => {
+        const customOptions = options.filter((optionItem) => (optionItem.id === fieldItem.id));
+        if (customOptions[0].options) {
+            setNewOptions(customOptions[0].options);
+        }
+    }, [setNewOptions, newOptions, options]);
+
+    const handleChange = (value) => {
+        console.log(`selected ${value}`);
+    };
+
     return (
-        <select
-            className="custom-select form-control select2-limit custom-multiselect"
-            multiple="multiple"
-            id={`tab_${tabIndex}_field_${fieldItem.field_type}_${fieldItem.id}`}
-            name={`tab_${tabIndex}_field_${fieldItem.field_type}_${fieldItem.id}`}
-            data-tab-id={tabIndex}
-            placeholder={fieldItem.field_placeholder ? fieldItem.field_placeholder : ''}
-            required={required}
+        <Select
+            mode="tags"
+            style={{
+                width: '100%',
+                minHeight: 'calc(1.5em + 0.9375rem + 3px)'
+            }}
+            placeholder="Tags Mode"
+            onChange={handleChange}
+            maxTagCount={3}
         >
             {
                 newOptions.map(optionItem => (
-                    <option value={optionItem.id}>{optionItem.option_text}</option>
+                    <Option key={optionItem.id} value={optionItem.id}>{optionItem.option_text}</Option>
                 ))
             }
-        </select>
+        </Select>
     )
 };
 

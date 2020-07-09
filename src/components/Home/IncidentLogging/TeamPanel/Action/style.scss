@@ -15,43 +15,17 @@
     padding: 0;
     display: flex;
     justify-content: space-between;
+    width: 100%;
     &:first-child {
-      border-top-left-radius: 2px;
-      border-bottom-left-radius: 2px;
+      border-top-left-radius: 6px;
+      border-bottom-left-radius: 6px;
     }
     &:last-child {
-      border-top-right-radius: 2px;
-      border-bottom-right-radius: 2px;
+      border-top-right-radius: 6px;
+      border-bottom-right-radius: 6px;
     }
-    .ant-radio-group {
-      width: 100%;
-      display: flex;
-      justify-content: space-between;
-      .ant-radio-button-wrapper,.ant-radio-button-wrapper-checked {
-        color: #fff;
-        flex: 1;
-        display: flex;
-        justify-content: center;
-        background-color: transparent;
-        border: 1px solid #7987a1 !important;
-        box-shadow: none;
-        padding: 5px 9px 5px 9px;
-        font-weight: 400;
-        font-size: 13px;
-        margin: 0 0;
-        line-height: 23px;
-        position: relative;
-        z-index: 1;
-        span {
-          color: white;
-          &:hover {
-            color: white;
-          }
-        }
-        &:before {
-          display: none !important;
-        }
-      }
+    button {
+      padding: 0.36875rem !important;
     }
   }
 

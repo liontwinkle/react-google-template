@@ -1,0 +1,25 @@
+.ant-select-selector {
+  min-height: calc(1.5em + 0.9375rem + 3px);
+}
+
+.ant-select-selection-item {
+  background-color: #0168fa !important;
+  color: white;
+  padding: 3px 10px 3px 5px !important;
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  justify-content: flex-start;
+  border-radius: 6px;
+  span {
+    margin-left: 2px;
+    display: flex;
+    align-items: center;
+  }
+
+  .anticon-close {
+    svg {
+      fill: white;
+    }
+  }
+}
