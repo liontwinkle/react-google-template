@@ -53,7 +53,7 @@ const CustomTypeAhead = ({
 
     return (
         <AsyncTypeahead
-            id="async-example"
+            id="async-typeahead"
             isLoading={isLoading}
             labelKey="Type*"
             minLength={2}
