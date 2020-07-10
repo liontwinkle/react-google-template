@@ -111,6 +111,34 @@
     display: flex;
     align-items: center;
   }
+
+  .btn-dim.btn-outline-primary {
+    color: #6576ff;
+    background-color: #eef0ff;
+    border-color: #c1c8ff !important;
+  }
+  .btn-outline-primary {
+    color: #6576ff;
+    border-color: #6576ff;
+  }
+  .btn {
+    display: inline-block;
+    font-family: Nunito,sans-serif;
+    font-weight: 700;
+    color: #526484;
+    text-align: center;
+    vertical-align: middle;
+    background-color: transparent;
+    border: 1px solid transparent;
+    padding: .4375rem 1.125rem;
+    font-size: .8125rem;
+    line-height: 1.25rem;
+    border-radius: 4px;
+    transition: color 0.15s ease-in-out,background-color 0.15s ease-in-out,border-color 0.15s ease-in-out,box-shadow 0.15s ease-in-out;
+  }
+  .btn-outline-primary:focus, .btn-outline-primary.focus {
+    box-shadow: 0 0 0 0.2rem rgba(101,118,255,0.5);
+  }
 }
 
 .ant-tabs-tab {
