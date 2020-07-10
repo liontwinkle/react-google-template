@@ -14,7 +14,7 @@ import ActionMultiButton from "./FormElements/mutliButton";
 import ActionTextArea from "./FormElements/textArea";
 import ActionTextField from "./FormElements/textField";
 import ActionMultiSelect from "./FormElements/multiSelect";
-
+import CustomTypeAhead from "../../../../common/CustomTypeahead";
 import './style.scss';
 import PlacesAutocomplete from "./FormElements/PlacesAutocomplete";
 
@@ -68,18 +68,7 @@ const FieldAction = ({actionFields, tabIndex}) => {
                     <div className="typeahead__container">
                         <div className="typeahead__field">
                             <div className="typeahead__query">
-                                <input
-                                    data-tab-id={tabIndex}
-                                    id={`tab_${tabIndex}_field_action-type_0`}
-                                    name={`tab_${tabIndex}_field_action-type_0`}
-                                    type="text"
-                                    className="form-control action-type-input"
-                                    autoComplete="off"
-                                    placeholder="Type"
-                                    spellCheck="false"
-                                    dir="auto"
-                                    required
-                                />
+                                <CustomTypeAhead tabIndex={tabIndex} />
                             </div>
                         </div>
                     </div>

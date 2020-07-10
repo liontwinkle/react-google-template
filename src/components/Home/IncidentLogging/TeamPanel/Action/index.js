@@ -9,7 +9,6 @@ import DefaultAction from "./defaultAction";
 import FieldAction from "./fieldAction";
 
 import './style.scss';
-import PlacesAutocomplete from "./FormElements/PlacesAutocomplete";
 
 
 const ActionPanel = ({actionTabs, activeTabIndex, setActiveIndex}) => {

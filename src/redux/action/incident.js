@@ -57,3 +57,29 @@ export const getFieldList = (tabIndex) => (dispatch, getState) => {
             throw error;
         });
 };
+
+
+export const getTypeAheadList = (tabIndex) => (dispatch, getState) => {
+    if (getState().incidentData.isFetchingFlag) {
+        return Promise.reject();
+    }
+
+    dispatch({
+        type: types.GET_HEAD_LIST_REQUEST,
+    });
+
+    return incidentService.GetTypeAheadList(tabIndex)
+        .then((data) => {
+            dispatch({
+                type: types.GET_HEAD_LIST_SUCCESS,
+                typeaheadList: data
+            });
+        })
+        .catch((error) => {
+            dispatch({
+                type: types.GET_HEAD_LIST_FAIL,
+                error,
+            });
+            throw error;
+        });
+};

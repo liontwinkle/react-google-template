@@ -1,8 +1,9 @@
 import types from '../actionType';
-import { getToolbarIcon, convertStringToKey } from '../../utils';
+import {getToolbarIcon, convertStringToKey} from '../../utils';
 
 const INITIAL_STATE = {
     actionTabs: [],
+    typeList: null,
     activeTabIndex: 0,
     isFetchingFlag: false,
 };
@@ -16,7 +17,7 @@ export default (state = INITIAL_STATE, action) => {
             }
         }
         case types.GET_ACTION_TABS_SUCCESS: {
-            const { actionData } = action;
+            const {actionData} = action;
             const newActionTabs = actionData.tabs.map((actionTabItem) => (
                 {
                     id: actionTabItem.id,
@@ -45,6 +46,28 @@ export default (state = INITIAL_STATE, action) => {
                 activeTabIndex: activeIndex,
             }
         }
-        default: return state;
+        case types.GET_HEAD_LIST_REQUEST: {
+            return {
+                ...state,
+                isFetchingFlag: true,
+            }
+        }
+        case types.GET_HEAD_LIST_SUCCESS: {
+            const recvTypeList = action.typeaheadList;
+            console.log('recv type list', recvTypeList); // fixme
+            return {
+                ...state,
+                typeList: recvTypeList,
+                isFetchingFlag: false,
+            }
+        }
+        case types.GET_HEAD_LIST_FAIL: {
+            return {
+                ...state,
+                isFetchingFlag: false,
+            }
+        }
+        default:
+            return state;
     }
 }
