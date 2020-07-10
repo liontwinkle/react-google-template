@@ -9,15 +9,19 @@ import DefaultAction from "./defaultAction";
 import FieldAction from "./fieldAction";
 
 import './style.scss';
+import PlacesAutocomplete from "./FormElements/PlacesAutocomplete";
 
 
 const ActionPanel = ({actionTabs, activeTabIndex, setActiveIndex}) => {
-    console.log('active tab index: ', activeTabIndex); // fixme
     const iconListB = [
         {key: 'agency_response', value: 'All Agency Response', icon: <Switch className='act-switch-icon action-icon-font' size="small" />},
         {key: 'name_email', value: 'Name or Email', icon: <FontAwesomeIcon icon={faUserCircle} className="action-icon-font" color='#8392a5'/>},
         {key: 'more', value: 'More Options', icon: <FontAwesomeIcon icon={faEllipsisH} className="action-icon-font" color='#8392a5'/>}
     ];
+
+    const onSubmit = () => {
+        console.log('submit');
+    };
 
     return (
         <div className='action-panel'>
@@ -53,7 +57,19 @@ const ActionPanel = ({actionTabs, activeTabIndex, setActiveIndex}) => {
                 activeTabIndex === 0 ? (
                     <DefaultAction />
                 ) : (
-                    <FieldAction tabIndex={activeTabIndex} />
+                    <div className="action-tab-content mg-t-20">
+                        <form method="post" className="action-form" onSubmit={onSubmit}>
+                            <FieldAction tabIndex={activeTabIndex} />
+                            <div className="first-group mb-3">
+                                <iframe
+                                    className="mt-2"
+                                    width="100%" height="250px"
+                                    src="https://maps.google.com/maps?hl=en&amp;q=-33.8714672,151.2080955&amp;ie=UTF8&amp;t=&amp;z=17&amp;iwloc=B&amp;output=embed"
+                                    frameBorder="0" scrolling="no" marginHeight="0" marginWidth="0"
+                                />
+                            </div>
+                        </form>
+                    </div>
                 )
             }
         </div>

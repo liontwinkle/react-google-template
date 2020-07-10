@@ -38,3 +38,8 @@
   overflow-y: auto;
   border-right: 1px solid rgba(72, 94, 144, 0.16);
 }
+
+textarea, input{
+  &::-moz-selection { color: white;  background: #1890ff; }
+  &::selection      { color: white;  background: #1890ff; }
+}

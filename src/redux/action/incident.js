@@ -12,7 +12,6 @@ export const getActionTabs = (id_event, id_instance) => (dispatch, getState) => 
 
     return incidentService.GetActionTabs(id_event, id_instance)
         .then((data) => {
-            console.log('data>>> ', data); // fixme
             dispatch({
                 type: types.GET_ACTION_TABS_SUCCESS,
                 actionData: data

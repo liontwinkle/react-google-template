@@ -32,7 +32,6 @@ export default class SimpleEmojiEditor extends Component {
     }
 
     handleChange = (event, newValue, newPlainTextValue, mentions) => {
-        console.log(newValue, newPlainTextValue, mentions)
         this.setState({
             value: newValue,
             mentionData: {newValue, newPlainTextValue, mentions}
