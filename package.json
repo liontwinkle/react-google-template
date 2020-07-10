@@ -38,6 +38,7 @@
     "react-dom": "^16.13.1",
     "react-feather": "^2.0.8",
     "react-fullstory": "^1.4.0",
+    "react-geocode": "^0.2.1",
     "react-google-maps": "^9.4.5",
     "react-hook-form": "^5.7.2",
     "react-horizontal-scrolling-menu": "^0.7.7",

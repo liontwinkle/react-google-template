@@ -1,6 +1,8 @@
 import React from "react";
-import GoogleMapReact from 'google-map-react';
-import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
+import {Map, Marker, GoogleApiWrapper} from 'google-maps-react';
+import PropTypes from "prop-types";
+
+import _isEqual from 'lodash/isEqual';
 
 const style = {
     width: '100%',
@@ -11,32 +13,29 @@ class GoogleMapComponent extends React.PureComponent {
     constructor(props) {
         super(props);
         this.state = {
-            bounds: new this.props.google.maps.LatLngBounds(),
-            location: {
-                lat: 37.778519,
-                lng: -122.405640,
-            }
+            markers: [
+                {
+                    name: "Current position",
+                    position: {
+                        lat: 37.77,
+                        lng: -122.42
+                    }
+                }
+            ]
         }
     }
 
     componentDidMount() {
-        this.setState((prevState)=>({
-            bounds: prevState.bounds.extend(prevState.location)
-        }));
+        this.setState({
+            markers: this.props.markers,
+        });
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        if(this.props.lat !== prevState.location.lat || this.props.lon !== prevState.location.lng) {
-            this.setState((prevState)=>({
-                bounds: prevState.bounds.extend({
-                    lat: this.props.lat,
-                    lng: this.props.lon
-                }),
-                location: {
-                    lat: this.props.lat,
-                    lng: this.props.lon
-                }
-            }));
+        if(!_isEqual(this.props.markers, prevState.markers)) {
+            this.setState({
+                markers: this.props.markers,
+            });
         }
     }
 
@@ -44,26 +43,56 @@ class GoogleMapComponent extends React.PureComponent {
         console.log(event);
     };
 
+    onMarkerDragEnd = (coord, index) => {
+        const { latLng } = coord;
+        const lat = latLng.lat();
+        const lng = latLng.lng();
+        const markers = [...this.state.markers];
+        markers[index] = { ...markers[index], position: { lat, lng } };
+        this.setState({
+            markers,
+        });
+        this.props.changePos(markers[0]);
+    };
 
     render() {
         return (
-            <div style={{height: '250px', width: '100%'}}>
+            <div style={style}>
                 <Map google={this.props.google}
                      style={style}
-                     initialCenter={{lat: 37.778519, lng: -122.405640}}
                      zoom={8}
                      onClick={this.onMapClicked}
-                     bounds={this.state.bounds}
+                     center={this.state.markers[0].position}
                 >
-                    <Marker
-                        title={'The marker`s title will appear as a tooltip.'}
-                        name={'SOMA'}
-                        position={{lat: 37.778519, lng: -122.405640}}/>
+                    {this.state.markers.map((marker, index) => (
+                        <Marker
+                            key={marker.name}
+                            position={marker.position}
+                            draggable={true}
+                            onDragend={(t, map, coord) => this.onMarkerDragEnd(coord, index)}
+                            name={marker.name}
+                        />
+                    ))}
                 </Map>
             </div>
         );
     }
 }
+
+GoogleMapComponent.propTypes = {
+    changePos: PropTypes.func,
+    markers: PropTypes.array,
+};
+
+GoogleMapComponent.defaultProps = {
+    markers: [{
+        name: "Current position",
+        position: {
+            lat: 37.77,
+            lng: -122.42
+        }
+    }]
+};
 
 export default GoogleApiWrapper({
     apiKey: ('AIzaSyDwCk7q9AVI9DvQjsFUTN69jnYXqqX8HZs')

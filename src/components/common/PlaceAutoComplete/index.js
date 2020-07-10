@@ -9,8 +9,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMapMarkerAlt } from "@fortawesome/pro-light-svg-icons";
 
 import './style.scss';
+import PropTypes from "prop-types";
 
-const PlacesAutocomplete = () => {
+const PlacesAutocomplete = ({changePos, address, setUpdateMapPos, updateMapPos,}) => {
     const {
         ready,
         value,
@@ -23,20 +24,17 @@ const PlacesAutocomplete = () => {
         },
         debounce: 300,
     });
+
     const ref = useOnclickOutside(() => {
-        // When user clicks outside of the component, we can dismiss
-        // the searched suggestions by calling this method
         clearSuggestions();
     });
 
     const handleInput = (e) => {
-        // Update the keyword of the input element
+        setUpdateMapPos(false);
         setValue(e.target.value);
     };
 
     const handleSelect = ({ description }) => () => {
-        // When user selects a place, we can replace the keyword without request data from API
-        // by setting the second parameter to "false"
         setValue(description, false);
         clearSuggestions();
 
@@ -44,6 +42,13 @@ const PlacesAutocomplete = () => {
         getGeocode({ address: description })
             .then((results) => getLatLng(results[0]))
             .then(({ lat, lng }) => {
+                changePos({
+                    name: "Current position",
+                    position: {
+                        lat,
+                        lng,
+                    }
+                });
                 console.log("📍 Coordinates: ", { lat, lng });
             })
             .catch((error) => {
@@ -68,7 +73,7 @@ const PlacesAutocomplete = () => {
     return (
         <div className="place-container" ref={ref}>
             <Input
-                value={value}
+                value={updateMapPos? address: value}
                 onChange={handleInput}
                 disabled={!ready}
                 placeholder="Area / Grid / Room*"
@@ -86,6 +91,18 @@ const PlacesAutocomplete = () => {
             }
         </div>
     );
+};
+
+PlacesAutocomplete.propTypes = {
+    changePos: PropTypes.func,
+    address: PropTypes.string,
+    updateMapPos: PropTypes.bool,
+    setUpdateMapPos: PropTypes.func,
+};
+
+PlacesAutocomplete.defaultProps = {
+    address: '',
+    updateMapPos: false,
 };
 
 export default PlacesAutocomplete;
