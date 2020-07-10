@@ -1,8 +1,12 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import {Input} from "antd";
 import GoogleMapComponent from "../../../../common/GoogleMap";
 import PlacesAutocomplete from '../../../../common/PlaceAutoComplete';
-import Geocode from "react-geocode";
+
+import usePlacesAutocomplete, {
+    getGeocode,
+    getLatLng,
+} from "use-places-autocomplete";
 
 import './style.scss';
 
@@ -11,8 +15,8 @@ const DefaultAction = () => {
     const [currentPos, setCurrentPos] = useState({
         name: "Current position",
         position: {
-            lat: 37.77,
-            lng: -122.42
+            lat: -33.86566064617498,
+            lng: 151.20870681376962
         }
     });
     const [address, setAddress] = useState('');
@@ -20,10 +24,18 @@ const DefaultAction = () => {
 
     const changePos = (value) => {
         setCurrentPos(value);
-        Geocode.setApiKey("AIzaSyDwCk7q9AVI9DvQjsFUTN69jnYXqqX8HZs");
-        Geocode.fromLatLng(value.position.lat, value.position.lng).then(
+        getGeocode({
+            location: {
+                lat: value.position.lat,
+                lng: value.position.lng,
+            }
+        }).then(
             response => {
-                const address = response.results[0].formatted_address;
+                console.log(response)
+                let address = 'Cannot determine address at this location.';
+                if (response && response.length > 0) {
+                    address = response[0].formatted_address;
+                }
                 setAddress(address);
                 setUpdateMapPos(true);
             },
@@ -41,12 +53,11 @@ const DefaultAction = () => {
                 changePos={changePos}
                 address={address}
                 updateMapPos={updateMapPos}
+                setAddress={setAddress}
                 setUpdateMapPos={setUpdateMapPos}
             />
             <br/>
             <GoogleMapComponent changePos={changePos} markers={[currentPos]}/>
-            <Input type="number" id="lat" value={currentPos.position.lat} />
-            <Input type="number" id="lng" value={currentPos.position.lng} />
         </>
     )
 };

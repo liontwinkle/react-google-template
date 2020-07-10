@@ -60,9 +60,12 @@ class GoogleMapComponent extends React.PureComponent {
             <div style={style}>
                 <Map google={this.props.google}
                      style={style}
-                     zoom={8}
+                     zoom={17}
+                     gestureHandling='cooperative'
+                     street
                      onClick={this.onMapClicked}
                      center={this.state.markers[0].position}
+                     streetViewControl={false}
                 >
                     {this.state.markers.map((marker, index) => (
                         <Marker

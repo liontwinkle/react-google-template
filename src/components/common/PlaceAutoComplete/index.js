@@ -11,7 +11,7 @@ import { faMapMarkerAlt } from "@fortawesome/pro-light-svg-icons";
 import './style.scss';
 import PropTypes from "prop-types";
 
-const PlacesAutocomplete = ({changePos, address, setUpdateMapPos, updateMapPos,}) => {
+const PlacesAutocomplete = ({changePos, address, setAddress, updateMapPos,}) => {
     const {
         ready,
         value,
@@ -20,7 +20,7 @@ const PlacesAutocomplete = ({changePos, address, setUpdateMapPos, updateMapPos,}
         clearSuggestions,
     } = usePlacesAutocomplete({
         requestOptions: {
-            /* Define search scope here */
+            componentRestrictions: { country: ['au'] },
         },
         debounce: 300,
     });
@@ -30,8 +30,8 @@ const PlacesAutocomplete = ({changePos, address, setUpdateMapPos, updateMapPos,}
     });
 
     const handleInput = (e) => {
-        setUpdateMapPos(false);
         setValue(e.target.value);
+        setAddress(e.target.value)
     };
 
     const handleSelect = ({ description }) => () => {
@@ -73,7 +73,7 @@ const PlacesAutocomplete = ({changePos, address, setUpdateMapPos, updateMapPos,}
     return (
         <div className="place-container" ref={ref}>
             <Input
-                value={updateMapPos? address: value}
+                value={address}
                 onChange={handleInput}
                 disabled={!ready}
                 placeholder="Area / Grid / Room*"
@@ -97,7 +97,7 @@ PlacesAutocomplete.propTypes = {
     changePos: PropTypes.func,
     address: PropTypes.string,
     updateMapPos: PropTypes.bool,
-    setUpdateMapPos: PropTypes.func,
+    setAddress: PropTypes.func,
 };
 
 PlacesAutocomplete.defaultProps = {
