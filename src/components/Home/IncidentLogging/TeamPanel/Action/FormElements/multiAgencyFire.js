@@ -1,7 +1,25 @@
-import React from 'react';
+import React, {useState} from 'react';
 import PropTypes from 'prop-types'
 
 const ActionMultiAgencyFire = ({tabIndex, fieldItem}) => {
+    const [ageFireState, setAgeFireState] = useState({
+        police: false,
+        ambulance: false,
+    });
+
+    const changeState = (type) => () => {
+        setAgeFireState(prevState => ({
+            ...ageFireState,
+            [type]: !ageFireState[type]
+        }));
+    };
+
+    const cancel = () => {
+        setAgeFireState({
+            police: false,
+            ambulance: false,
+        })
+    };
     return (
         <div
             className="custom-rad custom-mult-fire"
@@ -9,9 +27,24 @@ const ActionMultiAgencyFire = ({tabIndex, fieldItem}) => {
             data-tab-id={tabIndex}
         >
             <div className="btn-group custom-rad" aria-label="Basic example">
-                <button type="button" className="btn btn-dim btn-outline-primary">Police</button>
-                <button type="button" className="btn btn-dim btn-outline-primary">Fire</button>
-                <button type="button" className="btn btn-dim btn-outline-primary">Ambulance</button>
+                <button
+                    type="button"
+                    className={`btn btn-dim btn-outline-primary ${ageFireState.police === true ? 'selected' : ''}`}
+                    onClick={changeState('police')}>
+                    Police
+                </button>
+                <button
+                    type="button"
+                    className={`btn btn-dim btn-outline-primary ${ageFireState.ambulance === true ? 'selected' : ''}`}
+                    onClick={changeState('ambulance')}>
+                    Ambulance
+                </button>
+                <button
+                    type="button"
+                    className="btn btn-dim btn-outline-primary"
+                onClick={cancel}>
+                    No
+                </button>
             </div>
         </div>
 )

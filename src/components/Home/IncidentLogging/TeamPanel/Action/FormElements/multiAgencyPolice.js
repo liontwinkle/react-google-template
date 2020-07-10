@@ -1,9 +1,28 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types'
 
 import './style.scss';
 
 const ActionMultiAgencyPolice = ({tabIndex, fieldItem}) => {
+    const [agePoliceState, setAgePoliceState] = useState({
+        fire: false,
+        ambulance: false,
+    });
+
+    const changeState = (type) => () => {
+      setAgePoliceState(prevState => ({
+          ...agePoliceState,
+          [type]: !agePoliceState[type]
+      }));
+    };
+
+    const cancel = () => {
+        setAgePoliceState({
+            fire: false,
+            ambulance: false,
+        })
+    };
+
     return (
         <div
             className="custom-rad custom-mult-all"
@@ -11,9 +30,24 @@ const ActionMultiAgencyPolice = ({tabIndex, fieldItem}) => {
             data-tab-id={tabIndex}
         >
             <div className="btn-group custom-rad" aria-label="Basic example">
-                <button type="button" className="btn btn-dim btn-outline-primary">Fire</button>
-                <button type="button" className="btn btn-dim btn-outline-primary">Ambulance</button>
-                <button type="button" className="btn btn-dim btn-outline-primary">No</button>
+                <button
+                    type="button"
+                    className={`btn btn-dim btn-outline-primary ${agePoliceState.fire === true ? 'selected' : ''}`}
+                    onClick={changeState('fire')}>
+                    Fire
+                </button>
+                <button
+                    type="button"
+                    className={`btn btn-dim btn-outline-primary ${agePoliceState.ambulance === true ? 'selected' : ''}`}
+                    onClick={changeState('ambulance')}>
+                    Ambulance
+                </button>
+                <button
+                    type="button"
+                    className="btn btn-dim btn-outline-primary"
+                    onClick={cancel}>
+                    No
+                </button>
             </div>
         </div>
     )

@@ -116,6 +116,11 @@
     color: #6576ff;
     background-color: #eef0ff;
     border-color: #c1c8ff !important;
+    margin: 0;
+    &.selected {
+      background-color: #6576ff;
+      color: #eef0ff;
+    }
   }
   .btn-outline-primary {
     color: #6576ff;
