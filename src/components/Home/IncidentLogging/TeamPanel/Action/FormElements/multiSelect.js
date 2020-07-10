@@ -31,6 +31,9 @@ const ActionMultiSelect = ({tabIndex, fieldItem, options}) => {
             placeholder="Tags Mode"
             onChange={handleChange}
             maxTagCount={3}
+            filterOption={(input, option) =>
+                option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+            }
         >
             {
                 newOptions.map(optionItem => (
