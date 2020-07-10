@@ -43,7 +43,7 @@ const CustomTypeAhead = ({
 
     const covertHint = (string) => {
         const val = string.slice(0, getIndex(string, query)) + "<b>" +
-            string.slice(getIndex(string, query), getIndex(string, query)+query.length - 1) + "</b>" +
+            string.slice(getIndex(string, query), getIndex(string, query)+query.length) + "</b>" +
             string.slice(
                 getIndex(string, query) + query.length,
                 string.length
