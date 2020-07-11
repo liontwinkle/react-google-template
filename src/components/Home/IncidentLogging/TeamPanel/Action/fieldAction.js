@@ -16,7 +16,6 @@ import ActionTextField from "./FormElements/textField";
 import ActionMultiSelect from "./FormElements/multiSelect";
 import CustomTypeAhead from "../../../../common/CustomTypeahead";
 import './style.scss';
-import PlacesAutocomplete from "./FormElements/PlacesAutocomplete";
 
 
 const FieldAction = ({actionFields, tabIndex, typeList}) => {
@@ -73,7 +72,7 @@ const FieldAction = ({actionFields, tabIndex, typeList}) => {
                     <div className="typeahead__container">
                         <div className="typeahead__field">
                             <div className="typeahead__query">
-                                <CustomTypeAhead typeList={typeList}/>
+                                <CustomTypeAhead typeList={typeList} tabIndex={tabIndex}/>
                             </div>
                         </div>
                     </div>
@@ -112,13 +111,11 @@ const FieldAction = ({actionFields, tabIndex, typeList}) => {
 
 FieldAction.propTypes = {
     actionFields: PropTypes.array,
-    typeList: PropTypes.array,
     tabIndex: PropTypes.number,
 };
 
 FieldAction.defaultProps = {
     actionFields: [],
-    typeList: [],
     tabIndex: 1,
 };
 

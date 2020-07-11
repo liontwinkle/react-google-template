@@ -35,7 +35,6 @@ const ActionPanel = ({actionTabs, activeTabIndex, setActiveIndex, getTypeAheadLi
             icon: <FontAwesomeIcon icon={faEllipsisH} className="action-icon-font" color='#8392a5'/>
         }
     ];
-    const [typeList, setTypeList] = useState([]);
     const [currentPos, setCurrentPos] = useState({
         name: "Current position",
         position: {
@@ -51,11 +50,15 @@ const ActionPanel = ({actionTabs, activeTabIndex, setActiveIndex, getTypeAheadLi
     };
 
     const onChangeIndex = (id) => () => {
-        getTypeAheadList(id)
-            .then((data) => {
-                setTypeList(data);
-                setActiveIndex(id)
-            });
+        setActiveIndex(id)
+        setCurrentPos({
+            name: "Current position",
+            position: {
+                lat: -33.86566064617498,
+                lng: 151.20870681376962
+            }
+        })
+        setAddress('');
     };
 
     const changePos = (value) => {
@@ -129,7 +132,7 @@ const ActionPanel = ({actionTabs, activeTabIndex, setActiveIndex, getTypeAheadLi
                                 </>
                             ) : (
                                 <>
-                                    <FieldAction tabIndex={activeTabIndex} typeList={typeList}/>
+                                    <FieldAction tabIndex={activeTabIndex} />
                                     <div className="form-group row">
                                         <label htmlFor={`tab_${activeTabIndex}_field_dispatch-location_0`}
                                                className="col-sm-4 col-form-label condensed-lb">Dispatch
