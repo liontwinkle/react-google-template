@@ -74,6 +74,7 @@ export const getTypeAheadList = (tabIndex) => (dispatch, getState) => {
                 type: types.GET_HEAD_LIST_SUCCESS,
                 typeaheadList: data
             });
+            return data;
         })
         .catch((error) => {
             dispatch({

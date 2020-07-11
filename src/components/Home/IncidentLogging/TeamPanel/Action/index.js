@@ -1,25 +1,83 @@
-import React from 'react';
-import PropTypes from 'prop-types'
+import React, {useState} from 'react';
+import PropTypes from 'prop-types';
+import {connect} from "react-redux";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {Tooltip, Input } from "antd";
-import { faEllipsisH } from "@fortawesome/pro-solid-svg-icons";
-import { faUserCircle } from "@fortawesome/pro-regular-svg-icons";
-import { Switch } from 'antd';
+import {Tooltip, Input} from "antd";
+import {faEllipsisH} from "@fortawesome/pro-solid-svg-icons";
+import {faUserCircle} from "@fortawesome/pro-regular-svg-icons";
+import {Switch} from 'antd';
 import DefaultAction from "./defaultAction";
 import FieldAction from "./fieldAction";
 
 import './style.scss';
+import {bindActionCreators} from "redux";
+import {getTypeAheadList} from "../../../../../redux/action/incident";
+import PlacesAutocomplete from "../../../../common/PlaceAutoComplete";
+import GoogleMapComponent from "../../../../common/GoogleMap";
+import {getGeocode} from "use-places-autocomplete";
 
 
-const ActionPanel = ({actionTabs, activeTabIndex, setActiveIndex}) => {
+const ActionPanel = ({actionTabs, activeTabIndex, setActiveIndex, getTypeAheadList}) => {
     const iconListB = [
-        {key: 'agency_response', value: 'All Agency Response', icon: <Switch className='act-switch-icon action-icon-font' size="small" />},
-        {key: 'name_email', value: 'Name or Email', icon: <FontAwesomeIcon icon={faUserCircle} className="action-icon-font" color='#8392a5'/>},
-        {key: 'more', value: 'More Options', icon: <FontAwesomeIcon icon={faEllipsisH} className="action-icon-font" color='#8392a5'/>}
+        {
+            key: 'agency_response',
+            value: 'All Agency Response',
+            icon: <Switch className='act-switch-icon action-icon-font' size="small"/>
+        },
+        {
+            key: 'name_email',
+            value: 'Name or Email',
+            icon: <FontAwesomeIcon icon={faUserCircle} className="action-icon-font" color='#8392a5'/>
+        },
+        {
+            key: 'more',
+            value: 'More Options',
+            icon: <FontAwesomeIcon icon={faEllipsisH} className="action-icon-font" color='#8392a5'/>
+        }
     ];
+    const [typeList, setTypeList] = useState([]);
+    const [currentPos, setCurrentPos] = useState({
+        name: "Current position",
+        position: {
+            lat: -33.86566064617498,
+            lng: 151.20870681376962
+        }
+    });
+    const [address, setAddress] = useState('');
+    const [updateMapPos, setUpdateMapPos] = useState(false);
 
     const onSubmit = () => {
         console.log('submit');
+    };
+
+    const onChangeIndex = (id) => () => {
+        getTypeAheadList(id)
+            .then((data) => {
+                setTypeList(data);
+                setActiveIndex(id)
+            });
+    };
+
+    const changePos = (value) => {
+        setCurrentPos(value);
+        getGeocode({
+            location: {
+                lat: value.position.lat,
+                lng: value.position.lng,
+            }
+        }).then(
+            response => {
+                let address = 'Cannot determine address at this location.';
+                if (response && response.length > 0) {
+                    address = response[0].formatted_address;
+                }
+                setAddress(address);
+                setUpdateMapPos(true);
+            },
+            error => {
+                console.error(error);
+            }
+        );
     };
 
     return (
@@ -30,7 +88,7 @@ const ActionPanel = ({actionTabs, activeTabIndex, setActiveIndex}) => {
                         actionTabs.map((iconItem) => (
                             <Tooltip
                                 id={iconItem.key}
-                                onClick={() => setActiveIndex(iconItem.id)}
+                                onClick={onChangeIndex(iconItem.id)}
                                 key={iconItem.key}
                                 className={`options-icon ${iconItem.id === activeTabIndex ? 'selected' : ''}`}
                                 placement="top"
@@ -41,11 +99,12 @@ const ActionPanel = ({actionTabs, activeTabIndex, setActiveIndex}) => {
                         ))
                     }
                 </div>
-                <span className="vertical_line" />
+                <span className="vertical_line"/>
                 <div className="action_tab_b action_part">
                     {
                         iconListB.map((iconItem) => (
-                            <Tooltip id={iconItem.key} key={iconItem.key} className="options-icon" placement="top" title={iconItem.value}>
+                            <Tooltip id={iconItem.key} key={iconItem.key} className="options-icon" placement="top"
+                                     title={iconItem.value}>
                                 {iconItem.icon}
                             </Tooltip>
                         ))
@@ -53,23 +112,25 @@ const ActionPanel = ({actionTabs, activeTabIndex, setActiveIndex}) => {
                 </div>
             </div>
             {
-                activeTabIndex === 0 ? (
-                    <DefaultAction />
-                ) : (
-                    <div className="action-tab-content mg-t-20">
-                        <form method="post" className="action-form" onSubmit={onSubmit}>
-                            <FieldAction tabIndex={activeTabIndex} />
-                            <div className="first-group mb-3">
-                                <iframe
-                                    className="mt-2"
-                                    width="100%" height="250px"
-                                    src="https://maps.google.com/maps?hl=en&amp;q=-33.8714672,151.2080955&amp;ie=UTF8&amp;t=&amp;z=17&amp;iwloc=B&amp;output=embed"
-                                    frameBorder="0" scrolling="no" marginHeight="0" marginWidth="0"
-                                />
-                            </div>
-                        </form>
-                    </div>
-                )
+                <div className="action-tab-content mg-t-20">
+                    <form method="post" className="action-form" onSubmit={onSubmit}>
+                        {
+                            activeTabIndex === 0 ? (
+                                <DefaultAction/>
+                            ) : (
+                                <FieldAction tabIndex={activeTabIndex} typeList={typeList}/>
+                            )
+                        }
+                        <PlacesAutocomplete
+                            changePos={changePos}
+                            address={address}
+                            updateMapPos={updateMapPos}
+                            setAddress={setAddress}
+                            setUpdateMapPos={setUpdateMapPos}
+                        />
+                        <GoogleMapComponent changePos={changePos} markers={[currentPos]}/>
+                    </form>
+                </div>
             }
         </div>
     )
@@ -77,5 +138,19 @@ const ActionPanel = ({actionTabs, activeTabIndex, setActiveIndex}) => {
 ActionPanel.propTypes = {
     actionTabs: PropTypes.array.isRequired,
     activeTabIndex: PropTypes.number,
+    getTypeAheadList: PropTypes.func.isRequired,
 };
-export default ActionPanel;
+
+const mapDispatchToProps = dispatch =>
+    bindActionCreators(
+        {
+            getTypeAheadList
+        },
+        dispatch
+    );
+
+const mapStateToProps = store => ({
+    typeList: store.incidentData.typeList,
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(ActionPanel);

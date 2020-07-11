@@ -1,39 +1,37 @@
 import React, {useState, useEffect} from 'react';
 import {AsyncTypeahead} from 'react-bootstrap-typeahead';
-import {bindActionCreators} from "redux";
 import PropTypes from "prop-types";
-import {connect} from "react-redux";
-import {getTypeAheadList} from "../../../redux/action/incident";
 import ReactHtmlParser from 'react-html-parser';
+
 import './style.scss';
 
 const CustomTypeAhead = ({
                              typeList,
-                             tabIndex,
-                             getTypeAheadList
+    tabIndex,
                          }) => {
-    useEffect(() => {
-        if (typeList === null) {
-            getTypeAheadList(tabIndex);
-        }
-    }, [getTypeAheadList, tabIndex, typeList]);
-
     const [isLoading, setIsLoading] = useState(false);
+    const [isFormating, setFormating] = useState(false);
     const [options, setOptions] = useState([]);
-    const [query, setQuery] = useState(null);
+    const [query, setQuery] = useState('');
+
+    useEffect(() => {
+        if(typeList) {
+            setOptions([]);
+        }
+    }, [typeList]);
 
     const getIndex = (str, query) => {
         return str.toLowerCase().indexOf(query.toLowerCase());
     };
 
-    const handleSearch = (query) => {
+    const handleSearch = (newQuery) => {
         setIsLoading(true);
         if (typeList) {
             const filterResult = [];
             typeList.forEach((typeItem) => {
-                if (getIndex(typeItem, query) > -1) {
-                    setQuery(query);
+                if (getIndex(typeItem, newQuery) > -1) {
                     filterResult.push(typeItem);
+                    setQuery(newQuery);
                 }
             });
             setOptions(filterResult);
@@ -53,14 +51,15 @@ const CustomTypeAhead = ({
 
     return (
         <AsyncTypeahead
-            id="async-typeahead"
+            id={`async-${tabIndex}`}
             isLoading={isLoading}
             labelKey="Type*"
             minLength={2}
             onSearch={handleSearch}
             options={options}
-            order="asc"
+            defaultSelected=''
             placeholder="Search for a Github user..."
+            useCache={false}
             renderMenuItemChildren={(option) => (
                 <>
                     <span>{ReactHtmlParser(covertHint(option))}</span>
@@ -72,26 +71,11 @@ const CustomTypeAhead = ({
 
 CustomTypeAhead.propTypes = {
     typeList: PropTypes.array,
-    tabIndex: PropTypes.number,
-    getTypeAheadList: PropTypes.func.isRequired,
 };
 
 CustomTypeAhead.defaultProps = {
     typeList: PropTypes.array,
-    tabIndex: PropTypes.number,
 };
 
-const mapDispatchToProps = dispatch =>
-    bindActionCreators(
-        {
-            getTypeAheadList
-        },
-        dispatch
-    );
 
-const mapStateToProps = store => ({
-    typeList: store.incidentData.typeList,
-});
-
-
-export default connect(mapStateToProps, mapDispatchToProps)(CustomTypeAhead);
+export default CustomTypeAhead;

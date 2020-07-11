@@ -57,7 +57,7 @@ export default (state = INITIAL_STATE, action) => {
             console.log('recv type list', recvTypeList); // fixme
             return {
                 ...state,
-                typeList: recvTypeList,
+                typeList: recvTypeList.slice(1),
                 isFetchingFlag: false,
             }
         }

@@ -19,16 +19,20 @@ import './style.scss';
 import PlacesAutocomplete from "./FormElements/PlacesAutocomplete";
 
 
-const FieldAction = ({actionFields, tabIndex}) => {
+const FieldAction = ({actionFields, tabIndex, typeList}) => {
     const [fields, setFields] = useState([]);
     const [options, setOptions] = useState([]);
+    const [isReady, setReady] = useState(false);
+    
     useEffect(() => {
+        setReady(true);
         const newFields = actionFields.filter((actionItem) => (actionItem.id === tabIndex));
         if (newFields[0].field) {
             setFields(newFields[0].field);
             setOptions(newFields[0].options);
         }
-    }, [tabIndex, setFields]);
+        setReady(false);
+    }, [tabIndex, setFields, setReady, actionFields]);
 
     const newActionBody = (fieldItem) => {
         switch (fieldItem.field_type) {
@@ -60,6 +64,7 @@ const FieldAction = ({actionFields, tabIndex}) => {
     };
 
     return (
+        !isReady&&
         <>
             <div className="form-group row">
                 <label htmlFor={`tab_${tabIndex} _field_action-type_0`}
@@ -68,7 +73,7 @@ const FieldAction = ({actionFields, tabIndex}) => {
                     <div className="typeahead__container">
                         <div className="typeahead__field">
                             <div className="typeahead__query">
-                                <CustomTypeAhead tabIndex={tabIndex} />
+                                <CustomTypeAhead typeList={typeList}/>
                             </div>
                         </div>
                     </div>
@@ -78,7 +83,10 @@ const FieldAction = ({actionFields, tabIndex}) => {
                 <label htmlFor={`tab_${tabIndex}_field_location_0`}
                        className="col-sm-4 col-form-label text-dark">Location*</label>
                 <div className="col-sm-8">
-                    <PlacesAutocomplete
+                    <input
+                        type="text"
+                        className="form-control"
+                        placeholder="Area / Grid / Room"
                         data-tab-id={tabIndex}
                         id={`tab_${tabIndex}_field_location_0`}
                         name={`tab_${tabIndex}_field_location_0`}
@@ -118,11 +126,13 @@ const FieldAction = ({actionFields, tabIndex}) => {
 
 FieldAction.propTypes = {
     actionFields: PropTypes.array,
+    typeList: PropTypes.array,
     tabIndex: PropTypes.number,
 };
 
 FieldAction.defaultProps = {
     actionFields: [],
+    typeList: [],
     tabIndex: 1,
 };
 

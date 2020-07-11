@@ -6,7 +6,9 @@ import _isEqual from 'lodash/isEqual';
 
 const style = {
     width: '100%',
-    height: '250px'
+    height: '250px',
+    position: 'relative',
+    marginTop: '10px',
 };
 
 class GoogleMapComponent extends React.PureComponent {
