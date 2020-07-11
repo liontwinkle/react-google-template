@@ -60,6 +60,13 @@
     height: 50px;
 }
 
+.incident-sidebar-body {
+    .ant-tabs-content-holder {
+        max-height: calc(100vh - 150px);
+        overflow-y: auto;
+    }
+}
+
 .incident-sidebar-header .dropdown-link {
     height: 50px;
 }

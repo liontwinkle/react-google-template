@@ -8,7 +8,7 @@ const style = {
     width: '100%',
     height: '250px',
     position: 'relative',
-    marginTop: '10px',
+    marginTop: '8px',
 };
 
 class GoogleMapComponent extends React.PureComponent {
@@ -34,7 +34,7 @@ class GoogleMapComponent extends React.PureComponent {
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        if(!_isEqual(this.props.markers, prevState.markers)) {
+        if (!_isEqual(this.props.markers, prevState.markers)) {
             this.setState({
                 markers: this.props.markers,
             });
@@ -46,11 +46,11 @@ class GoogleMapComponent extends React.PureComponent {
     };
 
     onMarkerDragEnd = (coord, index) => {
-        const { latLng } = coord;
+        const {latLng} = coord;
         const lat = latLng.lat();
         const lng = latLng.lng();
         const markers = [...this.state.markers];
-        markers[index] = { ...markers[index], position: { lat, lng } };
+        markers[index] = {...markers[index], position: {lat, lng}};
         this.setState({
             markers,
         });
@@ -58,10 +58,10 @@ class GoogleMapComponent extends React.PureComponent {
     };
 
     render() {
+        const marker = this.state.markers[0];
         return (
             <div style={style}>
                 <Map google={this.props.google}
-                     style={style}
                      zoom={17}
                      gestureHandling='cooperative'
                      street
@@ -69,15 +69,13 @@ class GoogleMapComponent extends React.PureComponent {
                      center={this.state.markers[0].position}
                      streetViewControl={false}
                 >
-                    {this.state.markers.map((marker, index) => (
-                        <Marker
-                            key={marker.name}
-                            position={marker.position}
-                            draggable={true}
-                            onDragend={(t, map, coord) => this.onMarkerDragEnd(coord, index)}
-                            name={marker.name}
-                        />
-                    ))}
+                    <Marker
+                        key={marker.name}
+                        position={marker.position}
+                        draggable={true}
+                        onDragend={(t, map, coord) => this.onMarkerDragEnd(coord, 0)}
+                        name={marker.name}
+                    />
                 </Map>
             </div>
         );

@@ -116,19 +116,39 @@ const ActionPanel = ({actionTabs, activeTabIndex, setActiveIndex, getTypeAheadLi
                     <form method="post" className="action-form" onSubmit={onSubmit}>
                         {
                             activeTabIndex === 0 ? (
-                                <DefaultAction/>
+                                <>
+                                    <DefaultAction/>
+                                    <PlacesAutocomplete
+                                        changePos={changePos}
+                                        address={address}
+                                        updateMapPos={updateMapPos}
+                                        setAddress={setAddress}
+                                        setUpdateMapPos={setUpdateMapPos}
+                                    />
+                                    <GoogleMapComponent changePos={changePos} markers={[currentPos]}/>
+                                </>
                             ) : (
-                                <FieldAction tabIndex={activeTabIndex} typeList={typeList}/>
+                                <>
+                                    <FieldAction tabIndex={activeTabIndex} typeList={typeList}/>
+                                    <div className="form-group row">
+                                        <label htmlFor={`tab_${activeTabIndex}_field_dispatch-location_0`}
+                                               className="col-sm-4 col-form-label condensed-lb">Dispatch
+                                            Location</label>
+                                        <div className="col-sm-8">
+                                            <PlacesAutocomplete
+                                                changePos={changePos}
+                                                address={address}
+                                                updateMapPos={updateMapPos}
+                                                setAddress={setAddress}
+                                                setUpdateMapPos={setUpdateMapPos}
+                                            />
+                                        </div>
+                                    </div>
+                                    <GoogleMapComponent changePos={changePos} markers={[currentPos]}/>
+                                </>
+
                             )
                         }
-                        <PlacesAutocomplete
-                            changePos={changePos}
-                            address={address}
-                            updateMapPos={updateMapPos}
-                            setAddress={setAddress}
-                            setUpdateMapPos={setUpdateMapPos}
-                        />
-                        <GoogleMapComponent changePos={changePos} markers={[currentPos]}/>
                     </form>
                 </div>
             }

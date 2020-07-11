@@ -1,5 +1,5 @@
 .action-panel {
-  padding: 0 5px;
+  padding: 5px;
   display: flex;
   flex-direction: column;
   &__iconlist {
@@ -48,6 +48,11 @@
   .ant-input {
     margin-top: 5px;
     border-radius: 4px;
+  }
+  .place-container {
+    input {
+      height: calc(1.5em + 0.9375rem + 3px);
+    }
   }
   .ant-input-affix-wrapper {
     margin-top: 5px;
@@ -149,12 +154,6 @@
 .ant-tabs-tab {
   margin: 0 10px 0 0 !important;
 }
-
-.action-tab-content {
-  max-height: calc(100vh - 250px);
-  overflow-y: auto;
-}
-
 
 .col-form-label {
   padding-top: calc(0.46875rem + 1px);

@@ -26,7 +26,7 @@ import * as routes from '../../constants/routes'
 import * as loginSteps from '../../constants/login_steps'
 import * as FullStory from "@fullstory/browser";
 
-import './App.css'
+import './App.scss'
 import './Layout.css'
 
 function App({
