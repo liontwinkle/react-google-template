@@ -1,12 +1,5 @@
 import React, {useState} from 'react';
 import {Input} from "antd";
-import GoogleMapComponent from "../../../../common/GoogleMap";
-import PlacesAutocomplete from '../../../../common/PlaceAutoComplete';
-
-import usePlacesAutocomplete, {
-    getGeocode,
-    getLatLng,
-} from "use-places-autocomplete";
 
 import './style.scss';
 

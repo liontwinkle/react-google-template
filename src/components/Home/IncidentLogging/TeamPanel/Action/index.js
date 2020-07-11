@@ -1,21 +1,22 @@
 import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from "react-redux";
+import {bindActionCreators} from "redux";
+import {Tooltip} from "antd";
+import {getGeocode} from "use-places-autocomplete";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {Tooltip, Input} from "antd";
 import {faEllipsisH} from "@fortawesome/pro-solid-svg-icons";
 import {faUserCircle} from "@fortawesome/pro-regular-svg-icons";
 import {Switch} from 'antd';
 import DefaultAction from "./defaultAction";
 import FieldAction from "./fieldAction";
 
-import './style.scss';
-import {bindActionCreators} from "redux";
-import {getTypeAheadList} from "../../../../../redux/action/incident";
 import PlacesAutocomplete from "../../../../common/PlaceAutoComplete";
 import GoogleMapComponent from "../../../../common/GoogleMap";
-import {getGeocode} from "use-places-autocomplete";
 
+import {getTypeAheadList} from "../../../../../redux/action/incident";
+
+import './style.scss';
 
 const ActionPanel = ({actionTabs, activeTabIndex, setActiveIndex, getTypeAheadList}) => {
     const iconListB = [
@@ -57,7 +58,7 @@ const ActionPanel = ({actionTabs, activeTabIndex, setActiveIndex, getTypeAheadLi
                 lat: -33.86566064617498,
                 lng: 151.20870681376962
             }
-        })
+        });
         setAddress('');
     };
 
@@ -75,7 +76,6 @@ const ActionPanel = ({actionTabs, activeTabIndex, setActiveIndex, getTypeAheadLi
                     address = response[0].formatted_address;
                 }
                 setAddress(address);
-                setUpdateMapPos(true);
             },
             error => {
                 console.error(error);
@@ -128,7 +128,11 @@ const ActionPanel = ({actionTabs, activeTabIndex, setActiveIndex, getTypeAheadLi
                                         setAddress={setAddress}
                                         setUpdateMapPos={setUpdateMapPos}
                                     />
-                                    <GoogleMapComponent changePos={changePos} markers={[currentPos]}/>
+                                    <GoogleMapComponent
+                                        changePos={changePos}
+                                        markers={[currentPos]}
+                                        setUpdateMapPos={setUpdateMapPos}
+                                    />
                                 </>
                             ) : (
                                 <>
@@ -147,7 +151,11 @@ const ActionPanel = ({actionTabs, activeTabIndex, setActiveIndex, getTypeAheadLi
                                             />
                                         </div>
                                     </div>
-                                    <GoogleMapComponent changePos={changePos} markers={[currentPos]}/>
+                                    <GoogleMapComponent
+                                        changePos={changePos}
+                                        markers={[currentPos]}
+                                        setUpdateMapPos={setUpdateMapPos}
+                                    />
                                 </>
 
                             )

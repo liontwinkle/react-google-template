@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import usePlacesAutocomplete, {
     getGeocode,
     getLatLng,
@@ -9,9 +10,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMapMarkerAlt } from "@fortawesome/pro-light-svg-icons";
 
 import './style.scss';
-import PropTypes from "prop-types";
 
-const PlacesAutocomplete = ({changePos, address, setAddress, updateMapPos,}) => {
+const PlacesAutocomplete = ({changePos, address, setUpdateMapPos, updateMapPos}) => {
     const {
         ready,
         value,
@@ -31,7 +31,6 @@ const PlacesAutocomplete = ({changePos, address, setAddress, updateMapPos,}) => 
 
     const handleInput = (e) => {
         setValue(e.target.value);
-        setAddress(e.target.value)
     };
 
     const handleSelect = ({ description }) => () => {
@@ -49,6 +48,7 @@ const PlacesAutocomplete = ({changePos, address, setAddress, updateMapPos,}) => 
                         lng,
                     }
                 });
+                setUpdateMapPos(false);
                 console.log("📍 Coordinates: ", { lat, lng });
             })
             .catch((error) => {
@@ -73,7 +73,7 @@ const PlacesAutocomplete = ({changePos, address, setAddress, updateMapPos,}) => 
     return (
         <div className="place-container" ref={ref}>
             <Input
-                value={address}
+                value={updateMapPos?address: value}
                 onChange={handleInput}
                 disabled={!ready}
                 placeholder="Area / Grid / Room*"
@@ -97,7 +97,7 @@ PlacesAutocomplete.propTypes = {
     changePos: PropTypes.func,
     address: PropTypes.string,
     updateMapPos: PropTypes.bool,
-    setAddress: PropTypes.func,
+    setUpdateMapPos: PropTypes.func,
 };
 
 PlacesAutocomplete.defaultProps = {

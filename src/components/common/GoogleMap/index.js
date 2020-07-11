@@ -55,6 +55,7 @@ class GoogleMapComponent extends React.PureComponent {
             markers,
         });
         this.props.changePos(markers[0]);
+        this.props.setUpdateMapPos(true);
     };
 
     render() {
@@ -85,6 +86,7 @@ class GoogleMapComponent extends React.PureComponent {
 GoogleMapComponent.propTypes = {
     changePos: PropTypes.func,
     markers: PropTypes.array,
+    setUpdateMapPos: PropTypes.func,
 };
 
 GoogleMapComponent.defaultProps = {

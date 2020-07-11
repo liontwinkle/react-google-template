@@ -1,9 +1,6 @@
 import React, {Component} from 'react';
-import {Form} from 'react-bootstrap';
 import {
     Typeahead,
-    Hint,
-    TypeaheadInputSingle,
 } from 'react-bootstrap-typeahead';
 import PropTypes from "prop-types";
 import _isEqual from 'lodash/isEqual';
@@ -86,12 +83,14 @@ class CustomTypeAhead extends Component {
                     defaultSelected={options.slice(0, 4)}
                     selected={selected}
                     id={`should-select-${tabIndex}`}
+                    emptyLabel={<span style={{width: 0, height: 0}} />}
                     onChange={selected => this.setState({selected, text: true})}
                     options={options}
+                    minLength={2}
                     ref={this.typeInput}
                     labelKey="type"
                     onKeyDown={() => {this.setState({text: true})}}
-                    placeholder=""
+                    placeholder="Type"
                 />
                 {
                     text && (
