@@ -106,20 +106,6 @@ const FieldAction = ({actionFields, tabIndex, typeList}) => {
                     </div>
                 ))
             }
-            <div className="form-group row">
-                <label htmlFor={`tab_${tabIndex}_field_dispatch-location_0`}
-                       className="col-sm-4 col-form-label condensed-lb">Dispatch Location</label>
-                <div className="col-sm-8">
-                    <input
-                        type="text"
-                        className="form-control"
-                        placeholder="Dispatch Location"
-                        data-tab-id={tabIndex}
-                        id={`tab_${tabIndex}_field_dispatch-location_0`}
-                        name={`tab_${tabIndex}_field_dispatch-location_0`}
-                    />
-                </div>
-            </div>
         </>
     )
 };
