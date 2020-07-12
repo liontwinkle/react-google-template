@@ -68,7 +68,7 @@ class GoogleMapComponent extends React.PureComponent {
                      street
                      onClick={this.onMapClicked}
                      center={this.state.markers[0].position}
-                     streetViewControl={false}
+                     streetViewControl={true}
                 >
                     <Marker
                         key={marker.name}
