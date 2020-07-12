@@ -4,8 +4,8 @@ import storage from './storage.service';
 
 const USER_TOKEN_KEY = 'access_token';
 // const baseURL = process.env.REACT_APP_API;
-// const baseURL = 'https://api.commandpost.com.au';
-const baseURL = 'http://74.208.102.130:4000';
+const baseURL = 'https://api.commandpost.com.au';
+// const baseURL = 'https://74.208.102.130:4000';
 axios.defaults.withCredentials = true;
 const http = axios.create({ baseURL: `${baseURL}/` });
 
