@@ -3,8 +3,8 @@ import axios from 'axios';
 import storage from './storage.service';
 
 const USER_TOKEN_KEY = 'access_token';
-const baseURL = process.env.REACT_APP_API;
-
+// const baseURL = process.env.REACT_APP_API;
+const baseURL = 'https://api.commandpost.com.au';
 axios.defaults.withCredentials = true;
 const http = axios.create({ baseURL: `${baseURL}/` });
 
