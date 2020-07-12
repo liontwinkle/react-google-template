@@ -41,10 +41,6 @@ class GoogleMapComponent extends React.PureComponent {
         }
     }
 
-    onMapClicked = (event) => {
-        console.log(event);
-    };
-
     onMarkerDragEnd = (coord, index) => {
         const {latLng} = coord;
         const lat = latLng.lat();
@@ -68,7 +64,7 @@ class GoogleMapComponent extends React.PureComponent {
                      street
                      onClick={this.onMapClicked}
                      center={this.state.markers[0].position}
-                     streetViewControl={true}
+                     streetViewControl={false}
                      mapTypeControlOptions={{
                          mapTypeIds: ['roadmap','terrain', 'satellite', 'hybrid'],
                          tilt: 45,

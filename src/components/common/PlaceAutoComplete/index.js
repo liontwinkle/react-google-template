@@ -49,7 +49,6 @@ const PlacesAutocomplete = ({changePos, address, setUpdateMapPos, updateMapPos})
                     }
                 });
                 setUpdateMapPos(false);
-                console.log("📍 Coordinates: ", { lat, lng });
             })
             .catch((error) => {
                 console.log("😱 Error: ", error);

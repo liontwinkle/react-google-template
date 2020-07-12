@@ -54,7 +54,6 @@ export default (state = INITIAL_STATE, action) => {
         }
         case types.GET_HEAD_LIST_SUCCESS: {
             const recvTypeList = action.typeaheadList;
-            console.log('recv type list', recvTypeList); // fixme
             return {
                 ...state,
                 typeList: recvTypeList.slice(1),
