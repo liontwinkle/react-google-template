@@ -22,16 +22,15 @@
     "bootstrap": "^4.5.0",
     "classnames": "^2.2.6",
     "connected-react-router": "^6.8.0",
-    "css-loader": "^3.6.0",
     "draft-js": "^0.11.6",
     "draft-js-emoji-plugin": "^2.1.3",
     "draft-js-mention-plugin": "^3.1.5",
     "draft-js-plugins-editor": "^3.0.0",
-    "google-map-react": "^1.1.7",
     "google-maps-react": "^2.0.6",
     "lodash": "^4.17.15",
     "node-sass": "^4.14.1",
     "perfect-scrollbar-react": "^1.0.1",
+    "prop-types": "^15.7.2",
     "react": "^16.13.1",
     "react-bootstrap": "^1.0.1",
     "react-bootstrap-typeahead": "^5.1.0",
@@ -60,18 +59,59 @@
     "redux-logger": "^3.0.6",
     "redux-react-hook": "^4.0.1",
     "redux-thunk": "^2.3.0",
+    "resolve-url-loader": "^3.1.1",
     "style-loader": "^1.2.1",
     "styled-components": "^5.1.1",
-    "use-places-autocomplete": "^1.3.9"
+    "use-places-autocomplete": "^1.3.9",
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.12",
+    "webpack-dev-server": "^3.11.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.10.4",
+    "@babel/preset-env": "^7.10.4",
+    "@babel/preset-react": "^7.10.4",
+    "@date-io/core": "^1.3.11",
+    "@typescript-eslint/eslint-plugin": "^2.6.1",
+    "@typescript-eslint/parser": "^2.6.1",
+    "babel-loader": "^8.1.0",
+    "css-loader": "^3.6.0",
+    "date-fns": "2.1.0",
+    "dotenv": "^8.2.0",
+    "eslint-config-airbnb": "^18.0.1",
+    "eslint-config-react-app": "^5.2.0",
+    "eslint-plugin-chai-friendly": "^0.5.0",
+    "eslint-plugin-flowtype": "^3.13.0",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-react": "^7.18.3",
+    "eslint-plugin-react-hooks": "^1.7.0",
+    "html-loader": "^1.1.0",
+    "html-webpack-plugin": "^4.3.0",
+    "husky": "^3.0.9",
+    "lint-staged": "^10.0.7",
+    "monaco-editor": "^0.19.3",
+    "react-dnd": "^7.7.0",
+    "sass-loader": "^9.0.2",
+    "typescript": "^3.7.2"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
+    "start": "webpack-dev-server --mode development --open --config webpack.config.dev.js",
+    "build": "webpack --mode production --config webpack.config.js",
+    "dev-server": "webpack-dev-server",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
-  "eslintConfig": {
-    "extends": "react-app"
+  "lint-staged": {
+    "src/**/*.{js,jsx,ts,tsx,json}": [
+      "eslint --fix",
+      "git add"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
   },
   "browserslist": {
     "production": [
