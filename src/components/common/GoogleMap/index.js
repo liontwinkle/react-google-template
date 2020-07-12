@@ -69,6 +69,10 @@ class GoogleMapComponent extends React.PureComponent {
                      onClick={this.onMapClicked}
                      center={this.state.markers[0].position}
                      streetViewControl={true}
+                     mapTypeControlOptions={{
+                         mapTypeIds: ['roadmap','terrain', 'satellite', 'hybrid'],
+                         tilt: 45,
+                     }}
                 >
                     <Marker
                         key={marker.name}

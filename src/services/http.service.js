@@ -9,6 +9,7 @@ axios.defaults.withCredentials = true;
 const http = axios.create({ baseURL: `${baseURL}/` });
 
 function get(url, headers = {}, params = {}) {
+    console.log('base url: ', baseURL); // fixme
     const accessToken = storage.getItem(USER_TOKEN_KEY);
     const authHeader = { 'x-access-token': accessToken };
     return http.get(url, {
