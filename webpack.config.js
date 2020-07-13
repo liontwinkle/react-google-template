@@ -56,5 +56,11 @@ module.exports = () => {
       path: `${__dirname}/build`,
       filename: 'bundle.js',
     },
+    devServer: {
+      contentBase: './build',
+      historyApiFallback: true,
+      hot: true,
+      port: 3000,
+    },
   };
 };

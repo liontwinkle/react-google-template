@@ -1,36 +1,35 @@
-import React, {useEffect, useState} from 'react'
-import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
-import PropTypes from 'prop-types'
+import React, { useEffect, useState } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import PropTypes from 'prop-types';
 
-import DashboardLeft from './Dashboard/DashLeft'
-import DashContent from './Dashboard/DashContent'
+import axios from 'axios';
+import DashboardLeft from './Dashboard/DashLeft';
+import DashContent from './Dashboard/DashContent';
 
-import IncidentLeft from './IncidentLogging/IncidentLeft'
-import IncidentContent from './IncidentLogging/IncidentContent'
-import TaskBar from "../common/TaskBar";
-import axios from "axios";
-import Loader from "../Loader";
-
+import IncidentLeft from './IncidentLogging/IncidentLeft';
+import IncidentContent from './IncidentLogging/IncidentContent';
+import TaskBar from '../common/TaskBar';
+import Loader from '../Loader';
 
 import {
   setSessionExpiryModalState,
   setMainMenuState,
-  setLoadingFg
+  setLoadingFg,
 } from '../../redux/action/themeConfigs';
 import { resetSessionData, verifyToken } from '../../redux/action/session';
 
-import './style.scss'
+import './style.scss';
 
-function Home ({
+function Home({
   viewIndex,
   sessionData,
   setSessionExpiryModalState,
   setLoadingFg,
   verifyToken,
   resetSessionData,
-  isLoading }) {
-
+  isLoading,
+}) {
   const [info, setInfo] = useState(false);
 
   useEffect(() => {
@@ -38,37 +37,36 @@ function Home ({
       setLoadingFg(true);
       try {
         verifyToken()
-            .then(async () => {
-              const { data } = await axios.get(
-                  process.env.REACT_APP_API +
-                  '/auth/info/' +
-                  sessionData.id_instance +
-                  '/' +
-                  sessionData.id_team +
-                  '/' +
-                  sessionData.id_event
-              );
-              setInfo(data.info);
-              setLoadingFg(false)
-            })
-            .catch(e => {
-              if (e.response.status === 401) {
-                setSessionExpiryModalState(true)
-              } else {
-                resetSessionData()
-              }
-            })
+          .then(async () => {
+            const { data } = await axios.get(
+              `${process.env.REACT_APP_API
+              }/auth/info/${
+                sessionData.id_instance
+              }/${
+                sessionData.id_team
+              }/${
+                sessionData.id_event}`,
+            );
+            setInfo(data.info);
+            setLoadingFg(false);
+          })
+          .catch((e) => {
+            if (e.response.status === 401) {
+              setSessionExpiryModalState(true);
+            } else {
+              resetSessionData();
+            }
+          });
       } catch (e) {
         // if unauthorized
         if (e.response.status !== 400) {
           // open session expiry modal
           setSessionExpiryModalState(true);
           setLoadingFg(false);
-          return
         }
       }
     };
-    getInfoHandler()
+    getInfoHandler();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -77,18 +75,18 @@ function Home ({
   const LeftBar = () => {
     switch (viewIndex) {
       case 2:
-        return <IncidentLeft />
+        return <IncidentLeft />;
       default:
-        return <DashboardLeft info={info} sessionData={sessionData} />
+        return <DashboardLeft info={info} sessionData={sessionData} />;
     }
   };
 
   const ContentBody = () => {
     switch (viewIndex) {
       case 2:
-        return <IncidentContent />
+        return <IncidentContent />;
       default:
-        return <DashContent />
+        return <DashContent />;
     }
   };
   /**
@@ -96,45 +94,44 @@ function Home ({
    * It consists of two parts; left bar and content.
    */
   return (
-    <div className='main-body'>
-      <div className='main-group'>{LeftBar()}</div>
-      <div className='main-content'>
+    <div className="main-body">
+      <div className="main-group">{LeftBar()}</div>
+      <div className="main-content">
         {ContentBody()}
-        <div className='main-content__footer'>
+        <div className="main-content__footer">
           <TaskBar />
         </div>
       </div>
     </div>
-  )
+  );
 }
 
 Home.propTypes = {
   viewIndex: PropTypes.number,
   verifyToken: PropTypes.func.isRequired,
   setSessionExpiryModalState: PropTypes.func.isRequired,
-  setMainMenuState: PropTypes.func.isRequired,
   setLoadingFg: PropTypes.func.isRequired,
   isLoading: PropTypes.bool.isRequired,
   resetSessionData: PropTypes.func.isRequired,
-  sessionData: PropTypes.object.isRequired
+  sessionData: PropTypes.object.isRequired,
 };
 
 Home.defaultProps = {
-  viewIndex: null
+  viewIndex: null,
 };
 
-const mapStateToProps = store => ({
+const mapStateToProps = (store) => ({
   viewIndex: store.dashboardData.viewIndex,
   sessionData: store.sessionData.sessionData,
   isLoading: store.themeConfigData.isLoading,
 });
 
-const mapDispatchToProps = dispatch => bindActionCreators({
+const mapDispatchToProps = (dispatch) => bindActionCreators({
   setSessionExpiryModalState,
   setMainMenuState,
   setLoadingFg,
   resetSessionData,
-  verifyToken
+  verifyToken,
 }, dispatch);
 
-export default connect(mapStateToProps, mapDispatchToProps)(Home)
+export default connect(mapStateToProps, mapDispatchToProps)(Home);

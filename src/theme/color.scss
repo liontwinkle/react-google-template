@@ -1,0 +1,44 @@
+// Layout
+$bt_primary_color: #596882;
+
+/* ############### BOOTSTRAP FRAMEWORK ############### */
+/*!
+ * Bootstrap v4.3.1 (https://getbootstrap.com/)
+ * Copyright 2011-2019 The Bootstrap Authors
+ * Copyright 2011-2019 Twitter, Inc.
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+ */
+:root {
+  --blue: #0168fa;
+  --indigo: #5b47fb;
+  --purple: #6f42c1;
+  --pink: #f10075;
+  --red: #dc3545;
+  --orange: #fd7e14;
+  --yellow: #ffc107;
+  --green: #10b759;
+  --teal: #00cccc;
+  --cyan: #00b8d4;
+  --white: #fff;
+  --gray: #7987a1;
+  --gray-dark: #3b4863;
+  --primary: #0168fa;
+  --secondary: #7987a1;
+  --success: #10b759;
+  --info: #00b8d4;
+  --warning: #ffc107;
+  --danger: #dc3545;
+  --light: #f4f5f8;
+  --dark: #3b4863;
+  --breakpoint-xs: 0;
+  --breakpoint-sm: 576px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 992px;
+  --breakpoint-xl: 1200px;
+  --font-family-sans-serif: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  --border-color: rgba(72, 94, 144, 0.16);
+  --basic-font-color: #001737;
+  --scroll-color: #d5d5d5;
+}
+
