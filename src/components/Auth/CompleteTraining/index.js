@@ -3,20 +3,22 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { withRouter } from 'react-router-dom';
-import { Container, Form, Button, Spinner } from 'react-bootstrap';
-import { useForm } from "react-hook-form";
+import {
+  Container, Form, Button, Spinner,
+} from 'react-bootstrap';
+import { useForm } from 'react-hook-form';
 
 import Signout from '../Signout';
 import { setLoginStep } from '../../../redux/action/session';
 import * as loginSteps from '../../../constants/login_steps';
 
-import '../Auth.css';
+import '../Auth.scss';
 
 function CompleteTraining({ setLoginStep }) {
   const { handleSubmit } = useForm();
   const [loading, setLoading] = useState(false);
 
-  const submit = async (formData) => {
+  const submit = async () => {
     setLoading(true);
     setTimeout(() => {
       setLoading(false);
@@ -35,7 +37,7 @@ function CompleteTraining({ setLoginStep }) {
                 <h3 className="tx-color-01 mg-b-5">Complete training</h3>
                 <p className="tx-color-03 tx-16 mg-b-40">Complete your training to continue.</p>
                 <Form onSubmit={handleSubmit(submit)}>
-                  <Button variant="brand-02" block={true} type="submit">
+                  <Button variant="brand-02" block type="submit">
                     {loading ? (
                       <>
                         <Spinner size="sm" animation="grow" className="mr-2" />
@@ -44,14 +46,17 @@ function CompleteTraining({ setLoginStep }) {
                     ) : 'Continue'}
                   </Button>
                 </Form>
-                <div className="tx-13 mg-t-20 tx-center">Something is wrong? <Signout /></div>
+                <div className="tx-13 mg-t-20 tx-center">
+                  Something is wrong?
+                  <Signout />
+                </div>
               </div>
             </div>
           </div>
         </Container>
       </div>
     </>
-  )
+  );
 }
 
 CompleteTraining.propTypes = {
