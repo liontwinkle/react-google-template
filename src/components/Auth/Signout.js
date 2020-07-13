@@ -10,46 +10,48 @@ import { signOut, resetSessionData } from '../../redux/action/session';
 import { setSessionExpiryModalState } from '../../redux/action/themeConfigs';
 
 function Signout({
-    isDropdownItem,
-    signOut,
-    setSessionExpiryModalState,
+  isDropdownItem,
+  signOut,
+  setSessionExpiryModalState,
 }) {
-    const signoutHandler = (e) => {
-        e.preventDefault();
-        signOut()
-            .then(() => {
-                setSessionExpiryModalState(false);
-                resetSessionData();
-            })
-            .catch((error) => {
-                setSessionExpiryModalState(false);
-                resetSessionData();
-            })
-    };
+  const signoutHandler = (e) => {
+    e.preventDefault();
+    signOut()
+      .then(() => {
+        setSessionExpiryModalState(false);
+        resetSessionData();
+      })
+      .catch(() => {
+        setSessionExpiryModalState(false);
+        resetSessionData();
+      });
+  };
 
-    if (isDropdownItem) {
-        return <Dropdown.Item onClick={signoutHandler}><LogOut /> Sign Out</Dropdown.Item>
-    }
+  if (isDropdownItem) {
+    return (
+      <Dropdown.Item onClick={signoutHandler}>
+        <LogOut />
+        {' '}
+        Sign Out
+      </Dropdown.Item>
+    );
+  }
 
-    return <a href="." onClick={signoutHandler}>Sign Out</a>
+  return <a href="." onClick={signoutHandler}>Sign Out</a>;
 }
 
 Signout.propTypes = {
-    isDropdownItem: PropTypes.bool.isRequired,
-    signOut: PropTypes.func.isRequired,
-    setSessionExpiryModalState: PropTypes.func.isRequired,
-};
-
-Signout.defaultProps = {
-    isDropdownItem: false,
+  isDropdownItem: PropTypes.bool.isRequired,
+  signOut: PropTypes.func.isRequired,
+  setSessionExpiryModalState: PropTypes.func.isRequired,
 };
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({
-    signOut,
-    setSessionExpiryModalState
+  signOut,
+  setSessionExpiryModalState,
 }, dispatch);
 
 export default connect(
-    null,
-    mapDispatchToProps,
+  null,
+  mapDispatchToProps,
 )(Signout);

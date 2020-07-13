@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { MentionsInput, Mention } from 'react-mentions';
 
 import './styles.scss';
-import './metion.css';
+import './metion.scss';
 
 export default class SimpleEmojiEditor extends Component {
   constructor() {

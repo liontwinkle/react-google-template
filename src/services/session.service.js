@@ -1,32 +1,32 @@
 import httpService from './http.service';
+
 const authUrl = '/auth';
 
 const SignIn = (requestBody) => httpService
-    .post(`${authUrl}/signin`, requestBody)
-    .then(({ data }) => data)
-    .catch((err) => Promise.reject(err.response));
+  .post(`${authUrl}/signin`, requestBody)
+  .then(({ data }) => data)
+  .catch((err) => Promise.reject(err.response));
 
-const SignOut = () => httpService.get(`${authUrl}/signout`)
+const SignOut = () => httpService.get(`${authUrl}/signout`);
 
-const VerifyToken = () => httpService.get(`${authUrl}/verifyToken`)
+const VerifyToken = () => httpService.get(`${authUrl}/verifyToken`);
 
-const UpdateUser = (userData) => httpService.put(`/user`, userData)
+const UpdateUser = (userData) => httpService.put('/user', userData);
 
 const GetTrainingCount = () => httpService.get('/user/trainings_count')
-    .then(({ data }) => data)
-    .catch((err) => Promise.reject(err.response));
-
+  .then(({ data }) => data)
+  .catch((err) => Promise.reject(err.response));
 
 const GetInstancecs = () => httpService.get(`${authUrl}/instances`);
 
 const GetTeams = () => httpService.get(`${authUrl}/teams`);
 
 export default {
-    SignIn,
-    SignOut,
-    VerifyToken,
-    GetTrainingCount,
-    UpdateUser,
-    GetInstancecs,
-    GetTeams
+  SignIn,
+  SignOut,
+  VerifyToken,
+  GetTrainingCount,
+  UpdateUser,
+  GetInstancecs,
+  GetTeams,
 };
