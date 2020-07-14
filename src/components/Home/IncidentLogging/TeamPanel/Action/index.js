@@ -95,11 +95,11 @@ const ActionPanel = ({
   };
 
   const onTitleChange = (e) => {
-    onSetData('tab_0_field_action-type_0', e.target.value);
+    onSetData({ 'tab_0_field_action-type_0': e.target.value });
   };
 
   const onChangeActionInfo = (e) => {
-    onSetData('tab_0_field_action-info_0', e.target.value);
+    onSetData({ 'tab_0_field_action-info_0': e.target.value });
   };
 
   return (

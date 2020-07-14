@@ -15,7 +15,7 @@ const ActionTextArea = ({
     setNewOptions(customOptions.options);
   }
   const onTextArea = (e) => {
-    onSetData(`tab_${tabIndex}_field_${fieldItem.field_type}_${fieldItem.id}`, e.target.value);
+    onSetData({ [`tab_${tabIndex}_field_${fieldItem.field_type}_${fieldItem.id}`]: e.target.value });
   };
 
   return (

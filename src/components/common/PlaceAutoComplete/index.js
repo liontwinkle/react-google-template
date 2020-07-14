@@ -43,7 +43,7 @@ const PlacesAutocomplete = ({
   const handleSelect = ({ description }) => () => {
     setValue(description, false);
     clearSuggestions();
-    onSetData(`tab_${tabIndex}_field_location_${tabIndex}`, description);
+    onSetData({ [`tab_${tabIndex}_field_location_${tabIndex}`]: description });
 
     // Get latitude and longitude via utility functions
     getGeocode({ address: description })

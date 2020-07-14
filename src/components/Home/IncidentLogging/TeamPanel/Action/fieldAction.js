@@ -187,7 +187,7 @@ const FieldAction = ({
   };
 
   const onChangeAddress = (e) => {
-    onSetData(`tab_${tabIndex}_field_location_0`, e.target.value);
+    onSetData({ [`tab_${tabIndex}_field_location_0`]: e.target.value });
   };
 
   return (

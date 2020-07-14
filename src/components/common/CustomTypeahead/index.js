@@ -62,7 +62,7 @@ class CustomTypeAhead extends Component {
 
   onChangeType(selected) {
     console.log('selected', selected);
-    this.props.onSetData(`tab_${this.props.tabIndex}_field_action-type_0`, selected);
+    this.props.onSetData({ [`tab_${this.props.tabIndex}_field_action-type_0`]: selected });
     this.setState({ selected, text: true });
   }
 

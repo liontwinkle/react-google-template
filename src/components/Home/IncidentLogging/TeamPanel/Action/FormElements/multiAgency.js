@@ -5,7 +5,7 @@ const ActionMultiAgency = ({
   tabIndex, fieldItem, onSetData, value,
 }) => {
   const onSelect = (value) => {
-    onSetData(`tab_${tabIndex}_field_${fieldItem.field_type}_${fieldItem.id}`, value);
+    onSetData({ [`tab_${tabIndex}_field_${fieldItem.field_type}_${fieldItem.id}`]: value });
   };
 
   const selectedValue = value ? value[`tab_${tabIndex}_field_${fieldItem.field_type}_${fieldItem.id}`] : '';

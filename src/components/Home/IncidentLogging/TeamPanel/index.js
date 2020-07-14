@@ -15,13 +15,14 @@ import Update from './Update';
 
 import CustomTab from '../../../common/CustomTab';
 
-import { getActionTabs, setActiveIndex } from '../../../../redux/action/incident';
+import { getActionTabs, setActiveIndex, saveActionData } from '../../../../redux/action/incident';
 
 import './style.scss';
 
 const TeamPanel = ({
   getActionTabs,
   setActiveIndex,
+  saveActionData,
   sessionData,
   actionTabs,
   activeTabIndex,
@@ -40,16 +41,17 @@ const TeamPanel = ({
     }
   }, [getActionTabs, sessionData]);
 
-  const onSetData = (type, data) => {
+  const onSetData = (data) => {
+    console.log('data: ', data); // fixme
     setValue({
       ...value,
-      [type]: data,
+      ...data,
     });
+    console.log('value: ', value); // fixme
   };
 
   const onValidation = (data) => {
     const keys = Object.keys(data);
-    console.log('send data  ', keys);
     let issueCase = 3;
     keys.forEach((keyItem) => {
       if (keyItem.includes('field_action-type')) {
@@ -58,7 +60,6 @@ const TeamPanel = ({
         issueCase -= 2;
       }
     });
-    console.log(issueCase); // fixme
     if (issueCase >= 3) {
       setErrors({
         tabIndex: activeTabIndex,
@@ -95,11 +96,21 @@ const TeamPanel = ({
     const saveData = {
       ...data,
       ...value,
-      tabIndex: activeTabIndex,
+      id_tab: activeTabIndex,
+      id_event: sessionData.id_event,
+      id_instance: sessionData.id_instance,
     };
-    console.log(data); // fixme
+
     if (!isCreating && onValidation(saveData)) {
       console.log('will saved data', saveData);
+      saveActionData(saveData)
+        .then(() => {
+          console.log('success');
+          setValue({});
+        })
+        .catch((e) => {
+          console.log(e);
+        });
     }
   };
 
@@ -168,6 +179,7 @@ const TeamPanel = ({
 TeamPanel.propTypes = {
   getActionTabs: PropTypes.func,
   setActiveIndex: PropTypes.func,
+  saveActionData: PropTypes.func.isRequired,
   sessionData: PropTypes.object,
   actionTabs: PropTypes.array,
   activeTabIndex: PropTypes.number,
@@ -187,6 +199,7 @@ const mapDispatchToProps = (dispatch) => bindActionCreators(
   {
     getActionTabs,
     setActiveIndex,
+    saveActionData,
   },
   dispatch,
 );

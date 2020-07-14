@@ -16,8 +16,8 @@ const ActionMultiAgencyPolice = ({
 
   useEffect(() => {
     setAgePoliceState({
-      fire: value && value[`tab_${tabIndex}_field_${fieldItem.field_type}-fire_${fieldItem.id}`],
-      ambulance: value && value[`tab_${tabIndex}_field_${fieldItem.field_type}-ambulance_${fieldItem.id}`],
+      fire: (value && value[`tab_${tabIndex}_field_${fieldItem.field_type}-fire_${fieldItem.id}`] === 'fire'),
+      ambulance: (value && value[`tab_${tabIndex}_field_${fieldItem.field_type}-ambulance_${fieldItem.id}`] === 'ambulance'),
     });
   }, [value, tabIndex, fieldItem.field_type, fieldItem.id]);
 
@@ -26,7 +26,7 @@ const ActionMultiAgencyPolice = ({
       ...agePoliceState,
       [type]: !agePoliceState[type],
     }));
-    onSetData(`tab_${tabIndex}_field_${fieldItem.field_type}-${type}_${fieldItem.id}`, type);
+    onSetData({ [`tab_${tabIndex}_field_${fieldItem.field_type}-${type}_${fieldItem.id}`]: type });
   };
 
   const cancel = () => {
@@ -34,7 +34,11 @@ const ActionMultiAgencyPolice = ({
       fire: false,
       ambulance: false,
     });
-    onSetData(`tab_${tabIndex}_field_${fieldItem.field_type}-no_${fieldItem.id}`, 'no');
+    onSetData({
+      [`tab_${tabIndex}_field_${fieldItem.field_type}-no_${fieldItem.id}`]: 'no',
+      [`tab_${tabIndex}_field_${fieldItem.field_type}-fire_${fieldItem.id}`]: null,
+      [`tab_${tabIndex}_field_${fieldItem.field_type}-ambulance_${fieldItem.id}`]: null,
+    });
   };
 
   return (

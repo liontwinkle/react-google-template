@@ -83,3 +83,29 @@ export const getTypeAheadList = (tabIndex) => (dispatch, getState) => {
       throw error;
     });
 };
+
+export const saveActionData = (data) => (dispatch, getState) => {
+  if (getState().incidentData.isCreating) {
+    return Promise.reject();
+  }
+
+  dispatch({
+    type: types.SAVE_INCIDENT_DATA_REQUEST,
+  });
+
+  return incidentService.SaveActionData(data)
+    .then((data) => {
+      dispatch({
+        type: types.SAVE_INCIDENT_DATA_SUCCESS,
+        payload: data,
+      });
+      return data;
+    })
+    .catch((error) => {
+      dispatch({
+        type: types.SAVE_INCIDENT_DATA_FAIL,
+        error,
+      });
+      throw error;
+    });
+};
