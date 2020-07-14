@@ -1,36 +1,46 @@
-import React, {useState} from 'react';
-import PropTypes from 'prop-types'
+import React from 'react';
+import PropTypes from 'prop-types';
 
-const ActionTextField = ({tabIndex, fieldItem, options}) => {
-    const [newOptions, setNewOptions] = useState([]);
-    const required = (fieldItem.field_required === "1");
-    const customOptions = options.filter((optionItem) => (optionItem.id === fieldItem.id));
-    if (customOptions.options) {
-        setNewOptions(customOptions.options);
-    }
-    return (
-        <input
-            type="text"
-            className="form-control"
-            id={`tab_${tabIndex}_field_${fieldItem.field_type}_${fieldItem.id}`}
-            name={`tab_${tabIndex}_field_${fieldItem.field_type}_${fieldItem.id}`}
-            data-tab-id={tabIndex}
-            placeholder={fieldItem.field_placeholder}
-            required={required}
-        />
-    )
+const ActionTextField = ({
+  tabIndex,
+  fieldItem,
+  onSetData,
+  value,
+}) => {
+  const required = (fieldItem.field_required === '1');
+
+  const onChange = (e) => {
+    onSetData({ [`tab_${tabIndex}_field_${fieldItem.field_type}_${fieldItem.id}`]: e.target.value });
+  };
+
+  return (
+    <>
+      <input
+        type="text"
+        className="form-control"
+        id={`tab_${tabIndex}_field_${fieldItem.field_type}_${fieldItem.id}`}
+        name={`tab_${tabIndex}_field_${fieldItem.field_type}_${fieldItem.id}`}
+        data-tab-id={tabIndex}
+        placeholder={fieldItem.field_placeholder}
+        required={required}
+        value={value ? value[`tab_${tabIndex}_field_${fieldItem.field_type}_${fieldItem.id}`] : ''}
+        onChange={onChange}
+      />
+    </>
+  );
 };
 
 ActionTextField.propTypes = {
-    tabIndex: PropTypes.number,
-    fieldItem: PropTypes.object,
-    options: PropTypes.array,
+  tabIndex: PropTypes.number,
+  fieldItem: PropTypes.object,
+  onSetData: PropTypes.func.isRequired,
+  value: PropTypes.object,
 };
 
 ActionTextField.defaultProps = {
-    tabIndex: 1,
-    options: [],
-    fieldItem: {},
+  tabIndex: 1,
+  fieldItem: {},
+  value: {},
 };
 
 export default ActionTextField;

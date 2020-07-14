@@ -6,10 +6,11 @@ import {
 import _isEqual from 'lodash/isEqual';
 
 import 'react-bootstrap-typeahead/css/Typeahead.css';
-import './style.scss';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { getTypeAheadList } from '../../../redux/action/incident';
+
+import './style.scss';
 
 class CustomTypeAhead extends Component {
   constructor(props) {
@@ -50,13 +51,19 @@ class CustomTypeAhead extends Component {
           });
         });
     }
-    if (_isEqual(prevState.options, this.props.typeList)) {
+    if (!_isEqual(prevState.options, this.props.typeList)) {
       this.updateState({
         options: this.props.typeList,
         text: '',
         selected: [],
       });
     }
+  }
+
+  onChangeType(selected) {
+    console.log('selected', selected);
+    this.props.onSetData({ [`tab_${this.props.tabIndex}_field_action-type_0`]: selected });
+    this.setState({ selected, text: true });
   }
 
   updateState(option) {
@@ -83,7 +90,7 @@ class CustomTypeAhead extends Component {
           selected={selected}
           id={`should-select-${tabIndex}`}
           emptyLabel={<span style={{ width: 0, height: 0 }} />}
-          onChange={(selected) => this.setState({ selected, text: true })}
+          onChange={(selected) => this.onChangeType(selected)}
           options={options}
           minLength={2}
           ref={this.typeInput}
@@ -105,6 +112,7 @@ CustomTypeAhead.propTypes = {
   typeList: PropTypes.array,
   tabIndex: PropTypes.number,
   getTypeAheadList: PropTypes.func.isRequired,
+  onSetData: PropTypes.func.isRequired,
 };
 
 CustomTypeAhead.defaultProps = {

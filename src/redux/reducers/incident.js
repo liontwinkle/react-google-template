@@ -66,6 +66,27 @@ export default (state = INITIAL_STATE, action) => {
         isFetchingFlag: false,
       };
     }
+    case types.SAVE_INCIDENT_DATA_REQUEST: {
+      return {
+        ...state,
+        isCreatingFlag: true,
+      };
+    }
+    case types.SAVE_INCIDENT_DATA_SUCCESS: {
+      const { incidentData } = action.payload;
+      console.log('result: ', incidentData); // fixme
+      return {
+        ...state,
+        isCreatingFlag: false,
+      };
+    }
+
+    case types.SAVE_INCIDENT_DATA_FAIL: {
+      return {
+        ...state,
+        isCreatingFlag: false,
+      };
+    }
     default:
       return state;
   }

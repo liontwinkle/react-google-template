@@ -10,6 +10,7 @@ module.exports = () => {
     prev[`process.env.${next}`] = JSON.stringify(env[next]);
     return prev;
   }, {});
+
   return {
     entry: './src/index.js',
     module: {
@@ -53,13 +54,15 @@ module.exports = () => {
       new webpack.HotModuleReplacementPlugin(),
     ],
     output: {
-      path: `${__dirname}/public`,
+      path: __dirname,
+      publicPath: '/',
       filename: 'bundle.js',
     },
     devServer: {
       contentBase: './public',
       historyApiFallback: true,
       hot: true,
+      host: '74.208.102.130',
       port: 3000,
     },
   };

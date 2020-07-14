@@ -40,7 +40,7 @@
     "react-fullstory": "^1.4.0",
     "react-geocode": "^0.2.1",
     "react-google-maps": "^9.4.5",
-    "react-hook-form": "^5.7.2",
+    "react-hook-form": "^6.0.4",
     "react-horizontal-scrolling-menu": "^0.7.7",
     "react-html-parser": "^2.0.2",
     "react-ionicons": "^3.1.4",
@@ -97,6 +97,7 @@
   },
   "scripts": {
     "start": "webpack-dev-server --mode development --open --config webpack.config.dev.js",
+    "remote": "webpack-dev-server --mode development --open --config webpack.config.remote.js",
     "build": "webpack --mode production --config webpack.config.js",
     "dev-server": "webpack-dev-server",
     "test": "react-scripts test",

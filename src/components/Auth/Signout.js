@@ -41,9 +41,13 @@ function Signout({
 }
 
 Signout.propTypes = {
-  isDropdownItem: PropTypes.bool.isRequired,
+  isDropdownItem: PropTypes.bool,
   signOut: PropTypes.func.isRequired,
   setSessionExpiryModalState: PropTypes.func.isRequired,
+};
+
+Signout.defaultProps = {
+  isDropdownItem: false,
 };
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({

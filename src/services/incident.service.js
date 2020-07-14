@@ -17,8 +17,14 @@ const GetTypeAheadList = (tabId) => httpService
   .then(({ data }) => data)
   .catch((err) => Promise.reject(err.response));
 
+const SaveActionData = (data) => httpService
+  .post(`${authUrl}/typeahead/savedata`, data)
+  .then(({ data }) => data)
+  .catch((err) => Promise.reject(err.response));
+
 export default {
   GetActionTabs,
   GetTypeAheadList,
   GetFieldList,
+  SaveActionData,
 };

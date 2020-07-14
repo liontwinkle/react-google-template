@@ -68,7 +68,7 @@ function NavbarRight(props) {
             <a href="#" className="dropdown-item">
               <div className="media">
                 <div className="avatar avatar-sm avatar-online">
-                  <imgavatar
+                  <img
                     src="https://via.placeholder.com/600"
                     className="rounded-circle"
                     alt=""

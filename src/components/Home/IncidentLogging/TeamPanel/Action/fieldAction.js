@@ -1,134 +1,300 @@
-import React, {useEffect, useState} from 'react';
-import {connect} from 'react-redux'
-import {bindActionCreators} from 'redux'
-import PropTypes from 'prop-types'
-import {getFieldList} from "../../../../../redux/action/incident";
-import ActionAgeField from "./FormElements/ageField";
-import ActionDropDown from "./FormElements/dropdown";
-import ActionGenderFieldExtend from "./FormElements/genderFieldExtend";
-import ActionMultiAgency from "./FormElements/multiAgency";
-import ActionMultiAgencyAmbulance from "./FormElements/multiAgencyAmbulance";
-import ActionMultiAgencyFire from "./FormElements/multiAgencyFire";
-import ActionMultiAgencyPolice from "./FormElements/multiAgencyPolice";
-import ActionMultiButton from "./FormElements/mutliButton";
-import ActionTextArea from "./FormElements/textArea";
-import ActionTextField from "./FormElements/textField";
-import ActionMultiSelect from "./FormElements/multiSelect";
-import CustomTypeAhead from "../../../../common/CustomTypeahead";
+import React, { useEffect, useState } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import PropTypes from 'prop-types';
+import { getFieldList } from '../../../../../redux/action/incident';
+import ActionAgeField from './FormElements/ageField';
+import ActionDropDown from './FormElements/dropdown';
+import ActionGenderFieldExtend from './FormElements/genderFieldExtend';
+import ActionMultiAgency from './FormElements/multiAgency';
+import ActionMultiAgencyAmbulance from './FormElements/multiAgencyAmbulance';
+import ActionMultiAgencyFire from './FormElements/multiAgencyFire';
+import ActionMultiAgencyPolice from './FormElements/multiAgencyPolice';
+import ActionMultiButton from './FormElements/mutliButton';
+import ActionTextArea from './FormElements/textArea';
+import ActionTextField from './FormElements/textField';
+import ActionMultiSelect from './FormElements/multiSelect';
+import CustomTypeAhead from '../../../../common/CustomTypeahead';
 import './style.scss';
 
+const FieldAction = ({
+  actionFields,
+  tabIndex,
+  typeList,
+  register,
+  errors,
+  onSetData,
+  value,
+}) => {
+  const [fields, setFields] = useState([]);
+  const [options, setOptions] = useState([]);
+  const [isReady, setReady] = useState(false);
 
-const FieldAction = ({actionFields, tabIndex, typeList}) => {
-    const [fields, setFields] = useState([]);
-    const [options, setOptions] = useState([]);
-    const [isReady, setReady] = useState(false);
-    
-    useEffect(() => {
-        setReady(true);
-        const newFields = actionFields.filter((actionItem) => (actionItem.id === tabIndex));
-        if (newFields[0].field) {
-            setFields(newFields[0].field);
-            setOptions(newFields[0].options);
-        }
-        setReady(false);
-    }, [tabIndex, setFields, setReady, actionFields]);
+  useEffect(() => {
+    setReady(true);
+    const newFields = actionFields.filter((actionItem) => (actionItem.id === tabIndex));
+    if (newFields[0].field) {
+      setFields(newFields[0].field);
+      setOptions(newFields[0].options);
+    }
+    setReady(false);
+  }, [tabIndex, setFields, setReady, actionFields]);
 
-    const newActionBody = (fieldItem) => {
-        switch (fieldItem.field_type) {
-            case 'text-area':
-                return <ActionTextArea tabIndex={tabIndex} fieldItem={fieldItem} options={options}/>;
-            case 'multi-select':
-                return <ActionMultiSelect tabIndex={tabIndex} fieldItem={fieldItem} options={options}/>;
-            case 'multi-agency-police':
-                return <ActionMultiAgencyPolice tabIndex={tabIndex} fieldItem={fieldItem} options={options}/>;
-            case 'text-field':
-                return <ActionTextField tabIndex={tabIndex} fieldItem={fieldItem} options={options}/>;
-            case 'multi-button':
-                return <ActionMultiButton tabIndex={tabIndex} fieldItem={fieldItem} options={options}/>;
-            case 'multi-agency':
-                return <ActionMultiAgency tabIndex={tabIndex} fieldItem={fieldItem} options={options}/>;
-            case 'multi-agency-fire':
-                return <ActionMultiAgencyFire tabIndex={tabIndex} fieldItem={fieldItem} options={options}/>;
-            case 'age-field':
-                return <ActionAgeField tabIndex={tabIndex} fieldItem={fieldItem} options={options}/>;
-            case 'gender-field-extend':
-                return <ActionGenderFieldExtend tabIndex={tabIndex} fieldItem={fieldItem} options={options}/>;
-            case 'multi-agency-ambulance':
-                return <ActionMultiAgencyAmbulance tabIndex={tabIndex} fieldItem={fieldItem} options={options}/>;
-            case 'dropdown':
-                return <ActionDropDown tabIndex={tabIndex} fieldItem={fieldItem} options={options}/>;
-            default:
-                return <ActionTextArea tabIndex={tabIndex} fieldItem={fieldItem} options={options}/>;
-        }
-    };
+  const newActionBody = (fieldItem) => {
+    switch (fieldItem.field_type) {
+      case 'text-area':
+        return (
+          <ActionTextArea
+            tabIndex={tabIndex}
+            fieldItem={fieldItem}
+            options={options}
+            onSetData={onSetData}
+            value={value}
+          />
+        );
+      case 'multi-select':
+        return (
+          <ActionMultiSelect
+            tabIndex={tabIndex}
+            fieldItem={fieldItem}
+            options={options}
+            errors={errors}
+            onSetData={onSetData}
+            value={value}
+          />
+        );
+      case 'multi-agency-police':
+        return (
+          <ActionMultiAgencyPolice
+            tabIndex={tabIndex}
+            fieldItem={fieldItem}
+            options={options}
+            register={register}
+            errors={errors}
+            onSetData={onSetData}
+            value={value}
+          />
+        );
+      case 'text-field':
+        return (
+          <ActionTextField
+            tabIndex={tabIndex}
+            fieldItem={fieldItem}
+            options={options}
+            register={register}
+            errors={errors}
+            onSetData={onSetData}
+            value={value}
+          />
+        );
+      case 'multi-button':
+        return (
+          <ActionMultiButton
+            tabIndex={tabIndex}
+            fieldItem={fieldItem}
+            options={options}
+            register={register}
+            errors={errors}
+            onSetData={onSetData}
+            value={value}
+          />
+        );
+      case 'multi-agency':
+        return (
+          <ActionMultiAgency
+            tabIndex={tabIndex}
+            fieldItem={fieldItem}
+            options={options}
+            register={register}
+            errors={errors}
+            onSetData={onSetData}
+            value={value}
+          />
+        );
+      case 'multi-agency-fire':
+        return (
+          <ActionMultiAgencyFire
+            tabIndex={tabIndex}
+            fieldItem={fieldItem}
+            options={options}
+            register={register}
+            errors={errors}
+            onSetData={onSetData}
+            value={value}
+          />
+        );
+      case 'age-field':
+        return (
+          <ActionAgeField
+            tabIndex={tabIndex}
+            fieldItem={fieldItem}
+            options={options}
+            register={register}
+            errors={errors}
+            onSetData={onSetData}
+            value={value}
+          />
+        );
+      case 'gender-field-extend':
+        return (
+          <ActionGenderFieldExtend
+            tabIndex={tabIndex}
+            fieldItem={fieldItem}
+            options={options}
+            register={register}
+            errors={errors}
+            onSetData={onSetData}
+            value={value}
+          />
+        );
+      case 'multi-agency-ambulance':
+        return (
+          <ActionMultiAgencyAmbulance
+            tabIndex={tabIndex}
+            fieldItem={fieldItem}
+            options={options}
+            register={register}
+            errors={errors}
+            onSetData={onSetData}
+            value={value}
+          />
+        );
+      case 'dropdown':
+        return (
+          <ActionDropDown
+            tabIndex={tabIndex}
+            fieldItem={fieldItem}
+            options={options}
+            register={register}
+            errors={errors}
+            onSetData={onSetData}
+            value={value}
+          />
+        );
+      default:
+        return (
+          <ActionTextArea
+            tabIndex={tabIndex}
+            fieldItem={fieldItem}
+            options={options}
+            register={register}
+            errors={errors}
+            onSetData={onSetData}
+            value={value}
+          />
+        );
+    }
+  };
 
-    return (
-        !isReady&&
-        <>
+  const onChangeAddress = (e) => {
+    onSetData({ [`tab_${tabIndex}_field_location_0`]: e.target.value });
+  };
+
+  return (
+    !isReady
+        && (
+          <>
             <div className="form-group row">
-                <label htmlFor={`tab_${tabIndex} _field_action-type_0`}
-                       className="col-sm-4 col-form-label">Type*</label>
-                <div className="col-sm-8">
-                    <div className="typeahead__container">
-                        <div className="typeahead__field">
-                            <div className="typeahead__query">
-                                <CustomTypeAhead typeList={typeList} tabIndex={tabIndex}/>
-                            </div>
-                        </div>
+              <label
+                htmlFor={`tab_${tabIndex} _field_action-type_0`}
+                className="col-sm-4 col-form-label"
+              >
+                Type*
+              </label>
+              <div className="col-sm-8">
+                <div className="typeahead__container">
+                  <div className="typeahead__field">
+                    <div className="typeahead__query">
+                      <CustomTypeAhead
+                        typeList={typeList}
+                        tabIndex={tabIndex}
+                        register={register}
+                        errors={errors}
+                        onSetData={onSetData}
+                        value={value}
+                      />
                     </div>
+                  </div>
                 </div>
+                {errors.type && (
+                  <div className="validation-error">
+                    This value is require.
+                  </div>
+                )}
+              </div>
             </div>
             <div className="form-group row">
-                <label htmlFor={`tab_${tabIndex}_field_location_0`}
-                       className="col-sm-4 col-form-label text-dark">Location*</label>
-                <div className="col-sm-8">
-                    <input
-                        type="text"
-                        className="form-control"
-                        placeholder="Area / Grid / Room"
-                        data-tab-id={tabIndex}
-                        id={`tab_${tabIndex}_field_location_0`}
-                        name={`tab_${tabIndex}_field_location_0`}
-                    />
-                </div>
+              <label
+                htmlFor={`tab_${tabIndex}_field_location_0`}
+                className="col-sm-4 col-form-label text-dark"
+              >
+                Location*
+              </label>
+              <div className="col-sm-8">
+                <input
+                  type="text"
+                  className="form-control"
+                  placeholder="Area / Grid / Room"
+                  onChange={onChangeAddress}
+                  value={value[`tab_${tabIndex}_field_location_0`]}
+                  data-tab-id={tabIndex}
+                  id={`tab_${tabIndex}_field_location_0`}
+                  name={`tab_${tabIndex}_field_location_0`}
+                />
+                {errors.location && (
+                  <div className="validation-error">
+                    This value is require.
+                  </div>
+                )}
+              </div>
             </div>
             {
-                fields.map((fieldItem) => (
-                    <div className="form-group row" key={fieldItem.id}>
-                        <label htmlFor={`tab_${tabIndex}_field_${fieldItem.field_type}_${fieldItem.id}`}
-                               className="col-sm-4 col-form-label text-dark">
-                            {`${fieldItem.fied_text}${fieldItem.field_required === "1" ? "*" : ""}`}
-                        </label>
-                        <div className="col-sm-8">
-                            {newActionBody(fieldItem)}
-                        </div>
-                    </div>
-                ))
+              fields.map((fieldItem) => (
+                <div className="form-group row" key={fieldItem.id}>
+                  <label
+                    htmlFor={`tab_${tabIndex}_field_${fieldItem.field_type}_${fieldItem.id}`}
+                    className="col-sm-4 col-form-label text-dark"
+                  >
+                    {`${fieldItem.fied_text}${fieldItem.field_required === '1' ? '*' : ''}`}
+                  </label>
+                  <div className="col-sm-8">
+                    {newActionBody(fieldItem)}
+                  </div>
+                </div>
+              ))
             }
-        </>
-    )
+          </>
+        )
+  );
 };
 
 FieldAction.propTypes = {
-    actionFields: PropTypes.array,
-    tabIndex: PropTypes.number,
+  actionFields: PropTypes.array,
+  tabIndex: PropTypes.number,
+  typeList: PropTypes.array,
+  errors: PropTypes.object,
+  value: PropTypes.object,
+  onSetData: PropTypes.func.isRequired,
+  register: PropTypes.func.isRequired,
 };
 
 FieldAction.defaultProps = {
-    actionFields: [],
-    tabIndex: 1,
+  actionFields: [],
+  tabIndex: 1,
+  typeList: [],
+  errors: null,
+  value: null,
 };
 
-const mapDispatchToProps = dispatch =>
-    bindActionCreators(
-        {
-            getFieldList
-        },
-        dispatch
-    );
+const mapDispatchToProps = (dispatch) => bindActionCreators(
+  {
+    getFieldList,
+  },
+  dispatch,
+);
 
-const mapStateToProps = store => ({
-    actionFields: store.incidentData.actionFields,
+const mapStateToProps = (store) => ({
+  actionFields: store.incidentData.actionFields,
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(FieldAction)
+export default connect(mapStateToProps, mapDispatchToProps)(FieldAction);

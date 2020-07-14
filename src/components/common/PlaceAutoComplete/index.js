@@ -12,7 +12,12 @@ import { faMapMarkerAlt } from '@fortawesome/pro-light-svg-icons';
 import './style.scss';
 
 const PlacesAutocomplete = ({
-  changePos, address, setUpdateMapPos, updateMapPos,
+  changePos,
+  address,
+  setUpdateMapPos,
+  updateMapPos,
+  tabIndex,
+  onSetData,
 }) => {
   const {
     ready,
@@ -38,6 +43,7 @@ const PlacesAutocomplete = ({
   const handleSelect = ({ description }) => () => {
     setValue(description, false);
     clearSuggestions();
+    onSetData({ [`tab_${tabIndex}_field_location_${tabIndex}`]: description });
 
     // Get latitude and longitude via utility functions
     getGeocode({ address: description })
@@ -60,7 +66,7 @@ const PlacesAutocomplete = ({
   const renderSuggestions = () => data.map((suggestion) => {
     const {
       id,
-      structured_formatting: { mainText, secondaryText },
+      structured_formatting: { main_text: mainText, secondary_text: secondaryText },
     } = suggestion;
 
     return (
@@ -101,6 +107,8 @@ const PlacesAutocomplete = ({
 PlacesAutocomplete.propTypes = {
   address: PropTypes.string,
   updateMapPos: PropTypes.bool,
+  tabIndex: PropTypes.number,
+  onSetData: PropTypes.func.isRequired,
   changePos: PropTypes.func.isRequired,
   setUpdateMapPos: PropTypes.func.isRequired,
 };
@@ -108,6 +116,7 @@ PlacesAutocomplete.propTypes = {
 PlacesAutocomplete.defaultProps = {
   address: '',
   updateMapPos: false,
+  tabIndex: 0,
 };
 
 export default PlacesAutocomplete;
