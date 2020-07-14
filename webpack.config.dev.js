@@ -62,7 +62,6 @@ module.exports = () => {
       contentBase: './public',
       historyApiFallback: true,
       hot: true,
-      host: '74.208.102.130',
       port: 3000,
     },
   };
