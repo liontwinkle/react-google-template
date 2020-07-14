@@ -97,6 +97,7 @@
   },
   "scripts": {
     "start": "webpack-dev-server --mode development --open --config webpack.config.dev.js",
+    "remote": "webpack-dev-server --mode development --open --config webpack.config.remote.js",
     "build": "webpack --mode production --config webpack.config.js",
     "dev-server": "webpack-dev-server",
     "test": "react-scripts test",
