@@ -1,20 +1,32 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 
 import './style.scss';
 
-const ActionMultiAgencyPolice = ({ tabIndex, fieldItem, onSetData }) => {
+const ActionMultiAgencyPolice = ({
+  tabIndex,
+  fieldItem,
+  onSetData,
+  value,
+}) => {
   const [agePoliceState, setAgePoliceState] = useState({
     fire: false,
     ambulance: false,
   });
+
+  useEffect(() => {
+    setAgePoliceState({
+      fire: value && value[`tab_${tabIndex}_field_${fieldItem.field_type}-fire_${fieldItem.id}`],
+      ambulance: value && value[`tab_${tabIndex}_field_${fieldItem.field_type}-ambulance_${fieldItem.id}`],
+    });
+  }, [value, tabIndex, fieldItem.field_type, fieldItem.id]);
 
   const changeState = (type) => () => {
     setAgePoliceState(() => ({
       ...agePoliceState,
       [type]: !agePoliceState[type],
     }));
-    onSetData(`tab_${tabIndex}_field_${fieldItem.field_type}-${type}_${fieldItem.id}`, !agePoliceState[type]);
+    onSetData(`tab_${tabIndex}_field_${fieldItem.field_type}-${type}_${fieldItem.id}`, type);
   };
 
   const cancel = () => {
@@ -22,6 +34,7 @@ const ActionMultiAgencyPolice = ({ tabIndex, fieldItem, onSetData }) => {
       fire: false,
       ambulance: false,
     });
+    onSetData(`tab_${tabIndex}_field_${fieldItem.field_type}-no_${fieldItem.id}`, 'no');
   };
 
   return (
@@ -60,11 +73,13 @@ const ActionMultiAgencyPolice = ({ tabIndex, fieldItem, onSetData }) => {
 ActionMultiAgencyPolice.propTypes = {
   tabIndex: PropTypes.number,
   fieldItem: PropTypes.object,
+  value: PropTypes.object,
   onSetData: PropTypes.func.isRequired,
 };
 
 ActionMultiAgencyPolice.defaultProps = {
   tabIndex: 1,
+  value: null,
   fieldItem: {},
 };
 

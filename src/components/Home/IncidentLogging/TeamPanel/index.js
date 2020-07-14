@@ -115,15 +115,16 @@ const TeamPanel = ({
         errors={errors}
         setErrors={setErrors}
         onSetData={onSetData}
+        value={value}
       />,
     },
     { key: 'update', value: 'Update', children: <Update register={register} errors={errors} /> },
     { key: 'program', value: 'Program', children: <Program register={register} errors={errors} /> },
     { key: 'announcement', value: 'Announcement', children: <Announcement register={register} errors={errors} /> },
   ];
-    /**
-     * we are using chat page of template here.
-     */
+  /**
+   * we are using chat page of template here.
+   */
   return (
     <div className="incident-sidebar d-flex flex-column justify-content-between">
       <form onSubmit={handleSubmit(onSubmit)}>

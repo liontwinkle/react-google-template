@@ -1,11 +1,23 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 
-const ActionMultiAgencyFire = ({ tabIndex, fieldItem, onSetData }) => {
+const ActionMultiAgencyFire = ({
+  tabIndex,
+  fieldItem,
+  onSetData,
+  value,
+}) => {
   const [ageFireState, setAgeFireState] = useState({
     police: false,
     ambulance: false,
   });
+
+  useEffect(() => {
+    setAgeFireState({
+      police: value && value[`tab_${tabIndex}_field_${fieldItem.field_type}-police_${fieldItem.id}`],
+      ambulance: value && value[`tab_${tabIndex}_field_${fieldItem.field_type}-ambulance_${fieldItem.id}`],
+    });
+  }, [value, tabIndex, fieldItem.field_type, fieldItem.id]);
 
   const changeState = (type) => () => {
     setAgeFireState(() => ({
@@ -20,6 +32,7 @@ const ActionMultiAgencyFire = ({ tabIndex, fieldItem, onSetData }) => {
       police: false,
       ambulance: false,
     });
+    onSetData(`tab_${tabIndex}_field_${fieldItem.field_type}-no_${fieldItem.id}`, 'no');
   };
   return (
     <div
@@ -56,12 +69,14 @@ const ActionMultiAgencyFire = ({ tabIndex, fieldItem, onSetData }) => {
 
 ActionMultiAgencyFire.propTypes = {
   tabIndex: PropTypes.number,
+  value: PropTypes.object,
   fieldItem: PropTypes.object,
   onSetData: PropTypes.func.isRequired,
 };
 
 ActionMultiAgencyFire.defaultProps = {
   tabIndex: 1,
+  value: {},
   fieldItem: {},
 };
 

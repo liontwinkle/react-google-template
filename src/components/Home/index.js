@@ -30,7 +30,7 @@ function Home({
   resetSessionData,
   isLoading,
 }) {
-  const [info, setInfo] = useState(false);
+  const [info, setInfo] = useState(null);
 
   useEffect(() => {
     const getInfoHandler = async () => {
@@ -111,13 +111,14 @@ Home.propTypes = {
   verifyToken: PropTypes.func.isRequired,
   setSessionExpiryModalState: PropTypes.func.isRequired,
   setLoadingFg: PropTypes.func.isRequired,
-  isLoading: PropTypes.bool.isRequired,
+  isLoading: PropTypes.bool,
   resetSessionData: PropTypes.func.isRequired,
   sessionData: PropTypes.object.isRequired,
 };
 
 Home.defaultProps = {
   viewIndex: null,
+  isLoading: false,
 };
 
 const mapStateToProps = (store) => ({

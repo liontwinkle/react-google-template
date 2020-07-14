@@ -1,11 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const ActionAgeField = ({ tabIndex, fieldItem, onSetData }) => {
+const ActionAgeField = ({
+  tabIndex,
+  fieldItem,
+  onSetData,
+  value,
+}) => {
   const required = (fieldItem.field_required === '1');
   const handleChange = (value) => {
     console.log(`selected ${value}`);
     onSetData(`tab_${tabIndex}_field_${fieldItem.field_type}_${fieldItem.id}[]`, value);
+  };
+
+  const handleAge = (e) => {
+    onSetData(`tab_${tabIndex}_field_age-field1_${fieldItem.id}`, e.target.value);
   };
 
   return (
@@ -18,6 +27,7 @@ const ActionAgeField = ({ tabIndex, fieldItem, onSetData }) => {
           data-tab-id={tabIndex}
           data-age-holder=""
           required={required}
+          value={value ? value[`tab_${tabIndex}_field_${fieldItem.field_type}_${fieldItem.id}[]`] : []}
           onChange={handleChange}
         >
           <option value="Exact" className="age-exact" selected>Exact</option>
@@ -30,10 +40,11 @@ const ActionAgeField = ({ tabIndex, fieldItem, onSetData }) => {
         type="number"
         className="form-control range-hide age-input"
         aria-label="Age Info"
-        data-name={`tab_${tabIndex}_field_age-field1_${fieldItem.id}`}
+        name={`tab_${tabIndex}_field_age-field1_${fieldItem.id}`}
         placeholder="Age Info"
+        value={value ? value[`tab_${tabIndex}_field_age-field1_${fieldItem.id}`] : []}
+        onChange={handleAge}
       />
-
     </div>
   );
 };
@@ -41,11 +52,13 @@ const ActionAgeField = ({ tabIndex, fieldItem, onSetData }) => {
 ActionAgeField.propTypes = {
   tabIndex: PropTypes.number,
   fieldItem: PropTypes.object,
+  value: PropTypes.object,
   onSetData: PropTypes.func.isRequired,
 };
 
 ActionAgeField.defaultProps = {
   tabIndex: 1,
+  value: null,
   fieldItem: {},
 };
 

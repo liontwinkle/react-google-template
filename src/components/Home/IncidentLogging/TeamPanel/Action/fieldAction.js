@@ -18,7 +18,13 @@ import CustomTypeAhead from '../../../../common/CustomTypeahead';
 import './style.scss';
 
 const FieldAction = ({
-  actionFields, tabIndex, typeList, register, errors, onSetData,
+  actionFields,
+  tabIndex,
+  typeList,
+  register,
+  errors,
+  onSetData,
+  value,
 }) => {
   const [fields, setFields] = useState([]);
   const [options, setOptions] = useState([]);
@@ -42,8 +48,8 @@ const FieldAction = ({
             tabIndex={tabIndex}
             fieldItem={fieldItem}
             options={options}
-            register={register}
-            errors={errors}
+            onSetData={onSetData}
+            value={value}
           />
         );
       case 'multi-select':
@@ -52,9 +58,9 @@ const FieldAction = ({
             tabIndex={tabIndex}
             fieldItem={fieldItem}
             options={options}
-            register={register}
             errors={errors}
             onSetData={onSetData}
+            value={value}
           />
         );
       case 'multi-agency-police':
@@ -66,6 +72,7 @@ const FieldAction = ({
             register={register}
             errors={errors}
             onSetData={onSetData}
+            value={value}
           />
         );
       case 'text-field':
@@ -77,6 +84,7 @@ const FieldAction = ({
             register={register}
             errors={errors}
             onSetData={onSetData}
+            value={value}
           />
         );
       case 'multi-button':
@@ -88,6 +96,7 @@ const FieldAction = ({
             register={register}
             errors={errors}
             onSetData={onSetData}
+            value={value}
           />
         );
       case 'multi-agency':
@@ -99,6 +108,7 @@ const FieldAction = ({
             register={register}
             errors={errors}
             onSetData={onSetData}
+            value={value}
           />
         );
       case 'multi-agency-fire':
@@ -110,6 +120,7 @@ const FieldAction = ({
             register={register}
             errors={errors}
             onSetData={onSetData}
+            value={value}
           />
         );
       case 'age-field':
@@ -121,6 +132,7 @@ const FieldAction = ({
             register={register}
             errors={errors}
             onSetData={onSetData}
+            value={value}
           />
         );
       case 'gender-field-extend':
@@ -132,6 +144,7 @@ const FieldAction = ({
             register={register}
             errors={errors}
             onSetData={onSetData}
+            value={value}
           />
         );
       case 'multi-agency-ambulance':
@@ -143,6 +156,7 @@ const FieldAction = ({
             register={register}
             errors={errors}
             onSetData={onSetData}
+            value={value}
           />
         );
       case 'dropdown':
@@ -154,6 +168,7 @@ const FieldAction = ({
             register={register}
             errors={errors}
             onSetData={onSetData}
+            value={value}
           />
         );
       default:
@@ -165,9 +180,14 @@ const FieldAction = ({
             register={register}
             errors={errors}
             onSetData={onSetData}
+            value={value}
           />
         );
     }
+  };
+
+  const onChangeAddress = (e) => {
+    onSetData(`tab_${tabIndex}_field_location_0`, e.target.value);
   };
 
   return (
@@ -190,6 +210,8 @@ const FieldAction = ({
                         tabIndex={tabIndex}
                         register={register}
                         errors={errors}
+                        onSetData={onSetData}
+                        value={value}
                       />
                     </div>
                   </div>
@@ -213,6 +235,8 @@ const FieldAction = ({
                   type="text"
                   className="form-control"
                   placeholder="Area / Grid / Room"
+                  onChange={onChangeAddress}
+                  value={value[`tab_${tabIndex}_field_location_0`]}
                   data-tab-id={tabIndex}
                   id={`tab_${tabIndex}_field_location_0`}
                   name={`tab_${tabIndex}_field_location_0`}
@@ -248,17 +272,18 @@ FieldAction.propTypes = {
   actionFields: PropTypes.array,
   tabIndex: PropTypes.number,
   typeList: PropTypes.array,
-  register: PropTypes.object,
   errors: PropTypes.object,
+  value: PropTypes.object,
   onSetData: PropTypes.func.isRequired,
+  register: PropTypes.func.isRequired,
 };
 
 FieldAction.defaultProps = {
   actionFields: [],
   tabIndex: 1,
   typeList: [],
-  register: null,
   errors: null,
+  value: null,
 };
 
 const mapDispatchToProps = (dispatch) => bindActionCreators(

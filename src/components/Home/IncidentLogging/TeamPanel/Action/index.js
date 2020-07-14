@@ -23,6 +23,7 @@ const ActionPanel = ({
   setActiveIndex,
   register,
   errors,
+  value,
   onSetData,
   setErrors,
 }) => {
@@ -145,6 +146,7 @@ const ActionPanel = ({
               <Input
                 name="title"
                 placeholder="Title*"
+                value={(value && value['tab_0_field_action-type_0']) || ''}
                 onChange={onTitleChange}
                 allowClear
               />
@@ -181,6 +183,7 @@ const ActionPanel = ({
                 tabIndex={activeTabIndex}
                 register={register}
                 errors={errors}
+                value={value}
                 onSetData={onSetData}
               />
               <div className="form-group row">
@@ -222,12 +225,14 @@ ActionPanel.propTypes = {
   activeTabIndex: PropTypes.number.isRequired,
   setActiveIndex: PropTypes.func.isRequired,
   register: PropTypes.func.isRequired,
+  value: PropTypes.object,
   onSetData: PropTypes.func.isRequired,
   setErrors: PropTypes.func.isRequired,
   errors: PropTypes.object,
 };
 
 ActionPanel.defaultProps = {
+  value: null,
   errors: {},
 };
 

@@ -2,7 +2,11 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
 const ActionTextArea = ({
-  tabIndex, fieldItem, options, register, errors,
+  tabIndex,
+  fieldItem,
+  options,
+  onSetData,
+  value,
 }) => {
   const [setNewOptions] = useState([]);
   const required = (fieldItem.field_required === '1');
@@ -10,6 +14,10 @@ const ActionTextArea = ({
   if (customOptions.options) {
     setNewOptions(customOptions.options);
   }
+  const onTextArea = (e) => {
+    onSetData(`tab_${tabIndex}_field_${fieldItem.field_type}_${fieldItem.id}`, e.target.value);
+  };
+
   return (
     <>
       <textarea
@@ -20,9 +28,9 @@ const ActionTextArea = ({
         data-tab-id={tabIndex}
         placeholder={`${fieldItem.field_placeholder ? fieldItem.field_placeholder : ''}`}
         required={required}
-        ref={required ? register({ required: 'Title is required' }) : null}
+        onChange={onTextArea}
+        value={value ? value[`tab_${tabIndex}_field_${fieldItem.field_type}_${fieldItem.id}`] : ''}
       />
-      <div className="error-msg">{errors.time && errors.time.message}</div>
     </>
   );
 };
@@ -31,15 +39,15 @@ ActionTextArea.propTypes = {
   tabIndex: PropTypes.number,
   fieldItem: PropTypes.object,
   options: PropTypes.array,
-  register: PropTypes.func.isRequired,
-  errors: PropTypes.object,
+  onSetData: PropTypes.func.isRequired,
+  value: PropTypes.object,
 };
 
 ActionTextArea.defaultProps = {
   tabIndex: 1,
   options: [],
   fieldItem: {},
-  errors: {},
+  value: null,
 };
 
 export default ActionTextArea;

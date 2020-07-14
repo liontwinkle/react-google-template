@@ -7,7 +7,11 @@ import './style.scss';
 const { Option } = Select;
 
 const ActionMultiSelect = ({
-  tabIndex, fieldItem, options, onSetData,
+  tabIndex,
+  fieldItem,
+  options,
+  onSetData,
+  value,
 }) => {
   const [newOptions, setNewOptions] = useState([]);
 
@@ -32,6 +36,7 @@ const ActionMultiSelect = ({
       }}
       placeholder="Tags Mode"
       onChange={handleChange}
+      value={value ? value[`tab_${tabIndex}_field_${fieldItem.field_type}_${fieldItem.id}[]`] : []}
       maxTagCount={3}
       filterOption={(input, option) => option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
     >
@@ -48,6 +53,7 @@ ActionMultiSelect.propTypes = {
   tabIndex: PropTypes.number,
   fieldItem: PropTypes.object,
   options: PropTypes.array,
+  value: PropTypes.object,
   onSetData: PropTypes.func.isRequired,
 };
 
@@ -55,6 +61,7 @@ ActionMultiSelect.defaultProps = {
   tabIndex: 1,
   options: [],
   fieldItem: {},
+  value: null,
 };
 
 export default ActionMultiSelect;

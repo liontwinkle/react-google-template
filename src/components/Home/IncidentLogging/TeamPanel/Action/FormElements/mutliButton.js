@@ -1,13 +1,17 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
-const ActionMultiButton = ({ tabIndex, fieldItem, onSetData }) => {
-  const [value, setValue] = useState('');
-
+const ActionMultiButton = ({
+  tabIndex,
+  fieldItem,
+  onSetData,
+  value,
+}) => {
   const onSelect = (value) => {
-    setValue(value);
     onSetData(`tab_${tabIndex}_field_${fieldItem.field_type}_${fieldItem.id}`, value);
   };
+
+  const selectedValue = value ? value[`tab_${tabIndex}_field_${fieldItem.field_type}_${fieldItem.id}`] : '';
 
   return (
     <div
@@ -18,21 +22,21 @@ const ActionMultiButton = ({ tabIndex, fieldItem, onSetData }) => {
       <div className="btn-group custom-rad" aria-label="Basic example">
         <button
           type="button"
-          className={`btn btn-dim btn-outline-primary ${value === 'yes' ? 'selected' : ''}`}
+          className={`btn btn-dim btn-outline-primary ${selectedValue === 'yes' ? 'selected' : ''}`}
           onClick={() => onSelect('yes')}
         >
           Yes
         </button>
         <button
           type="button"
-          className={`btn btn-dim btn-outline-primary ${value === 'no' ? 'selected' : ''}`}
+          className={`btn btn-dim btn-outline-primary ${selectedValue === 'no' ? 'selected' : ''}`}
           onClick={() => onSelect('no')}
         >
           No
         </button>
         <button
           type="button"
-          className={`btn btn-dim btn-outline-primary ${value === 'unknown' ? 'selected' : ''}`}
+          className={`btn btn-dim btn-outline-primary ${selectedValue === 'unknown' ? 'selected' : ''}`}
           onClick={() => onSelect('unknown')}
         >
           Unknown
@@ -45,12 +49,14 @@ const ActionMultiButton = ({ tabIndex, fieldItem, onSetData }) => {
 ActionMultiButton.propTypes = {
   tabIndex: PropTypes.array,
   fieldItem: PropTypes.object,
+  value: PropTypes.object,
   onSetData: PropTypes.func.isRequired,
 };
 
 ActionMultiButton.defaultProps = {
   tabIndex: 1,
   fieldItem: {},
+  value: null,
 };
 
 export default ActionMultiButton;
