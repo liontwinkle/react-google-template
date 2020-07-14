@@ -106,7 +106,6 @@ const TeamPanel = ({
       saveActionData(saveData)
         .then(() => {
           console.log('success');
-          setValue({});
         })
         .catch((e) => {
           console.log(e);
