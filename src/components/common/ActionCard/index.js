@@ -22,17 +22,17 @@ const ActionCard = ({ type, index }) => {
   const ellipseMenu = (
     <Menu>
       <Menu.Item>
-        <a target="_blank" rel="noopener noreferrer" href="http://www.alipay.com/">
+        <a target="_blank" rel="noopener noreferrer" href="#">
           More options
         </a>
       </Menu.Item>
       <Menu.Item>
-        <a target="_blank" rel="noopener noreferrer" href="http://www.taobao.com/">
+        <a target="_blank" rel="noopener noreferrer" href="#">
           Export
         </a>
       </Menu.Item>
       <Menu.Item>
-        <a target="_blank" rel="noopener noreferrer" href="http://www.tmall.com/">
+        <a target="_blank" rel="noopener noreferrer" href="#">
           Create task
         </a>
       </Menu.Item>
@@ -42,17 +42,17 @@ const ActionCard = ({ type, index }) => {
   const shareMenu = (
     <Menu>
       <Menu.Item>
-        <a target="_blank" rel="noopener noreferrer" href="http://www.alipay.com/">
+        <a target="_blank" rel="noopener noreferrer" href="#">
           Share Action
         </a>
       </Menu.Item>
       <Menu.Item>
-        <a target="_blank" rel="noopener noreferrer" href="http://www.taobao.com/">
+        <a target="_blank" rel="noopener noreferrer" href="#">
           Share with instance...
         </a>
       </Menu.Item>
       <Menu.Item>
-        <a target="_blank" rel="noopener noreferrer" href="http://www.tmall.com/">
+        <a target="_blank" rel="noopener noreferrer" href="#">
           Share with ground personnel
         </a>
       </Menu.Item>
@@ -62,17 +62,17 @@ const ActionCard = ({ type, index }) => {
   const attachMenu = (
     <Menu>
       <Menu.Item>
-        <a target="_blank" rel="noopener noreferrer" href="http://www.alipay.com/">
+        <a target="_blank" rel="noopener noreferrer" href="#">
           Attach a File
         </a>
       </Menu.Item>
       <Menu.Item>
-        <a target="_blank" rel="noopener noreferrer" href="http://www.taobao.com/">
+        <a target="_blank" rel="noopener noreferrer" href="#">
           Your Computer
         </a>
       </Menu.Item>
       <Menu.Item>
-        <a target="_blank" rel="noopener noreferrer" href="http://www.tmall.com/">
+        <a target="_blank" rel="noopener noreferrer" href="#">
           CommandPost Directory
         </a>
       </Menu.Item>
