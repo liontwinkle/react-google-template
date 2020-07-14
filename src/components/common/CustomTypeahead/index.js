@@ -6,10 +6,11 @@ import {
 import _isEqual from 'lodash/isEqual';
 
 import 'react-bootstrap-typeahead/css/Typeahead.css';
-import './style.scss';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { getTypeAheadList } from '../../../redux/action/incident';
+
+import './style.scss';
 
 class CustomTypeAhead extends Component {
   constructor(props) {

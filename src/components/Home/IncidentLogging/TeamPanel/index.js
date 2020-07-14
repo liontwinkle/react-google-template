@@ -1,116 +1,200 @@
 import React, { useEffect, useState } from 'react';
-import {connect} from 'react-redux'
-import {bindActionCreators} from 'redux'
-import PropTypes from 'prop-types'
-import CustomDropDown from "../../../common/CustomDropDown";
-import ActionPanel from './Action';
-import Announcement from "./Announcement";
-import Program from "./Program";
-import Update from "./Update";
-
-import CustomTab from "../../../common/CustomTab";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import PropTypes from 'prop-types';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
-    faHomeAlt,
+  faHomeAlt,
 } from '@fortawesome/pro-regular-svg-icons';
+import { useForm } from 'react-hook-form';
+import CustomDropDown from '../../../common/CustomDropDown';
+import ActionPanel from './Action';
+import Announcement from './Announcement';
+import Program from './Program';
+import Update from './Update';
 
-import {getActionTabs, setActiveIndex} from "../../../../redux/action/incident";
+import CustomTab from '../../../common/CustomTab';
+
+import { getActionTabs, setActiveIndex } from '../../../../redux/action/incident';
 
 import './style.scss';
 
 const TeamPanel = ({
-                       getActionTabs,
-                       setActiveIndex,
-                       sessionData,
-                       isFetchingFlag,
-                       actionTabs,
-                       activeTabIndex,
-                   }) => {
-    useEffect(() => {
-        if(sessionData) {
-            getActionTabs(sessionData.id_event, sessionData.id_instance);
-        }
-    }, [getActionTabs]);
+  getActionTabs,
+  setActiveIndex,
+  sessionData,
+  actionTabs,
+  activeTabIndex,
+  isCreating,
+}) => {
+  const { register, handleSubmit } = useForm();
+  const [value, setValue] = useState({});
+  const [errors, setErrors] = useState({
+    tabIndex: null,
+    type: null,
+    location: null,
+  });
+  useEffect(() => {
+    if (sessionData) {
+      getActionTabs(sessionData.id_event, sessionData.id_instance);
+    }
+  }, [getActionTabs, sessionData]);
 
-    const tabList = [
-        {key: 'action', value: 'Action', children: <ActionPanel actionTabs={actionTabs} activeTabIndex={activeTabIndex} setActiveIndex={setActiveIndex}/>},
-        {key: 'update', value: 'Update', children: <Update/>},
-        {key: 'program', value: 'Program', children: <Program/>},
-        {key: 'announcement', value: 'Announcement', children: <Announcement/>}
-    ];
+  const onSetData = (type, data) => {
+    setValue({
+      ...value,
+      [type]: data,
+    });
+  };
+
+  const onValidation = (data) => {
+    const keys = Object.keys(data);
+    console.log('send data  ', keys);
+    let issueCase = 3;
+    keys.forEach((keyItem) => {
+      if (keyItem.includes('field_action-type')) {
+        issueCase -= 1;
+      } else if (keyItem.includes('field_location')) {
+        issueCase -= 2;
+      }
+    });
+    console.log(issueCase); // fixme
+    if (issueCase >= 3) {
+      setErrors({
+        tabIndex: activeTabIndex,
+        type: true,
+        location: true,
+      });
+      return false;
+    }
+    if (issueCase >= 2) {
+      setErrors({
+        tabIndex: activeTabIndex,
+        type: true,
+        location: null,
+      });
+      return false;
+    }
+    if (issueCase >= 1) {
+      setErrors({
+        tabIndex: activeTabIndex,
+        type: null,
+        location: true,
+      });
+      return false;
+    }
+    setErrors({
+      tabIndex: null,
+      type: null,
+      location: null,
+    });
+    return true;
+  };
+
+  const onSubmit = (data) => {
+    const saveData = {
+      ...data,
+      ...value,
+      tabIndex: activeTabIndex,
+    };
+    console.log(data); // fixme
+    if (!isCreating && onValidation(saveData)) {
+      console.log('will saved data', saveData);
+    }
+  };
+
+  const tabList = [
+    {
+      key: 'action',
+      value: 'Action',
+      children: <ActionPanel
+        actionTabs={actionTabs}
+        activeTabIndex={activeTabIndex}
+        setActiveIndex={setActiveIndex}
+        register={register}
+        errors={errors}
+        setErrors={setErrors}
+        onSetData={onSetData}
+      />,
+    },
+    { key: 'update', value: 'Update', children: <Update register={register} errors={errors} /> },
+    { key: 'program', value: 'Program', children: <Program register={register} errors={errors} /> },
+    { key: 'announcement', value: 'Announcement', children: <Announcement register={register} errors={errors} /> },
+  ];
     /**
      * we are using chat page of template here.
      */
-    return (
-        <div className="incident-sidebar d-flex flex-column justify-content-between">
-            <div className="incident-sidebar-body">
-                <CustomDropDown/>
-                <CustomTab tabList={tabList}/>
-                <div className=" nav_action_link flex-fill pd-y-20 pd-x-10 bd-t">
-                    <div id="chatDirectMsg" className="chat-msg-list">
-                        <a href="#" className="media">
-                            <FontAwesomeIcon icon={faHomeAlt} size="lg" />
-                            <div className="media-body p-2 ps">
-                                <h6 className="mg-b-0">Actions</h6>
-                                <small className="d-block tx-color-04">Team Actions</small>
-                            </div>
-                        </a>
-                        <a href="#" className="media">
-                            <FontAwesomeIcon icon={faHomeAlt} size="lg" />
-                            <div className="media-body mg-l-10">
-                                <h6 className="mg-b-0">Updates</h6>
-                                <small className="d-block tx-color-04">Last Updates</small>
-                            </div>
-                        </a>
-                        <a href="#" className="media">
-                            <FontAwesomeIcon icon={faHomeAlt} size="lg" />
-                            <div className="media-body mg-l-10">
-                                <h6 className="mg-b-0">Announcement</h6>
-                                <small className="d-block tx-color-04">Team Announcement</small>
-                            </div>
-                        </a>
-                    </div>
+  return (
+    <div className="incident-sidebar d-flex flex-column justify-content-between">
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <div className="incident-sidebar-body">
+          <CustomDropDown />
+          <CustomTab tabList={tabList} />
+          <div className=" nav_action_link flex-fill pd-y-20 pd-x-10 bd-t">
+            <div id="chatDirectMsg" className="chat-msg-list">
+              <a href="#" className="media">
+                <FontAwesomeIcon icon={faHomeAlt} size="lg" />
+                <div className="media-body p-2 ps">
+                  <h6 className="mg-b-0">Actions</h6>
+                  <small className="d-block tx-color-04">Team Actions</small>
                 </div>
+              </a>
+              <a href="#" className="media">
+                <FontAwesomeIcon icon={faHomeAlt} size="lg" />
+                <div className="media-body mg-l-10">
+                  <h6 className="mg-b-0">Updates</h6>
+                  <small className="d-block tx-color-04">Last Updates</small>
+                </div>
+              </a>
+              <a href="#" className="media">
+                <FontAwesomeIcon icon={faHomeAlt} size="lg" />
+                <div className="media-body mg-l-10">
+                  <h6 className="mg-b-0">Announcement</h6>
+                  <small className="d-block tx-color-04">Team Announcement</small>
+                </div>
+              </a>
             </div>
-            <div className="chat-sidebar-footer w-100 p-2">
-                <button type="button" className="btn btn-secondary btn-block">Submit</button>
-            </div>
+          </div>
         </div>
-    )
+        <div className="chat-sidebar-footer w-100 p-2">
+          <button type="submit" className="btn btn-secondary btn-block">Submit</button>
+        </div>
+      </form>
+    </div>
+  );
 };
 
 TeamPanel.propTypes = {
-    isFetchingFlag: PropTypes.bool,
-    getActionTabs: PropTypes.func,
-    setActiveIndex: PropTypes.func,
-    sessionData: PropTypes.object,
-    actionTabs: PropTypes.array,
-    activeTabIndex: PropTypes.number,
+  getActionTabs: PropTypes.func,
+  setActiveIndex: PropTypes.func,
+  sessionData: PropTypes.object,
+  actionTabs: PropTypes.array,
+  activeTabIndex: PropTypes.number,
+  isCreating: PropTypes.bool,
 };
 
 TeamPanel.defaultProps = {
-    getActionTabs: () => {},
-    setActiveIndex: () => {},
-    isFetchingFlag: false,
-    sessionData: {},
-    actionTabs:[],
-    activeTabIndex: 0,
+  getActionTabs: () => {},
+  setActiveIndex: () => {},
+  sessionData: {},
+  actionTabs: [],
+  activeTabIndex: 0,
+  isCreating: false,
 };
 
-const mapDispatchToProps = dispatch =>
-    bindActionCreators(
-        {
-            getActionTabs,
-            setActiveIndex
-        },
-        dispatch
-    );
+const mapDispatchToProps = (dispatch) => bindActionCreators(
+  {
+    getActionTabs,
+    setActiveIndex,
+  },
+  dispatch,
+);
 
-const mapStateToProps = store => ({
-    isFetchingFlag: store.incidentData.isFetchingFlag,
-    sessionData: store.sessionData.sessionData,
-    actionTabs: store.incidentData.actionTabs,
-    activeTabIndex: store.incidentData.activeTabIndex,
+const mapStateToProps = (store) => ({
+  sessionData: store.sessionData.sessionData,
+  actionTabs: store.incidentData.actionTabs,
+  activeTabIndex: store.incidentData.activeTabIndex,
+  isCreating: store.incidentData.isCreating,
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(TeamPanel)
+export default connect(mapStateToProps, mapDispatchToProps)(TeamPanel);

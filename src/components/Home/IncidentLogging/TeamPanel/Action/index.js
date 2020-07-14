@@ -2,13 +2,12 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { Tooltip, Switch } from 'antd';
+import { Tooltip, Switch, Input } from 'antd';
 import { getGeocode } from 'use-places-autocomplete';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEllipsisH } from '@fortawesome/pro-solid-svg-icons';
 import { faUserCircle } from '@fortawesome/pro-regular-svg-icons';
 
-import DefaultAction from './defaultAction';
 import FieldAction from './fieldAction';
 
 import PlacesAutocomplete from '../../../../common/PlaceAutoComplete';
@@ -19,13 +18,21 @@ import { getTypeAheadList } from '../../../../../redux/action/incident';
 import './style.scss';
 
 const ActionPanel = ({
-  actionTabs, activeTabIndex, setActiveIndex,
+  actionTabs,
+  activeTabIndex,
+  setActiveIndex,
+  register,
+  errors,
+  onSetData,
+  setErrors,
 }) => {
+  const { TextArea } = Input;
+
   const iconListB = [
     {
       key: 'agency_response',
       value: 'All Agency Response',
-      icon: <Switch className="act-switch-icon action-icon-font" size="small" />,
+      icon: <Switch className="act-switch-icon action-icon-font" size="small" onSetData={onSetData} />,
     },
     {
       key: 'name_email',
@@ -48,12 +55,13 @@ const ActionPanel = ({
   const [address, setAddress] = useState('');
   const [updateMapPos, setUpdateMapPos] = useState(false);
 
-  const onSubmit = () => {
-    console.log('submit');
-  };
-
   const onChangeIndex = (id) => () => {
     setActiveIndex(id);
+    setErrors({
+      tabIndex: null,
+      type: null,
+      location: null,
+    });
     setCurrentPos({
       name: 'Current position',
       position: {
@@ -83,6 +91,14 @@ const ActionPanel = ({
         console.error(error);
       },
     );
+  };
+
+  const onTitleChange = (e) => {
+    onSetData('tab_0_field_action-type_0', e.target.value);
+  };
+
+  const onChangeActionInfo = (e) => {
+    onSetData('tab_0_field_action-info_0', e.target.value);
   };
 
   return (
@@ -122,63 +138,97 @@ const ActionPanel = ({
         </div>
       </div>
       <div className="action-tab-content mg-t-20">
-        <form method="post" className="action-form" onSubmit={onSubmit}>
-          {
-            activeTabIndex === 0 ? (
-              <>
-                <DefaultAction />
-                <PlacesAutocomplete
-                  changePos={changePos}
-                  address={address}
-                  updateMapPos={updateMapPos}
-                  setAddress={setAddress}
-                  setUpdateMapPos={setUpdateMapPos}
-                />
-                <GoogleMapComponent
-                  changePos={changePos}
-                  markers={[currentPos]}
-                  setUpdateMapPos={setUpdateMapPos}
-                />
-              </>
-            ) : (
-              <>
-                <FieldAction tabIndex={activeTabIndex} />
-                <div className="form-group row">
-                  <label
-                    htmlFor={`tab_${activeTabIndex}_field_dispatch-location_0`}
-                    className="col-sm-4 col-form-label condensed-lb"
-                  >
-                    Dispatch
-                    Location
-                  </label>
-                  <div className="col-sm-8">
-                    <PlacesAutocomplete
-                      changePos={changePos}
-                      address={address}
-                      updateMapPos={updateMapPos}
-                      setAddress={setAddress}
-                      setUpdateMapPos={setUpdateMapPos}
-                    />
-                  </div>
+        {
+          activeTabIndex === 0 ? (
+            <>
+              <TextArea rows={4} placeholder="Action Information" onChange={onChangeActionInfo} />
+              <Input
+                name="title"
+                placeholder="Title*"
+                onChange={onTitleChange}
+                allowClear
+              />
+              {errors.type && (
+                <div className="validation-error">
+                  This value is require.
                 </div>
-                <GoogleMapComponent
-                  changePos={changePos}
-                  markers={[currentPos]}
-                  setUpdateMapPos={setUpdateMapPos}
-                />
-              </>
-
-            )
-          }
-        </form>
+              )}
+              <PlacesAutocomplete
+                changePos={changePos}
+                address={address}
+                updateMapPos={updateMapPos}
+                setAddress={setAddress}
+                setUpdateMapPos={setUpdateMapPos}
+                tabIndex={activeTabIndex}
+                onSetData={onSetData}
+              />
+              {errors.location && (
+                <div className="validation-error">
+                  This value is require.
+                </div>
+              )}
+              <GoogleMapComponent
+                changePos={changePos}
+                markers={[currentPos]}
+                setUpdateMapPos={setUpdateMapPos}
+                register={register}
+                errors={errors}
+              />
+            </>
+          ) : (
+            <>
+              <FieldAction
+                tabIndex={activeTabIndex}
+                register={register}
+                errors={errors}
+                onSetData={onSetData}
+              />
+              <div className="form-group row">
+                <label
+                  htmlFor={`tab_${activeTabIndex}_field_dispatch-location_0`}
+                  className="col-sm-4 col-form-label condensed-lb"
+                >
+                  Dispatch Location
+                </label>
+                <div className="col-sm-8">
+                  <PlacesAutocomplete
+                    changePos={changePos}
+                    address={address}
+                    updateMapPos={updateMapPos}
+                    setAddress={setAddress}
+                    setUpdateMapPos={setUpdateMapPos}
+                    tabIndex={activeTabIndex}
+                    onSetData={onSetData}
+                  />
+                </div>
+              </div>
+              <GoogleMapComponent
+                changePos={changePos}
+                markers={[currentPos]}
+                setUpdateMapPos={setUpdateMapPos}
+                register={register}
+                errors={errors}
+              />
+            </>
+          )
+        }
       </div>
     </div>
   );
 };
+
 ActionPanel.propTypes = {
   actionTabs: PropTypes.array.isRequired,
   activeTabIndex: PropTypes.number.isRequired,
   setActiveIndex: PropTypes.func.isRequired,
+  register: PropTypes.func.isRequired,
+  onSetData: PropTypes.func.isRequired,
+  setErrors: PropTypes.func.isRequired,
+  errors: PropTypes.object,
+};
+
+ActionPanel.defaultProps = {
+  errors: {},
 };
 
 const mapDispatchToProps = (dispatch) => bindActionCreators(
