@@ -1,3 +1,5 @@
+$padding_space: calc(0.46875rem + 1px);
+
 .incident-sidebar {
     .ant-tabs-top > .ant-tabs-nav {
         margin: 0;
@@ -28,19 +30,6 @@
         padding: 0;
     }
 
-    .ant-tabs {
-        color: #596882;
-    }
-
-    .ant-tabs-tab:hover {
-        color: #0168fa;
-    }
-
-    .ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn {
-        font-weight: inherit;
-        color: #0168fa;
-    }
-
     .form-group {
         margin-bottom: 5px;
     }
@@ -55,9 +44,9 @@
     }
 
     .col-form-label {
-        padding-top: calc(0.46875rem + 1px);
-        padding-bottom: calc(0.46875rem + 1px);
+        padding-top: $padding_space;
+        padding-bottom: $padding_space;
         font-size: 13px;
-        color: #3b4863;
+        color: $medium_light_text_color;
     }
   }
