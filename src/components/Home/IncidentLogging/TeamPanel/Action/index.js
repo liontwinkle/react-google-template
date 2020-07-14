@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux';
 import { Tooltip, Switch, Input } from 'antd';
 import { getGeocode } from 'use-places-autocomplete';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEllipsisH } from '@fortawesome/pro-solid-svg-icons';
+import { faEllipsisHAlt } from '@fortawesome/pro-solid-svg-icons';
 import { faUserCircle } from '@fortawesome/pro-regular-svg-icons';
 
 import FieldAction from './fieldAction';
@@ -43,7 +43,7 @@ const ActionPanel = ({
     {
       key: 'more',
       value: 'More Options',
-      icon: <FontAwesomeIcon icon={faEllipsisH} className="action-icon-font" color="#8392a5" />,
+      icon: <FontAwesomeIcon icon={faEllipsisHAlt} className="action-icon-font" color="#8392a5" />,
     },
   ];
   const [currentPos, setCurrentPos] = useState({

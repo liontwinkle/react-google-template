@@ -45,8 +45,11 @@
 .action-card-content {
   font-size: 13px;
   white-space: pre-wrap;
-  color: black;
   margin-top: 10px;
+}
+
+.action-card-content:last-child {
+  margin-bottom: 0;
 }
 
 .msg-number {

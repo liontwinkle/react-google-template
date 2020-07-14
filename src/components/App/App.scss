@@ -1041,13 +1041,13 @@ article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
 
 body {
     margin: 0;
-    font-family: "IBM Plex Sans", sans-serif;
-    font-size: 0.875rem;
-    font-weight: 400;
-    line-height: 1.5;
-    color: #001737;
-    text-align: left;
-    background-color: #fff;
+    font-family: "IBM Plex Sans", sans-serif !important;
+    font-size: 0.875rem !important;
+    font-weight: 400 !important;
+    line-height: 1.5 !important;
+    color: #001737 !important;
+    text-align: left !important;
+    background-color: #fff !important;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
@@ -9716,7 +9716,7 @@ textarea.form-control {
 .card-event .card-body {
     border: 1px solid rgba(72, 94, 144, 0.16);
     border-top-width: 0;
-    padding: 18px 20px; }
+    padding: 15px; }
 .card-event .card-body h5 {
     font-size: 15px;
     margin-bottom: 0; }
