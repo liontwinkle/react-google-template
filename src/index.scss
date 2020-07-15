@@ -1,5 +1,6 @@
 $active_link_color: #0168fa;
 $medium_light_text_color: #596882;
+$validation_error_color: #dc3545;
 
 @import "theme/color";
 @import "components/common/CustomTab/custom";
@@ -11,4 +12,11 @@ $medium_light_text_color: #596882;
 .ant-tabs-tab:hover, .ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn {
     font-weight: inherit !important;
     color: $active_link_color !important;
+}
+
+.validation-error {
+    color: $validation_error_color;
+    font-size: 12px;
+    padding: 0;
+    margin-bottom: 0;
 }
