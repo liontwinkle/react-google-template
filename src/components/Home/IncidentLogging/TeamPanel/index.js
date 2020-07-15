@@ -114,40 +114,38 @@ const TeamPanel = ({
    */
   return (
     <div className="incident-sidebar d-flex flex-column justify-content-between">
-      <form>
-        <div className="incident-sidebar-body">
-          <CustomDropDown />
-          <CustomTab tabList={tabList} />
-          <div className=" nav_action_link flex-fill pd-y-20 pd-x-10 bd-t">
-            <div id="chatDirectMsg" className="chat-msg-list">
-              <a href="#" className="media">
-                <FontAwesomeIcon icon={faHomeAlt} size="lg" />
-                <div className="media-body p-2 ps">
-                  <h6 className="mg-b-0">Actions</h6>
-                  <small className="d-block tx-color-04">Team Actions</small>
-                </div>
-              </a>
-              <a href="#" className="media">
-                <FontAwesomeIcon icon={faHomeAlt} size="lg" />
-                <div className="media-body mg-l-10">
-                  <h6 className="mg-b-0">Updates</h6>
-                  <small className="d-block tx-color-04">Last Updates</small>
-                </div>
-              </a>
-              <a href="#" className="media">
-                <FontAwesomeIcon icon={faHomeAlt} size="lg" />
-                <div className="media-body mg-l-10">
-                  <h6 className="mg-b-0">Announcement</h6>
-                  <small className="d-block tx-color-04">Team Announcement</small>
-                </div>
-              </a>
-            </div>
+      <div className="incident-sidebar-body">
+        <CustomDropDown />
+        <CustomTab tabList={tabList} />
+        <div className=" nav_action_link flex-fill pd-y-20 pd-x-10 bd-t">
+          <div id="chatDirectMsg" className="chat-msg-list">
+            <a href="#" className="media">
+              <FontAwesomeIcon icon={faHomeAlt} size="lg" />
+              <div className="media-body p-2 ps">
+                <h6 className="mg-b-0">Actions</h6>
+                <small className="d-block tx-color-04">Team Actions</small>
+              </div>
+            </a>
+            <a href="#" className="media">
+              <FontAwesomeIcon icon={faHomeAlt} size="lg" />
+              <div className="media-body mg-l-10">
+                <h6 className="mg-b-0">Updates</h6>
+                <small className="d-block tx-color-04">Last Updates</small>
+              </div>
+            </a>
+            <a href="#" className="media">
+              <FontAwesomeIcon icon={faHomeAlt} size="lg" />
+              <div className="media-body mg-l-10">
+                <h6 className="mg-b-0">Announcement</h6>
+                <small className="d-block tx-color-04">Team Announcement</small>
+              </div>
+            </a>
           </div>
         </div>
-        <div className="chat-sidebar-footer w-100 p-2">
-          <button type="button" className="btn btn-secondary btn-block" onClick={onSubmit}>Submit</button>
-        </div>
-      </form>
+      </div>
+      <div className="chat-sidebar-footer w-100 p-2">
+        <button type="submit" className="btn btn-secondary btn-block" onClick={onSubmit}>Submit</button>
+      </div>
     </div>
   );
 };
