@@ -26,13 +26,9 @@ const ActionDropDown = ({
       data-tab-id={tabIndex}
       required={required}
       onChange={handleChange}
+      defaultValue={0}
     >
-      {
-        fieldItem.field_placeholder && (
-          <option value="" disabled selected hidden>{fieldItem.field_placeholder}</option>
-        )
-      }
-      <option value="0" selected>Unknown</option>
+      <option value="0">Unknown</option>
       {
         newOptions.map((customOptionItem) => (
           <option key={customOptionItem.id} value={customOptionItem.id}>{customOptionItem.option_text}</option>

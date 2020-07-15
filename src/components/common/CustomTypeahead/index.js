@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import {
   Typeahead,
+  TypeaheadMenu,
 } from 'react-bootstrap-typeahead';
 import _isEqual from 'lodash/isEqual';
 
@@ -86,7 +87,6 @@ class CustomTypeAhead extends Component {
     return (
       <>
         <Typeahead
-          defaultSelected={options.slice(0, 4)}
           selected={selected}
           id={`should-select-${tabIndex}`}
           emptyLabel={<span style={{ width: 0, height: 0 }} />}
@@ -97,6 +97,12 @@ class CustomTypeAhead extends Component {
           labelKey="type"
           onKeyDown={() => { this.setState({ text: true }); }}
           placeholder="Type"
+          renderMenu={(results, menuProps) => {
+            if (!results.length) {
+              return null;
+            }
+            return <TypeaheadMenu {...menuProps} options={results} />;
+          }}
         />
         {
           text && (
