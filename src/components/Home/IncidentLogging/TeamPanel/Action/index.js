@@ -21,11 +21,11 @@ const ActionPanel = ({
   actionTabs,
   activeTabIndex,
   setActiveIndex,
-  register,
   errors,
   value,
   onSetData,
   setErrors,
+  resetValue,
 }) => {
   const { TextArea } = Input;
 
@@ -33,7 +33,7 @@ const ActionPanel = ({
     {
       key: 'agency_response',
       value: 'All Agency Response',
-      icon: <Switch className="act-switch-icon action-icon-font" size="small" onSetData={onSetData} />,
+      icon: <Switch className="act-switch-icon action-icon-font" size="small" />,
     },
     {
       key: 'name_email',
@@ -58,6 +58,7 @@ const ActionPanel = ({
 
   const onChangeIndex = (id) => () => {
     setActiveIndex(id);
+    resetValue();
     setErrors({
       tabIndex: null,
       type: null,
@@ -173,7 +174,6 @@ const ActionPanel = ({
                 changePos={changePos}
                 markers={[currentPos]}
                 setUpdateMapPos={setUpdateMapPos}
-                register={register}
                 errors={errors}
               />
             </>
@@ -181,7 +181,6 @@ const ActionPanel = ({
             <>
               <FieldAction
                 tabIndex={activeTabIndex}
-                register={register}
                 errors={errors}
                 value={value}
                 onSetData={onSetData}
@@ -209,7 +208,6 @@ const ActionPanel = ({
                 changePos={changePos}
                 markers={[currentPos]}
                 setUpdateMapPos={setUpdateMapPos}
-                register={register}
                 errors={errors}
               />
             </>
@@ -224,9 +222,9 @@ ActionPanel.propTypes = {
   actionTabs: PropTypes.array.isRequired,
   activeTabIndex: PropTypes.number.isRequired,
   setActiveIndex: PropTypes.func.isRequired,
-  register: PropTypes.func.isRequired,
   value: PropTypes.object,
   onSetData: PropTypes.func.isRequired,
+  resetValue: PropTypes.func.isRequired,
   setErrors: PropTypes.func.isRequired,
   errors: PropTypes.object,
 };

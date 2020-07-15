@@ -6,7 +6,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faHomeAlt,
 } from '@fortawesome/pro-regular-svg-icons';
-import { useForm } from 'react-hook-form';
 import CustomDropDown from '../../../common/CustomDropDown';
 import ActionPanel from './Action';
 import Announcement from './Announcement';
@@ -28,7 +27,6 @@ const TeamPanel = ({
   activeTabIndex,
   isCreating,
 }) => {
-  const { register, handleSubmit } = useForm();
   const [value, setValue] = useState({});
   const [errors, setErrors] = useState({
     tabIndex: null,
@@ -42,59 +40,38 @@ const TeamPanel = ({
   }, [getActionTabs, sessionData]);
 
   const onSetData = (data) => {
-    console.log('data: ', data); // fixme
     setValue({
       ...value,
       ...data,
     });
-    console.log('value: ', value); // fixme
+  };
+
+  const resetValue = () => {
+    setValue({});
   };
 
   const onValidation = (data) => {
     const keys = Object.keys(data);
-    let issueCase = 3;
-    keys.forEach((keyItem) => {
-      if (keyItem.includes('field_action-type')) {
-        issueCase -= 1;
-      } else if (keyItem.includes('field_location')) {
-        issueCase -= 2;
-      }
-    });
-    if (issueCase >= 3) {
-      setErrors({
-        tabIndex: activeTabIndex,
-        type: true,
-        location: true,
-      });
-      return false;
-    }
-    if (issueCase >= 2) {
-      setErrors({
-        tabIndex: activeTabIndex,
-        type: true,
-        location: null,
-      });
-      return false;
-    }
-    if (issueCase >= 1) {
-      setErrors({
-        tabIndex: activeTabIndex,
-        type: null,
-        location: true,
-      });
-      return false;
-    }
-    setErrors({
-      tabIndex: null,
+    let result = true;
+    const errorCase = {
+      tabIndex: activeTabIndex,
       type: null,
       location: null,
-    });
-    return true;
+    };
+    if (keys.filter((keyItem) => (keyItem.includes('field_action-type'))).length === 0) {
+      errorCase.type = true;
+      result = false;
+    }
+    if (keys.filter((keyItem) => (keyItem.includes('field_location'))).length === 0) {
+      errorCase.location = true;
+      result = false;
+    }
+    setErrors(errorCase);
+    return result;
   };
 
-  const onSubmit = (data) => {
+  const onSubmit = () => {
     const saveData = {
-      ...data,
       ...value,
       id_tab: activeTabIndex,
       id_event: sessionData.id_event,
@@ -121,23 +98,23 @@ const TeamPanel = ({
         actionTabs={actionTabs}
         activeTabIndex={activeTabIndex}
         setActiveIndex={setActiveIndex}
-        register={register}
         errors={errors}
         setErrors={setErrors}
         onSetData={onSetData}
         value={value}
+        resetValue={resetValue}
       />,
     },
-    { key: 'update', value: 'Update', children: <Update register={register} errors={errors} /> },
-    { key: 'program', value: 'Program', children: <Program register={register} errors={errors} /> },
-    { key: 'announcement', value: 'Announcement', children: <Announcement register={register} errors={errors} /> },
+    { key: 'update', value: 'Update', children: <Update /> },
+    { key: 'program', value: 'Program', children: <Program /> },
+    { key: 'announcement', value: 'Announcement', children: <Announcement /> },
   ];
   /**
    * we are using chat page of template here.
    */
   return (
     <div className="incident-sidebar d-flex flex-column justify-content-between">
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form>
         <div className="incident-sidebar-body">
           <CustomDropDown />
           <CustomTab tabList={tabList} />
@@ -168,7 +145,7 @@ const TeamPanel = ({
           </div>
         </div>
         <div className="chat-sidebar-footer w-100 p-2">
-          <button type="submit" className="btn btn-secondary btn-block">Submit</button>
+          <button type="button" className="btn btn-secondary btn-block" onClick={onSubmit}>Submit</button>
         </div>
       </form>
     </div>

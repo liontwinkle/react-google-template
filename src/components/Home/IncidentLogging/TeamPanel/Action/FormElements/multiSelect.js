@@ -29,7 +29,7 @@ const ActionMultiSelect = ({
 
   return (
     <Select
-      mode="tags"
+      mode="multiple"
       style={{
         width: '100%',
         minHeight: 'calc(1.5em + 0.9375rem + 3px)',
