@@ -6,6 +6,7 @@ const INITIAL_STATE = {
   typeList: null,
   activeTabIndex: 0,
   isFetchingFlag: false,
+  incidentData: null,
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -77,6 +78,7 @@ export default (state = INITIAL_STATE, action) => {
       console.log('result: ', incidentData); // fixme
       return {
         ...state,
+        incidentData,
         isCreatingFlag: false,
       };
     }

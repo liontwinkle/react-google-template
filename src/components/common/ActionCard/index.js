@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import {
   Tooltip, Button, Dropdown, Menu,
 } from 'antd';
@@ -18,7 +19,7 @@ import {
 
 import './style.scss';
 
-const ActionCard = ({ type, index }) => {
+const ActionCard = ({ type, index, incidentData }) => {
   const ellipseMenu = (
     <Menu>
       <Menu.Item>
@@ -78,6 +79,25 @@ const ActionCard = ({ type, index }) => {
       </Menu.Item>
     </Menu>
   );
+  const renderIncident = () => {
+    const keys = Object.keys(incidentData.data);
+    return (
+      <>
+        <p>data:</p>
+        {
+          keys.map((keyitem) => (
+            <span key={keyitem}>
+              <label>{`${keyitem}=> `}</label>
+              <label>{incidentData.data[keyitem]}</label>
+              <br />
+            </span>
+          ))
+        }
+        <label>{`incidentLogCurrentID=> ${incidentData.incidentLogCurrentID} `}</label>
+        <label>{`incidentLogIncrementalID=> ${incidentData.incidentLogIncrementalID} `}</label>
+      </>
+    );
+  };
   return (
     <div className="card card-event">
       <div className="card-body tx-13">
@@ -89,12 +109,15 @@ const ActionCard = ({ type, index }) => {
           Event
           Control Centre(ECC)
         </span>
-
-        <p className="action-card-content">
-          Royalty-free(RF) material subject to copyright subject to copyright or other intellectual property
-          rights may be used rights may be used without the need to pay royalities or liences fees for each
-          use.
-        </p>
+        {
+          incidentData ? renderIncident() : (
+            <p className="action-card-content">
+              Royalty-free(RF) material subject to copyright subject to copyright or other intellectual property
+              rights may be used rights may be used without the need to pay royalities or liences fees for each
+              use.
+            </p>
+          )
+        }
       </div>
       <div className="card-footer tx-13 d-flex flex-column align-items-center">
         <div className="w-100 d-flex justify-content-between align-items-center p-2">
@@ -194,11 +217,16 @@ const ActionCard = ({ type, index }) => {
 ActionCard.propTypes = {
   type: PropTypes.string,
   index: PropTypes.number,
+  incidentData: PropTypes.object, // todo remove
 };
 
 ActionCard.defaultProps = {
   type: 'Action',
   index: 0,
+  incidentData: null, // todo remove
 };
 
-export default ActionCard;
+const mapStateToProps = (store) => ({
+  incidentData: store.incidentData.incidentData,
+});
+export default connect(mapStateToProps)(ActionCard);
