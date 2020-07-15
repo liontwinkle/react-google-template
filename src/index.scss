@@ -1,10 +1,7 @@
-$active_link_color: #0168fa;
-$medium_light_text_color: #596882;
-$validation_error_color: #dc3545;
-
 @import "theme/color";
 @import "components/common/CustomTab/custom";
 
+/* # Action tab styles # */
 .ant-tabs {
     color: $medium_light_text_color !important;
 }

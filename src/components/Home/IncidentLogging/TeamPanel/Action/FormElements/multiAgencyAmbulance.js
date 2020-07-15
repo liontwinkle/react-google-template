@@ -34,7 +34,7 @@ const ActionMultiAgencyAmbulance = ({
 
   return (
     <div
-      className="custom-rad custom-mult-fire"
+      className="custom-rad custom-mult-medical"
       id={`tab_${tabIndex}_field_${fieldItem.field_type}_${fieldItem.id}`}
       data-tab-id={tabIndex}
     >

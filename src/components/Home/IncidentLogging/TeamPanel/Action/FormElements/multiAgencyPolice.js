@@ -43,7 +43,7 @@ const ActionMultiAgencyPolice = ({
 
   return (
     <div
-      className="custom-rad custom-mult-all"
+      className="custom-rad custom-mult-pol"
       id={`tab_${tabIndex}_field_${fieldItem.file_type}_${fieldItem.id}`}
       data-tab-id={tabIndex}
     >
