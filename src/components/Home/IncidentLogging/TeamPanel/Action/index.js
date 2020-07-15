@@ -164,6 +164,7 @@ const ActionPanel = ({
                 setUpdateMapPos={setUpdateMapPos}
                 tabIndex={activeTabIndex}
                 onSetData={onSetData}
+                actionFg={false}
               />
               {errors.location && (
                 <div className="validation-error">
@@ -200,6 +201,7 @@ const ActionPanel = ({
                     setAddress={setAddress}
                     setUpdateMapPos={setUpdateMapPos}
                     tabIndex={activeTabIndex}
+                    actionFg
                     onSetData={onSetData}
                   />
                 </div>

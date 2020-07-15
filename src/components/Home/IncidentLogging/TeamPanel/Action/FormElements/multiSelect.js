@@ -23,7 +23,8 @@ const ActionMultiSelect = ({
   }, [setNewOptions, newOptions, options, fieldItem.id]);
 
   const handleChange = (value) => {
-    console.log(`selected ${value}`);
+    console.log(`selected ${value}-${fieldItem.field_type}`);
+    console.log(value);
     onSetData({ [`tab_${tabIndex}_field_${fieldItem.field_type}_${fieldItem.id}[]`]: value });
   };
 

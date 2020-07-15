@@ -18,6 +18,7 @@ const PlacesAutocomplete = ({
   updateMapPos,
   tabIndex,
   onSetData,
+  actionFg,
 }) => {
   const {
     ready,
@@ -43,7 +44,11 @@ const PlacesAutocomplete = ({
   const handleSelect = ({ description }) => () => {
     setValue(description, false);
     clearSuggestions();
-    onSetData({ [`tab_${tabIndex}_field_location_${tabIndex}`]: description });
+    if (actionFg) {
+      onSetData({ [`tab_${tabIndex}_field_dispatch-location_${tabIndex}`]: description });
+    } else {
+      onSetData({ [`tab_${tabIndex}_field_location_${tabIndex}`]: description });
+    }
 
     // Get latitude and longitude via utility functions
     getGeocode({ address: description })
@@ -110,6 +115,7 @@ PlacesAutocomplete.propTypes = {
   tabIndex: PropTypes.number,
   onSetData: PropTypes.func.isRequired,
   changePos: PropTypes.func.isRequired,
+  actionFg: PropTypes.bool,
   setUpdateMapPos: PropTypes.func.isRequired,
 };
 
@@ -117,6 +123,7 @@ PlacesAutocomplete.defaultProps = {
   address: '',
   updateMapPos: false,
   tabIndex: 0,
+  actionFg: false,
 };
 
 export default PlacesAutocomplete;
