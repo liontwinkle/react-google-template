@@ -36,10 +36,8 @@ $padding_space: calc(0.46875rem + 1px);
     border-color: $submit_brd_color_active !important;
   }
 
-  .action-panel::-webkit-scrollbar {
-    -webkit-appearance: none;
-    width: 0;
-    height: 0;
+  .ant-tabs-content {
+    overflow: hidden;
   }
 }
 
