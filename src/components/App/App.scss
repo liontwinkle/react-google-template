@@ -41500,3 +41500,14 @@ a.bg-twitter:hover, a.bg-twitter:focus, button.bg-twitter:hover, button.bg-twitt
   padding: 0;
   margin-bottom: 0;
 }
+
+html, body {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    overflow: hidden;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+}
