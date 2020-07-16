@@ -35,6 +35,12 @@ $padding_space: calc(0.46875rem + 1px);
     background-color: $submit_bck_color_active !important;
     border-color: $submit_brd_color_active !important;
   }
+
+  .action-panel::-webkit-scrollbar {
+    -webkit-appearance: none;
+    width: 0;
+    height: 0;
+  }
 }
 
 .action-panel {
