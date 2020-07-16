@@ -61,8 +61,6 @@ class CustomTypeAhead extends Component {
   }
 
   onChangeType(selected) {
-    console.log('selected', selected);
-
     this.setState({ selected, text: true });
   }
 

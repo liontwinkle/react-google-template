@@ -73,7 +73,6 @@ const TeamPanel = ({
     };
 
     if (!isCreating && onValidation(saveData)) {
-      console.log('will saved data', saveData);
       saveActionData(saveData)
         .then(() => {
           console.log('success');

@@ -86,6 +86,13 @@ const ActionPanel = ({
         if (response && response.length > 0) {
           address = response[0].formatted_address;
         }
+        onSetData({
+          [`tab_${activeTabIndex}_field_dispatch-location_${activeTabIndex}`]: {
+            address,
+            lat: value.position.lat,
+            lng: value.position.lng,
+          },
+        });
         setAddress(address);
       },
       (error) => {

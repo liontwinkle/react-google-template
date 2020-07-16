@@ -80,21 +80,34 @@ const ActionCard = ({ type, index, incidentData }) => {
     </Menu>
   );
   const renderIncident = () => {
-    const keys = Object.keys(incidentData.data);
+    const keys = incidentData ? Object.keys(incidentData) : [];
     return (
       <>
         <p>data:</p>
         {
           keys.map((keyitem) => (
-            <span key={keyitem}>
-              <label>{`${keyitem}=> `}</label>
-              <label>{incidentData.data[keyitem]}</label>
-              <br />
-            </span>
+            keyitem.includes('dispatch-location') ? (
+              <span key={keyitem}>
+                <label>{`${keyitem}=> `}</label>
+                <label>{incidentData[keyitem].address}</label>
+                {' '}
+                <br />
+                <label>{incidentData[keyitem].lat}</label>
+                <br />
+                <label>{incidentData[keyitem].lng}</label>
+                <br />
+                <br />
+              </span>
+            ) : (
+              <span key={keyitem}>
+                <label>{`${keyitem}=> `}</label>
+                <label>{incidentData[keyitem]}</label>
+                <br />
+              </span>
+            )
+
           ))
         }
-        <label>{`incidentLogCurrentID=> ${incidentData.incidentLogCurrentID} `}</label>
-        <label>{`incidentLogIncrementalID=> ${incidentData.incidentLogIncrementalID} `}</label>
       </>
     );
   };

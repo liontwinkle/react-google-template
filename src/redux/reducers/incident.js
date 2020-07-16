@@ -75,7 +75,6 @@ export default (state = INITIAL_STATE, action) => {
     }
     case types.SAVE_INCIDENT_DATA_SUCCESS: {
       const { incidentData } = action.payload;
-      console.log('result: ', incidentData); // fixme
       return {
         ...state,
         incidentData,

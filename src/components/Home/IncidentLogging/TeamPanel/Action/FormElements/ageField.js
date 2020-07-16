@@ -9,7 +9,6 @@ const ActionAgeField = ({
 }) => {
   const required = (fieldItem.field_required === '1');
   const handleChange = (value) => {
-    console.log(`selected ${value}`);
     onSetData({ [`tab_${tabIndex}_field_${fieldItem.field_type}_${fieldItem.id}[]`]: value });
   };
 

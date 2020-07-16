@@ -94,7 +94,7 @@ export const saveActionData = (data) => (dispatch, getState) => {
   });
 
   return incidentService.SaveActionData(data)
-    .then((data) => {
+    .then(() => {
       dispatch({
         type: types.SAVE_INCIDENT_DATA_SUCCESS,
         payload: { incidentData: data },

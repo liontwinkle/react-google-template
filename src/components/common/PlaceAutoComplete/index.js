@@ -43,8 +43,12 @@ const PlacesAutocomplete = ({
   const handleSelect = ({ description }) => () => {
     setValue(description, false);
     clearSuggestions();
-    onSetData({ [`tab_${tabIndex}_field_dispatch-location_${tabIndex}`]: description });
-
+    const data = {
+      address: description,
+      lat: '',
+      lng: '',
+    };
+    data.address = description;
     // Get latitude and longitude via utility functions
     getGeocode({ address: description })
       .then((results) => getLatLng(results[0]))
@@ -56,6 +60,9 @@ const PlacesAutocomplete = ({
             lng,
           },
         });
+        data.lat = lat;
+        data.lng = lng;
+        onSetData({ [`tab_${tabIndex}_field_dispatch-location_${tabIndex}`]: data });
         setUpdateMapPos(false);
       })
       .catch((error) => {
