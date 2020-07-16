@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import {
   Typeahead,
-  TypeaheadMenu,
 } from 'react-bootstrap-typeahead';
 import _isEqual from 'lodash/isEqual';
 
@@ -63,8 +62,15 @@ class CustomTypeAhead extends Component {
 
   onChangeType(selected) {
     console.log('selected', selected);
-    this.props.onSetData({ [`tab_${this.props.tabIndex}_field_action-type_0`]: selected });
+
     this.setState({ selected, text: true });
+  }
+
+  onChangeValue() {
+    this.setState({
+      text: true,
+    });
+    this.props.onSetData({ [`tab_${this.props.tabIndex}_field_action-type_0`]: this.typeInput.current.state.text });
   }
 
   updateState(option) {
@@ -74,11 +80,11 @@ class CustomTypeAhead extends Component {
   }
 
   cancel() {
+    this.typeInput.current.clear();
     this.updateState({
       text: false,
       selected: [],
     });
-    this.typeInput.current.clear();
   }
 
   render() {
@@ -89,24 +95,18 @@ class CustomTypeAhead extends Component {
         <Typeahead
           selected={selected}
           id={`should-select-${tabIndex}`}
-          emptyLabel={<span style={{ width: 0, height: 0 }} />}
           onChange={(selected) => this.onChangeType(selected)}
           options={options}
           minLength={2}
           ref={this.typeInput}
           labelKey="type"
-          onKeyDown={() => { this.setState({ text: true }); }}
+          onKeyDown={() => this.onChangeValue()}
+          onBlur={() => this.onChangeValue()}
           placeholder="Type"
-          renderMenu={(results, menuProps) => {
-            if (!results.length) {
-              return null;
-            }
-            return <TypeaheadMenu {...menuProps} options={results} />;
-          }}
         />
         {
           text && (
-            <span className="typeahead__cancel-button" onClick={this.cancel}>×</span>
+            <span className="typeahead__cancel-button" onClick={() => this.cancel()}>×</span>
           )
         }
       </>
