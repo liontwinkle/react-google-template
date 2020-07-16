@@ -62,7 +62,6 @@ const ActionPanel = ({
     setErrors({
       tabIndex: null,
       type: null,
-      location: null,
     });
     setCurrentPos({
       name: 'Current position',
@@ -164,13 +163,7 @@ const ActionPanel = ({
                 setUpdateMapPos={setUpdateMapPos}
                 tabIndex={activeTabIndex}
                 onSetData={onSetData}
-                actionFg={false}
               />
-              {errors.location && (
-                <div className="validation-error">
-                  This value is required.
-                </div>
-              )}
               <GoogleMapComponent
                 changePos={changePos}
                 markers={[currentPos]}
@@ -201,7 +194,6 @@ const ActionPanel = ({
                     setAddress={setAddress}
                     setUpdateMapPos={setUpdateMapPos}
                     tabIndex={activeTabIndex}
-                    actionFg
                     onSetData={onSetData}
                   />
                 </div>

@@ -31,7 +31,6 @@ const TeamPanel = ({
   const [errors, setErrors] = useState({
     tabIndex: null,
     type: null,
-    location: null,
   });
   useEffect(() => {
     if (sessionData) {
@@ -56,14 +55,9 @@ const TeamPanel = ({
     const errorCase = {
       tabIndex: activeTabIndex,
       type: null,
-      location: null,
     };
     if (keys.filter((keyItem) => (keyItem.includes('field_action-type'))).length === 0) {
       errorCase.type = true;
-      result = false;
-    }
-    if (keys.filter((keyItem) => (keyItem.includes('field_location'))).length === 0) {
-      errorCase.location = true;
       result = false;
     }
     setErrors(errorCase);
