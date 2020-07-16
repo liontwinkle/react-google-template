@@ -1,8 +1,8 @@
 import React from 'react';
-import TeamPanel from "./TeamPanel";
+import TeamPanel from './TeamPanel';
 
 const IncidentLeft = () => (
-    <TeamPanel/>
+  <TeamPanel />
 );
 
 export default IncidentLeft;

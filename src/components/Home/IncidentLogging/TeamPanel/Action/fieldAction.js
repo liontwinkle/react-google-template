@@ -218,7 +218,7 @@ const FieldAction = ({
                 </div>
                 {errors.type && (
                   <div className="validation-error">
-                    This value is require.
+                    This value is required.
                   </div>
                 )}
               </div>
