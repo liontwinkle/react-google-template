@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
-import ItemsCarousel from 'react-items-carousel';
+import Carousel from 'react-elastic-carousel';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRight, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
-
-import 'react-responsive-carousel/lib/styles/carousel.min.css'; // requires a loader
 
 import { Datalist } from '../../../constants/static';
 import IncidentCard from './IncidentCard';
@@ -23,41 +21,42 @@ const MenuItem = ({ text }) => (
   </div>
 );
 
+// Breakpoints to limit carousel columns dependend of frame width
+const breakPoints = [
+  { width: 1, itemsToShow: 1 },
+  { width: 600, itemsToShow: 2, itemsToScroll: 1 },
+  { width: 1000, itemsToShow: 3 },
+  { width: 1300, itemsToShow: 4 },
+  { width: 1600, itemsToShow: 5 },
+  { width: 1900, itemsToShow: 6 },
+];
+
 const IncidentContent = () => {
-  const [activeItemIndex, setActiveItemIndex] = useState(0);
-  const chevronWidth = 0;
+  const [activeItemIndex] = useState(0);
+  let CarouselElement = null;
   return (
     <div className="chat-content-body">
       <div style={{
-        padding: `0 ${chevronWidth}px`,
         height: '100%',
-        minWidth: '1500px',
       }}
       >
-        <ItemsCarousel
-          infiniteLoop={false}
-          gutter={12}
-          activePosition="center"
-          chevronWidth={chevronWidth}
-          disableSwipe={false}
-          alwaysShowChevrons={false}
-          numberOfCards={4}
-          slidesToScroll={4}
-          outsideChevron
-          showSlither={false}
-          firstAndLastGutter={false}
-          requestToChangeActive={setActiveItemIndex}
-          activeItemIndex={activeItemIndex}
-          leftChevron={<FontAwesomeIcon className="arrow arrow-prev" icon={faArrowLeft} />}
-          rightChevron={<FontAwesomeIcon className="arrow arrow-next" icon={faArrowRight} />}
+        <Carousel
+          breakPoints={breakPoints}
+          showArrows={false}
+          pagination={false}
+          easing="cubic-bezier(.54,.04,.18,.98)"
+          transitionMs={500}
+          ref={(carousel) => { CarouselElement = carousel; }}
         >
           {
             Datalist.map((el) => (
               <MenuItem text={el.name} key={el.name} selected={activeItemIndex} />
             ))
           }
-        </ItemsCarousel>
+        </Carousel>
       </div>
+      <FontAwesomeIcon className="arrow arrow-prev" icon={faArrowLeft} onClick={() => CarouselElement.slidePrev()} />
+      <FontAwesomeIcon className="arrow arrow-next" icon={faArrowRight} onClick={() => CarouselElement.slideNext()} />
     </div>
   );
 };
