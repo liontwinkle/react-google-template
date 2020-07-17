@@ -11,6 +11,19 @@
   width: 100%;
   overflow-x: auto;
   top: 5px;
+
+  .rec-carousel {
+    height: 100% !important;
+    position: absolute;
+  }
+
+  .rec-slider-container{
+    margin: 0;
+  }
+
+  .rec-slider > div {
+    overflow: auto;
+  }
 }
 
 .action-carousel-item {
@@ -111,6 +124,10 @@
     z-index: 10;
     color: #8392a5;
   }
+}
+
+.arrow-prev, .arrow-next {
+  cursor: pointer;
 }
 
 .arrow-prev {

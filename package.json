@@ -36,6 +36,7 @@
     "react-bootstrap-typeahead": "^5.1.0",
     "react-cool-onclickoutside": "^1.5.4",
     "react-dom": "^16.13.1",
+    "react-elastic-carousel": "^0.6.4",
     "react-feather": "^2.0.8",
     "react-fullstory": "^1.4.0",
     "react-geocode": "^0.2.1",
