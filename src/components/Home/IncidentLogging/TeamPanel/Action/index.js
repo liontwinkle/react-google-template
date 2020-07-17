@@ -159,7 +159,7 @@ const ActionPanel = ({
               />
               {errors.type && (
                 <div className="validation-error">
-                  This value is required.
+                  This field is required.
                 </div>
               )}
               <PlacesAutocomplete

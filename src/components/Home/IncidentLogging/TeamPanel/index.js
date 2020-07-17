@@ -30,6 +30,8 @@ const TeamPanel = ({
   const [value, setValue] = useState({});
   const [errors, setErrors] = useState({
     tabIndex: null,
+    location: null,
+    multiButton: null,
     type: null,
   });
   useEffect(() => {
@@ -60,6 +62,12 @@ const TeamPanel = ({
       errorCase.type = true;
       result = false;
     }
+
+    if (keys.filter((keyItem) => (keyItem.includes('field_location'))).length === 0) {
+      errorCase.location = true;
+      result = false;
+    }
+
     setErrors(errorCase);
     return result;
   };

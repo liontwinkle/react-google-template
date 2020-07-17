@@ -58,11 +58,11 @@ module.exports = () => {
       new webpack.HotModuleReplacementPlugin(),
     ],
     output: {
-      path: `${__dirname}/public`,
+      path: `${__dirname}/build`,
       filename: 'bundle.js',
     },
     devServer: {
-      contentBase: './public',
+      contentBase: './build',
       historyApiFallback: true,
       hot: true,
       port: 3000,

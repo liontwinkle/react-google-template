@@ -218,7 +218,7 @@ const FieldAction = ({
                 </div>
                 {errors.type && (
                   <div className="validation-error">
-                    This value is required.
+                    This field is required.
                   </div>
                 )}
               </div>
@@ -241,6 +241,11 @@ const FieldAction = ({
                   id={`tab_${tabIndex}_field_location_0`}
                   name={`tab_${tabIndex}_field_location_0`}
                 />
+                {errors.location && (
+                  <div className="validation-error">
+                    This field is required.
+                  </div>
+                )}
               </div>
             </div>
             {
