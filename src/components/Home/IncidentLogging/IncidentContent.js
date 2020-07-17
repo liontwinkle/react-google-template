@@ -26,9 +26,9 @@ const breakPoints = [
   { width: 1, itemsToShow: 1 },
   { width: 600, itemsToShow: 2, itemsToScroll: 1 },
   { width: 1000, itemsToShow: 3 },
-  { width: 1300, itemsToShow: 4 },
-  { width: 1600, itemsToShow: 5 },
-  { width: 1900, itemsToShow: 6 },
+  { width: 1500, itemsToShow: 4 },
+  { width: 1800, itemsToShow: 5 },
+  { width: 2200, itemsToShow: 6 },
 ];
 
 const IncidentContent = () => {
