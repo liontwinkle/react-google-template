@@ -63,6 +63,7 @@ module.exports = () => {
       historyApiFallback: true,
       hot: true,
       port: 3000,
+      inline: false,
     },
   };
 };
