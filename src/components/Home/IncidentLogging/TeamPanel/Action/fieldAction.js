@@ -38,10 +38,13 @@ const FieldAction = ({
     const requiredValidation = getRequiredFields.map((item) => ({
       [`${item.field_type}_${item.id}`]: false,
     }));
-    setErrors({
-      ...errors,
-      ...requiredValidation,
-    });
+    if (Object.keys(errors).length < 3) {
+      setErrors({
+        ...errors,
+        ...requiredValidation,
+      });
+    }
+
     if (newFields[0].field) {
       setFields(newFields[0].field);
       setOptions(newFields[0].options);
