@@ -14,7 +14,11 @@ function get(url, headers = {}, params = {}) {
   const authHeader = { 'x-access-token': accessToken };
   return http.get(url, {
     ...params,
-    headers: { ...authHeader, ...headers },
+    headers: {
+      ...authHeader,
+      ...headers,
+      credentials: 'include',
+    },
   });
 }
 
@@ -23,21 +27,35 @@ function post(url, data, headers = {}, params = {}) {
   const authHeader = { 'x-access-token': accessToken };
   return http.post(url, data, {
     ...params,
-    headers: { ...authHeader, ...headers },
+    headers: {
+      ...authHeader,
+      ...headers,
+      credentials: 'include',
+    },
   });
 }
 
 function put(url, data, headers = {}) {
   const accessToken = storage.getItem(USER_TOKEN_KEY);
   const authHeader = { 'x-access-token': accessToken };
-  return http.put(url, data, { headers: { ...authHeader, ...headers } });
+  return http.put(url, data, {
+    headers: {
+      ...authHeader,
+      ...headers,
+      credentials: 'include',
+    },
+  });
 }
 
 function remove(url, data, headers = {}) {
   const accessToken = storage.getItem(USER_TOKEN_KEY);
   const authHeader = { 'x-access-token': accessToken };
   return http.delete(url, {
-    headers: { ...authHeader, ...headers },
+    headers: {
+      ...authHeader,
+      ...headers,
+      credentials: 'include',
+    },
     data,
   });
 }
