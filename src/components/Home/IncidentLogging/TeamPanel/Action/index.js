@@ -62,6 +62,7 @@ const ActionPanel = ({
     setErrors({
       tabIndex: null,
       type: null,
+      location: null,
     });
     setCurrentPos({
       name: 'Current position',
@@ -185,6 +186,7 @@ const ActionPanel = ({
                 errors={errors}
                 value={value}
                 onSetData={onSetData}
+                setErrors={setErrors}
               />
               <div className="form-group row">
                 <label

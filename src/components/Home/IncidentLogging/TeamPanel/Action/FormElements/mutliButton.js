@@ -6,7 +6,9 @@ const ActionMultiButton = ({
   fieldItem,
   onSetData,
   value,
+  errors,
 }) => {
+  const required = (fieldItem.field_required === '1');
   const onSelect = (value) => {
     onSetData({ [`tab_${tabIndex}_field_${fieldItem.field_type}_${fieldItem.id}`]: value });
   };
@@ -42,6 +44,13 @@ const ActionMultiButton = ({
           Unknown
         </button>
       </div>
+      {
+        required && errors && errors[`${fieldItem.field_type}_${fieldItem.id}`] && (
+          <div className="validation-error">
+            This field is required.
+          </div>
+        )
+      }
     </div>
   );
 };
@@ -50,12 +59,14 @@ ActionMultiButton.propTypes = {
   tabIndex: PropTypes.array,
   fieldItem: PropTypes.object,
   value: PropTypes.object,
+  errors: PropTypes.object,
   onSetData: PropTypes.func.isRequired,
 };
 
 ActionMultiButton.defaultProps = {
   tabIndex: 1,
   fieldItem: {},
+  errors: null,
   value: null,
 };
 

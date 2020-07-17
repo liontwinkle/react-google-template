@@ -23,6 +23,7 @@ const FieldAction = ({
   typeList,
   register,
   errors,
+  setErrors,
   onSetData,
   value,
 }) => {
@@ -33,12 +34,20 @@ const FieldAction = ({
   useEffect(() => {
     setReady(true);
     const newFields = actionFields.filter((actionItem) => (actionItem.id === tabIndex));
+    const getRequiredFields = actionFields.filter((actionItem) => (actionItem.field_required === '1'));
+    const requiredValidation = getRequiredFields.map((item) => ({
+      [`${item.field_type}_${item.id}`]: false,
+    }));
+    setErrors({
+      ...errors,
+      ...requiredValidation,
+    });
     if (newFields[0].field) {
       setFields(newFields[0].field);
       setOptions(newFields[0].options);
     }
     setReady(false);
-  }, [tabIndex, setFields, setReady, actionFields]);
+  }, [tabIndex, setFields, setReady, setErrors, actionFields, errors]);
 
   const newActionBody = (fieldItem) => {
     switch (fieldItem.field_type) {
@@ -276,6 +285,7 @@ FieldAction.propTypes = {
   value: PropTypes.object,
   onSetData: PropTypes.func.isRequired,
   register: PropTypes.func.isRequired,
+  setErrors: PropTypes.func.isRequired,
 };
 
 FieldAction.defaultProps = {

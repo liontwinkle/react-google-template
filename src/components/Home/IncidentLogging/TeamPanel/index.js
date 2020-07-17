@@ -58,15 +58,26 @@ const TeamPanel = ({
       tabIndex: activeTabIndex,
       type: null,
     };
-    if (keys.filter((keyItem) => (keyItem.includes('field_action-type'))).length === 0) {
-      errorCase.type = true;
-      result = false;
-    }
-
-    if (keys.filter((keyItem) => (keyItem.includes('field_location'))).length === 0) {
-      errorCase.location = true;
-      result = false;
-    }
+    const errorKeys = Object.keys(errors);
+    errorKeys.forEach((errorItem) => {
+      if ((errorItem === 'type')
+        && (keys.filter((keyItem) => (keyItem.includes('field_action-type'))).length === 0)) {
+        errorCase.type = true;
+        result = false;
+      } else if ((errorItem === 'location')
+      && (keys.filter((keyItem) => (keyItem.includes('field_location'))).length === 0)) {
+        errorCase.location = true;
+        result = false;
+      } else {
+        const indexKey = errorItem.split('_');
+        const fieldType = indexKey[0];
+        const fieldId = indexKey[1];
+        if (keys.filter((keyItem) => (keyItem.includes(fieldType) && keyItem.includes(fieldId)))) {
+          errorCase[errorItem] = false;
+          result = false;
+        }
+      }
+    });
 
     setErrors(errorCase);
     return result;
