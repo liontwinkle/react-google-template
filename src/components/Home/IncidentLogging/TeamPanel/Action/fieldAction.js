@@ -238,7 +238,7 @@ const FieldAction = ({
             <div className="form-group row">
               <label
                 htmlFor={`tab_${tabIndex}_field_location_0`}
-                className="col-sm-4 col-form-label text-dark"
+                className="col-sm-4 col-form-label"
               >
                 Location*
               </label>
@@ -265,7 +265,7 @@ const FieldAction = ({
                 <div className="form-group row" key={fieldItem.id}>
                   <label
                     htmlFor={`tab_${tabIndex}_field_${fieldItem.field_type}_${fieldItem.id}`}
-                    className="col-sm-4 col-form-label text-dark"
+                    className="col-sm-4 col-form-label"
                   >
                     {`${fieldItem.fied_text}${fieldItem.field_required === '1' ? '*' : ''}`}
                   </label>
