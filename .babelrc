@@ -25,7 +25,8 @@
       {
         "absoluteRuntime": false,
         "corejs": 3,
-        "version": "^7.10.5"
+        "version": "^7.10.5",
+        "regenerator": true
       }
     ],
     ["transform-es2015-for-of", { "loose": true }]
