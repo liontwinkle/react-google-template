@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { MentionsInput, Mention } from 'react-mentions';
 
 import './styles.scss';
 import './metion.scss';
@@ -8,36 +7,10 @@ export default class SimpleEmojiEditor extends Component {
   constructor() {
     super();
     this.state = {
-      value: '',
-      users: [
-        {
-          _id: '123',
-          name: { first: 'John', last: 'Reynolds' },
-        },
-        {
-          _id: '234',
-          name: { first: 'Holly', last: 'Reynolds' },
-        },
-        {
-          _id: '345',
-          name: { first: 'Ryan', last: 'Williams' },
-        },
-      ],
     };
   }
 
-  handleChange(event, newValue) {
-    this.setState({
-      value: newValue,
-    });
-  }
-
   render() {
-    const userMentionData = this.state.users.map((myUser) => ({
-      id: myUser._id,
-      display: `${myUser.name.first} ${myUser.name.last}`,
-    }));
-
     return (
       <div className="chat-content-footer w-100 pr-5">
         <span data-toggle="tooltip" title="Add File" className="chat-plus">
@@ -57,22 +30,7 @@ export default class SimpleEmojiEditor extends Component {
             <line x1="5" y1="12" x2="19" y2="12" />
           </svg>
         </span>
-        <div className="editor form-control bd-0">
-          <MentionsInput
-            value={this.state.value}
-            onChange={this.handleChange}
-            markup="@{{__type__||__id__||__display__}}"
-            placeholder="Create task…. ie. @Bob can you complete incident report before today 8pm?"
-            className="mentions"
-          >
-            <Mention
-              type="user"
-              trigger="@"
-              data={userMentionData}
-              className="mentions__mention"
-            />
-          </MentionsInput>
-        </div>
+        <div className="editor form-control bd-0" />
         <nav>
           <span data-toggle="tooltip" title="Add GIF">
             <svg

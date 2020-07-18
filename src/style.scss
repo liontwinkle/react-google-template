@@ -1,0 +1,21 @@
+@import "./theme/color.scss";
+@import "./components/App/App.scss";
+@import "./components/App/Layout.scss";
+@import "./components/common/CustomTab/custom.scss";
+
+/* # Action tab styles # */
+.ant-tabs {
+    color: $medium_light_text_color !important;
+}
+
+.ant-tabs-tab:hover, .ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn {
+    font-weight: inherit !important;
+    color: $active_link_color !important;
+}
+
+.validation-error {
+    color: $validation_error_color;
+    font-size: 12px;
+    padding: 0;
+    margin-bottom: 0;
+}

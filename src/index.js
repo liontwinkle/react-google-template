@@ -9,16 +9,11 @@ import store, { history } from './redux/store';
 
 import App from './components/App';
 
-import 'core-js/es6/map';
-import 'core-js/es6/set';
-import 'core-js/fn/array/find';
-import 'core-js/fn/array/includes';
-import 'core-js/fn/number/is-nan';
+// import 'draft-js/dist/Draft.css';
+// import 'draft-js-emoji-plugin/lib/plugin.css';
+// import 'antd/dist/antd.css';
 
-import './index.scss';
-import 'draft-js/dist/Draft.css';
-import 'draft-js-emoji-plugin/lib/plugin.css';
-import 'antd/dist/antd.css';
+import './style.scss';
 
 FullStory.init({
   orgId: 'W49VA',
