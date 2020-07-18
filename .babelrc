@@ -4,6 +4,7 @@
       "@babel/preset-env",
       {
         "modules": false,
+        "corejs": "2",
         "useBuiltIns": "usage"
       }
     ],
@@ -14,7 +15,6 @@
     ["@babel/plugin-transform-runtime",
       {
         "absoluteRuntime": false,
-        "corejs": 2,
         "version": "^7.10.5",
         "regenerator": true
       }
