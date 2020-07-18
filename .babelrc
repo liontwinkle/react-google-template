@@ -5,7 +5,8 @@
       {
         "modules": false,
         "corejs": "2",
-        "useBuiltIns": "usage"
+        "useBuiltIns": "usage",
+        "exclude": ["transform-regenerator"]
       }
     ],
     "@babel/preset-react"
@@ -15,6 +16,7 @@
     ["@babel/plugin-transform-runtime",
       {
         "absoluteRuntime": false,
+        "corejs": 2,
         "version": "^7.10.5",
         "regenerator": true
       }
