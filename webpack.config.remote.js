@@ -64,6 +64,7 @@ module.exports = () => {
       hot: true,
       host: '74.208.102.130',
       port: 3000,
+      inline: false,
     },
   };
 };
