@@ -4,22 +4,6 @@ $(function(){
 
   $('[data-toggle="tooltip"]').tooltip()
 
-  // chat sidebar body scrollbar
-  new PerfectScrollbar('.chat-sidebar-body', {
-    suppressScrollX: true
-  });
-
-  // chat content body scrollbar
-  new PerfectScrollbar('.chat-content-body', {
-    suppressScrollX: true
-  });
-
-  // chat sidebar right scrollbar
-  new PerfectScrollbar('.chat-sidebar-right', {
-    suppressScrollX: true
-  });
-
-
   ///// UI INTERACTION /////
 
   // channel click

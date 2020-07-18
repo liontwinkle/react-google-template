@@ -21,7 +21,13 @@
   ],
   "plugins": [
     "@babel/plugin-proposal-class-properties",
-    "@babel/plugin-transform-runtime",
+    ["@babel/plugin-transform-runtime",
+      {
+        "absoluteRuntime": false,
+        "corejs": 3,
+        "version": "^7.10.5"
+      }
+    ],
     ["transform-es2015-for-of", { "loose": true }]
   ]
 }
