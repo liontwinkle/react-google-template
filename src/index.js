@@ -9,6 +9,12 @@ import store, { history } from './redux/store';
 
 import App from './components/App';
 
+import 'core-js/es/map';
+import 'core-js/es/set';
+import 'core-js/features/array/find';
+import 'core-js/features/array/includes';
+import 'core-js/features/number/is-nan';
+
 import './index.scss';
 import 'draft-js/dist/Draft.css';
 import 'draft-js-emoji-plugin/lib/plugin.css';
