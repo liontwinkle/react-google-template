@@ -27,7 +27,6 @@ import * as routes from '../../constants/routes';
 import * as loginSteps from '../../constants/login_steps';
 
 import './App.css';
-import './Layout.scss';
 
 function App({
   loading,
@@ -199,3 +198,12 @@ const mapStateToProps = (store) => ({
 export default GoogleApiWrapper({
   apiKey: 'AIzaSyAQHX0rJGGbt6qbf0P5587hwE09u2Ggdm8',
 })(connect(mapStateToProps)(App));
+// import React from 'react';
+//
+// function App() {
+//   return (
+//     <div>testing</div>
+//   );
+// }
+//
+// export default App;
