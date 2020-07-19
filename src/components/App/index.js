@@ -26,6 +26,9 @@ import NotFound from '../NotFound';
 import * as routes from '../../constants/routes';
 import * as loginSteps from '../../constants/login_steps';
 
+import './App.css';
+import './Layout.scss';
+
 function App({
   loading,
   teamFg,
