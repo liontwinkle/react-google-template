@@ -122,9 +122,35 @@ const TeamPanel = ({
         resetValue={resetValue}
       />,
     },
-    { key: 'update', value: 'Update', children: <Update /> },
+    { 
+      key: 'update', 
+      value: 'Update', 
+      children: <Update
+        actionTabs={actionTabs}
+        activeTabIndex={activeTabIndex}
+        setActiveIndex={setActiveIndex}
+        errors={errors}
+        setErrors={setErrors}
+        onSetData={onSetData}
+        value={value}
+        resetValue={resetValue}
+      /> 
+    },
     { key: 'program', value: 'Program', children: <Program /> },
-    { key: 'announcement', value: 'Announcement', children: <Announcement /> },
+    { 
+      key: 'announcement', 
+      value: 'Announcement', 
+      children: <Announcement
+        actionTabs={actionTabs}
+        activeTabIndex={activeTabIndex}
+        setActiveIndex={setActiveIndex}
+        errors={errors}
+        setErrors={setErrors}
+        onSetData={onSetData}
+        value={value}
+        resetValue={resetValue}
+        /> 
+    },
   ];
   /**
    * we are using chat page of template here.
