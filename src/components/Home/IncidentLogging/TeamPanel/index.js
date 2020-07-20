@@ -31,7 +31,6 @@ const TeamPanel = ({
   const [errors, setErrors] = useState({
     tabIndex: null,
     location: null,
-    multiButton: null,
     type: null,
   });
   useEffect(() => {
@@ -57,23 +56,29 @@ const TeamPanel = ({
     const errorCase = {
       tabIndex: activeTabIndex,
       type: null,
+      location: null,
     };
     const errorKeys = Object.keys(errors);
     errorKeys.forEach((errorItem) => {
-      if ((errorItem === 'type')
-        && (keys.filter((keyItem) => (keyItem.includes('field_action-type'))).length === 0)) {
-        errorCase.type = true;
-        result = false;
-      } else if ((errorItem === 'location')
-      && (keys.filter((keyItem) => (keyItem.includes('field_location'))).length === 0)) {
-        errorCase.location = true;
-        result = false;
-      } else {
+      if (errorItem === 'type') {
+        const validValue = keys.filter((keyItem) => (keyItem.includes('field_action-type')));
+        if (validValue.length === 0) {
+          errorCase.type = true;
+          result = false;
+        }
+      } else if (errorItem === 'location') {
+        const locationValid = keys.filter((keyItem) => (keyItem.includes('field_location')));
+        if (locationValid.length === 0) {
+          errorCase.location = true;
+          result = false;
+        }
+      } else if (errorItem !== 'tabIndex') {
         const indexKey = errorItem.split('_');
         const fieldType = indexKey[0];
         const fieldId = indexKey[1];
-        if (keys.filter((keyItem) => (keyItem.includes(fieldType) && keyItem.includes(fieldId)))) {
-          errorCase[errorItem] = false;
+        const otherValid = keys.filter((keyItem) => (keyItem.includes(fieldType) && keyItem.includes(fieldId)));
+        if (otherValid.length === 0) {
+          errorCase[errorItem] = true;
           result = false;
         }
       }

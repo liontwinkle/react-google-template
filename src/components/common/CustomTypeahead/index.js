@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import {
   Typeahead,
+  TypeaheadMenu,
 } from 'react-bootstrap-typeahead';
 import _isEqual from 'lodash/isEqual';
 
@@ -97,6 +98,13 @@ class CustomTypeAhead extends Component {
           options={options}
           minLength={2}
           ref={this.typeInput}
+          renderMenu={(results, menuProps) => {
+            // Hide the menu when there are no results.
+            if (!results.length) {
+              return null;
+            }
+            return <TypeaheadMenu {...menuProps} options={results} />;
+          }}
           labelKey="type"
           onKeyDown={() => this.onChangeValue()}
           onBlur={() => this.onChangeValue()}
