@@ -48,12 +48,12 @@ const ActionPanel = ({
   ];
   const [currentPos, setCurrentPos] = useState({
     name: 'Current position',
+    address: '',
     position: {
       lat: -33.86566064617498,
       lng: 151.20870681376962,
     },
   });
-  const [address, setAddress] = useState('');
   const [updateMapPos, setUpdateMapPos] = useState(false);
 
   const onChangeIndex = (id) => () => {
@@ -66,16 +66,15 @@ const ActionPanel = ({
     });
     setCurrentPos({
       name: 'Current position',
+      address: '',
       position: {
         lat: -33.86566064617498,
         lng: 151.20870681376962,
       },
     });
-    setAddress('');
   };
 
   const changePos = (value) => {
-    setCurrentPos(value);
     getGeocode({
       location: {
         lat: value.position.lat,
@@ -94,7 +93,10 @@ const ActionPanel = ({
             lng: value.position.lng,
           },
         });
-        setAddress(address);
+        setCurrentPos({
+          ...value,
+          address,
+        });
       },
       (error) => {
         console.error(error);
@@ -165,9 +167,9 @@ const ActionPanel = ({
               )}
               <PlacesAutocomplete
                 changePos={changePos}
-                address={address}
+                currentPos={currentPos}
                 updateMapPos={updateMapPos}
-                setAddress={setAddress}
+                setCurrentPos={setCurrentPos}
                 setUpdateMapPos={setUpdateMapPos}
                 tabIndex={activeTabIndex}
                 onSetData={onSetData}
@@ -198,9 +200,9 @@ const ActionPanel = ({
                 <div className="col-sm-8">
                   <PlacesAutocomplete
                     changePos={changePos}
-                    address={address}
+                    currentPos={currentPos}
                     updateMapPos={updateMapPos}
-                    setAddress={setAddress}
+                    setCurrentPos={setCurrentPos}
                     setUpdateMapPos={setUpdateMapPos}
                     tabIndex={activeTabIndex}
                     onSetData={onSetData}

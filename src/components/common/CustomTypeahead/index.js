@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import {
   Typeahead,
   TypeaheadMenu,
 } from 'react-bootstrap-typeahead';
 import _isEqual from 'lodash/isEqual';
+import { getTypeAheadList } from '../../../redux/action/incident';
 
 import 'react-bootstrap-typeahead/css/Typeahead.css';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
-import { getTypeAheadList } from '../../../redux/action/incident';
 
 import './style.scss';
 

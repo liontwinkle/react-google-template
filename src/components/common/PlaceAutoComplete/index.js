@@ -13,7 +13,7 @@ import './style.scss';
 
 const PlacesAutocomplete = ({
   changePos,
-  address,
+  currentPos,
   setUpdateMapPos,
   updateMapPos,
   tabIndex,
@@ -37,6 +37,7 @@ const PlacesAutocomplete = ({
   });
 
   const handleInput = (e) => {
+    setUpdateMapPos(false);
     setValue(e.target.value);
   };
 
@@ -90,7 +91,7 @@ const PlacesAutocomplete = ({
   return (
     <div className="place-container" ref={ref}>
       <Input
-        value={updateMapPos ? address : value}
+        value={updateMapPos ? currentPos.address : value}
         onChange={handleInput}
         disabled={!ready}
         placeholder="Area / Grid / Room*"
@@ -112,7 +113,7 @@ const PlacesAutocomplete = ({
 };
 
 PlacesAutocomplete.propTypes = {
-  address: PropTypes.string,
+  currentPos: PropTypes.string.isRequired,
   updateMapPos: PropTypes.bool,
   tabIndex: PropTypes.number,
   onSetData: PropTypes.func.isRequired,
@@ -121,7 +122,6 @@ PlacesAutocomplete.propTypes = {
 };
 
 PlacesAutocomplete.defaultProps = {
-  address: '',
   updateMapPos: false,
   tabIndex: 0,
 };
