@@ -39,6 +39,7 @@ $padding_space: calc(0.46875rem + 1px);
   .ant-tabs-content {
     overflow: hidden;
   }
+
 }
 
 .action-panel {
@@ -98,6 +99,10 @@ $padding_space: calc(0.46875rem + 1px);
 
   .custom-rad .btn-dim.btn-outline-primary.selected {
     background-color: $selected_custom_rad;
+  }
+
+  .ant-select-selection-item {
+    background-color: $custom_rad_color !important;
   }
 
 }
