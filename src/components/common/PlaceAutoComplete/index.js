@@ -113,7 +113,7 @@ const PlacesAutocomplete = ({
 };
 
 PlacesAutocomplete.propTypes = {
-  currentPos: PropTypes.string.isRequired,
+  currentPos: PropTypes.object.isRequired,
   updateMapPos: PropTypes.bool,
   tabIndex: PropTypes.number,
   onSetData: PropTypes.func.isRequired,
