@@ -86,6 +86,17 @@ class CustomTypeAhead extends Component {
     });
   }
 
+  /**
+   *  renderMenu={(results, menuProps) => {
+            // Hide the menu when there are no results.
+            if (!results.length) {
+              return null;
+            }
+            return <TypeaheadMenu {...menuProps} options={results} />;
+          }}
+   * @returns {*}
+   */
+
   render() {
     const { selected, options, text } = this.state;
     const { tabIndex } = this.props;
@@ -98,13 +109,6 @@ class CustomTypeAhead extends Component {
           options={options}
           minLength={2}
           ref={this.typeInput}
-          renderMenu={(results, menuProps) => {
-            // Hide the menu when there are no results.
-            if (!results.length) {
-              return null;
-            }
-            return <TypeaheadMenu {...menuProps} options={results} />;
-          }}
           labelKey="type"
           onKeyDown={() => this.onChangeValue()}
           onBlur={() => this.onChangeValue()}
