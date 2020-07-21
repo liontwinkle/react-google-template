@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useRef, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
@@ -17,8 +17,7 @@ import { setAuthUser } from '../../../redux/action/session';
 import { setViewIndex } from '../../../redux/action/dashboard';
 
 function MainMenu({
-  userId,
-  eventId,
+  apps,
   viewIndex,
   setAuthUser,
   setViewIndex,
@@ -27,8 +26,6 @@ function MainMenu({
   setSessionExpiryModalState,
 }) {
   const wrapperRef = useRef(null);
-
-  const [apps, setApps] = useState([]);
 
   const clickMenuItemHandler = async (index, e) => {
     e.preventDefault();
@@ -78,34 +75,11 @@ function MainMenu({
     // Bind the event listener
     document.addEventListener('mousedown', handleClickOutside);
 
-    const getAppsHandler = async (userId, eventId) => {
-      try {
-        const { data } = await axios.get(`${process.env.REACT_APP_API}/apps/${eventId}`);
-        // set apps data
-        setApps(data.apps);
-      } catch (e) {
-        // if unauthorized
-        if (e.response.status === 401) {
-          // open session expiry modal
-          setSessionExpiryModalState(true);
-        }
-      }
-    };
-    getAppsHandler(userId, eventId);
-
     return () => {
       // Unbind the event listener on clean up
       document.removeEventListener('mousedown', handleClickOutside);
     };
-  }, [
-    wrapperRef,
-    setMainMenuState,
-    setNavbarMenuState,
-    userId,
-    eventId,
-    setSessionExpiryModalState,
-    setAuthUser,
-  ]);
+  }, [wrapperRef, setMainMenuState, setNavbarMenuState, setSessionExpiryModalState, setAuthUser]);
 
   return (
     <>
@@ -127,7 +101,7 @@ function MainMenu({
                       )}
                     >
                       <a
-                        href="."
+                        href="#dropdown"
                         onClick={(e) => clickMenuItemHandler(app.id_app, e)}
                         className={viewIndex === app.id_app ? 'nav-link active' : 'nav-link'}
                       >
@@ -146,9 +120,8 @@ function MainMenu({
 }
 
 MainMenu.propTypes = {
-  userId: PropTypes.number,
+  apps: PropTypes.array,
   viewIndex: PropTypes.number,
-  eventId: PropTypes.string.isRequired,
   setAuthUser: PropTypes.func.isRequired,
   setViewIndex: PropTypes.func.isRequired,
   setMainMenuState: PropTypes.func.isRequired,
@@ -157,7 +130,7 @@ MainMenu.propTypes = {
 };
 
 MainMenu.defaultProps = {
-  userId: null,
+  apps: [],
   viewIndex: null,
 };
 

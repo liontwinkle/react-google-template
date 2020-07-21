@@ -23,17 +23,17 @@ const ActionCard = ({ type, index, incidentData }) => {
   const ellipseMenu = (
     <Menu>
       <Menu.Item>
-        <a target="_blank" rel="noopener noreferrer" href="#">
+        <a target="_blank" rel="noopener noreferrer" href="#dropdown">
           More options
         </a>
       </Menu.Item>
       <Menu.Item>
-        <a target="_blank" rel="noopener noreferrer" href="#">
+        <a target="_blank" rel="noopener noreferrer" href="#dropdown">
           Export
         </a>
       </Menu.Item>
       <Menu.Item>
-        <a target="_blank" rel="noopener noreferrer" href="#">
+        <a target="_blank" rel="noopener noreferrer" href="#dropdown">
           Create task
         </a>
       </Menu.Item>
@@ -43,17 +43,17 @@ const ActionCard = ({ type, index, incidentData }) => {
   const shareMenu = (
     <Menu>
       <Menu.Item>
-        <a target="_blank" rel="noopener noreferrer" href="#">
+        <a target="_blank" rel="noopener noreferrer" href="#dropdown">
           Share Action
         </a>
       </Menu.Item>
       <Menu.Item>
-        <a target="_blank" rel="noopener noreferrer" href="#">
+        <a target="_blank" rel="noopener noreferrer" href="#dropdown">
           Share with instance...
         </a>
       </Menu.Item>
       <Menu.Item>
-        <a target="_blank" rel="noopener noreferrer" href="#">
+        <a target="_blank" rel="noopener noreferrer" href="#dropdown">
           Share with ground personnel
         </a>
       </Menu.Item>
@@ -63,17 +63,17 @@ const ActionCard = ({ type, index, incidentData }) => {
   const attachMenu = (
     <Menu>
       <Menu.Item>
-        <a target="_blank" rel="noopener noreferrer" href="#">
+        <a target="_blank" rel="noopener noreferrer" href="#dropdown">
           Attach a File
         </a>
       </Menu.Item>
       <Menu.Item>
-        <a target="_blank" rel="noopener noreferrer" href="#">
+        <a target="_blank" rel="noopener noreferrer" href="#dropdown">
           Your Computer
         </a>
       </Menu.Item>
       <Menu.Item>
-        <a target="_blank" rel="noopener noreferrer" href="#">
+        <a target="_blank" rel="noopener noreferrer" href="#dropdown">
           CommandPost Directory
         </a>
       </Menu.Item>
@@ -178,8 +178,8 @@ const ActionCard = ({ type, index, incidentData }) => {
           <div className="chat-group w-100 d-flex flex-column align-items-between p-2">
             <label className="tx-14 font-weight-bold mt-2">
               Replying to
-              <a href="#">@AustralianOpen</a>
-              <a href="#">@nyhro</a>
+              <a href="#dropdown">@AustralianOpen</a>
+              <a href="#dropdown">@nyhro</a>
             </label>
             <input type="text" className="form-control mb-4" placeholder="What's happening?" />
             <div className="media d-flex justify-content-between">

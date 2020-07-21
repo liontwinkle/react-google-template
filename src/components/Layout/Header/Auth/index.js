@@ -45,7 +45,7 @@ function AuthHeader({
     <>
       <header className="navbar navbar-header navbar-header-fixed">
         <a
-          href="."
+          href="#dropdown"
           id="navbarMenuOpen"
           onClick={navbarMenuOpenHandler}
           className={navbarMenuOpenClasses}
@@ -54,7 +54,7 @@ function AuthHeader({
           <Menu isnavbarmenuopenclicked="true" />
         </a>
         <a
-          href="."
+          href="#dropdown"
           id="mainMenuOpen"
           onClick={mainMenuOpenHandler}
           className={mainMenuOpenClasses}

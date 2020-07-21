@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { GoogleApiWrapper } from 'google-maps-react';
@@ -11,6 +11,8 @@ import {
 } from 'react-router-dom';
 
 import * as FullStory from '@fullstory/browser';
+import axios from 'axios';
+import { bindActionCreators } from 'redux';
 import Header from '../Layout/Header';
 import MainMenu from '../Layout/MainMenu';
 import Footer from '../Layout/Footer';
@@ -26,8 +28,15 @@ import NotFound from '../NotFound';
 import * as routes from '../../constants/routes';
 import * as loginSteps from '../../constants/login_steps';
 
+import {
+  setMainMenuState, setNavbarMenuState,
+  setSessionExpiryModalState,
+} from '../../redux/action/themeConfigs';
+
 import './App.css';
 import './Layout.scss';
+import { setAuthUser } from '../../redux/action/session';
+import { setViewIndex } from '../../redux/action/dashboard';
 
 function App({
   loading,
@@ -40,7 +49,29 @@ function App({
   isNavbarMenuOpened,
   isSessionExpiryModalOpened,
 }) {
-  if (loading && authUser) return <Loader />;
+  const [apps, setApps] = useState([]);
+  const [isGettingFlag, SetIsGettingFlag] = useState(false);
+  useEffect(() => {
+    SetIsGettingFlag(false);
+    const getAppsHandler = async (userId, eventId) => {
+      try {
+        const { data } = await axios.get(`${process.env.REACT_APP_API}/apps/${eventId}`);
+        // set apps data
+        setApps(data.apps);
+        SetIsGettingFlag(true);
+      } catch (e) {
+        // if unauthorized
+        if (e.response.status === 401) {
+          // open session expiry modal
+          setSessionExpiryModalState(true);
+        }
+      }
+    };
+    if (authUser && sessionData) {
+      getAppsHandler(authUser.id, sessionData.id_event);
+    }
+  }, [authUser, sessionData]);
+  if (loading && authUser && isGettingFlag) return <Loader />;
 
   if (authUser) {
     FullStory.event(authUser.userId, {
@@ -67,10 +98,7 @@ function App({
               ) : (
                 <div className="mail-wrapper">
                   {!isLoading && (
-                    <MainMenu
-                      userId={authUser.id}
-                      eventId={sessionData.id_event}
-                    />
+                    <MainMenu apps={apps} />
                   )}
                   <Home />
                 </div>
@@ -196,9 +224,13 @@ const mapStateToProps = (store) => ({
   isSessionExpiryModalOpened: store.themeConfigData.isSessionExpiryModalOpened,
 });
 
+const mapDispatchToProps = (dispatch) => bindActionCreators({
+  setSessionExpiryModalState,
+}, dispatch);
+
 export default GoogleApiWrapper({
   apiKey: 'AIzaSyAQHX0rJGGbt6qbf0P5587hwE09u2Ggdm8',
-})(connect(mapStateToProps)(App));
+})(connect(mapStateToProps, mapDispatchToProps)(App));
 // import React from 'react';
 //
 // function App() {

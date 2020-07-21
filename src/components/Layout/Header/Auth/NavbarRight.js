@@ -14,7 +14,7 @@ function NavbarRight(props) {
       <div className="navbar-right">
         <a href="dashforge.html">Docs</a>
         <div className="dropdown dropdown-message">
-          <a href="#" className="dropdown-link new-indicator" data-toggle="dropdown">
+          <a href="#dropdown" className="dropdown-link new-indicator" data-toggle="dropdown">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="24"
@@ -33,7 +33,7 @@ function NavbarRight(props) {
           </a>
           <div className="dropdown-menu dropdown-menu-right">
             <div className="dropdown-header">New Messages</div>
-            <a href="#" className="dropdown-item">
+            <a href="#dropdown" className="dropdown-item">
               <div className="media">
                 <div className="avatar avatar-sm avatar-online">
                   <img
@@ -49,7 +49,7 @@ function NavbarRight(props) {
                 </div>
               </div>
             </a>
-            <a href="#" className="dropdown-item">
+            <a href="#dropdown" className="dropdown-item">
               <div className="media">
                 <div className="avatar avatar-sm avatar-online">
                   <img
@@ -65,7 +65,7 @@ function NavbarRight(props) {
                 </div>
               </div>
             </a>
-            <a href="#" className="dropdown-item">
+            <a href="#dropdown" className="dropdown-item">
               <div className="media">
                 <div className="avatar avatar-sm avatar-online">
                   <img
@@ -81,7 +81,7 @@ function NavbarRight(props) {
                 </div>
               </div>
             </a>
-            <a href="#" className="dropdown-item">
+            <a href="#dropdown" className="dropdown-item">
               <div className="media">
                 <div className="avatar avatar-sm avatar-online">
                   <img
@@ -101,7 +101,7 @@ function NavbarRight(props) {
           </div>
         </div>
         <div className="dropdown dropdown-notification">
-          <a href="#" className="dropdown-link new-indicator" data-toggle="dropdown">
+          <a href="#dropdown" className="dropdown-link new-indicator" data-toggle="dropdown">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="24"
@@ -122,7 +122,7 @@ function NavbarRight(props) {
           </a>
           <div className="dropdown-menu dropdown-menu-right">
             <div className="dropdown-header">Notifications</div>
-            <a href="#" className="dropdown-item">
+            <a href="#dropdown" className="dropdown-item">
               <div className="media">
                 <div className="avatar avatar-sm avatar-online">
                   <img
@@ -142,7 +142,7 @@ function NavbarRight(props) {
                 </div>
               </div>
             </a>
-            <a href="#" className="dropdown-item">
+            <a href="#dropdown" className="dropdown-item">
               <div className="media">
                 <div className="avatar avatar-sm avatar-online">
                   <img
@@ -161,7 +161,7 @@ function NavbarRight(props) {
                 </div>
               </div>
             </a>
-            <a href="#" className="dropdown-item">
+            <a href="#dropdown" className="dropdown-item">
               <div className="media">
                 <div className="avatar avatar-sm avatar-online">
                   <img
@@ -180,7 +180,7 @@ function NavbarRight(props) {
                 </div>
               </div>
             </a>
-            <a href="#" className="dropdown-item">
+            <a href="#dropdown" className="dropdown-item">
               <div className="media">
                 <div className="avatar avatar-sm avatar-online">
                   <img
@@ -203,7 +203,7 @@ function NavbarRight(props) {
           </div>
         </div>
         <div className="dropdown dropdown-profile">
-          <a href="#" className="dropdown-link" data-toggle="dropdown" data-display="static">
+          <a href="#dropdown" className="dropdown-link" data-toggle="dropdown" data-display="static">
             <div className="avatar avatar-sm">
               <img src="https://via.placeholder.com/500" className="rounded-circle" alt="avatar" />
             </div>
@@ -225,11 +225,11 @@ function NavbarRight(props) {
               Help
               {' '}
             </a>
-            <a href="#" className="dropdown-item">
+            <a href="#dropdown" className="dropdown-item">
               <FontAwesomeIcon icon={faCog} />
               Settings
             </a>
-            <a href="#" className="dropdown-item">
+            <a href="#dropdown" className="dropdown-item">
               <FontAwesomeIcon icon={faEdit} />
               Change Password
             </a>

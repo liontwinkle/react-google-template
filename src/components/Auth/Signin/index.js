@@ -169,7 +169,6 @@ function Signin({
 }
 
 Signin.propTypes = {
-  // isLoading: PropTypes.bool,
   signInAuth: PropTypes.func.isRequired,
   getInstances: PropTypes.func.isRequired,
   getTeams: PropTypes.func.isRequired,

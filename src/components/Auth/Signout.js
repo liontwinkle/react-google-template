@@ -37,7 +37,7 @@ function Signout({
     );
   }
 
-  return <a href="." onClick={signoutHandler}>Sign Out</a>;
+  return <a href="#sign" onClick={signoutHandler}>Sign Out</a>;
 }
 
 Signout.propTypes = {

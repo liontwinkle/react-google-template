@@ -14,7 +14,7 @@ import './style.scss';
 
 const CustomDropDown = () => (
   <div className="incident-sidebar-header">
-    <a href="#" data-toggle="dropdown" className="dropdown-link">
+    <a href="#dropdown" data-toggle="dropdown" className="dropdown-link">
       <div className="d-flex align-items-center">
         <div className="avatar avatar-sm mg-r-8">
           <span className="avatar-initial rounded-circle">T</span>
@@ -24,38 +24,38 @@ const CustomDropDown = () => (
       <span><FontAwesomeIcon icon={faChevronDown} /></span>
     </a>
     <div className="dropdown-menu dropdown-menu-right">
-      <a href="#" className="dropdown-item">
+      <a href="#dropdown" className="dropdown-item">
         <FontAwesomeIcon icon={faUserPlus} />
         {' '}
         Invite People
       </a>
-      <a href="#" className="dropdown-item">
+      <a href="#dropdown" className="dropdown-item">
         <FontAwesomeIcon icon={faPlusSquare} />
         {' '}
         Create Channel
       </a>
-      <a href="#" className="dropdown-item">
+      <a href="#dropdown" className="dropdown-item">
         <FontAwesomeIcon icon={faServer} />
         {' '}
         Server Settings
       </a>
-      <a href="#" className="dropdown-item">
+      <a href="#dropdown" className="dropdown-item">
         <FontAwesomeIcon icon={faBell} />
         {' '}
         Notification Settings
       </a>
-      <a href="#" className="dropdown-item">
+      <a href="#dropdown" className="dropdown-item">
         <FontAwesomeIcon icon={faBolt} />
         {' '}
         Privacy Settings
       </a>
       <div className="dropdown-divider" />
-      <a href="#" className="dropdown-item">
+      <a href="#dropdown" className="dropdown-item">
         <FontAwesomeIcon icon={faEdit} />
         {' '}
         Edit Team Details
       </a>
-      <a href="#" className="dropdown-item">
+      <a href="#dropdown" className="dropdown-item">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="24"
