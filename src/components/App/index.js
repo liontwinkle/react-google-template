@@ -40,7 +40,10 @@ function App({
   isNavbarMenuOpened,
   isSessionExpiryModalOpened,
 }) {
-  if (loading && authUser) return <Loader />;
+
+  if (loading) return null;
+
+  //if (loading && authUser) return <Loader />;
 
   if (authUser) {
     FullStory.event(authUser.userId, {

@@ -11,6 +11,7 @@ import {
   setSessionExpiryModalState,
   setMainMenuState,
   setNavbarMenuState,
+  setLoadingFg,
 } from '../../../redux/action/themeConfigs';
 
 import { setAuthUser } from '../../../redux/action/session';
@@ -25,6 +26,7 @@ function MainMenu({
   setMainMenuState,
   setNavbarMenuState,
   setSessionExpiryModalState,
+  setLoadingFg,
 }) {
   const wrapperRef = useRef(null);
 
@@ -32,6 +34,7 @@ function MainMenu({
 
   const clickMenuItemHandler = async (index, e) => {
     e.preventDefault();
+    setLoadingFg(true);
     // check session
     try {
       const { data } = await axios.get(`${process.env.REACT_APP_API}/auth/verifyToken`);
@@ -43,6 +46,7 @@ function MainMenu({
         // open session expiry modal
         setSessionExpiryModalState(true);
       }
+      setLoadingFg(false);
     } catch {
       // open session expiry modal
       setSessionExpiryModalState(true);
@@ -105,6 +109,7 @@ function MainMenu({
     eventId,
     setSessionExpiryModalState,
     setAuthUser,
+    setLoadingFg,
   ]);
 
   return (
@@ -154,6 +159,7 @@ MainMenu.propTypes = {
   setMainMenuState: PropTypes.func.isRequired,
   setNavbarMenuState: PropTypes.func.isRequired,
   setSessionExpiryModalState: PropTypes.func.isRequired,
+  setLoadingFg: PropTypes.func.isRequired,
 };
 
 MainMenu.defaultProps = {
@@ -171,6 +177,7 @@ const mapDispatchToProps = (dispatch) => bindActionCreators({
   setMainMenuState,
   setNavbarMenuState,
   setSessionExpiryModalState,
+  setLoadingFg,
 }, dispatch);
 
 export default connect(
