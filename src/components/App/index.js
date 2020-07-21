@@ -16,7 +16,6 @@ import { bindActionCreators } from 'redux';
 import Header from '../Layout/Header';
 import MainMenu from '../Layout/MainMenu';
 import Footer from '../Layout/Footer';
-import Loader from '../Loader';
 import Signin from '../Auth/Signin';
 import SelectInstanceTeam from '../Auth/SelectInstanceTeam';
 import CreateNewInstance from '../Auth/CreateNewInstance';
@@ -29,14 +28,11 @@ import * as routes from '../../constants/routes';
 import * as loginSteps from '../../constants/login_steps';
 
 import {
-  setMainMenuState, setNavbarMenuState,
   setSessionExpiryModalState,
 } from '../../redux/action/themeConfigs';
 
 import './App.css';
 import './Layout.scss';
-import { setAuthUser } from '../../redux/action/session';
-import { setViewIndex } from '../../redux/action/dashboard';
 
 function App({
   loading,
@@ -71,7 +67,7 @@ function App({
       getAppsHandler(authUser.id, sessionData.id_event);
     }
   }, [authUser, sessionData]);
-  if (loading && authUser && isGettingFlag) return <Loader />;
+  if (loading && authUser && isGettingFlag) return null;
 
   if (authUser) {
     FullStory.event(authUser.userId, {
@@ -231,12 +227,3 @@ const mapDispatchToProps = (dispatch) => bindActionCreators({
 export default GoogleApiWrapper({
   apiKey: 'AIzaSyAQHX0rJGGbt6qbf0P5587hwE09u2Ggdm8',
 })(connect(mapStateToProps, mapDispatchToProps)(App));
-// import React from 'react';
-//
-// function App() {
-//   return (
-//     <div>testing</div>
-//   );
-// }
-//
-// export default App;
