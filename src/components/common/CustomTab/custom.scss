@@ -22,8 +22,8 @@ $padding_space: calc(0.46875rem + 1px);
   }
 
   [type="submit"] {
-    background-color: $medium_light_text_color;
-    border-color: $submit_border_color;
+    background-color: $bt_primary_color;
+    border: none;
     color: $submit_btn_color;
     padding: 9px;
     text-transform: uppercase;
