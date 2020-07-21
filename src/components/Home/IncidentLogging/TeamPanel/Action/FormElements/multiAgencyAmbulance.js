@@ -7,29 +7,45 @@ const ActionMultiAgencyAmbulance = ({
   const [ageAmbulanceState, setAgeAmbulanceState] = useState({
     police: false,
     fire: false,
+    no: false,
   });
 
   useEffect(() => {
-    setAgeAmbulanceState({
-      police: (value && value[`tab_${tabIndex}_field_${fieldItem.field_type}-police_${fieldItem.id}`] === 'police'),
-      fire: (value && value[`tab_${tabIndex}_field_${fieldItem.field_type}-fire_${fieldItem.id}`] === 'fire'),
-    });
+    const updatedValue = {
+      police: (value.filter((item) => (item === 'police')).length > 0),
+      fire: (value.filter((item) => (item === 'fire')).length > 0),
+      no: (value.filter((item) => (item === 'no')).length > 0),
+    };
+    setAgeAmbulanceState(updatedValue);
   }, [value, tabIndex, fieldItem.field_type, fieldItem.id]);
 
+  const getAgencyData = (state) => {
+    const newData = [];
+    if (state.police) {
+      newData.push('police');
+    }
+    if (state.fire) {
+      newData.push('fire');
+    }
+
+    if (state.no) {
+      newData.push('no');
+    }
+    return newData;
+  };
+
   const changeState = (type) => () => {
-    setAgeAmbulanceState(() => ({
+    const updateState = {
       ...ageAmbulanceState,
       [type]: !ageAmbulanceState[type],
-    }));
-    onSetData({ [`tab_${tabIndex}_field_${fieldItem.field_type}-${type}_${fieldItem.id}`]: type });
+      no: false,
+    };
+    const newData = getAgencyData(updateState, value);
+    onSetData({ [`tab_${tabIndex}_field_${fieldItem.field_type}_${fieldItem.id}`]: newData });
   };
 
   const cancel = () => {
-    onSetData({
-      [`tab_${tabIndex}_field_${fieldItem.field_type}-police_${fieldItem.id}`]: null,
-      [`tab_${tabIndex}_field_${fieldItem.field_type}-fire_${fieldItem.id}`]: null,
-      [`tab_${tabIndex}_field_${fieldItem.field_type}-no_${fieldItem.id}`]: 'no',
-    });
+    onSetData({ [`tab_${tabIndex}_field_${fieldItem.field_type}_${fieldItem.id}`]: ['no'] });
   };
 
   return (
@@ -55,7 +71,7 @@ const ActionMultiAgencyAmbulance = ({
         </button>
         <button
           type="button"
-          className="btn btn-dim btn-outline-primary"
+          className={`btn btn-dim btn-outline-primary ${ageAmbulanceState.no === true ? 'selected' : ''}`}
           onClick={cancel}
         >
           No
@@ -68,13 +84,13 @@ const ActionMultiAgencyAmbulance = ({
 ActionMultiAgencyAmbulance.propTypes = {
   tabIndex: PropTypes.number,
   fieldItem: PropTypes.object,
-  value: PropTypes.object,
+  value: PropTypes.array,
   onSetData: PropTypes.func.isRequired,
 };
 
 ActionMultiAgencyAmbulance.defaultProps = {
   tabIndex: 1,
-  value: null,
+  value: [],
   fieldItem: {},
 };
 

@@ -53,6 +53,7 @@ const FieldAction = ({
   }, [tabIndex, setFields, setReady, setErrors, actionFields, errors]);
 
   const newActionBody = (fieldItem) => {
+    const filterValue = value ? (value[`tab_${tabIndex}_field_${fieldItem.field_type}_${fieldItem.id}`] || []) : [];
     switch (fieldItem.field_type) {
       case 'text-area':
         return (
@@ -84,7 +85,7 @@ const FieldAction = ({
             register={register}
             errors={errors}
             onSetData={onSetData}
-            value={value}
+            value={filterValue}
           />
         );
       case 'text-field':
@@ -120,7 +121,7 @@ const FieldAction = ({
             register={register}
             errors={errors}
             onSetData={onSetData}
-            value={value}
+            value={filterValue}
           />
         );
       case 'multi-agency-fire':
@@ -132,7 +133,7 @@ const FieldAction = ({
             register={register}
             errors={errors}
             onSetData={onSetData}
-            value={value}
+            value={filterValue}
           />
         );
       case 'age-field':
@@ -168,7 +169,7 @@ const FieldAction = ({
             register={register}
             errors={errors}
             onSetData={onSetData}
-            value={value}
+            value={filterValue}
           />
         );
       case 'dropdown':

@@ -28,8 +28,9 @@ const ActionAgeField = ({
           required={required}
           value={value ? value[`tab_${tabIndex}_field_${fieldItem.field_type}_${fieldItem.id}[]`] : []}
           onChange={handleChange}
+          defaultValue="Exact"
         >
-          <option value="Exact" className="age-exact" selected>Exact</option>
+          <option value="Exact" className="age-exact">Exact</option>
           <option value="Estimate">Estimate</option>
           <option value="Range">Range</option>
           <option value="Infant">Infant (Months)</option>

@@ -122,9 +122,9 @@ const TeamPanel = ({
         resetValue={resetValue}
       />,
     },
-    { 
-      key: 'update', 
-      value: 'Update', 
+    {
+      key: 'update',
+      value: 'Update',
       children: <Update
         actionTabs={actionTabs}
         activeTabIndex={activeTabIndex}
@@ -134,12 +134,12 @@ const TeamPanel = ({
         onSetData={onSetData}
         value={value}
         resetValue={resetValue}
-      /> 
+      />,
     },
     { key: 'program', value: 'Program', children: <Program /> },
-    { 
-      key: 'announcement', 
-      value: 'Announcement', 
+    {
+      key: 'announcement',
+      value: 'Announcement',
       children: <Announcement
         actionTabs={actionTabs}
         activeTabIndex={activeTabIndex}
@@ -149,7 +149,7 @@ const TeamPanel = ({
         onSetData={onSetData}
         value={value}
         resetValue={resetValue}
-        /> 
+      />,
     },
   ];
   /**

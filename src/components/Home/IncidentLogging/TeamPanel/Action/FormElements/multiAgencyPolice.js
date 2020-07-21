@@ -12,33 +12,45 @@ const ActionMultiAgencyPolice = ({
   const [agePoliceState, setAgePoliceState] = useState({
     fire: false,
     ambulance: false,
+    no: false,
   });
 
   useEffect(() => {
-    setAgePoliceState({
-      fire: (value && value[`tab_${tabIndex}_field_${fieldItem.field_type}-fire_${fieldItem.id}`] === 'fire'),
-      ambulance: (value && value[`tab_${tabIndex}_field_${fieldItem.field_type}-ambulance_${fieldItem.id}`] === 'ambulance'),
-    });
+    const updatedValue = {
+      fire: (value.filter((item) => (item === 'fire')).length > 0),
+      ambulance: (value.filter((item) => (item === 'ambulance')).length > 0),
+      no: (value.filter((item) => (item === 'no')).length > 0),
+    };
+    setAgePoliceState(updatedValue);
   }, [value, tabIndex, fieldItem.field_type, fieldItem.id]);
 
+  const getAgencyData = (state) => {
+    const newData = [];
+    if (state.fire) {
+      newData.push('fire');
+    }
+    if (state.ambulance) {
+      newData.push('ambulance');
+    }
+
+    if (state.no) {
+      newData.push('no');
+    }
+    return newData;
+  };
+
   const changeState = (type) => () => {
-    setAgePoliceState(() => ({
+    const updateState = {
       ...agePoliceState,
       [type]: !agePoliceState[type],
-    }));
-    onSetData({ [`tab_${tabIndex}_field_${fieldItem.field_type}-${type}_${fieldItem.id}`]: type });
+      no: false,
+    };
+    const newData = getAgencyData(updateState, value);
+    onSetData({ [`tab_${tabIndex}_field_${fieldItem.field_type}_${fieldItem.id}`]: newData });
   };
 
   const cancel = () => {
-    setAgePoliceState({
-      fire: false,
-      ambulance: false,
-    });
-    onSetData({
-      [`tab_${tabIndex}_field_${fieldItem.field_type}-no_${fieldItem.id}`]: 'no',
-      [`tab_${tabIndex}_field_${fieldItem.field_type}-fire_${fieldItem.id}`]: null,
-      [`tab_${tabIndex}_field_${fieldItem.field_type}-ambulance_${fieldItem.id}`]: null,
-    });
+    onSetData({ [`tab_${tabIndex}_field_${fieldItem.field_type}_${fieldItem.id}`]: ['no'] });
   };
 
   return (
@@ -64,7 +76,7 @@ const ActionMultiAgencyPolice = ({
         </button>
         <button
           type="button"
-          className="btn btn-dim btn-outline-primary"
+          className={`btn btn-dim btn-outline-primary ${agePoliceState.no === true ? 'selected' : ''}`}
           onClick={cancel}
         >
           No
@@ -77,13 +89,13 @@ const ActionMultiAgencyPolice = ({
 ActionMultiAgencyPolice.propTypes = {
   tabIndex: PropTypes.number,
   fieldItem: PropTypes.object,
-  value: PropTypes.object,
+  value: PropTypes.array,
   onSetData: PropTypes.func.isRequired,
 };
 
 ActionMultiAgencyPolice.defaultProps = {
   tabIndex: 1,
-  value: null,
+  value: [],
   fieldItem: {},
 };
 
