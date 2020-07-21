@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 
     <!-- Required meta tags -->
@@ -17,9 +18,35 @@
 
     <!-- vendor css -->
     <link rel="stylesheet" href="./assets/css/dashforge.chat.css">
+
+    <!-- early loader style -->
+    <style>
+        .early-loader:empty {
+            position: absolute;
+            top: calc(50% - 35px);
+            left: calc(50% - 35px);
+            width: 70px;
+            height: 70px;
+            border: 7px solid rgba(1, 104, 250, 0.3);
+            border-left: 7px solid #0168fa;
+            border-radius: 50%;
+            animation: load8 1.1s infinite linear;
+        }
+
+        @keyframes load8 {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
 </head>
+
 <body>
-<div id="root"></div>
+    <div id="root" class="early-loader"></div>
 </body>
 <script src="./lib/jquery/jquery.min.js"></script>
 <script src="./lib/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -29,4 +56,5 @@
 <script src="./assets/js/dashforge.js"></script>
 <script src="./assets/js/dashforge.chat.js"></script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDwCk7q9AVI9DvQjsFUTN69jnYXqqX8HZs&libraries=places"></script>
+
 </html>
