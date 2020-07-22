@@ -3,6 +3,7 @@ import { getToolbarIcon, convertStringToKey } from '../../utils';
 
 const INITIAL_STATE = {
   actionTabs: [],
+  mentionUsers: [],
   typeList: null,
   activeTabIndex: 0,
   isFetchingFlag: false,
@@ -98,9 +99,9 @@ export default (state = INITIAL_STATE, action) => {
 
     case types.GET_USERS_INCIDENT_DATA_SUCCESS: {
       const { mentionUsers } = action;
-      console.log('mention users: ', mentionUsers); // fixme
       return {
         ...state,
+        mentionUsers,
         isFetchingFlag: false,
       };
     }

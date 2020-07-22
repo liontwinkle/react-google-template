@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import { EditorState } from 'draft-js';
 
 import Editor from 'draft-js-plugins-editor';
@@ -6,7 +8,7 @@ import Editor from 'draft-js-plugins-editor';
 import createMentionPlugin from 'draft-js-mention-plugin';
 import editorStyles from './style.css';
 
-export default class SimpleMentionEditor extends Component {
+class SimpleMentionEditor extends Component {
   constructor(props) {
     super(props);
 
@@ -24,7 +26,19 @@ export default class SimpleMentionEditor extends Component {
     };
 
     onSearchChange = ({ value }) => {
-      console.log('searching...', value); // fixme
+      console.log('value: ', value);
+      console.log('data: ', this.props.mentionsUser); // fixme
+      const filterData = this.props.mentionsUser.filter((item) => (
+        item.user_first_name.concat(' ', item.user_last_name).includes(value)
+      ));
+      console.log('filterData: ', filterData); // fixme
+
+      this.setState({
+        suggestions: filterData.map((filterItem) => ({
+          name: filterItem.user_first_name.concat(' ', filterItem.user_last_name),
+          avatar: filterItem.avatar,
+        })),
+      });
     };
 
     focus = () => {
@@ -51,3 +65,26 @@ export default class SimpleMentionEditor extends Component {
       );
     }
 }
+
+SimpleMentionEditor.propTypes = {
+  mentionsUser: PropTypes.array,
+};
+
+SimpleMentionEditor.defaultProps = {
+  mentionsUser: [],
+};
+
+const mapStateToProps = (store) => ({
+  mentionsUser: store.incidentData.mentionUsers,
+});
+
+// const mapDispatchToProps = (dispatch) => bindActionCreators({
+//   setSessionExpiryModalState,
+//   setMainMenuState,
+//   setLoadingFg,
+//   resetSessionData,
+//   getMentionUsers,
+//   verifyToken,
+// }, dispatch);
+
+export default connect(mapStateToProps)(SimpleMentionEditor);
