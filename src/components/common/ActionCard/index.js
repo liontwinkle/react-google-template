@@ -19,7 +19,7 @@ import {
 
 import './style.scss';
 
-const ActionCard = ({ type, index, incidentData }) => {
+const ActionCard = ({ type, index, incidentData, CEIndex, handleClick }) => {
   const ellipseMenu = (
     <Menu>
       <Menu.Item>
@@ -114,7 +114,7 @@ const ActionCard = ({ type, index, incidentData }) => {
   return (
     <div className="card card-event">
       <div className="card-body tx-13">
-        <div className="action-card-title d-flex justify-content-between align-items-center">
+        <div className="action-card-title d-flex justify-content-between align-items-center" onClick={() => handleClick(index, CEIndex)}>
           <p>#210 Signage Hazard - Millstons Point</p>
           <span className="pt-0 pb-0 pl-2 pr-2 rounded d-flex align-items-center m-0">3m</span>
         </div>
