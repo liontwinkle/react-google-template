@@ -97,7 +97,7 @@ function NavbarRight(props) {
                 </div>
               </div>
             </a>
-            <div className="dropdown-footer"><a href="#">View all Messages</a></div>
+            <div className="dropdown-footer"><a href="#view">View all Messages</a></div>
           </div>
         </div>
         <div className="dropdown dropdown-notification">
@@ -199,7 +199,7 @@ function NavbarRight(props) {
                 </div>
               </div>
             </a>
-            <div className="dropdown-footer"><a href="#">View all Notifications</a></div>
+            <div className="dropdown-footer"><a href="#view">View all Notifications</a></div>
           </div>
         </div>
         <div className="dropdown dropdown-profile">

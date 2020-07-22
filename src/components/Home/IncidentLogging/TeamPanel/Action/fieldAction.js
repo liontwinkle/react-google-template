@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
-import { getFieldList } from '../../../../../redux/action/incident';
 import ActionAgeField from './FormElements/ageField';
 import ActionDropDown from './FormElements/dropdown';
 import ActionGenderFieldExtend from './FormElements/genderFieldExtend';
@@ -15,6 +14,8 @@ import ActionTextArea from './FormElements/textArea';
 import ActionTextField from './FormElements/textField';
 import ActionMultiSelect from './FormElements/multiSelect';
 import CustomTypeAhead from '../../../../common/CustomTypeahead';
+import { getFieldList } from '../../../../../redux/action/incident';
+
 import './style.scss';
 
 const FieldAction = ({

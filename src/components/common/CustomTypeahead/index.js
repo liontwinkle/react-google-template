@@ -113,6 +113,21 @@ class CustomTypeAhead extends Component {
           onKeyDown={() => this.onChangeValue()}
           onBlur={() => this.onChangeValue()}
           placeholder="Type"
+          renderMenu={(results, menuProps, props) => {
+          // Hide the menu when there are no results.
+            if (!results.length) {
+              return null;
+            }
+
+            return (
+              <TypeaheadMenu
+                {...menuProps}
+                labelKey={props.labelKey}
+                options={results}
+                text={props.text}
+              />
+            );
+          }}
         />
         {
           text && (

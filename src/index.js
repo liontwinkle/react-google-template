@@ -11,6 +11,7 @@ import App from './components/App';
 
 import 'draft-js/dist/Draft.css';
 import 'draft-js-emoji-plugin/lib/plugin.css';
+import 'draft-js-mention-plugin/lib/plugin.css';
 import 'antd/dist/antd.css';
 
 import './style.scss';

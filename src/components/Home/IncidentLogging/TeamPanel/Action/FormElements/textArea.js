@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import SimpleMentionEditor from '../../../../../common/CustomMention';
 
 const ActionTextArea = ({
   tabIndex,
@@ -20,17 +21,18 @@ const ActionTextArea = ({
 
   return (
     <>
-      <textarea
-        className="form-control"
-        rows="5"
-        id={`tab_${tabIndex}_field_${fieldItem.field_type}_${fieldItem.id}`}
-        name={`tab_${tabIndex}_field_${fieldItem.field_type}_${fieldItem.id}`}
-        data-tab-id={tabIndex}
-        placeholder={`${fieldItem.field_placeholder ? fieldItem.field_placeholder : ''}`}
-        required={required}
-        onChange={onTextArea}
-        value={value ? value[`tab_${tabIndex}_field_${fieldItem.field_type}_${fieldItem.id}`] : ''}
-      />
+      {/* <textarea */}
+      {/*  className="form-control" */}
+      {/*  rows="5" */}
+      {/*  id={`tab_${tabIndex}_field_${fieldItem.field_type}_${fieldItem.id}`} */}
+      {/*  name={`tab_${tabIndex}_field_${fieldItem.field_type}_${fieldItem.id}`} */}
+      {/*  data-tab-id={tabIndex} */}
+      {/*  placeholder={`${fieldItem.field_placeholder ? fieldItem.field_placeholder : ''}`} */}
+      {/*  required={required} */}
+      {/*  onChange={onTextArea} */}
+      {/*  value={value ? value[`tab_${tabIndex}_field_${fieldItem.field_type}_${fieldItem.id}`] : ''} */}
+      {/* /> */}
+      <SimpleMentionEditor />
     </>
   );
 };
