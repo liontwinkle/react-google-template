@@ -88,6 +88,30 @@ export default (state = INITIAL_STATE, action) => {
         isCreatingFlag: false,
       };
     }
+
+    case types.GET_USERS_INCIDENT_DATA_REQUEST: {
+      return {
+        ...state,
+        isFetchingFlag: true,
+      };
+    }
+
+    case types.GET_USERS_INCIDENT_DATA_SUCCESS: {
+      const { mentionUsers } = action;
+      console.log('mention users: ', mentionUsers); // fixme
+      return {
+        ...state,
+        isFetchingFlag: false,
+      };
+    }
+
+    case types.GET_USERS_INCIDENT_DATA_FAIL: {
+      return {
+        ...state,
+        isFetchingFlag: false,
+      };
+    }
+
     default:
       return state;
   }

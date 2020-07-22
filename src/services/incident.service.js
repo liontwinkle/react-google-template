@@ -7,6 +7,11 @@ const GetActionTabs = (idEvent, idInstance) => httpService
   .then(({ data }) => data)
   .catch((err) => Promise.reject(err.response));
 
+const GetUserForIncident = (idEvent, idInstance) => httpService
+  .get(`${authUrl}/users/event/${idEvent}/instance/${idInstance}`)
+  .then(({ data }) => data)
+  .catch((err) => Promise.reject(err.response));
+
 const GetFieldList = (tabId) => httpService
   .get(`${authUrl}/field/${tabId}`)
   .then(({ data }) => data)
@@ -27,4 +32,5 @@ export default {
   GetTypeAheadList,
   GetFieldList,
   SaveActionData,
+  GetUserForIncident,
 };

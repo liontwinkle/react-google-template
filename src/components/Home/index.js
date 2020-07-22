@@ -17,7 +17,9 @@ import {
   setMainMenuState,
   setLoadingFg,
 } from '../../redux/action/themeConfigs';
+
 import { resetSessionData, verifyToken } from '../../redux/action/session';
+import { getMentionUsers } from '../../redux/action/incident';
 
 import './style.scss';
 
@@ -28,6 +30,7 @@ function Home({
   setLoadingFg,
   verifyToken,
   resetSessionData,
+  getMentionUsers,
   isLoading,
 }) {
   const [info, setInfo] = useState(null);
@@ -47,8 +50,11 @@ function Home({
               }/${
                 sessionData.id_event}`,
             );
-            setInfo(data.info);
-            setLoadingFg(false);
+            getMentionUsers(sessionData.id_instance, sessionData.id_event)
+              .then(() => {
+                setInfo(data.info);
+                setLoadingFg(false);
+              });
           })
           .catch((e) => {
             if (e.response.status === 401) {
@@ -113,6 +119,7 @@ Home.propTypes = {
   setLoadingFg: PropTypes.func.isRequired,
   isLoading: PropTypes.bool,
   resetSessionData: PropTypes.func.isRequired,
+  getMentionUsers: PropTypes.func.isRequired,
   sessionData: PropTypes.object.isRequired,
 };
 
@@ -132,6 +139,7 @@ const mapDispatchToProps = (dispatch) => bindActionCreators({
   setMainMenuState,
   setLoadingFg,
   resetSessionData,
+  getMentionUsers,
   verifyToken,
 }, dispatch);
 

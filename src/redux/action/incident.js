@@ -84,6 +84,31 @@ export const getTypeAheadList = (tabIndex) => (dispatch, getState) => {
     });
 };
 
+export const getMentionUsers = (idInstance, idEvent) => (dispatch, getState) => {
+  if (getState().incidentData.isFetchingFlag) {
+    return Promise.reject();
+  }
+
+  dispatch({
+    type: types.GET_USERS_INCIDENT_DATA_REQUEST,
+  });
+
+  return incidentService.GetUserForIncident(idEvent, idInstance)
+    .then((data) => {
+      dispatch({
+        type: types.GET_USERS_INCIDENT_DATA_SUCCESS,
+        mentionUsers: data,
+      });
+    })
+    .catch((error) => {
+      dispatch({
+        type: types.GET_USERS_INCIDENT_DATA_FAIL,
+        error,
+      });
+      throw error;
+    });
+};
+
 export const saveActionData = (data) => (dispatch, getState) => {
   if (getState().incidentData.isCreating) {
     return Promise.reject();

@@ -24,26 +24,7 @@ export default class SimpleMentionEditor extends Component {
     };
 
     onSearchChange = ({ value }) => {
-      // An import statment would break server-side rendering.
-      // eslint-disable-next-line import/no-extraneous-dependencies
-      require('whatwg-fetch'); // eslint-disable-line global-require
-
-      // while you normally would have a dynamic server that takes the value as
-      // a workaround we use this workaround to show different results
-      let url = '/data/mentionsA.json';
-      if (value.length === 1) {
-        url = '/data/mentionsB.json';
-      } else if (value.length > 1) {
-        url = '/data/mentionsC.json';
-      }
-
-      fetch(url)
-        .then((response) => response.json())
-        .then((data) => {
-          this.setState({
-            suggestions: data,
-          });
-        });
+      console.log('searching...', value); // fixme
     };
 
     focus = () => {

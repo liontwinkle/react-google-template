@@ -10,18 +10,16 @@ import ActionCard from '../../common/ActionCard';
 import './style.scss';
 
 // eslint-disable-next-line react/prop-types
-const MenuItem = ({ text, handleClick, CarouselElementIndex }) => {
-  return (
-    <div key={text} className="action-carousel-item">
-      <IncidentCard title={text} >
-        <ActionCard type={text} index={1} handleClick={handleClick} CEIndex={CarouselElementIndex} />
-        <ActionCard type={text} index={2} handleClick={handleClick} CEIndex={CarouselElementIndex} />
-        <ActionCard type={text} index={3} handleClick={handleClick} CEIndex={CarouselElementIndex} />
-        <ActionCard type={text} index={4} handleClick={handleClick} CEIndex={CarouselElementIndex} />
-      </IncidentCard>
-    </div>
-  )
-};
+const MenuItem = ({ text, handleClick, CarouselElementIndex }) => (
+  <div key={text} className="action-carousel-item">
+    <IncidentCard title={text}>
+      <ActionCard type={text} index={1} handleClick={handleClick} CEIndex={CarouselElementIndex} />
+      <ActionCard type={text} index={2} handleClick={handleClick} CEIndex={CarouselElementIndex} />
+      <ActionCard type={text} index={3} handleClick={handleClick} CEIndex={CarouselElementIndex} />
+      <ActionCard type={text} index={4} handleClick={handleClick} CEIndex={CarouselElementIndex} />
+    </IncidentCard>
+  </div>
+);
 
 // Breakpoints to limit carousel columns dependend of frame width
 const defaultBreakPoints = [
@@ -35,36 +33,38 @@ const defaultBreakPoints = [
 const defaultParentDivClass = 'chat-content-body';
 
 class IncidentContent extends React.Component {
-  state = {
-    breakPoints: defaultBreakPoints,
-    parentDivClass: defaultParentDivClass
+  constructor(props) {
+    super(props);
+    this.state = {
+      breakPoints: defaultBreakPoints,
+      parentDivClass: defaultParentDivClass,
+    };
+    this.CarouselElement = React.createRef();
   }
 
-  render() {
-    let CarouselElement = null;
-    const gotoCarouselElement = (cardIndex, elementIndex) => {
-      console.log('Card Num: ', cardIndex);
-      console.log('Column Num: ', elementIndex);
-      if (elementIndex != null) {
-        const newBreakPoints = [
-          { width: 1, itemsToShow: 1, itemsToScroll: 0 }
-        ];
-        const newParentDivClass = 'chat-content-body action-opened';
-        this.setState({
-          breakPoints: newBreakPoints,
-          parentDivClass: newParentDivClass,
-        }, function() {
-          console.log('New state: ', this.state,elementIndex);
-          //this.CarouselElement.goTo(Number(elementIndex));
-        });
-        CarouselElement.goTo(Number(elementIndex));
-      } else {
-        this.setState({
-          breakPoints: defaultBreakPoints,
-          parentDivClass: defaultParentDivClass,
-        });
-      }
+  gotoCarouselElement = (cardIndex, elementIndex) => {
+    console.log('Card Num: ', cardIndex); // fixme
+    console.log('Column Num: ', elementIndex); // fixme
+    if (elementIndex != null) {
+      const newBreakPoints = [
+        { width: 1, itemsToShow: 1, itemsToScroll: 0 },
+      ];
+      const newParentDivClass = 'chat-content-body action-opened';
+      this.setState({
+        breakPoints: newBreakPoints,
+        parentDivClass: newParentDivClass,
+      }, function () {
+        this.CarouselElement.goTo(Number(elementIndex));
+      });
+    } else {
+      this.setState({
+        breakPoints: defaultBreakPoints,
+        parentDivClass: defaultParentDivClass,
+      });
     }
+  };
+
+  render() {
     return (
       <div className={this.state.parentDivClass}>
         <div className="carousel">
@@ -74,25 +74,25 @@ class IncidentContent extends React.Component {
             pagination={false}
             easing="cubic-bezier(.54,.04,.18,.98)"
             transitionMs={500}
-            ref={(carousel) => { CarouselElement = carousel; }}
+            ref={(carousel) => { this.CarouselElement = carousel; }}
           >
             {
               Datalist.map((el, index) => (
-                <MenuItem text={el.name} key={el.name} handleClick={gotoCarouselElement} CarouselElementIndex={index} />
+                <MenuItem text={el.name} key={el.name} handleClick={this.gotoCarouselElement} CarouselElementIndex={index} />
               ))
             }
           </Carousel>
         </div>
         <div className="action-details">
           <h1>Action details</h1>
-          <FontAwesomeIcon className="" icon={faWindowClose} onClick={() => gotoCarouselElement(null, null)} />
+          <FontAwesomeIcon className="" icon={faWindowClose} onClick={() => this.gotoCarouselElement(null, null)} />
         </div>
-        <FontAwesomeIcon className="arrow arrow-prev" icon={faArrowLeft} onClick={() => CarouselElement.slidePrev()} />
-        <FontAwesomeIcon className="arrow arrow-next" icon={faArrowRight} onClick={() => CarouselElement.slideNext()} />
+        <FontAwesomeIcon className="arrow arrow-prev" icon={faArrowLeft} onClick={() => this.CarouselElement.slidePrev()} />
+        <FontAwesomeIcon className="arrow arrow-next" icon={faArrowRight} onClick={() => this.CarouselElement.slideNext()} />
 
       </div>
     );
   }
-};
+}
 
 export default IncidentContent;
