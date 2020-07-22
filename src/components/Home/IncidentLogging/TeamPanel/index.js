@@ -186,8 +186,8 @@ const TeamPanel = ({
           </div>
         </div>
       </div>
-      <div className="chat-sidebar-footer w-100 p-2">
-        <button type="submit" className="btn btn-secondary btn-block" onClick={onSubmit}>Submit</button>
+      <div className="chat-sidebar-footer w-100 pd-5">
+        <button type="submit" className="btn btn-secondary btn-block tx-spacing-1" onClick={onSubmit}>Submit</button>
       </div>
     </div>
   );
