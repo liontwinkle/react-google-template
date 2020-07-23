@@ -36,18 +36,23 @@
     width: 100%;
   }
 
-  .action-details {
+  .incident-details {
     width: 0;
+    display: none;
   }
 }
 
-.action-opened {
+.incident-opened {
   .carousel {
     width: 30%;
+    min-width: 380px;
   }
 
-  .action-details {
+  .incident-details {
     width: 70%;
+    display: block;
+    overflow: scroll;
+    height: calc(100% - 65px);
   }
 }
 

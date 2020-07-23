@@ -41430,3 +41430,6 @@ a.bg-twitter:hover, a.bg-twitter:focus, button.bg-twitter:hover, button.bg-twitt
     margin-top: 20px;
     padding: 5px 0;
 }
+.no-wrap {
+    white-space: nowrap;
+}
