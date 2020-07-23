@@ -27,7 +27,7 @@ class SimpleMentionEditor extends Component {
 
     onSearchChange = ({ value }) => {
       const filterData = this.props.mentionsUser.filter((item) => (
-        item.user_first_name.concat(' ', item.user_last_name).includes(value)
+        item.user_first_name.concat(' ', item.user_last_name).toLowerCase().includes(value.toLowerCase())
       ));
 
       this.setState({
