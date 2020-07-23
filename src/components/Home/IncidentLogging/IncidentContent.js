@@ -6,6 +6,7 @@ import { faArrowRight, faArrowLeft, faWindowClose } from '@fortawesome/free-soli
 import { Datalist } from '../../../constants/static';
 import IncidentCard from './IncidentCard';
 import ActionCard from '../../common/ActionCard';
+import IncidentDetails from './IncidentDetails';
 
 import './style.scss';
 
@@ -43,14 +44,14 @@ class IncidentContent extends React.Component {
   }
 
   // Open and close Action card details
-  actionDetails = (cardIndex, elementIndex) => {
+  incidentDetails = (cardIndex, elementIndex) => {
     console.log('Card Num: ', cardIndex); // fixme
     console.log('Column Num: ', elementIndex); // fixme
     if (elementIndex != null) {
       const newBreakPoints = [
         { width: 1, itemsToShow: 1, itemsToScroll: 0 },
       ];
-      const newParentDivClass = 'chat-content-body action-opened';
+      const newParentDivClass = 'chat-content-body incident-opened';
       this.setState({
         breakPoints: newBreakPoints,
         parentDivClass: newParentDivClass,
@@ -66,7 +67,7 @@ class IncidentContent extends React.Component {
   };
 
   moveCarousel = (direction) => {
-    this.actionDetails(null, null); // Close Action details at first
+    this.incidentDetails(null, null); // Close Action details at first
     if (direction === 'prev') {
       this.CarouselElement.slidePrev();
     } else if (direction === 'next') {
@@ -88,14 +89,13 @@ class IncidentContent extends React.Component {
           >
             {
               Datalist.map((el, index) => (
-                <MenuItem text={el.name} key={el.name} handleClick={this.actionDetails} CarouselElementIndex={index} />
+                <MenuItem text={el.name} key={el.name} handleClick={this.incidentDetails} CarouselElementIndex={index} />
               ))
             }
           </Carousel>
         </div>
-        <div className="action-details">
-          <h1>Action details</h1>
-          <FontAwesomeIcon className="" icon={faWindowClose} onClick={() => this.actionDetails(null, null)} />
+        <div className="incident-details">
+          <IncidentDetails handleClick={this.incidentDetails} />
         </div>
         <FontAwesomeIcon className="arrow arrow-prev" icon={faArrowLeft} onClick={() => this.moveCarousel('prev')} />
         <FontAwesomeIcon className="arrow arrow-next" icon={faArrowRight} onClick={() => this.moveCarousel('next')} />
