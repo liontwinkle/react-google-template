@@ -42,7 +42,8 @@ class IncidentContent extends React.Component {
     this.CarouselElement = React.createRef();
   }
 
-  gotoCarouselElement = (cardIndex, elementIndex) => {
+  // Open and close Action card details
+  actionDetails = (cardIndex, elementIndex) => {
     if (elementIndex != null) {
       const newBreakPoints = [
         { width: 1, itemsToShow: 1, itemsToScroll: 0 },
@@ -62,6 +63,15 @@ class IncidentContent extends React.Component {
     }
   };
 
+  moveCarousel = (direction) => {
+    this.actionDetails(null, null); // Close Action details at first
+    if (direction === 'prev') {
+      this.CarouselElement.slidePrev();
+    } else if (direction === 'next') {
+      this.CarouselElement.slideNext();
+    }
+  };
+
   render() {
     return (
       <div className={this.state.parentDivClass}>
@@ -76,17 +86,17 @@ class IncidentContent extends React.Component {
           >
             {
               Datalist.map((el, index) => (
-                <MenuItem text={el.name} key={el.name} handleClick={this.gotoCarouselElement} CarouselElementIndex={index} />
+                <MenuItem text={el.name} key={el.name} handleClick={this.actionDetails} CarouselElementIndex={index} />
               ))
             }
           </Carousel>
         </div>
         <div className="action-details">
           <h1>Action details</h1>
-          <FontAwesomeIcon className="" icon={faWindowClose} onClick={() => this.gotoCarouselElement(null, null)} />
+          <FontAwesomeIcon className="" icon={faWindowClose} onClick={() => this.actionDetails(null, null)} />
         </div>
-        <FontAwesomeIcon className="arrow arrow-prev" icon={faArrowLeft} onClick={() => this.CarouselElement.slidePrev()} />
-        <FontAwesomeIcon className="arrow arrow-next" icon={faArrowRight} onClick={() => this.CarouselElement.slideNext()} />
+        <FontAwesomeIcon className="arrow arrow-prev" icon={faArrowLeft} onClick={() => this.moveCarousel('prev')} />
+        <FontAwesomeIcon className="arrow arrow-next" icon={faArrowRight} onClick={() => this.moveCarousel('next')} />
 
       </div>
     );
