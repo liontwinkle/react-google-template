@@ -1,5 +1,6 @@
 import types from '../actionType';
 import { getToolbarIcon, convertStringToKey } from '../../utils';
+import defaultAvatar from "../../utils/default.jpg";
 
 const INITIAL_STATE = {
   actionTabs: [],
@@ -99,9 +100,15 @@ export default (state = INITIAL_STATE, action) => {
 
     case types.GET_USERS_INCIDENT_DATA_SUCCESS: {
       const { mentionUsers } = action;
+      const mentions = mentionUsers.map((filterItem) => ({
+        id: filterItem.id,
+        name: filterItem.user_first_name.concat(' ', filterItem.user_last_name),
+        title: filterItem.label ?? 'unknown role',
+        avatar: filterItem.avatar ?? defaultAvatar,
+      }));
       return {
         ...state,
-        mentionUsers,
+        mentionUsers: mentions,
         isFetchingFlag: false,
       };
     }

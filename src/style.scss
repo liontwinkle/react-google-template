@@ -57,14 +57,6 @@ code {
     background: #888;
 }
 
-::selection {
-    background-color: transparent;
-}
-
-::-moz-selection {
-    background-color: transparent;
-}
-
 ::-webkit-scrollbar {
     -webkit-appearance: none;
     width: 0;
