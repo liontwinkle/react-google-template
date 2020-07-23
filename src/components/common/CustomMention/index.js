@@ -8,42 +8,45 @@ import createMentionPlugin from 'draft-js-mention-plugin';
 import './mentionsStyles.css';
 import './style.scss';
 
-// const Entry = ({
-//   mention,
-//   // eslint-disable-next-line react/prop-types
-//   searchValue, // eslint-disable-line no-unused-vars
-//   // eslint-disable-next-line react/prop-types
-//   isFocused, // eslint-disable-line no-unused-vars
-//   parentProps,
-// }) => (
-//   <div {...parentProps}>
-//     <div className="mentionSuggestionsEntryContainer">
-//       <div className="mentionSuggestionsEntryContainerLeft">
-//         <img
-//           src={mention.avatar}
-//           className="mentionSuggestionsEntryAvatar"
-//           role="presentation"
-//           alt="presentation"
-//         />
-//       </div>
-//
-//       <div className="mentionSuggestionsEntryContainerRight">
-//         <div className="mentionSuggestionsEntryText">
-//           {mention.name}
-//         </div>
-//
-//         <div className="mentionSuggestionsEntryTitle">
-//           {mention.title}
-//         </div>
-//       </div>
-//     </div>
-//   </div>
-// );
+const Entry = (props) => {
+  const {
+    // eslint-disable-next-line react/prop-types
+    mention,
+    // eslint-disable-next-line react/prop-types
+    searchValue, // eslint-disable-line no-unused-vars
+    // eslint-disable-next-line react/prop-types
+    isFocused, // eslint-disable-line no-unused-vars
+    ...parentProps
+  } = props;
 
-// Entry.propTypes = {
-//   mention: PropTypes.object.isRequired,
-//   parentProps: PropTypes.object.isRequired,
-// };
+  return (
+    <div {...parentProps}>
+      <div className="mentionSuggestionsEntryContainer">
+        <div className="mentionSuggestionsEntryContainerLeft">
+          <img
+            /* eslint-disable-next-line react/prop-types */
+            src={mention.avatar}
+            className="mentionSuggestionsEntryAvatar"
+            role="presentation"
+            alt="presentation"
+          />
+        </div>
+
+        <div className="mentionSuggestionsEntryContainerRight">
+          <div className="mentionSuggestionsEntryText">
+            {/* eslint-disable-next-line react/prop-types */}
+            {mention.name}
+          </div>
+
+          <div className="mentionSuggestionsEntryTitle">
+            {/* eslint-disable-next-line react/prop-types */}
+            {mention.title}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
 
 class SimpleMentionEditor extends Component {
   constructor(props) {
@@ -101,7 +104,7 @@ class SimpleMentionEditor extends Component {
           <MentionSuggestions
             onSearchChange={this.onSearchChange}
             suggestions={this.state.suggestions}
-            // entryComponent={Entry}
+            entryComponent={Entry}
           />
         </div>
       );
