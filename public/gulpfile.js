@@ -9,7 +9,7 @@ const htmlInjector = require('bs-html-injector');
 
 sass.compiler = require('node-sass');
 
-// Compile scss files to style.css file
+// Compile scss files to style.scss file
 function compileStyle() {
   return src('./scss/dashforge.scss')
   .pipe(sass().on('error', sass.logError))
@@ -17,7 +17,7 @@ function compileStyle() {
   .pipe(bs.stream());
 }
 
-// Compile and minify scss files to style.css file
+// Compile and minify scss files to style.scss file
 function minifyStyle () {
   return src('./scss/dashforge.scss')
     .pipe(sass({outputStyle: 'compressed'}))

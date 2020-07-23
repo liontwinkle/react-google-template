@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Carousel from 'react-elastic-carousel';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRight, faArrowLeft, faWindowClose } from '@fortawesome/free-solid-svg-icons';
@@ -43,8 +43,6 @@ class IncidentContent extends React.Component {
   }
 
   gotoCarouselElement = (cardIndex, elementIndex) => {
-    console.log('Card Num: ', cardIndex); // fixme
-    console.log('Column Num: ', elementIndex); // fixme
     if (elementIndex != null) {
       const newBreakPoints = [
         { width: 1, itemsToShow: 1, itemsToScroll: 0 },

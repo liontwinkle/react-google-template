@@ -22,7 +22,6 @@ const FieldAction = ({
   actionFields,
   tabIndex,
   typeList,
-  register,
   errors,
   setErrors,
   onSetData,
@@ -59,11 +58,10 @@ const FieldAction = ({
       case 'text-area':
         return (
           <ActionTextArea
-            tabIndex={tabIndex}
-            fieldItem={fieldItem}
-            options={options}
-            onSetData={onSetData}
             value={value}
+            fieldItem={fieldItem}
+            tabIndex={tabIndex}
+            onSetData={onSetData}
           />
         );
       case 'multi-select':
@@ -83,7 +81,6 @@ const FieldAction = ({
             tabIndex={tabIndex}
             fieldItem={fieldItem}
             options={options}
-            register={register}
             errors={errors}
             onSetData={onSetData}
             value={filterValue}
@@ -95,7 +92,6 @@ const FieldAction = ({
             tabIndex={tabIndex}
             fieldItem={fieldItem}
             options={options}
-            register={register}
             errors={errors}
             onSetData={onSetData}
             value={value}
@@ -107,7 +103,6 @@ const FieldAction = ({
             tabIndex={tabIndex}
             fieldItem={fieldItem}
             options={options}
-            register={register}
             errors={errors}
             onSetData={onSetData}
             value={value}
@@ -119,7 +114,6 @@ const FieldAction = ({
             tabIndex={tabIndex}
             fieldItem={fieldItem}
             options={options}
-            register={register}
             errors={errors}
             onSetData={onSetData}
             value={filterValue}
@@ -131,7 +125,6 @@ const FieldAction = ({
             tabIndex={tabIndex}
             fieldItem={fieldItem}
             options={options}
-            register={register}
             errors={errors}
             onSetData={onSetData}
             value={filterValue}
@@ -143,7 +136,6 @@ const FieldAction = ({
             tabIndex={tabIndex}
             fieldItem={fieldItem}
             options={options}
-            register={register}
             errors={errors}
             onSetData={onSetData}
             value={value}
@@ -155,7 +147,6 @@ const FieldAction = ({
             tabIndex={tabIndex}
             fieldItem={fieldItem}
             options={options}
-            register={register}
             errors={errors}
             onSetData={onSetData}
             value={value}
@@ -167,7 +158,6 @@ const FieldAction = ({
             tabIndex={tabIndex}
             fieldItem={fieldItem}
             options={options}
-            register={register}
             errors={errors}
             onSetData={onSetData}
             value={filterValue}
@@ -179,24 +169,13 @@ const FieldAction = ({
             tabIndex={tabIndex}
             fieldItem={fieldItem}
             options={options}
-            register={register}
             errors={errors}
             onSetData={onSetData}
             value={value}
           />
         );
       default:
-        return (
-          <ActionTextArea
-            tabIndex={tabIndex}
-            fieldItem={fieldItem}
-            options={options}
-            register={register}
-            errors={errors}
-            onSetData={onSetData}
-            value={value}
-          />
-        );
+        return null;
     }
   };
 
@@ -222,7 +201,6 @@ const FieldAction = ({
                       <CustomTypeAhead
                         typeList={typeList}
                         tabIndex={tabIndex}
-                        register={register}
                         errors={errors}
                         onSetData={onSetData}
                         value={value}
@@ -250,7 +228,7 @@ const FieldAction = ({
                   className="form-control"
                   placeholder="Area / Grid / Room"
                   onChange={onChangeAddress}
-                  value={value ? value[`tab_${tabIndex}_field_location_0`] : ''}
+                  value={value ? (value[`tab_${tabIndex}_field_location_0`] ?? undefined) : undefined}
                   data-tab-id={tabIndex}
                   id={`tab_${tabIndex}_field_location_0`}
                   name={`tab_${tabIndex}_field_location_0`}
@@ -289,7 +267,6 @@ FieldAction.propTypes = {
   errors: PropTypes.object,
   value: PropTypes.object,
   onSetData: PropTypes.func.isRequired,
-  register: PropTypes.func.isRequired,
   setErrors: PropTypes.func.isRequired,
 };
 

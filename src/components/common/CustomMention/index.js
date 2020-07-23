@@ -6,35 +6,33 @@ import { EditorState } from 'draft-js';
 import Editor from 'draft-js-plugins-editor';
 
 import createMentionPlugin from 'draft-js-mention-plugin';
-import editorStyles from './style.css';
+
+import './style.scss';
 
 class SimpleMentionEditor extends Component {
   constructor(props) {
     super(props);
-
     this.mentionPlugin = createMentionPlugin();
     this.state = {
-      editorState: EditorState.createEmpty(),
       suggestions: [],
     };
   }
 
     onChange = (editorState) => {
-      this.setState({
-        editorState,
+      const { fieldId } = this.props;
+      this.props.setEditorState({
+        [fieldId]: editorState,
       });
     };
 
     onSearchChange = ({ value }) => {
-      console.log('value: ', value);
-      console.log('data: ', this.props.mentionsUser); // fixme
       const filterData = this.props.mentionsUser.filter((item) => (
         item.user_first_name.concat(' ', item.user_last_name).includes(value)
       ));
-      console.log('filterData: ', filterData); // fixme
 
       this.setState({
         suggestions: filterData.map((filterItem) => ({
+          id: filterItem.id,
           name: filterItem.user_first_name.concat(' ', filterItem.user_last_name),
           avatar: filterItem.avatar,
         })),
@@ -50,10 +48,11 @@ class SimpleMentionEditor extends Component {
       const plugins = [this.mentionPlugin];
 
       return (
-        <div className={editorStyles.editor} onClick={this.focus}>
+        <div className="custom-mention_text-area" onClick={this.focus}>
           <Editor
-            editorState={this.state.editorState}
-            onChange={this.onChange}
+            editorState={this.props.editorState}
+            onChange={(editState) => this.onChange(editState)}
+            placeholder="Action Information"
             plugins={plugins}
             ref={(element) => { this.editor = element; }}
           />
@@ -68,23 +67,18 @@ class SimpleMentionEditor extends Component {
 
 SimpleMentionEditor.propTypes = {
   mentionsUser: PropTypes.array,
+  editorState: PropTypes.object,
+  fieldId: PropTypes.string.isRequired,
+  setEditorState: PropTypes.func.isRequired,
 };
 
 SimpleMentionEditor.defaultProps = {
   mentionsUser: [],
+  editorState: EditorState.createEmpty(),
 };
 
 const mapStateToProps = (store) => ({
   mentionsUser: store.incidentData.mentionUsers,
 });
-
-// const mapDispatchToProps = (dispatch) => bindActionCreators({
-//   setSessionExpiryModalState,
-//   setMainMenuState,
-//   setLoadingFg,
-//   resetSessionData,
-//   getMentionUsers,
-//   verifyToken,
-// }, dispatch);
 
 export default connect(mapStateToProps)(SimpleMentionEditor);

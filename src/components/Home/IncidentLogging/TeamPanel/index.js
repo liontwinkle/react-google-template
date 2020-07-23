@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { convertToRaw } from 'draft-js';
 import {
   faHomeAlt,
 } from '@fortawesome/pro-regular-svg-icons';
@@ -66,13 +67,13 @@ const TeamPanel = ({
           errorCase.type = true;
           result = false;
         }
-      } else if (errorItem === 'location') {
+      } else if (errorItem === 'location' && activeTabIndex !== 0) {
         const locationValid = keys.filter((keyItem) => (keyItem.includes('field_location')));
         if (locationValid.length === 0) {
           errorCase.location = true;
           result = false;
         }
-      } else if (errorItem !== 'tabIndex') {
+      } else if (errorItem !== 'tabIndex' && activeTabIndex !== 0) {
         const indexKey = errorItem.split('_');
         const fieldType = indexKey[0];
         const fieldId = indexKey[1];
@@ -83,7 +84,6 @@ const TeamPanel = ({
         }
       }
     });
-
     setErrors(errorCase);
     return result;
   };
@@ -97,6 +97,21 @@ const TeamPanel = ({
     };
 
     if (!isCreating && onValidation(saveData)) {
+      const keys = Object.keys(saveData);
+      const textAreaKey = keys.find((item) => (item.includes('field_text-area') || item.includes('field_action-info')));
+      if (textAreaKey) {
+        const mentionValue = saveData[textAreaKey];
+        const contentState = mentionValue.getCurrentContent();
+        const note = convertToRaw(contentState);
+        const textArray = note.blocks.map((item) => (item.text));
+        const entityValues = Object.values(note.entityMap); // fixme
+        const entityArray = entityValues.map((item) => (item.data.mention.id));
+        saveData[textAreaKey] = {
+          textArray,
+          entityArray,
+        };
+      }
+
       saveActionData(saveData)
         .then(() => {
           console.log('success');
