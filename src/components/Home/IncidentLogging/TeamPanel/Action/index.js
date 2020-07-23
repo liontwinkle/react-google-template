@@ -16,6 +16,7 @@ import GoogleMapComponent from '../../../../common/GoogleMap';
 import { getTypeAheadList } from '../../../../../redux/action/incident';
 
 import './style.scss';
+import SimpleMentionEditor from '../../../../common/CustomMention';
 
 const ActionPanel = ({
   actionTabs,
@@ -27,7 +28,6 @@ const ActionPanel = ({
   setErrors,
   resetValue,
 }) => {
-  const { TextArea } = Input;
 
   const iconListB = [
     {
@@ -108,10 +108,6 @@ const ActionPanel = ({
     onSetData({ 'tab_0_field_action-type_0': e.target.value });
   };
 
-  const onChangeActionInfo = (e) => {
-    onSetData({ 'tab_0_field_action-info_0': e.target.value });
-  };
-
   return (
     <div className="action-panel">
       <div className="action-panel__iconlist">
@@ -152,7 +148,11 @@ const ActionPanel = ({
         {
           activeTabIndex === 0 ? (
             <>
-              <TextArea rows={4} placeholder="Action Information" onChange={onChangeActionInfo} />
+              <SimpleMentionEditor
+                setEditorState={onSetData}
+                editorState={value ? value['tab_0_field_action-info_0'] : null}
+                fieldId="tab_0_field_action-info_0"
+              />
               <Input
                 name="title"
                 placeholder="Title*"

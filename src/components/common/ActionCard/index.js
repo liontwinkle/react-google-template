@@ -19,7 +19,9 @@ import {
 
 import './style.scss';
 
-const ActionCard = ({ type, index, incidentData, CEIndex, handleClick }) => {
+const ActionCard = ({
+  type, index, incidentData, CEIndex, handleClick,
+}) => {
   const ellipseMenu = (
     <Menu>
       <Menu.Item>
@@ -79,6 +81,42 @@ const ActionCard = ({ type, index, incidentData, CEIndex, handleClick }) => {
       </Menu.Item>
     </Menu>
   );
+
+  const showResult = (key) => {
+    if (key.includes('dispatch-location')) {
+      return (
+        <span key={key}>
+          <label>{`${key}=> `}</label>
+          <label>{incidentData[key].address}</label>
+          {' '}
+          <br />
+          <label>{incidentData[key].lat}</label>
+          <br />
+          <label>{incidentData[key].lng}</label>
+          <br />
+          <br />
+        </span>
+      );
+    } if (key.includes('text-area') || key.includes('action-info')) {
+      return (
+        <span key={key}>
+          <label>{`${key} text value=> `}</label>
+          <label>{incidentData[key].textArray.join('\n')}</label>
+          <br />
+          <label>{`${key} user value=> `}</label>
+          <label>{incidentData[key].entityArray.join(' ,')}</label>
+          <br />
+        </span>
+      );
+    }
+    return (
+      <span key={key}>
+        <label>{`${key}=> `}</label>
+        <label>{incidentData[key]}</label>
+        <br />
+      </span>
+    );
+  };
   const renderIncident = () => {
     const keys = incidentData ? Object.keys(incidentData) : [];
     return (
@@ -86,26 +124,7 @@ const ActionCard = ({ type, index, incidentData, CEIndex, handleClick }) => {
         <p>data:</p>
         {
           keys.map((keyitem) => (
-            keyitem.includes('dispatch-location') ? (
-              <span key={keyitem}>
-                <label>{`${keyitem}=> `}</label>
-                <label>{incidentData[keyitem].address}</label>
-                {' '}
-                <br />
-                <label>{incidentData[keyitem].lat}</label>
-                <br />
-                <label>{incidentData[keyitem].lng}</label>
-                <br />
-                <br />
-              </span>
-            ) : (
-              <span key={keyitem}>
-                <label>{`${keyitem}=> `}</label>
-                <label>{incidentData[keyitem]}</label>
-                <br />
-              </span>
-            )
-
+            showResult(keyitem)
           ))
         }
       </>
