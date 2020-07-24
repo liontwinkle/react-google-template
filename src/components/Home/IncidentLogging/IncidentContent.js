@@ -1,7 +1,7 @@
 import React from 'react';
 import Carousel from 'react-elastic-carousel';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowRight, faArrowLeft, faWindowClose } from '@fortawesome/free-solid-svg-icons';
+import { faArrowRight, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 
 import { Datalist } from '../../../constants/static';
 import IncidentCard from './IncidentCard';

@@ -2,18 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import {
-    Tooltip, Button, Dropdown, Menu,
+    Tooltip, Dropdown, Menu,
 } from 'antd';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
-    faCommentAlt,
-    faPaperclip,
     faEllipsisHAlt,
-    faThumbsUp,
 } from '@fortawesome/pro-light-svg-icons';
-import {
-    faLink,
-} from '@fortawesome/pro-regular-svg-icons';
 import CustomTab from '../../../common/CustomTab';
 import InformationTab from './InformationTab';
 
