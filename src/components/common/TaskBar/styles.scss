@@ -5,11 +5,18 @@
 
     .custom-mention_text-area {
       .DraftEditor-root {
+        border: none;
         border-radius: 0;
+        height: 60px;
+        min-height: 38px;
+        line-height: 1.5715;
+        vertical-align: bottom;
+        align-items: center;
+        display: flex;
         &:focus-within {
           color: #596882;
           background-color: #fff;
-          border: 1px solid #c0ccda!important;
+          border: none;
           outline: 0;
           box-shadow: none !important;
         }

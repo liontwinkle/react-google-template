@@ -123,7 +123,11 @@ class CustomMention extends Component {
           <Editor
             editorState={this.props.editorState}
             onChange={(editState) => this.onChange(editState)}
-            placeholder="Action Information"
+            placeholder={
+              this.props.topFetch
+                ? 'Create task…. ie. @Bob can you complete incident report before today 8pm?'
+                : 'Action Information'
+            }
             plugins={plugins}
             ref={(element) => {
               this.editor = element;
