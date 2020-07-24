@@ -95,6 +95,7 @@ function Home({
         return <DashContent />;
     }
   };
+  const add = '';
   /**
    * The main component for the Body of site
    * It consists of two parts; left bar and content.
