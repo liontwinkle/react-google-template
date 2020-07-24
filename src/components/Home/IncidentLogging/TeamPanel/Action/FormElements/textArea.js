@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import SimpleMentionEditor from '../../../../../common/CustomMention';
+import CustomMention from '../../../../../common/CustomMention';
 
 const ActionTextArea = ({
   onSetData,
@@ -9,7 +9,7 @@ const ActionTextArea = ({
   value,
 }) => (
   <>
-    <SimpleMentionEditor
+    <CustomMention
       setEditorState={onSetData}
       editorState={value ? value[`tab_${tabIndex}_field_${fieldItem.field_type}_${fieldItem.id}`] : null}
       fieldId={`tab_${tabIndex}_field_${fieldItem.field_type}_${fieldItem.id}`}

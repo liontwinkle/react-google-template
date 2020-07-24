@@ -1,14 +1,23 @@
 import React, { Component } from 'react';
+import { EditorState } from 'draft-js';
+import CustomMention from '../CustomMention';
 
 import './styles.scss';
-import './metion.scss';
 
 export default class SimpleEmojiEditor extends Component {
   constructor() {
     super();
     this.state = {
+      editState: EditorState.createEmpty(),
     };
   }
+
+  updateEditState = (state) => {
+    console.log('state: ', state); // fixme
+    this.setState({
+      ...state,
+    });
+  };
 
   render() {
     return (
@@ -30,7 +39,14 @@ export default class SimpleEmojiEditor extends Component {
             <line x1="5" y1="12" x2="19" y2="12" />
           </svg>
         </span>
-        <div className="editor form-control bd-0" />
+        <div className="editor form-control bd-0">
+          <CustomMention
+            editorState={this.state.editState}
+            fieldId="editState"
+            setEditorState={this.updateEditState}
+            topFetch
+          />
+        </div>
         <nav>
           <span data-toggle="tooltip" title="Add GIF">
             <svg

@@ -14,9 +14,9 @@ import PlacesAutocomplete from '../../../../common/PlaceAutoComplete';
 import GoogleMapComponent from '../../../../common/GoogleMap';
 
 import { getTypeAheadList } from '../../../../../redux/action/incident';
+import CustomMention from '../../../../common/CustomMention';
 
 import './style.scss';
-import SimpleMentionEditor from '../../../../common/CustomMention';
 
 const ActionPanel = ({
   actionTabs,
@@ -28,7 +28,6 @@ const ActionPanel = ({
   setErrors,
   resetValue,
 }) => {
-
   const iconListB = [
     {
       key: 'agency_response',
@@ -148,7 +147,7 @@ const ActionPanel = ({
         {
           activeTabIndex === 0 ? (
             <>
-              <SimpleMentionEditor
+              <CustomMention
                 setEditorState={onSetData}
                 editorState={value ? value['tab_0_field_action-info_0'] : null}
                 fieldId="tab_0_field_action-info_0"

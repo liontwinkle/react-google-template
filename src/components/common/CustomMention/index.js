@@ -1,12 +1,34 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { convertToRaw, EditorState } from 'draft-js';
+import { EditorState } from 'draft-js';
 import Editor from 'draft-js-plugins-editor';
 import createMentionPlugin from 'draft-js-mention-plugin';
 
 import './mentionsStyles.css';
 import './style.scss';
+
+// const positionSuggestions = ({ state, props }) => {
+//   let transform;
+//   let transition;
+//   let left;
+//   let top;
+//
+//   if (state.isActive && props.suggestions.length > 0) {
+//     transform = 'scale(1) translateY(-100%)';
+//     transition = 'all 0.25s cubic-bezier(.3,1.2,.2,1)';
+//     left = props.decoratorRect.left + 'px';
+//     top = props.decoratorRect.top - 40 + 'px';
+//   } else if (state.isActive) {
+//     transform = 'scaleY(0)';
+//     transition = 'all 0.25s cubic-bezier(.3,1,.2,1)';
+//   }
+//
+//   return {
+//     transform,
+//     transition,
+//   };
+// };
 
 const Entry = (props) => {
   const {
@@ -48,10 +70,19 @@ const Entry = (props) => {
   );
 };
 
-class SimpleMentionEditor extends Component {
+class CustomMention extends Component {
   constructor(props) {
     super(props);
-    this.mentionPlugin = createMentionPlugin();
+    this.mentionPlugin = props.topFetch ? createMentionPlugin({
+      positionSuggestions: (settings) => ({
+        left: `${settings.decoratorRect.left}px`,
+        top: `${settings.decoratorRect.top - 54}px`, // change this value (40) for manage the distance between cursor and bottom edge of popover
+        position: 'fixed',
+        transform: 'scale(1) translateY(-100%)', // transition popover on the value of its height
+        transformOrigin: '1em 0% 0px',
+        transition: 'all 0.25s cubic-bezier(0.3, 1.2, 0.2, 1)',
+      }),
+    }) : createMentionPlugin();
     this.state = {
       suggestions: [],
     };
@@ -59,9 +90,6 @@ class SimpleMentionEditor extends Component {
 
     onChange = (editorState) => {
       const { fieldId } = this.props;
-      const contentState = editorState.getCurrentContent();
-      const note = convertToRaw(contentState);
-      console.log(note); // fixme
       this.props.setEditorState({
         [fieldId]: editorState,
       });
@@ -111,15 +139,17 @@ class SimpleMentionEditor extends Component {
     }
 }
 
-SimpleMentionEditor.propTypes = {
+CustomMention.propTypes = {
   mentionsUser: PropTypes.array,
   editorState: PropTypes.object,
   fieldId: PropTypes.string.isRequired,
   setEditorState: PropTypes.func.isRequired,
+  topFetch: PropTypes.bool,
 };
 
-SimpleMentionEditor.defaultProps = {
+CustomMention.defaultProps = {
   mentionsUser: [],
+  topFetch: false,
   editorState: EditorState.createEmpty(),
 };
 
@@ -127,4 +157,4 @@ const mapStateToProps = (store) => ({
   mentionsUser: store.incidentData.mentionUsers,
 });
 
-export default connect(mapStateToProps)(SimpleMentionEditor);
+export default connect(mapStateToProps)(CustomMention);
