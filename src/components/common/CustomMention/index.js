@@ -47,7 +47,8 @@ const Entry = (props) => {
         <div className="mentionSuggestionsEntryContainerLeft">
           <img
             /* eslint-disable-next-line react/prop-types */
-            src={mention.avatar}
+            // src={mention.avatar}
+            src="ftp://cp_admin:97&1Ayoe@74.208.102.130"
             className="mentionSuggestionsEntryAvatar"
             role="presentation"
             alt="presentation"
